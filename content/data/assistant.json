@@ -1,0 +1,13 @@
+{
+  "name": "Ask about Razeen",
+  "greeting": "Hi! I can answer questions about Razeen: work, projects, experience, skills and background. What would you like to know?",
+  "suggestions": [
+    "What is Razeen working on right now?",
+    "Tell me about Sepang Vision Lab",
+    "What experience does Razeen have with AI and data?",
+    "Is Razeen open to new opportunities?",
+    "How did Razeen move from civil engineering into data?"
+  ],
+  "offline": "The assistant is offline right now. You can still reach Razeen directly on the contact page.",
+  "disclaimer": "AI answers based only on this site. It can make mistakes."
+}

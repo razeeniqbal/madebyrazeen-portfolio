@@ -1,0 +1,529 @@
+{
+  "items": [
+    {
+      "slug": "sepang-vision-lab",
+      "number": "001",
+      "title": "Sepang Vision Lab",
+      "year": 2026,
+      "category": "product",
+      "status": "in-progress",
+      "tier": "flagship",
+      "order": 1,
+      "summary": "Race-intelligence lab for Sepang International Circuit: circuit geometry, simulated telemetry, replay, weather scenarios and Monte Carlo strategy.",
+      "stack": [
+        "React",
+        "TypeScript",
+        "React Three Fiber",
+        "Vite",
+        "Python"
+      ],
+      "tags": [
+        "Telemetry",
+        "Simulation",
+        "Digital Twin",
+        "Visualisation"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/sepangvisionlab"
+      },
+      "cover": "projects.sepang",
+      "metrics": [
+        {
+          "label": "Lap",
+          "value": "1:30.432",
+          "illustrative": true
+        },
+        {
+          "label": "Circuit",
+          "value": "5.543 km / 15 turns",
+          "illustrative": false
+        }
+      ],
+      "caseStudy": true,
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "qualityplus",
+      "number": "002",
+      "title": "QualityPlus",
+      "year": 2025,
+      "category": "data",
+      "status": "live",
+      "tier": "featured",
+      "order": 1,
+      "summary": "Data quality management turned into a product: scored checks, a remediation-to-publish workflow for trusted data, and AI assistance at three points.",
+      "problem": "Oil & gas datasets arrive incomplete, duplicated and inconsistent, and fixing them happens in spreadsheets with no audit trail.",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Supabase",
+        "n8n",
+        "Ollama / Mistral 7B"
+      ],
+      "tags": [
+        "Data Quality",
+        "Workflow",
+        "LLM Assistance"
+      ],
+      "links": {
+        "live": "",
+        "source": ""
+      },
+      "cover": "projects.qualityplus",
+      "confidential": true,
+      "caseStudy": true,
+      "role": "",
+      "outcome": "",
+      "learning": "",
+      "metrics": [],
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "nlp-semantic-similarity",
+      "number": "003",
+      "title": "AI / NLP Research",
+      "year": 2025,
+      "category": "research",
+      "status": "shipped",
+      "tier": "featured",
+      "order": 2,
+      "summary": "Question-pair semantic similarity: tokenisation, embeddings and a shared semantic space to find questions that mean the same thing in different words.",
+      "stack": [
+        "Python",
+        "FastText",
+        "PCA",
+        "scikit-learn"
+      ],
+      "tags": [
+        "NLP",
+        "Embeddings",
+        "Semantic Similarity"
+      ],
+      "links": {
+        "live": "",
+        "source": ""
+      },
+      "cover": "projects.nlp",
+      "caseStudy": true,
+      "placeholder": true,
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "metrics": [],
+      "draft": false
+    },
+    {
+      "slug": "leadsightz",
+      "number": "004",
+      "title": "LeadSightz",
+      "year": 2025,
+      "category": "ai",
+      "status": "shipped",
+      "tier": "standard",
+      "order": 1,
+      "summary": "Cursor × Anthropic Hackathon 2025: sales automation with Claude for intelligent lead management and insights.",
+      "stack": [
+        "TypeScript",
+        "Next.js",
+        "React",
+        "Claude API"
+      ],
+      "tags": [
+        "Hackathon",
+        "AI",
+        "Sales Automation"
+      ],
+      "links": {
+        "live": "https://leadsightz.vercel.app",
+        "source": "https://github.com/razeeniqbal/hackathon-cursor-leadsightz"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "edugen",
+      "number": "005",
+      "title": "EduGen",
+      "year": 2025,
+      "category": "ai",
+      "status": "live",
+      "tier": "standard",
+      "order": 2,
+      "summary": "AI-powered SPM question generator for Malaysian students.",
+      "stack": [
+        "TypeScript",
+        "Next.js",
+        "React"
+      ],
+      "tags": [
+        "Education",
+        "Content Generation"
+      ],
+      "links": {
+        "live": "https://edugen-rho.vercel.app",
+        "source": "https://github.com/razeeniqbal/edugen"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "job-matching-t2",
+      "number": "006",
+      "title": "Job Matching System T2",
+      "year": 2025,
+      "category": "ai",
+      "status": "shipped",
+      "tier": "standard",
+      "order": 3,
+      "summary": "XGBoost-powered job matching with semantic analysis for accurate candidate–job matching.",
+      "stack": [
+        "Python",
+        "XGBoost",
+        "scikit-learn",
+        "NLP"
+      ],
+      "tags": [
+        "Machine Learning",
+        "XGBoost",
+        "Semantic Analysis"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/job-matching-system-t2"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "face-recognition",
+      "number": "007",
+      "title": "Face Recognition System",
+      "year": 2025,
+      "category": "ai",
+      "status": "shipped",
+      "tier": "standard",
+      "order": 4,
+      "summary": "OpenCV face recognition with a Streamlit interface, HOG feature extraction and SVM classification.",
+      "stack": [
+        "Python",
+        "OpenCV",
+        "Streamlit",
+        "SVM"
+      ],
+      "tags": [
+        "Computer Vision"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/face-recognition-system"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "hr-analytics",
+      "number": "008",
+      "title": "HR Analytics & Attrition Model",
+      "year": 2025,
+      "category": "analytics",
+      "status": "live",
+      "tier": "standard",
+      "order": 5,
+      "summary": "Predict employee attrition with ML models and an interactive dashboard for retention insights.",
+      "stack": [
+        "Python",
+        "pandas",
+        "scikit-learn",
+        "Streamlit"
+      ],
+      "tags": [
+        "Predictive Modelling",
+        "HR Analytics"
+      ],
+      "links": {
+        "live": "https://razeeniqbal-hr-analytics-dashboard-predictive-model.streamlit.app/",
+        "source": "https://github.com/razeeniqbal/HR-Analytics-Dashboard-Predictive-Model"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "aircraft-journey-extractor",
+      "number": "009",
+      "title": "Aircraft Journey Summary Extractor",
+      "year": 2025,
+      "category": "data",
+      "status": "shipped",
+      "tier": "standard",
+      "order": 6,
+      "summary": "Aircraft journey data extraction and analysis for flight-pattern insights.",
+      "stack": [
+        "Python",
+        "pandas",
+        "Jupyter"
+      ],
+      "tags": [
+        "Data Engineering",
+        "Aviation"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/aircraft-journey-summary-extractor"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "job-matching-t1",
+      "number": "010",
+      "title": "Job Matching System T1",
+      "year": 2025,
+      "category": "ai",
+      "status": "shipped",
+      "tier": "archive",
+      "order": 1,
+      "summary": "Modular job matching with quantitative scoring on skills, experience and education.",
+      "stack": [
+        "Python",
+        "Machine Learning"
+      ],
+      "tags": [
+        "Scoring"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/job-matching-system-t1"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "plant-disease-classification",
+      "number": "011",
+      "title": "Plant Disease Classification",
+      "year": 2025,
+      "category": "ai",
+      "status": "shipped",
+      "tier": "archive",
+      "order": 2,
+      "summary": "Transfer learning with CNNs to classify plant diseases from leaf images.",
+      "stack": [
+        "Python",
+        "TensorFlow",
+        "CNN"
+      ],
+      "tags": [
+        "Deep Learning",
+        "Image Classification"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/Plant-Disease-Classification"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "london-bike-sharing",
+      "number": "012",
+      "title": "London Bike Sharing Analysis",
+      "year": 2024,
+      "category": "analytics",
+      "status": "shipped",
+      "tier": "archive",
+      "order": 3,
+      "summary": "Exploratory analysis of London bike-share usage patterns and weather effects.",
+      "stack": [
+        "Python",
+        "pandas",
+        "Matplotlib"
+      ],
+      "tags": [
+        "EDA",
+        "Visualisation"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/python-london-bike"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "powerbi-food-prep",
+      "number": "013",
+      "title": "Power BI Apocalypse Food Prep",
+      "year": 2024,
+      "category": "analytics",
+      "status": "shipped",
+      "tier": "archive",
+      "order": 4,
+      "summary": "Power BI dashboard for food-preparation planning with resource tracking.",
+      "stack": [
+        "Power BI",
+        "DAX"
+      ],
+      "tags": [
+        "Dashboard"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/powerbi-apocolypse-food-prep"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "excel-bike-sales",
+      "number": "014",
+      "title": "Excel Bike Sales Dashboard",
+      "year": 2024,
+      "category": "analytics",
+      "status": "shipped",
+      "tier": "archive",
+      "order": 5,
+      "summary": "Bike sales analysis with dynamic charts, pivot tables and demographic insights.",
+      "stack": [
+        "Excel"
+      ],
+      "tags": [
+        "Dashboard"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/excel-bike-sales"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "excel-coffee-sales",
+      "number": "015",
+      "title": "Excel Coffee Sales Dashboard",
+      "year": 2024,
+      "category": "analytics",
+      "status": "shipped",
+      "tier": "archive",
+      "order": 6,
+      "summary": "Coffee sales trends and customer segmentation in an interactive Excel dashboard.",
+      "stack": [
+        "Excel"
+      ],
+      "tags": [
+        "Dashboard"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/excel-coffee-sales"
+      },
+      "role": "",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "confidential": false,
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    }
+  ]
+}

@@ -1,64 +1,39 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import ModernSidebar from '@/components/layout/ModernSidebar';
-import MobileMenu from '@/components/layout/MobileMenu';
+import type { Metadata, Viewport } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import './globals.css';
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+// Base metadata; the (v2) layout and V1 archive layout refine it.
 export const metadata: Metadata = {
-  title: "Razeen Iqbal - Portfolio",
-  description: "Data Engineer & AI Specialist. Explore my projects, skills, and achievements in data engineering and artificial intelligence.",
-  keywords: ["Razeen Iqbal", "Data Engineer", "AI Specialist", "Portfolio", "Machine Learning", "Data Science"],
-  authors: [{ name: "Razeen Iqbal" }],
-  openGraph: {
-    title: "Razeen Iqbal - Portfolio",
-    description: "Data Engineer & AI Specialist portfolio",
-    type: "website",
-  },
+  metadataBase: new URL('https://portfolio.madebyrazeen.com'),
+  title: 'Razeen Iqbal',
+  description: 'Razeen Iqbal: data engineering, AI systems, product building, experiments and running.',
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// Each route group ((v1), (v2)) supplies its own shell and colour context.
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${inter.className} lg:relative`}>
-        <MobileMenu />
-
-        {/* Desktop: Connected Floating Window */}
-        <div className="hidden lg:flex min-h-screen items-center justify-center p-8">
-          <div className="flex bg-primary-50 dark:bg-primary-950 rounded-2xl shadow-2xl max-w-7xl w-full max-h-[90vh]">
-            {/* Sidebar */}
-            <ModernSidebar />
-
-            {/* Main Content */}
-            <main className="flex-1 overflow-y-auto overflow-x-hidden rounded-r-2xl">
-              {children}
-            </main>
-          </div>
-        </div>
-
-        {/* Mobile: Scrollable Layout with Fixed Header */}
-        <main className="lg:hidden min-h-screen pt-16">
-          <div className="min-h-[calc(100vh-4rem)]">
-            {children}
-          </div>
-        </main>
-      </body>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

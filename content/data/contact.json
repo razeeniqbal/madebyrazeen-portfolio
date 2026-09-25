@@ -1,0 +1,43 @@
+{
+  "availability": {
+    "open": true,
+    "headline": "Open to opportunities",
+    "detail": "Data engineering and AI roles, project collaborations, and talks."
+  },
+  "helpWith": [
+    {
+      "title": "Data platforms & pipelines",
+      "detail": "ETL/ELT, data modelling, moving data between systems, and making it trustworthy."
+    },
+    {
+      "title": "AI features that behave",
+      "detail": "LLM applications, RAG and agentic workflows, scoped so they only say what the data supports."
+    },
+    {
+      "title": "Analytics & dashboards",
+      "detail": "Power BI and custom dashboards that answer a real question, not every question."
+    },
+    {
+      "title": "Talks & sharing",
+      "detail": "Speaking about data and AI, from beginners to practitioners."
+    }
+  ],
+  "quickAnswers": [
+    {
+      "q": "What’s the best way to reach you?",
+      "a": "Email. It’s the channel I check most reliably."
+    },
+    {
+      "q": "Where are you based?",
+      "a": "Seri Kembangan, Malaysia (UTC+8). Happy to work across time zones asynchronously."
+    },
+    {
+      "q": "Can I see a CV first?",
+      "a": "Yes. There’s an online resume with a PDF download."
+    },
+    {
+      "q": "Not sure it’s a fit?",
+      "a": "Ask the assistant in the corner. It answers questions about my work and background."
+    }
+  ]
+}

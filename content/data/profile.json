@@ -1,0 +1,104 @@
+{
+  "name": "Razeen Iqbal",
+  "wordmark": "razeeniqbal",
+  "umbrella": "Made by Razeen",
+  "statement": [
+    "Engineer.",
+    "Builder.",
+    "Runner.",
+    "Curious human."
+  ],
+  "supporting": "I build systems, experiment with ideas, and keep learning, in engineering and outside of it.",
+  "role": "Data Engineer & AI Specialist",
+  "disciplines": [
+    "Data Engineering",
+    "AI Systems",
+    "Product Building",
+    "Experimentation",
+    "Continuous Learning",
+    "Running"
+  ],
+  "loops": {
+    "philosophy": [
+      "Input",
+      "Process",
+      "Iterate",
+      "Progress"
+    ],
+    "system": [
+      "Build",
+      "Learn",
+      "Experiment",
+      "Improve"
+    ],
+    "journey": [
+      "Ideas",
+      "Systems",
+      "Impact"
+    ]
+  },
+  "location": "Seri Kembangan, Malaysia",
+  "coordinates": {
+    "lat": "3.1390° N",
+    "lng": "101.6869° E",
+    "label": "KL · MY"
+  },
+  "status": "Open to opportunities • Data Engineering & AI Projects",
+  "languages": [
+    "Malay (Native)",
+    "English (Professional)",
+    "Arabic (Educational)"
+  ],
+  "resume": "/Razeen_Iqbal_Resume.pdf",
+  "domains": {
+    "umbrella": "madebyrazeen.com",
+    "portfolio": "portfolio.madebyrazeen.com"
+  },
+  "contact": {
+    "email": "razeeniqbal98@gmail.com",
+    "github": "https://github.com/razeeniqbal",
+    "linkedin": "https://linkedin.com/in/razeeniqbal",
+    "phone": "(+60) 13-7441727"
+  },
+  "education": [
+    {
+      "institution": "Universiti Malaysia Pahang Al-Sultan Abdullah",
+      "short": "UMPSA",
+      "degree": "Master",
+      "field": "Artificial Intelligence",
+      "period": "2024 - 2025",
+      "location": "Pekan, Pahang",
+      "cgpa": "3.72"
+    },
+    {
+      "institution": "Universiti Putra Malaysia",
+      "short": "UPM",
+      "degree": "Bachelor",
+      "field": "Civil Engineering",
+      "period": "2017 - 2021",
+      "location": "Serdang, Selangor",
+      "cgpa": "3.65"
+    }
+  ],
+  "recognition": [
+    {
+      "year": "2025",
+      "title": "Google Speaker, AI Build 2025",
+      "detail": "Invited to speak about AI."
+    },
+    {
+      "year": "2025",
+      "title": "Top 20, AWS National 2025",
+      "detail": "Training large language models."
+    }
+  ],
+  "bio": {
+    "short": "Data Engineer & AI Specialist passionate about building intelligent data solutions. Currently pursuing Master's in AI with expertise in ETL pipelines, ML models, and cloud platforms.",
+    "story": [
+      "My journey started in civil engineering, but I discovered my passion for data and AI during my time at G&P Geotechnic, where I automated engineering workflows and built data solutions. That spark led me to become a Certified Data Analyst and pursue a Master's in Artificial Intelligence, and I haven't looked back since.",
+      "Now as a Data Engineer at AEM Energy Solutions, I work on building data pipelines, moving data between different systems, and creating smart analytics tools for the energy sector. Before this, at EISmartwork, I built prediction models using massive datasets with over 10 million records and created interactive dashboards that helped companies make better decisions 20% faster.",
+      "I hold a Master's degree in AI from UMPSA with a CGPA of 3.72, and I've earned certifications from big tech companies like Microsoft, Google Cloud, and IBM. I was invited as a Google Speaker to talk about AI at AI Build 2025, and made it to the Top 20 in AWS National 2025 for training large language models.",
+      "What drives me? Turning messy data into clear insights, building systems that learn and improve, and staying ahead in the fast-moving world of AI. Whether it's designing data workflows, training smart models, or creating visual dashboards, I'm passionate about solving tough problems that make a real difference."
+    ]
+  }
+}

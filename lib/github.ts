@@ -21,7 +21,7 @@ export interface GitHubStats {
   };
 }
 
-export async function fetchGitHubStats(token?: string): Promise<GitHubStats> {
+export async function fetchGitHubStats(token?: string): Promise<GitHubStats | null> {
   const headers: HeadersInit = {
     'Accept': 'application/vnd.github.v3+json',
   };
@@ -117,21 +117,8 @@ export async function fetchGitHubStats(token?: string): Promise<GitHubStats> {
       contributionCalendar,
     };
   } catch (error) {
+    // No invented fallback numbers (PRD §58): callers show an "unavailable" state instead.
     console.error('Error fetching GitHub stats:', error);
-    // Return fallback data
-    return {
-      repos: 42,
-      followers: 156,
-      following: 89,
-      totalStars: 0,
-      contributions: 1247,
-      topLanguages: {
-        'Python': 45,
-        'TypeScript': 25,
-        'JavaScript': 15,
-        'SQL': 10,
-        'Other': 5,
-      },
-    };
+    return null;
   }
 }

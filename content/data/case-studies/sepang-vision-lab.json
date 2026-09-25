@@ -1,0 +1,342 @@
+{
+  "project": "Sepang Vision Lab",
+  "review": "draft",
+  "lede": "A motorsport digital twin and race-strategy research platform built around Sepang International Circuit. You don’t drive the car. You act as the race engineer.",
+  "facts": [
+    {
+      "label": "Role",
+      "value": "Solo: product, engineering, data, ML"
+    },
+    {
+      "label": "Timeline",
+      "value": "2026 · 17 milestones"
+    },
+    {
+      "label": "Data",
+      "value": "2017 Malaysian GP · 1,024 lap times"
+    },
+    {
+      "label": "Stack",
+      "value": "React Three Fiber · FastAPI · scikit-learn · MediaPipe"
+    }
+  ],
+  "disclaimer": "Independent motorsport technology and research project. Motorsport names and trademarks belong to their respective owners. No official affiliation or endorsement is implied.",
+  "sections": [
+    {
+      "id": "overview",
+      "headline": "A strategy workstation, not a racing game.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "Sepang Vision Lab puts an interactive digital twin of Sepang next to the tools a strategist would want: historical replay, telemetry, lap-time models, pit-strategy and Monte Carlo simulation, weather scenarios, webcam hand tracking and an AI race engineer."
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "It is deliberately not a driving game, a fantasy manager or a chatbot with racing trivia. The question it explores is how far honest, public race data can go before you have to start guessing, and how to show clearly where that line is."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "headline": "Strategy is decided under uncertainty.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Race strategy is made from partial information: lap times, gaps, pit windows, weather that might arrive. Public data covers only a slice of it. There is timing, but no pedal telemetry, no tyre compounds and no car positions between timing lines.",
+              "Most visualisations fill those gaps quietly with plausible-looking numbers. I wanted a system that used what the data actually supports, modelled what it could, and labelled everything else as an assumption."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "idea",
+      "headline": "Build in layers.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Each capability depends on the one before it, so the project was built strictly in that order. No layer started until the one beneath it worked and was tested."
+            ]
+          }
+        },
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "Build order",
+            "steps": [
+              "Circuit",
+              "Car movement",
+              "Race state",
+              "Replay",
+              "Telemetry",
+              "ML",
+              "Strategy",
+              "Monte Carlo",
+              "Weather",
+              "Computer vision",
+              "AI race engineer"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "headline": "Ingest once. Replay offline.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "flow",
+          "value": {
+            "label": "Sepang Vision Lab architecture",
+            "caption": "No external calls happen during replay. The frontend never reads the raw API JSON directly.",
+            "nodes": [
+              {
+                "type": "SOURCE",
+                "title": "Jolpica F1 API",
+                "detail": "Ergast-compatible results, laps and pit stops.",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "Ingest",
+                "detail": "Paginated, paced, cached. Validates lap sequences and the winner’s total time.",
+                "active": false
+              },
+              {
+                "type": "DATABASE",
+                "title": "Parquet cache",
+                "detail": "Raw-response hashes and retrieval time kept as provenance.",
+                "active": false
+              },
+              {
+                "type": "API",
+                "title": "FastAPI",
+                "detail": "Pydantic-validated replay, models and strategy endpoints.",
+                "active": false
+              },
+              {
+                "type": "OUTPUT",
+                "title": "Digital twin",
+                "detail": "React Three Fiber scene; readouts refresh at 10 Hz.",
+                "active": true
+              },
+              {
+                "type": "USER",
+                "title": "Race engineer",
+                "detail": "Selects drivers, seeks the race, branches strategies.",
+                "active": false
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": false,
+            "items": [
+              {
+                "title": "Circuit geometry",
+                "detail": "Community GeoJSON, cross-checked against the operator’s circuit map. The projected path is ~5,549 m against a published 5.543 km (0.11% over). Smoothed with a centripetal Catmull–Rom spline."
+              },
+              {
+                "title": "Historical replay",
+                "detail": "Cars move by linear reconstruction between recorded lap crossings. It is not GPS, and it is labelled that way. A retired car is never extrapolated around the track."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "headline": "The baseline won.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "The lap-time experiment predicts lap N from the three previous laps, the lap number and the last recorded position. Splits are chronological across the whole field (train by 45 min, validate to 65 min, test after), so no model ever sees the future.",
+              "Random Forest won on validation MAE and was selected. On the test window it did not beat the naive previous-lap baseline, and the app says so prominently instead of hiding it."
+            ]
+          }
+        },
+        {
+          "discriminant": "table",
+          "value": {
+            "caption": "Lap-time models · 2017 Malaysian GP · chronological split (448 / 207 / 275 examples)",
+            "columns": "Model | Validation MAE (s) | Test MAE (s) | Test RMSE (s) | Test R²",
+            "rows": [
+              "Previous-lap baseline | 1.584 | 0.795 | 2.162 | −0.368",
+              "Linear Regression | 1.634 | 1.098 | 1.709 | 0.145",
+              "Random Forest (selected) | 1.505 | 1.160 | 1.731 | 0.123",
+              "XGBoost | 1.843 | 1.566 | 1.934 | −0.095"
+            ],
+            "note": "Single race only; not validated on unseen races.",
+            "highlightRow": 2
+          }
+        },
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": false,
+            "items": [
+              {
+                "title": "Stint pace",
+                "detail": "Median-of-pairwise-slopes regression per stint. Pit laps and the following lap are excluded but stay visible. Tyre-only degradation is reported as not identifiable from this data."
+              },
+              {
+                "title": "Monte Carlo",
+                "detail": "1,000–10,000 seeded scenarios per comparison. Every strategy shares the same random draws (common random numbers), so the differences come from the strategy, not the noise."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "headline": "Constrain what can be trusted.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Strategy Lab",
+                "detail": "Freezes a hypothetical branch from a driver’s last completed lap and compares stay out, pit now and a delayed stop. All defaults are editable and labelled illustrative."
+              },
+              {
+                "title": "Weather Lab",
+                "detail": "Dry → light rain → wet → drying, with five deterministic tyre plans (slicks, early or delayed inters, early or delayed wets) and editable per-lap penalties."
+              },
+              {
+                "title": "Hand tracking",
+                "detail": "MediaPipe HandLandmarker runs locally in a web worker, capped at 15 fps. No camera request is made until the user explicitly enables it."
+              },
+              {
+                "title": "AI race engineer",
+                "detail": "The model may call exactly one tool, which re-runs the captured comparison. It can’t change inputs, and only simulator-derived numbers are shown. The no-AI path is labelled no-AI."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "interface",
+      "headline": "Same curiosity. Different tracks.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "image",
+          "value": {
+            "image": "projects.sepang",
+            "caption": "Cover art · figures illustrative"
+          }
+        }
+      ]
+    },
+    {
+      "id": "outcome",
+      "headline": "Seventeen milestones in.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "metrics",
+          "value": {
+            "items": [
+              {
+                "label": "Milestones",
+                "value": "17",
+                "note": "",
+                "illustrative": false
+              },
+              {
+                "label": "Recorded laps",
+                "value": "1,024",
+                "note": "20 drivers · 20 pit records",
+                "illustrative": false
+              },
+              {
+                "label": "Scenarios / run",
+                "value": "10,000",
+                "note": "Monte Carlo, seeded",
+                "illustrative": false
+              },
+              {
+                "label": "Geometry error",
+                "value": "0.11%",
+                "note": "vs published length",
+                "illustrative": false
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Still open: the gesture model is waiting on real labelled recordings, and the live AI race-engineer path still needs end-to-end verification. Both are marked as open in the project rather than shown as finished."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "learned",
+      "headline": "A baseline is a result.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Beat the naive model first",
+                "detail": "A previous-lap guess outperformed every trained model on test. Showing that is more useful than a flattering chart."
+              },
+              {
+                "title": "Label the unknown",
+                "detail": "Saying “tyre degradation is not identifiable here” is a finding, not a gap."
+              },
+              {
+                "title": "Layers keep you honest",
+                "detail": "Building strictly bottom-up meant every new feature stood on something already tested."
+              },
+              {
+                "title": "Give AI a narrow job",
+                "detail": "Letting the model explain the simulator, but never invent numbers, made the AI feature trustworthy."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

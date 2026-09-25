@@ -1,211 +1,311 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   V2 design tokens (PRD §7–§10)
+   Colours are RGB channels so Tailwind alpha modifiers work: bg-surface/80.
+   ========================================================================== */
+
+:root {
+  --carbon: 9 9 9;          /* #090909 */
+  --carbon-raised: 20 20 19;
+  --warm: 243 241 235;      /* #F3F1EB */
+  --warm-sunk: 232 229 221;
+  --grey: 154 154 148;      /* #9A9A94 — muted text on dark only */
+  --grey-ink: 94 94 89;     /* #5E5E59 — muted text on light (6:1 on warm) */
+  --lime: 216 255 62;       /* #D8FF3E — a signal, never a background field */
+
+  --gutter: 1rem;
+  --page-max: 90rem;
+  --header-h: 4rem;
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 2rem; }
+}
+@media (min-width: 1280px) {
+  :root { --gutter: 3rem; }
+}
+
+/* Section surfaces. Everything inside reads bg/fg/muted/line from here,
+   so one component works on both dark and light sections. */
+[data-surface='dark'] {
+  --bg: var(--carbon);
+  --bg-raised: var(--carbon-raised);
+  --fg: var(--warm);
+  --muted: var(--grey);
+  --line: 243 241 235 / 0.12;
+  --grid-line: 243 241 235 / 0.045;
+  /* Lime is readable as text on dark. */
+  --signal-text: var(--lime);
+  color-scheme: dark;
+}
+
+[data-surface='light'] {
+  --bg: var(--warm);
+  --bg-raised: var(--warm-sunk);
+  --fg: var(--carbon);
+  --muted: var(--grey-ink);
+  --line: 9 9 9 / 0.12;
+  --grid-line: 9 9 9 / 0.05;
+  /* Lime fails contrast as text on warm white; emphasis falls back to ink
+     and lime is used only as a marker/fill behind carbon text. */
+  --signal-text: var(--carbon);
+  color-scheme: light;
+}
+
+[data-surface] {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+}
+
 @layer base {
-  * {
-    box-sizing: border-box;
-    /* Hardware acceleration for smoother animations */
+  html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(var(--carbon));
   }
 
-  body {
-    @apply bg-primary-50 dark:bg-primary-950 text-gray-900 dark:text-gray-100;
-    @apply font-sans antialiased;
-    @apply transition-colors duration-300;
-    /* Optimize scrolling performance on mobile */
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+  :focus-visible {
+    outline: 2px solid rgb(var(--lime));
+    outline-offset: 3px;
+  }
+  [data-surface='light'] :focus-visible {
+    outline-color: rgb(var(--carbon));
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+  ::selection {
+    background: rgb(var(--lime));
+    color: rgb(var(--carbon));
   }
 }
 
 @layer components {
-  /* Container */
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  /* 4 / 8 / 12-column page grid (PRD §10). Mobile is a recomposition, not a shrink. */
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 1rem;
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  @media (min-width: 768px) {
+    .page-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .page-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
   }
 
-  /* Card */
-  .card {
-    @apply bg-white dark:bg-primary-900 rounded-xl shadow-card;
-    @apply border border-primary-200 dark:border-primary-800;
-    @apply transition-all duration-300;
+  .page-container {
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
 
-  .card:hover {
-    @apply shadow-card-hover border-primary-300 dark:border-primary-700;
+  /* Technical label: mono, uppercase, tracked. Metadata, coordinates, numbers. */
+  .label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  /* Button Primary */
-  .btn-primary {
-    @apply px-6 py-3 bg-primary-600 hover:bg-primary-700;
-    @apply text-white font-medium rounded-lg;
-    @apply transition-all duration-300;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
-  }
-
-  /* Button Secondary */
-  .btn-secondary {
-    @apply px-6 py-3 bg-primary-200 dark:bg-primary-800;
-    @apply text-gray-900 dark:text-gray-100;
-    @apply font-medium rounded-lg;
-    @apply hover:bg-primary-300 dark:hover:bg-primary-700;
-    @apply transition-all duration-300;
-  }
-
-  /* Input */
-  .input {
-    @apply w-full px-4 py-2 rounded-lg;
-    @apply border border-primary-300 dark:border-primary-700;
-    @apply bg-white dark:bg-primary-900;
-    @apply text-gray-900 dark:text-gray-100;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
-    @apply transition-all duration-200;
-  }
-
-  /* Badge */
-  .badge {
-    @apply inline-flex items-center px-3 py-1;
-    @apply text-xs font-medium rounded-full;
-    @apply bg-primary-100 dark:bg-primary-800;
-    @apply text-gray-800 dark:text-gray-200;
-  }
-
-  /* Section Heading */
-  .section-heading {
-    @apply text-3xl md:text-4xl font-bold;
-    @apply text-gray-900 dark:text-white;
-    @apply mb-6;
-  }
-
-  /* Glass effect */
-  .glass {
-    @apply bg-white/80 dark:bg-primary-900/80;
-    @apply backdrop-blur-md;
-    @apply border border-primary-200/50 dark:border-primary-800/50;
+  /* Faint technical grid texture. Use selectively (PRD §10: not noise). */
+  .bg-tech-grid {
+    background-image:
+      linear-gradient(rgb(var(--grid-line)) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--grid-line)) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    background-position: -1px -1px;
   }
 }
 
-@layer utilities {
-  /* Smooth transitions */
-  .transition-smooth {
-    @apply transition-all duration-300 ease-in-out;
-  }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 
-  /* Text gradient */
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    @apply bg-gradient-to-r from-accent-blue via-accent-purple to-accent-teal;
-  }
-
-  /* Handwritten name style */
-  .handwritten-name {
-    font-family: 'Allura', cursive;
-    @apply text-gray-900 dark:text-white;
-    @apply transition-colors duration-300;
-  }
-
-  /* Hover lift effect */
-  .hover-lift {
-    @apply transition-transform duration-300;
-  }
-
-  .hover-lift:hover {
-    @apply -translate-y-1;
+  /* Route draws once: INITIAL → RUNNING → COMPLETE (PRD §29). */
+  .route-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: route-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
   }
 }
 
-/* Hide scrollbars but keep functionality */
-::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+@keyframes route-draw {
+  to { stroke-dashoffset: 0; }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* ── Motion (M11). Motion communicates progress, not decoration (PRD §36). ── */
+@media (prefers-reduced-motion: no-preference) {
+  /* Loading sequence: ○ ─── ○ ─── ● nodes activate in turn (~1.1s). */
+  .seq-node {
+    animation: seq-node 0.2s ease-out forwards;
+    animation-delay: calc(var(--i) * 220ms);
+  }
+  .seq-line {
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: seq-line 0.2s ease-out forwards;
+    animation-delay: calc(var(--i) * 220ms - 120ms);
+  }
+
+  /* Scroll reveals: only once JS has marked the page ready, so content never hides without JS. */
+  .reveal-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal-ready [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Diagram construction: flow nodes light up left → right when revealed. */
+  .reveal-ready [data-reveal] .flow-node {
+    opacity: 0.25;
+    transition: opacity 0.4s ease-out;
+    transition-delay: calc(var(--i) * 120ms);
+  }
+  .reveal-ready [data-reveal].is-visible .flow-node {
+    opacity: 1;
+  }
+
+  /* Hero trajectory: nodes activate once on load. */
+  .trajectory-animate [data-node] {
+    animation: fade-in-node 0.35s ease-out both;
+    animation-delay: calc(var(--i) * 160ms + 300ms);
+  }
 }
 
-* {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+@keyframes seq-node {
+  to { background-color: rgb(var(--lime)); border-color: rgb(var(--lime)); }
+}
+@keyframes seq-line {
+  to { transform: scaleX(1); }
+}
+@keyframes fade-in-node {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: none; }
 }
 
-/* Selection */
-::selection {
-  @apply bg-primary-500 text-white;
+/* Reduced motion: show the finished state immediately. */
+@media (prefers-reduced-motion: reduce) {
+  .seq-node { background-color: rgb(var(--lime)); border-color: rgb(var(--lime)); }
 }
 
-/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   V1 (archived) — every rule below is scoped to the .v1 shell so it cannot
+   leak into V2. Behaviour is unchanged from the original globals.css.
+   ========================================================================== */
+
+html:has(.v1) {
+  background-color: #121212;
+}
+
+.v1 {
+  /* V1 was always dark; `dark:` variants need a .dark ancestor, so set the dark values directly. */
+  @apply bg-primary-950 text-gray-100 min-h-screen;
+  @apply transition-colors duration-300;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.v1 h1, .v1 h2, .v1 h3, .v1 h4, .v1 h5, .v1 h6 {
+  @apply font-bold;
+}
+
+.v1 .container-custom { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+.v1 .card {
+  @apply bg-white dark:bg-primary-900 rounded-xl shadow-card border border-primary-200 dark:border-primary-800 transition-all duration-300;
+}
+.v1 .card:hover { @apply shadow-card-hover border-primary-300 dark:border-primary-700; }
+.v1 .btn-primary {
+  @apply px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-all duration-300;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+}
+.v1 .btn-secondary {
+  @apply px-6 py-3 bg-primary-200 dark:bg-primary-800 text-gray-900 dark:text-gray-100 font-medium rounded-lg;
+  @apply hover:bg-primary-300 dark:hover:bg-primary-700 transition-all duration-300;
+}
+.v1 .input {
+  @apply w-full px-4 py-2 rounded-lg border border-primary-300 dark:border-primary-700 bg-white dark:bg-primary-900;
+  @apply text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-200;
+}
+.v1 .badge {
+  @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-primary-100 dark:bg-primary-800 text-gray-800 dark:text-gray-200;
+}
+.v1 .section-heading { @apply text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6; }
+.v1 .glass {
+  @apply bg-white/80 dark:bg-primary-900/80 border border-primary-200/50 dark:border-primary-800/50;
+  backdrop-filter: blur(12px);
+}
+.v1 .transition-smooth { @apply transition-all duration-300 ease-in-out; }
+.v1 .text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-blue via-accent-purple to-accent-teal;
+}
+.v1 .handwritten-name { @apply text-gray-900 dark:text-white transition-colors duration-300; font-family: var(--font-allura), cursive; }
+.v1 .hover-lift { @apply transition-transform duration-300; }
+.v1 .hover-lift:hover { @apply -translate-y-1; }
+.v1 ::selection { @apply bg-primary-500 text-white; }
+
+/* V1 hid scrollbars site-wide; kept for V1 only. */
+html:has(.v1)::-webkit-scrollbar,
+.v1 *::-webkit-scrollbar { width: 0; height: 0; }
+html:has(.v1),
+.v1 * { scrollbar-width: none; -ms-overflow-style: none; }
+
 @media (max-width: 1023px) {
-  /* Disable heavy animations on mobile */
-  .backdrop-blur-xl,
-  .backdrop-blur-md,
-  .backdrop-blur-sm {
+  .v1 .backdrop-blur-xl,
+  .v1 .backdrop-blur-md,
+  .v1 .backdrop-blur-sm {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-
-  /* Reduce shadow complexity on mobile */
-  .shadow-2xl,
-  .shadow-xl {
+  .v1 .shadow-2xl,
+  .v1 .shadow-xl {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
   }
-}
-
-/* Optimize animations for better performance */
-@media (prefers-reduced-motion: no-preference) {
-  * {
-    scroll-behavior: smooth;
-  }
-}
-
-/* GPU acceleration for frequently animated elements */
-.will-change-transform {
-  will-change: transform;
-}
-
-.will-change-opacity {
-  will-change: opacity;
-}
-
-/* Additional mobile performance optimizations */
-@media (max-width: 1023px) {
-  /* Disable 3D transforms on mobile */
-  [style*="perspective"],
-  [style*="rotateX"],
-  [style*="rotateY"],
-  [style*="translate3d"] {
+  .v1 [style*='perspective'],
+  .v1 [style*='rotateX'],
+  .v1 [style*='rotateY'],
+  .v1 [style*='translate3d'] {
     transform: none !important;
   }
+  .v1 * { transition-duration: 0.15s !important; }
+  html:has(.v1),
+  html:has(.v1) body { height: 100%; overflow-x: hidden; }
+  html:has(.v1) body { overflow-y: auto; }
+}
 
-  /* Simplify transitions on mobile */
-  * {
-    transition-duration: 0.15s !important;
+/* ── Print (used by /resume "Print / Save as PDF") ── */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  html, body { background: #fff !important; }
+  body > div > header,
+  body > div > footer,
+  [data-print-hide] { display: none !important; }
+  [data-surface] {
+    --bg: 255 255 255;
+    --bg-raised: 255 255 255;
+    --fg: 9 9 9;
+    --muted: 70 70 66;
+    --line: 9 9 9 / 0.18;
+    background: #fff !important;
+    color: #090909 !important;
   }
-
-  /* Reduce animation complexity */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* Remove transforms from body to allow fixed positioning */
-  html, body {
-    height: 100%;
-    overflow-x: hidden;
-  }
-
-  body {
-    overflow-y: auto;
-  }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  a { text-decoration: none; }
 }

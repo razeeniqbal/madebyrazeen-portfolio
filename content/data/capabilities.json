@@ -1,0 +1,45 @@
+{
+  "groups": [
+    {
+      "group": "Data Systems",
+      "items": [
+        "SQL",
+        "Python",
+        "ETL / ELT",
+        "Data Modelling",
+        "Data Platforms",
+        "Power BI"
+      ]
+    },
+    {
+      "group": "AI Systems",
+      "items": [
+        "Machine Learning",
+        "NLP",
+        "LLM Applications",
+        "RAG",
+        "Agentic Workflows"
+      ]
+    },
+    {
+      "group": "Product Engineering",
+      "items": [
+        "React",
+        "TypeScript",
+        "APIs",
+        "Databases",
+        "Deployment"
+      ]
+    },
+    {
+      "group": "Cloud & Platform",
+      "items": [
+        "Azure",
+        "GCP",
+        "AWS",
+        "Docker",
+        "CI/CD"
+      ]
+    }
+  ]
+}

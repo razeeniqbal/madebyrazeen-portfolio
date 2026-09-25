@@ -1,0 +1,86 @@
+{
+  "title": "What a data quality score should actually tell you",
+  "number": "001",
+  "summary": "Notes from building QualityPlus: dimensions, failed rows, and why the score is where the work starts.",
+  "topic": "Product",
+  "status": "draft",
+  "date": null,
+  "readingMinutes": 4,
+  "body": [
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": true,
+        "body": [
+          "A single number like “92% quality” feels useful until someone asks the obvious follow-up: which 8%, and what do we do about it? Building QualityPlus taught me that the score is only worth computing if it leads straight to the rows that need work."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "The first decision was to stop treating quality as one thing. A dataset can be complete and still wrong, or unique and still inconsistent with every other system. So the score is split into dimensions that each answer a different question."
+        ]
+      }
+    },
+    {
+      "discriminant": "list",
+      "value": {
+        "numbered": false,
+        "items": [
+          {
+            "title": "Completeness",
+            "detail": "Is the value there at all?"
+          },
+          {
+            "title": "Uniqueness",
+            "detail": "Is this record the only one of its kind?"
+          },
+          {
+            "title": "Validity",
+            "detail": "Is the value possible: right type, range and format?"
+          },
+          {
+            "title": "Consistency",
+            "detail": "Does it agree with a reference we already trust?"
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "The second decision was to keep the failures. A check that only reports a percentage throws away the most useful thing it found: the exact rows and cells that failed. In QualityPlus those failures become a work queue, and the score becomes the start of a workflow (assess, remediate, approve, publish) instead of the end of a report.",
+          "The third was about AI. It’s tempting to let a model fix bad cells automatically. Instead, every suggestion is stored next to the value a person finally chose, marked as accepted, modified or manual. That keeps the data auditable, and it turns out to be the best way to find out whether the AI is actually any good."
+        ]
+      }
+    },
+    {
+      "discriminant": "steps",
+      "value": {
+        "label": "From score to trusted data",
+        "steps": [
+          "Score",
+          "Failed rows",
+          "Suggested fixes",
+          "Human decision",
+          "Approval",
+          "Trusted version"
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "So what should a quality score tell you? Not how good the data is in general, but where it breaks, why, and what a fix would look like. Anything less is a vanity metric."
+        ]
+      }
+    }
+  ]
+}

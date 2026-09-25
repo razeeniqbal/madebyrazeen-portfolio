@@ -1,0 +1,313 @@
+{
+  "project": "QualityPlus",
+  "review": "draft",
+  "lede": "Data quality management, turned into a product. Score a dataset, fix what failed inside a governed workflow, and publish a version everyone can trust.",
+  "facts": [
+    {
+      "label": "Role",
+      "value": "Solo: product, engineering, AI workflows"
+    },
+    {
+      "label": "Domain",
+      "value": "Oil & gas datasets"
+    },
+    {
+      "label": "Stack",
+      "value": "React · TypeScript · Supabase · n8n · Ollama"
+    },
+    {
+      "label": "Repository",
+      "value": "Private"
+    }
+  ],
+  "disclaimer": "",
+  "sections": [
+    {
+      "id": "overview",
+      "headline": "Measure it. Fix it. Trust it.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "QualityPlus lets a team upload a dataset, run configurable checks across four quality dimensions, and work every failed cell through a review workflow until a corrected “trusted” version is published."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "headline": "Bad data gets fixed in spreadsheets.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Operational datasets arrive incomplete, duplicated or inconsistent. The fixes usually happen by hand in a copy of a spreadsheet, with no record of what changed, who approved it, or which rules were applied.",
+              "Every project also ends up reinventing its own validation rules, so the same mistakes get caught differently, or not at all, depending on who looks."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "idea",
+      "headline": "Quality as a workflow, not a report.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "Trusted data workflow",
+            "steps": [
+              "Assessment",
+              "Remediation",
+              "Approval",
+              "Publish"
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "A score on its own isn’t enough; people need a way to act on it. So the score becomes the start of a workflow. AI can suggest at each step, but a person always decides."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "headline": "Scoring runs in the browser. AI runs in-house.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "flow",
+          "value": {
+            "label": "QualityPlus architecture",
+            "caption": "The AI features are optional. If a webhook isn’t configured, that feature is hidden and the core workflow still works.",
+            "nodes": [
+              {
+                "type": "SOURCE",
+                "title": "Dataset upload",
+                "detail": "Dataset files uploaded into a project.",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "Quality engine",
+                "detail": "Pure TypeScript; scores without a database round-trip.",
+                "active": false
+              },
+              {
+                "type": "DATABASE",
+                "title": "Supabase",
+                "detail": "Scores history, templates, corrections, auth, roles.",
+                "active": false
+              },
+              {
+                "type": "AGENT",
+                "title": "n8n workflows",
+                "detail": "Three webhooks: rule check, summary, remediation.",
+                "active": true
+              },
+              {
+                "type": "MODEL",
+                "title": "Mistral 7B",
+                "detail": "Self-hosted via Ollama, plus an O&G knowledge base.",
+                "active": false
+              },
+              {
+                "type": "OUTPUT",
+                "title": "Trusted data",
+                "detail": "Corrected dataset + PDF quality report.",
+                "active": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "headline": "Four dimensions, three AI touchpoints.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": false,
+            "items": [
+              {
+                "title": "Completeness",
+                "detail": "Selected columns must be present and non-empty."
+              },
+              {
+                "title": "Uniqueness",
+                "detail": "Single-column or composite-key uniqueness across rows."
+              },
+              {
+                "title": "Validity",
+                "detail": "Ranges, thresholds, allowed values, regex and data types, seeded by automatic type inference."
+              },
+              {
+                "title": "Consistency",
+                "detail": "Values must match a reference list, an uploaded file, or another dataset already in the platform."
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "AI rule check",
+                "detail": "Reads column names against an O&G domain knowledge base, suggests validity rules, and flags columns that should be consistency checks instead."
+              },
+              {
+                "title": "AI summary",
+                "detail": "Writes a plain-language summary of a saved score: key issues, links to the failing rows, recommendations."
+              },
+              {
+                "title": "AI remediation",
+                "detail": "Suggests a replacement for each failed cell, with a reason and confidence, using passing values from the same column as style examples."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "headline": "Keep the AI’s answer separate from the human’s.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Traceable corrections",
+                "detail": "Every fix records whether it was manual, an accepted AI suggestion or a modified one, keeping both the AI’s value and the final value."
+              },
+              {
+                "title": "Roles",
+                "detail": "Editors submit corrections; owners and co-owners approve or reject, with a required reason."
+              },
+              {
+                "title": "Governed templates",
+                "detail": "A check configuration becomes a template that is reviewed and approved before other projects can reuse it."
+              },
+              {
+                "title": "Derived state",
+                "detail": "Workflow phase is computed from failed, addressed and pending counts rather than stored, so it can’t drift."
+              },
+              {
+                "title": "A pivot",
+                "detail": "An early Python backend on Render was replaced by talking to Supabase directly. It was simpler to run and there was less to break."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "interface",
+      "headline": "Data you can trust.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "image",
+          "value": {
+            "image": "projects.qualityplus",
+            "caption": "Cover art · figures illustrative"
+          }
+        }
+      ]
+    },
+    {
+      "id": "outcome",
+      "headline": "Live, and still evolving.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "metrics",
+          "value": {
+            "items": [
+              {
+                "label": "Quality dimensions",
+                "value": "4",
+                "note": "",
+                "illustrative": false
+              },
+              {
+                "label": "AI workflows",
+                "value": "3",
+                "note": "all optional",
+                "illustrative": false
+              },
+              {
+                "label": "Workflow phases",
+                "value": "4",
+                "note": "assess → publish",
+                "illustrative": false
+              },
+              {
+                "label": "Access roles",
+                "value": "4",
+                "note": "owner → viewer",
+                "illustrative": false
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "The remediation workflow is the most actively developed part: dataset refresh, visual marking of corrected cells and PDF export were the latest additions."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "learned",
+      "headline": "Suggest, don’t decide.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Separate suggestion from decision",
+                "detail": "Storing the AI’s value next to the human’s made the system auditable, and made the AI easier to evaluate."
+              },
+              {
+                "title": "Self-hosting changes the conversation",
+                "detail": "Running the model in-house removed the question of sending operational data to a third party."
+              },
+              {
+                "title": "Governance is a feature",
+                "detail": "Rules only get reused once there’s a review step people trust."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

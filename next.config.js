@@ -12,19 +12,26 @@ const nextConfig = {
   // Image optimization
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.simpleicons.org',
-      },
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     qualities: [75, 85],
+  },
+
+  // The chat API builds its knowledge from content/data at runtime; make sure those files ship with it.
+  outputFileTracingIncludes: {
+    '/api/chat': ['./content/data/**/*'],
+  },
+
+  // V1 URLs → their V2 homes. V1 itself lives on at /archive/v1.
+  async redirects() {
+    return [
+      { source: '/projects', destination: '/work', permanent: true },
+      { source: '/achievements', destination: '/about', permanent: true },
+      { source: '/dashboard', destination: '/lab', permanent: true },
+      { source: '/smart-talk', destination: '/lab', permanent: true },
+    ];
   },
 
   // Compress output

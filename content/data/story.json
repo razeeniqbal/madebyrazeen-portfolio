@@ -1,0 +1,133 @@
+{
+  "intro": {
+    "file": "story.log",
+    "path": "civil engineering → data → AI",
+    "title": [
+      "The long way from",
+      "concrete to code."
+    ],
+    "lede": "I’m Razeen, a data engineer in Malaysia who started out as a civil engineer. I build systems, test ideas in public repos, and run long distances to keep my head straight.",
+    "note": "Told step by step and kept as a journal, so it grows as I do."
+  },
+  "chapters": [
+    {
+      "period": "2017 – 2021",
+      "title": "Engineer by training",
+      "body": [
+        "Civil Engineering at Universiti Putra Malaysia. Four years of structures, soils and calculations that had to be right the first time. It taught me to respect systems long before I built software ones."
+      ],
+      "photo": "none",
+      "photoCaption": "",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    },
+    {
+      "period": "2022",
+      "title": "Registered, and restless",
+      "body": [
+        "I registered as a Graduate Engineer with the Board of Engineers Malaysia and the Institution of Engineers Malaysia, and joined G&P Geotechnic. The engineering was real. So was the pile of repetitive work around it."
+      ],
+      "photo": "none",
+      "photoCaption": "",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    },
+    {
+      "period": "2022 – 2024",
+      "title": "Automating the boring parts",
+      "body": [
+        "I started writing Python and VBA to do the repetitive parts of geotechnical analysis for me, and cut a lot of manual effort. Somewhere in there I realised I cared more about the data than the drawings."
+      ],
+      "photo": "none",
+      "photoCaption": "",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    },
+    {
+      "period": "2023",
+      "title": "Making it official",
+      "body": [
+        "I studied at night and turned the curiosity into credentials: Certified Data Analyst Associate, the PCEP Python certification, and Microsoft’s Power BI Data Analyst Associate."
+      ],
+      "photo": "none",
+      "photoCaption": "",
+      "credentialTitle": "Microsoft Certified: Power BI Data Analyst Associate",
+      "credentialIssuer": "Microsoft",
+      "credentialDate": "Sep 2023",
+      "credentialUrl": "https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874"
+    },
+    {
+      "period": "2024",
+      "title": "Switching lanes",
+      "body": [
+        "I left engineering for a Data Analyst role at EISmartwork, building models on datasets of more than ten million records and dashboards people actually used. At the same time I started a Master’s in Artificial Intelligence at UMPSA."
+      ],
+      "photo": "none",
+      "photoCaption": "",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    },
+    {
+      "period": "2025",
+      "title": "Master’s, and a microphone",
+      "body": [
+        "I finished the Master’s in AI (CGPA 3.72). I was invited as a Google Speaker at AI Build 2025 and made the Top 20 of AWS National 2025 for training large language models.",
+        "At the Cursor × Anthropic hackathon we built LeadSightz, a sales-automation platform, in a weekend."
+      ],
+      "photo": "career.cursorAnthropic",
+      "photoCaption": "Cursor × Anthropic hackathon",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    },
+    {
+      "period": "Jun 2025 – now",
+      "title": "Data engineer, for real",
+      "body": [
+        "At AEM Energy Solutions I build data pipelines and analytics for the energy sector. The problems there led to QualityPlus: a tool that scores data quality and turns the failures into a review workflow instead of a spreadsheet."
+      ],
+      "photo": "career.briefing2",
+      "photoCaption": "Walking through a demo",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    },
+    {
+      "period": "2026",
+      "title": "Same curiosity, different tracks",
+      "body": [
+        "Sepang Vision Lab started as a question about how far public race data can go. Seventeen milestones later it’s a digital twin with replay, strategy simulation and an AI race engineer that is only allowed to explain the simulator."
+      ],
+      "photo": "none",
+      "photoCaption": "",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    },
+    {
+      "period": "Always",
+      "title": "Running, and the long game",
+      "body": [
+        "Outside work I run road races. It’s the same loop as engineering: show up, measure, adjust, repeat. Progress you only notice over months."
+      ],
+      "photo": "running.race",
+      "photoCaption": "Race day",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": ""
+    }
+  ],
+  "outro": "Input → process → iterate → progress. Still iterating."
+}
