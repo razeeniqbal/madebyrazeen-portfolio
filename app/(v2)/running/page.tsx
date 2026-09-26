@@ -8,6 +8,7 @@ import { RouteMap } from '@/components/v2/running/RouteMap';
 import { assets } from '@/lib/assets';
 import {
   getLatestRun,
+  getLatestRouteRun,
   getPersonalBests,
   getRaces,
   isSampleData,
@@ -30,6 +31,7 @@ function SampleBadge() {
 
 export default function RunningPage() {
   const run = getLatestRun();
+  const routeRun = run?.route ? run : getLatestRouteRun();
   const sample = isSampleData();
   const bests = getPersonalBests();
   const races = getRaces();
@@ -95,16 +97,20 @@ export default function RunningPage() {
                 ))}
             </dl>
 
-            {run.route && (
+            {routeRun?.route && (
               <figure className="col-span-full lg:col-span-7">
                 <RouteMap
-                  route={run.route}
-                  distanceKm={run.distanceKm}
-                  label={`Route of the ${run.distanceKm.toFixed(2)} km run${run.sample ? ' (sample shape)' : ''}.`}
+                  route={routeRun.route}
+                  distanceKm={routeRun.distanceKm}
+                  label={`Route of the ${routeRun.distanceKm.toFixed(2)} km run${routeRun.sample ? ' (sample shape)' : ''}.`}
                 />
                 <figcaption className="mt-2 flex justify-between gap-4">
-                  <TechnicalLabel>Route · {run.sample ? 'sample shape' : 'ends trimmed for privacy'}</TechnicalLabel>
-                  <TechnicalLabel>{run.distanceKm.toFixed(2)} km</TechnicalLabel>
+                  <TechnicalLabel>
+                    {routeRun === run
+                      ? `Route · ${run.sample ? 'sample shape' : 'ends trimmed for privacy'}`
+                      : `Latest outdoor route · ${new Date(`${routeRun.date}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })}`}
+                  </TechnicalLabel>
+                  <TechnicalLabel>{routeRun.distanceKm.toFixed(2)} km</TechnicalLabel>
                 </figcaption>
               </figure>
             )}

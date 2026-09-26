@@ -1,0 +1,296 @@
+{
+  "project": "Duplicate Question Detection (NLP)",
+  "review": "draft",
+  "lede": "My Master's research: can duplicate questions be detected accurately without the heavy models? FastText embeddings plus PCA kept 83.68% accuracy while cutting training time by two thirds and memory by 83%.",
+  "facts": [
+    {
+      "label": "Context",
+      "value": "Master of Science in AI, UMPSA (Master Project II)"
+    },
+    {
+      "label": "Data",
+      "value": "Quora Question Pairs · 404,290 pairs"
+    },
+    {
+      "label": "Stack",
+      "value": "Python · FastText · PCA · scikit-learn · XGBoost"
+    },
+    {
+      "label": "Result",
+      "value": "83.68% accuracy at 200 dimensions"
+    }
+  ],
+  "disclaimer": "",
+  "sections": [
+    {
+      "id": "overview",
+      "headline": "Accurate enough, and cheap enough to run.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "Duplicate questions fragment answers and waste moderators' time on large Q&A platforms. The strongest published detectors use deep models like BERT and BiLSTMs, which are accurate but expensive to train and serve."
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "This research asked a narrower, practical question: how much accuracy do you actually lose if you compress the features aggressively, and what do you gain in speed and memory?"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "headline": "High-dimensional vectors are slow at scale.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": false,
+            "items": [
+              {
+                "title": "Manual detection does not scale",
+                "detail": "Semantically identical questions are phrased differently, so keyword matching misses them."
+              },
+              {
+                "title": "Heavy features, heavy costs",
+                "detail": "Pair features built from word embeddings reach 1,200 dimensions, which slows training and inference."
+              },
+              {
+                "title": "A gap in the literature",
+                "detail": "Most prior work reports accuracy and ignores computational efficiency entirely."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "idea",
+      "headline": "Compress the meaning, keep the signal.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "Research pipeline",
+            "steps": [
+              "Preprocess",
+              "FastText embeddings",
+              "Pair features",
+              "PCA",
+              "Classify",
+              "Evaluate"
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Represent each question with FastText word vectors, combine the pair into features, then use Principal Component Analysis to shrink those features before classification, and measure both accuracy and cost."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "headline": "From raw text to a duplicate score.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "flow",
+          "value": {
+            "label": "Duplicate detection pipeline",
+            "caption": "Evaluated with accuracy, precision, recall and F1, plus training time, memory and inference speed.",
+            "nodes": [
+              {
+                "type": "SOURCE",
+                "title": "Quora pairs",
+                "detail": "404,290 question pairs, 36.9% duplicates.",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "Preprocess",
+                "detail": "Cleaning, tokenisation, lemmatisation; question words like how and why kept.",
+                "active": false
+              },
+              {
+                "type": "MODEL",
+                "title": "FastText",
+                "detail": "300-dimensional vectors, 94.3% vocabulary coverage.",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "Pair features",
+                "detail": "Absolute differences and element-wise products: 1,200 features.",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "PCA",
+                "detail": "Reduced to 50, 100, 150 and 200 dimensions.",
+                "active": true
+              },
+              {
+                "type": "OUTPUT",
+                "title": "Classifier",
+                "detail": "Logistic Regression, SVM, Random Forest, XGBoost.",
+                "active": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "headline": "200 dimensions keep almost everything.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "FastText separated the classes clearly: duplicate pairs averaged a similarity of 0.742 against 0.431 for non-duplicates. PCA at 200 dimensions kept 89.5% of the variance while shrinking the features by 83.3%."
+            ]
+          }
+        },
+        {
+          "discriminant": "table",
+          "value": {
+            "caption": "Computational efficiency · 200D vs full 1,200D features",
+            "columns": "Model | Training 1200D | Training 200D | Saved | Inference 200D",
+            "rows": [
+              "Logistic Regression | 42.3s | 9.87s | 76.7% | 0.8ms",
+              "SVM | 156.7s | 58.34s | 62.8% | 1.9ms",
+              "Random Forest | 89.4s | 32.78s | 63.3% | 0.9ms",
+              "XGBoost | 67.8s | 24.56s | 63.8% | 1.1ms"
+            ],
+            "note": "Memory for feature storage fell from 3.2 GB to 0.53 GB (83.4%) for every model.",
+            "highlightRow": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "headline": "Systematic, not lucky.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Four dimension settings",
+                "detail": "50, 100, 150 and 200 dimensions, each tested against the full baseline."
+              },
+              {
+                "title": "Four classifiers",
+                "detail": "Linear and ensemble models compared on the same features."
+              },
+              {
+                "title": "Question-aware cleaning",
+                "detail": "Interrogative words were kept because they carry intent."
+              },
+              {
+                "title": "Cost as a metric",
+                "detail": "Training time, memory and inference speed measured alongside accuracy."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "outcome",
+      "headline": "0.33% less accurate, far cheaper.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "metrics",
+          "value": {
+            "items": [
+              {
+                "label": "Accuracy (200D, XGBoost)",
+                "value": "83.68%",
+                "note": "Full 1,200D: 84.01%",
+                "illustrative": false
+              },
+              {
+                "label": "F1-score (200D)",
+                "value": "81.22%",
+                "note": "",
+                "illustrative": false
+              },
+              {
+                "label": "Training time saved",
+                "value": "66.7%",
+                "note": "average across models",
+                "illustrative": false
+              },
+              {
+                "label": "Memory saved",
+                "value": "83.4%",
+                "note": "3.2 GB → 0.53 GB",
+                "illustrative": false
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Deep-learning approaches in the literature reach 91 to 96% accuracy, but at far higher computational cost. This framework trades a few points of accuracy for a system that is fast and light enough to run widely."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "learned",
+      "headline": "Measure the cost, not just the score.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "The trade-off curve is the result",
+                "detail": "Showing accuracy against dimensions said more than any single best number."
+              },
+              {
+                "title": "Most meaning survives compression",
+                "detail": "Losing five sixths of the features cost a third of a percentage point."
+              },
+              {
+                "title": "Efficiency belongs in the evaluation",
+                "detail": "A model that is too expensive to deploy has not really solved the problem."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

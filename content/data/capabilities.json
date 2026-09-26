@@ -8,7 +8,9 @@
         "ETL / ELT",
         "Data Modelling",
         "Data Platforms",
-        "Power BI"
+        "Power BI",
+        "Data Governance",
+        "NoSQL"
       ]
     },
     {
@@ -18,7 +20,10 @@
         "NLP",
         "LLM Applications",
         "RAG",
-        "Agentic Workflows"
+        "Agentic Workflows",
+        "LLM Fine-tuning",
+        "Vector Databases",
+        "Prompt Engineering"
       ]
     },
     {
@@ -28,7 +33,8 @@
         "TypeScript",
         "APIs",
         "Databases",
-        "Deployment"
+        "Deployment",
+        "FastAPI / Flask"
       ]
     },
     {
@@ -38,7 +44,10 @@
         "GCP",
         "AWS",
         "Docker",
-        "CI/CD"
+        "CI/CD",
+        "AzureML",
+        "Vertex AI",
+        "SageMaker"
       ]
     }
   ]

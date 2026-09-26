@@ -20,6 +20,9 @@ export const metadata: Metadata = {
 // PRD §33: direct channels, no form. (V1's form never sent anything.)
 const channels = [
   { label: 'Email', value: contact.email, href: `mailto:${contact.email}`, note: 'Best for anything detailed' },
+  ...(contact.phone
+    ? [{ label: 'Phone', value: contact.phone, href: `tel:${contact.phone.replace(/[^\d+]/g, '')}`, note: 'For a quick call' }]
+    : []),
   { label: 'LinkedIn', value: 'in/razeeniqbal', href: contact.linkedin, note: 'Career & professional' },
   { label: 'GitHub', value: '@razeeniqbal', href: contact.github, note: 'Code & open projects' },
 ];

@@ -89,23 +89,25 @@
     {
       "slug": "nlp-semantic-similarity",
       "number": "003",
-      "title": "AI / NLP Research",
+      "title": "Duplicate Question Detection (NLP)",
       "year": 2025,
       "category": "research",
       "status": "shipped",
       "tier": "featured",
       "order": 2,
-      "summary": "Question-pair semantic similarity: tokenisation, embeddings and a shared semantic space to find questions that mean the same thing in different words.",
+      "summary": "Master's research: FastText embeddings plus PCA to detect duplicate questions on 404k Quora pairs, keeping 83.68% accuracy while cutting training time by two thirds and memory by 83%.",
       "stack": [
         "Python",
         "FastText",
         "PCA",
-        "scikit-learn"
+        "scikit-learn",
+        "XGBoost"
       ],
       "tags": [
         "NLP",
         "Embeddings",
-        "Semantic Similarity"
+        "Dimensionality Reduction",
+        "Research"
       ],
       "links": {
         "live": "",
@@ -113,13 +115,29 @@
       },
       "cover": "projects.nlp",
       "caseStudy": true,
-      "placeholder": true,
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "placeholder": false,
+      "role": "Master's researcher (UMPSA)",
+      "problem": "Q&A platforms fill up with duplicate questions, and the accurate deep-learning detectors are too heavy to run at scale.",
+      "outcome": "83.68% accuracy at 200 dimensions, 0.33% below the full 1,200-dimension baseline, with 66.7% faster training and 83.4% less memory.",
+      "learning": "The most useful result was the trade-off curve, not the top accuracy: most of the meaning survives aggressive compression.",
       "confidential": false,
-      "metrics": [],
+      "metrics": [
+        {
+          "label": "Accuracy (200D)",
+          "value": "83.68%",
+          "illustrative": false
+        },
+        {
+          "label": "Memory saved",
+          "value": "83.4%",
+          "illustrative": false
+        },
+        {
+          "label": "Training time saved",
+          "value": "66.7%",
+          "illustrative": false
+        }
+      ],
       "draft": false
     },
     {

@@ -78,6 +78,9 @@ export function getRuns(): Run[] {
 
 export const getLatestRun = (): Run | undefined => getRuns()[0];
 
+/** Most recent run with a GPS route (treadmill runs have none). */
+export const getLatestRouteRun = (): Run | undefined => getRuns().find((r) => r.route && r.route.length > 1);
+
 export const isSampleData = () => (exported as Run[]).length === 0;
 
 /** Race results among the runs (those with `race` set). */

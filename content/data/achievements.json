@@ -461,6 +461,94 @@
       "image": "/achievements/mereka-search.jpg",
       "credentialId": "f9f3a231",
       "credentialUrl": ""
+    },
+    {
+      "id": "43",
+      "title": "Microsoft Certified: Azure AI Engineer Associate (AI-102)",
+      "organization": "Microsoft",
+      "issuedDate": "",
+      "description": "Designing and implementing Azure AI solutions.",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
+    },
+    {
+      "id": "44",
+      "title": "Microsoft Certified: Fabric Data Engineer Associate (DP-700)",
+      "organization": "Microsoft",
+      "issuedDate": "",
+      "description": "Data engineering with Microsoft Fabric.",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
+    },
+    {
+      "id": "45",
+      "title": "Generative AI Leader",
+      "organization": "Google Cloud",
+      "issuedDate": "",
+      "description": "Generative AI strategy and adoption on Google Cloud.",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
+    },
+    {
+      "id": "46",
+      "title": "Claude 101",
+      "organization": "Anthropic",
+      "issuedDate": "",
+      "description": "Working effectively with Claude.",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
+    },
+    {
+      "id": "47",
+      "title": "Claude Code in Action",
+      "organization": "Anthropic",
+      "issuedDate": "",
+      "description": "Agentic software development with Claude Code.",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
+    },
+    {
+      "id": "48",
+      "title": "Data Streaming Engineer Foundations",
+      "organization": "Apache",
+      "issuedDate": "",
+      "description": "Foundations of real-time data streaming.",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
+    },
+    {
+      "id": "49",
+      "title": "Data Streaming Engineer: Apache Flink",
+      "organization": "Apache",
+      "issuedDate": "",
+      "description": "Stream processing with Apache Flink.",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
+    },
+    {
+      "id": "50",
+      "title": "Axiata Digital Leadership Programme",
+      "organization": "Axiata",
+      "issuedDate": "",
+      "description": "Digital leadership programme; Innovation Challenge champion (Bootcamp 3).",
+      "category": "certification",
+      "image": "",
+      "credentialUrl": "",
+      "credentialId": ""
     }
   ]
 }

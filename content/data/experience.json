@@ -8,11 +8,13 @@
       "location": "Kuala Lumpur, Malaysia",
       "type": "Hybrid",
       "highlights": [
-        "Design and implement end-to-end data pipelines for oil & gas analytics",
-        "Automate ETL processes reducing data preparation time by 30%",
-        "Develop and maintain Power BI dashboards for real-time monitoring",
-        "Successfully migrated legacy SQL databases to NoSQL architecture",
-        "Collaborate with cross-functional teams to optimize data workflows"
+        "Built AI SaaS infrastructure: an in-house LLM framework with custom pre-training corpora and APIs for AI assistants",
+        "Architected a Data Quality Platform from scratch, now the enterprise standard for upstream and downstream data",
+        "Automated dataset labelling with Ollama and deployed refined classification models to AzureML",
+        "Turned PDF engineering drawings into vectors for semantic classification of technical specs",
+        "Redesigned Power BI and Python dashboards, improving decision-making accuracy by 30%",
+        "Authored the company's first AI Cybersecurity Procedure for safe LLM adoption",
+        "Led the SQL to NoSQL migration for real-time AI inference with 100% data consistency"
       ],
       "worked": "",
       "changed": "",
@@ -26,11 +28,10 @@
       "location": "Kuala Lumpur, Malaysia",
       "type": "Onsite",
       "highlights": [
-        "Built machine learning models on datasets with 10M+ records",
-        "Created interactive dashboards that improved reporting speed by 50%",
-        "Optimized ELT pipelines resulting in 40% faster query performance",
-        "Conducted statistical analysis and data visualization for business insights",
-        "Increased operational efficiency by 20% through data-driven recommendations"
+        "Improved operational efficiency by 20% with predictive ML models on 10M+ records",
+        "Engineered ELT pipelines and cut database query times by 40%",
+        "Automated data transformation in Python, saving 30+ hours of manual work a month",
+        "Designed 5+ interactive dashboards, halving report generation time"
       ],
       "worked": "",
       "changed": "",
@@ -44,11 +45,9 @@
       "location": "Kuala Lumpur, Malaysia",
       "type": "Onsite",
       "highlights": [
-        "Performed data analysis and visualization for engineering projects",
-        "Automated workflows using Python and VBA Excel reducing manual effort by 30%",
-        "Developed high-accuracy analysis tools for geotechnical assessments",
-        "Successfully transitioned from engineering to data science role",
-        "Collaborated with engineering teams on data-driven project optimization"
+        "Taught myself Python and VBA to automate engineering workflows, cutting manual effort by 30%",
+        "Delivered high-accuracy data analysis and visualisation with Excel and Grapher across infrastructure projects",
+        "Redesigned engineering reporting into end-to-end analysis workflows for senior decision-makers"
       ],
       "worked": "",
       "changed": "",

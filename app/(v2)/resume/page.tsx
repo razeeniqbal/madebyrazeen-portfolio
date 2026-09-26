@@ -12,12 +12,12 @@ import { getProjectsByTier } from '@/content/projects';
 
 export const metadata: Metadata = {
   title: 'Resume',
-  description: 'Online resume of Razeen Iqbal: Data Engineer & AI Specialist. Read it here or download the PDF.',
+  description: 'Online resume of Razeen Iqbal: Data Engineer & AI Solutions Engineer. Read it here or download the PDF.',
   alternates: { canonical: '/resume' },
 };
 
 // Credentials worth listing on a one-page CV: professional registrations and vendor certifications.
-const KEY_ISSUERS = ['Microsoft', 'Google Cloud', 'Board of Engineers Malaysia', 'The Institution of Engineers Malaysia', 'Asia Pacific University (APU/APIIT)', 'Python Institute'];
+const KEY_ISSUERS = ['Microsoft', 'Google Cloud', 'Board of Engineers Malaysia', 'The Institution of Engineers Malaysia', 'Asia Pacific University (APU/APIIT)', 'Python Institute', 'Anthropic', 'Apache', 'Axiata'];
 
 function Heading({ children }: { children: React.ReactNode }) {
   return (
@@ -53,6 +53,13 @@ export default function ResumePage() {
             </div>
             <ul className="space-y-1 text-sm md:text-right">
               <li>{profile.location}</li>
+              {contact.phone && (
+                <li>
+                  <a href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`} className="underline-offset-2 hover:underline">
+                    {contact.phone}
+                  </a>
+                </li>
+              )}
               <li>
                 <a href={`mailto:${contact.email}`} className="underline-offset-2 hover:underline">
                   {contact.email}
