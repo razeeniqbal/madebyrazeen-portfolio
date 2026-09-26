@@ -94,7 +94,7 @@ export function ProjectIndex({ projects }: { projects: Project[] }) {
         </ol>
       ) : (
         <div className="flex flex-col items-center gap-4 py-16 text-center">
-          <MiniRazeen pose="thinking" height={120} />
+          <MiniRazeen pose="thinking" height={160} />
           <p className="label text-muted">// No results</p>
           <p className="text-xl font-semibold">Nothing matches that. Yet.</p>
           <button

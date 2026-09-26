@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
-import type { MiniRazeenPose } from '@/lib/assets';
+import { assets, type MiniRazeenPose } from '@/lib/assets';
 
 /** OpenGraph templates (PRD §41): identity, portfolio, project, technical note, running story. 1200×630. */
 export const ogSize = { width: 1200, height: 630 };
@@ -28,7 +28,7 @@ export async function renderOg({ kind, index, title, subtitle, meta, surface = '
     fontFile('jetbrains-mono-latin-400-normal.woff'),
   ]);
   const character = pose
-    ? `data:image/png;base64,${(await readFile(join(process.cwd(), 'public/assets/v2/identity/mini-razeen', `${pose}.png`))).toString('base64')}`
+    ? `data:image/png;base64,${(await readFile(join(process.cwd(), 'public', assets.miniRazeen[pose].src))).toString('base64')}`
     : null;
 
   const dark = surface === 'dark';

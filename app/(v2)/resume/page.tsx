@@ -33,7 +33,7 @@ export default function ResumePage() {
   return (
     <Section surface="light" className="!pt-12 print:!py-0">
       <div className="page-container">
-        {/* Toolbar — hidden when printing */}
+        {/* Toolbar, hidden when printing */}
         <div className="mx-auto mb-10 flex max-w-[52rem] flex-wrap items-center justify-between gap-4 print:hidden">
           <TechnicalLabel>Online resume · updated from this site&apos;s content</TechnicalLabel>
           <div className="flex flex-wrap items-center gap-6">
@@ -76,7 +76,7 @@ export default function ResumePage() {
             <div className="space-y-10 print:space-y-5">
               <section>
                 <Heading>Profile</Heading>
-                <p className="text-muted print:text-sm">
+                <p className="justify-copy text-muted print:text-sm">
                   Data engineer with a civil engineering background and a Master&apos;s in Artificial Intelligence. I build
                   data pipelines, analytics and AI systems, from ETL and dashboards to LLM-assisted products, and ship side
                   projects that test ideas end to end.
@@ -97,7 +97,7 @@ export default function ResumePage() {
                       <ul className="mt-2 space-y-1 text-sm text-muted">
                         {r.highlights.map((h) => (
                           <li key={h} className="flex gap-2">
-                            <span aria-hidden="true">—</span>
+                            <span aria-hidden="true">→</span>
                             {h}
                           </li>
                         ))}

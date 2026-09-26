@@ -46,16 +46,19 @@ export const assets = {
     action: img('/assets/v2/running/run-action.webp', 1605, 2400, 'Razeen running toward the camera, arms raised, during a road race'),
     race: img('/assets/v2/running/run-race.webp', 1600, 2400, 'Razeen running in a road race with a race bib'),
   },
-  /** Interim cut-outs from the character model sheet; small, so use ≤ native size. */
+  /**
+   * Mini Razeen poses. front, neutral, thinking and happy come from the pose sheet (sharp, full body);
+   * the rest are interim cut-outs from the character model sheet (small, so use ≤ native size).
+   */
   miniRazeen: {
-    front: img('/assets/v2/identity/mini-razeen/front.png', 127, 293, 'Mini Razeen standing, hands in hoodie pockets'),
+    front: img('/assets/v2/identity/mini-razeen/idle.png', 212, 518, 'Mini Razeen standing, hands in hoodie pockets'),
     working: img('/assets/v2/identity/mini-razeen/working.png', 150, 114, 'Mini Razeen working on a laptop'),
     learning: img('/assets/v2/identity/mini-razeen/learning.png', 112, 151, 'Mini Razeen reading a notebook with a lightbulb idea'),
     running: img('/assets/v2/identity/mini-razeen/running.png', 129, 190, 'Mini Razeen running in a cap and sunglasses'),
     exploring: img('/assets/v2/identity/mini-razeen/exploring.png', 97, 188, 'Mini Razeen with a backpack, exploring'),
-    thinking: img('/assets/v2/identity/mini-razeen/thinking.png', 123, 135, 'Mini Razeen thinking, hand on chin'),
-    happy: img('/assets/v2/identity/mini-razeen/happy.png', 113, 132, 'Mini Razeen laughing'),
-    neutral: img('/assets/v2/identity/mini-razeen/neutral.png', 111, 129, 'Mini Razeen, neutral expression'),
+    thinking: img('/assets/v2/identity/mini-razeen/thinking.png', 201, 516, 'Mini Razeen thinking, hand on chin'),
+    happy: img('/assets/v2/identity/mini-razeen/happy.png', 314, 527, 'Mini Razeen celebrating with both arms up'),
+    neutral: img('/assets/v2/identity/mini-razeen/idle.png', 212, 518, 'Mini Razeen standing, relaxed smile'),
     laptop: img('/assets/v2/identity/mini-razeen/laptop.png', 103, 164, 'Mini Razeen holding a laptop'),
   },
 } as const;
@@ -69,3 +72,24 @@ export function resolveAsset(key: string | null | undefined): ImageAsset | undef
   const items = (assets as Record<string, Record<string, ImageAsset>>)[group];
   return items?.[name];
 }
+
+/**
+ * Chat mascot poses (from the Mini Razeen pose sheet). Same canvas, scale and feet
+ * baseline for every pose, so switching poses never shifts the character.
+ * `bust` is a head-and-shoulders crop for small spaces like the launcher.
+ */
+export const botMoods = ['idle', 'wave', 'thinking', 'talking', 'happy', 'sleeping', 'confused'] as const;
+export type BotMood = (typeof botMoods)[number];
+
+export const botPoses = Object.fromEntries(
+  botMoods.map((m) => [
+    m,
+    {
+      full: `/assets/v2/identity/mini-razeen/bot/${m}.png` as AssetPath,
+      bust: `/assets/v2/identity/mini-razeen/bot/${m}-bust.png` as AssetPath,
+    },
+  ]),
+) as Record<BotMood, { full: AssetPath; bust: AssetPath }>;
+
+/** Full-pose canvas size in px (all poses share it). */
+export const botPoseSize = { width: 336, height: 543 };

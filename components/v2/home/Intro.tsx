@@ -22,7 +22,7 @@ export function Intro() {
           ))}
         </ul>
 
-        <div className="col-span-full md:col-span-4 lg:col-span-5 lg:col-start-1">
+        <div className="justify-copy col-span-full md:col-span-4 lg:col-span-5 lg:col-start-1">
           <p className="text-lead">{home.intro.lead}</p>
           <p className="mt-4 text-muted">{home.intro.body}</p>
         </div>

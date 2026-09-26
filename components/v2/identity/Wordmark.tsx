@@ -7,7 +7,7 @@ interface WordmarkProps {
 }
 
 /**
- * razeeniqbal. — rendered as live text rather than an image so it stays crisp,
+ * razeeniqbal. is rendered as live text rather than an image so it stays crisp,
  * inherits the section's ink colour and costs no request. The period is the
  * brand's lime "progress point".
  */

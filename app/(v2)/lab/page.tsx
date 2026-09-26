@@ -93,7 +93,7 @@ export default async function LabPage() {
         </div>
       </Section>
 
-      {/* Coding activity — migrated from the V1 dashboard */}
+      {/* Coding activity, migrated from the V1 dashboard */}
       <Section surface="dark" id="coding-activity">
         <div className="page-grid gap-y-10">
           <div className="col-span-full flex flex-wrap items-end justify-between gap-4">

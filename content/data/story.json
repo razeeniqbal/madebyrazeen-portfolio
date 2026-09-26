@@ -21,7 +21,8 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "none"
     },
     {
       "period": "2022",
@@ -34,7 +35,8 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "thinking"
     },
     {
       "period": "2022 – 2024",
@@ -47,7 +49,8 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "none"
     },
     {
       "period": "2023",
@@ -60,7 +63,8 @@
       "credentialTitle": "Microsoft Certified: Power BI Data Analyst Associate",
       "credentialIssuer": "Microsoft",
       "credentialDate": "Sep 2023",
-      "credentialUrl": "https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874"
+      "credentialUrl": "https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874",
+      "pose": "learning"
     },
     {
       "period": "2024",
@@ -73,7 +77,8 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "none"
     },
     {
       "period": "2025",
@@ -87,7 +92,8 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "none"
     },
     {
       "period": "Jun 2025 – now",
@@ -100,7 +106,8 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "laptop"
     },
     {
       "period": "2026",
@@ -113,7 +120,8 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "none"
     },
     {
       "period": "Always",
@@ -126,8 +134,45 @@
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "pose": "running"
     }
   ],
-  "outro": "Input → process → iterate → progress. Still iterating."
+  "outro": "Input → process → iterate → progress. Still iterating.",
+  "path": [
+    {
+      "label": "Civil engineering",
+      "year": "2017"
+    },
+    {
+      "label": "Data",
+      "year": "2022"
+    },
+    {
+      "label": "AI",
+      "year": "2024"
+    },
+    {
+      "label": "Systems",
+      "year": "Now"
+    }
+  ],
+  "principles": [
+    {
+      "title": "Input",
+      "detail": "Start from the real question and the data that actually exists, not the data I wish existed."
+    },
+    {
+      "title": "Process",
+      "detail": "Build the smallest system that answers it end to end, then make each layer solid before adding the next."
+    },
+    {
+      "title": "Iterate",
+      "detail": "Measure against a baseline. If the clever version doesn't beat the simple one, say so and try again."
+    },
+    {
+      "title": "Progress",
+      "detail": "Ship, write down what I learned, and carry it into the next project. Or the next run."
+    }
+  ]
 }

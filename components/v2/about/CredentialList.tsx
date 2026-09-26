@@ -17,7 +17,7 @@ const monthIndex = (d: string) => {
 };
 
 /** Every certification and course from the V1 achievements page, as a filterable list. */
-export function CredentialList({ items }: { items: Achievement[] }) {
+export function CredentialList({ items, initial }: { items: Achievement[]; initial?: number }) {
   const orgs = useMemo(() => {
     const m = new Map<string, number>();
     items.forEach((a) => m.set(a.organization, (m.get(a.organization) ?? 0) + 1));
@@ -26,6 +26,7 @@ export function CredentialList({ items }: { items: Achievement[] }) {
 
   const [org, setOrg] = useState<string>('all');
   const [query, setQuery] = useState('');
+  const [expanded, setExpanded] = useState(false);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -74,7 +75,7 @@ export function CredentialList({ items }: { items: Achievement[] }) {
       </p>
 
       <ol className="mt-2">
-        {results.map((a) => {
+        {(initial && !expanded && org === 'all' && !query ? results.slice(0, initial) : results).map((a) => {
           const verify = a.credentialUrl && !GENERIC_URLS.has(a.credentialUrl) ? a.credentialUrl : undefined;
           return (
             <li
@@ -102,6 +103,13 @@ export function CredentialList({ items }: { items: Achievement[] }) {
           );
         })}
       </ol>
+      {initial && !expanded && org === 'all' && !query && results.length > initial && (
+        <div className="border-t border-line pt-6">
+          <button type="button" onClick={() => setExpanded(true)} className="label border-b border-current pb-1 hover:text-signal">
+            Show all {results.length} ↓
+          </button>
+        </div>
+      )}
     </div>
   );
 }

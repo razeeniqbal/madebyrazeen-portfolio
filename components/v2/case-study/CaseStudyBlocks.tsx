@@ -10,7 +10,7 @@ export function CaseStudyBlock({ block }: { block: Block }) {
   switch (block.kind) {
     case 'text':
       return (
-        <div className="max-w-prose space-y-4">
+        <div className="justify-copy max-w-prose space-y-4">
           {block.body.map((p) => (
             <p key={p} className={block.lead ? 'text-lead' : 'text-muted'}>
               {p}

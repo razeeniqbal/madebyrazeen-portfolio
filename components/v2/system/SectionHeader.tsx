@@ -16,7 +16,7 @@ interface SectionHeaderProps {
 
 const sizes = { xl: 'text-display-xl', lg: 'text-display-lg', md: 'text-display-md' };
 
-/** 02 / SELECTED WORK — then the display statement. */
+/** 02 / SELECTED WORK, then the display statement. */
 export function SectionHeader({ index, eyebrow, title, as: Tag = 'h2', size = 'lg', className, children }: SectionHeaderProps) {
   return (
     <div data-reveal className={cn('col-span-full', className)}>

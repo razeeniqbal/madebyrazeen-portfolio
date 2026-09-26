@@ -116,7 +116,7 @@ export default async function ProjectPage({ params }: Params) {
       <Section surface="light">
         <div className="page-grid gap-y-10">
           <div className="col-span-full flex items-start gap-8 md:col-span-6 lg:col-span-7">
-            <MiniRazeen pose="thinking" height={120} className="hidden shrink-0 md:block" />
+            <MiniRazeen pose="thinking" height={160} className="hidden shrink-0 md:block" />
             <div>
               <TechnicalLabel as="p" marker="//">
                 Full case study coming

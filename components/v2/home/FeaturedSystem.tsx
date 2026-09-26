@@ -28,7 +28,7 @@ export function FeaturedSystem() {
 
         <div className="col-span-full md:col-span-5 lg:col-span-4 lg:self-end">
           <p className="text-lead">{home.featured.lead}</p>
-          <p className="mt-3 text-muted">{home.featured.body}</p>
+          <p className="justify-copy mt-3 text-muted">{home.featured.body}</p>
         </div>
 
         <div className="col-span-full">

@@ -1,4 +1,4 @@
-# razeeniqbal. — Portfolio V2
+# razeeniqbal. · Portfolio V2
 
 Personal site of Razeen Iqbal: engineering notebook, project archive, lab and running journal.
 Target domain: `portfolio.madebyrazeen.com`. Product spec: [`docs/v2/PRD.md`](docs/v2/PRD.md). Milestone reports: `docs/v2/`.

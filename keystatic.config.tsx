@@ -15,6 +15,11 @@ const assetOptions = [
     Object.entries(items as Record<string, ImageAsset>).map(([key, a]) => ({ label: `${group} / ${key} (${a.alt.slice(0, 40)})`, value: `${group}.${key}` })),
   ),
 ];
+const poseOptions = [
+  { label: 'None', value: 'none' },
+  ...Object.keys(assets.miniRazeen).map((k) => ({ label: k, value: k })),
+];
+
 const imageSelect = (label: string) => fields.select({ label, options: assetOptions, defaultValue: 'none' });
 
 const textList = (label: string, itemLabel = 'Item') =>
@@ -231,6 +236,7 @@ export default config({
             body: paragraphList('Paragraphs'),
             photo: imageSelect('Photo'),
             photoCaption: fields.text({ label: 'Photo caption' }),
+            pose: fields.select({ label: 'Mini Razeen (use sparingly)', options: poseOptions, defaultValue: 'none' }),
             credentialTitle: fields.text({ label: 'Credential title (optional)' }),
             credentialIssuer: fields.text({ label: 'Credential issuer' }),
             credentialDate: fields.text({ label: 'Credential date' }),
@@ -239,6 +245,14 @@ export default config({
           { label: 'Chapters', itemLabel: (p) => `${p.fields.period.value} · ${p.fields.title.value}` },
         ),
         outro: fields.text({ label: 'Closing line' }),
+        path: fields.array(fields.object({ label: fields.text({ label: 'Stage' }), year: fields.text({ label: 'Year' }) }), {
+          label: 'Path diagram (hero)',
+          itemLabel: (p) => `${p.fields.year.value} · ${p.fields.label.value}`,
+        }),
+        principles: fields.array(fields.object({ title: fields.text({ label: 'Step' }), detail: fields.text({ label: 'Detail', multiline: true }) }), {
+          label: 'How I work',
+          itemLabel: (p) => p.fields.title.value,
+        }),
       },
     }),
 

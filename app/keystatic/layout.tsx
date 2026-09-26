@@ -3,7 +3,7 @@ import KeystaticApp from './keystatic';
 import { keystaticReady } from '@/lib/keystatic-env';
 
 export const metadata: Metadata = {
-  title: 'Admin — razeeniqbal.',
+  title: 'Admin · razeeniqbal.',
   robots: { index: false, follow: false },
 };
 

@@ -22,7 +22,7 @@ export function AboutTeaser() {
         />
         <div className="col-span-full lg:col-span-4 lg:col-start-9 lg:self-end">
           <SectionHeader index="10" eyebrow="About" title={home.aboutTeaser.title} size="md" />
-          <p className="mt-6 text-muted">{home.aboutTeaser.body}</p>
+          <p className="justify-copy mt-6 text-muted">{home.aboutTeaser.body}</p>
           <dl className="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-4">
             <div>
               <dt className="label text-muted">Certifications</dt>

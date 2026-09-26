@@ -3,9 +3,9 @@
  * Bodies reuse the case-study block types (text, list, table, flow…).
  *
  * status:
- *   'published'  — listed and indexed.
- *   'draft'      — has a body; readable at /notes/<slug> with a DRAFT banner, noindex.
- *   'in-writing' — planned topic only; listed, not linked.
+ *   'published':  listed and indexed.
+ *   'draft':      has a body; readable at /notes/<slug> with a DRAFT banner, noindex.
+ *   'in-writing': planned topic only; listed, not linked.
  * To publish: set status to Published and add a date.
  */
 import type { Block } from './case-studies/types';

@@ -3,8 +3,8 @@
  * getters below, so the source can change without touching the page.
  *
  * Source order:
- *   1. content/running/runs.json — written by scripts/garmin/export_runs.py (real data)
- *   2. SAMPLE_RUNS below — used only while runs.json is empty, and every
+ *   1. content/running/runs.json: written by scripts/garmin/export_runs.py (real data)
+ *   2. SAMPLE_RUNS below: used only while runs.json is empty, and every
  *      surface labels it "Sample data" (PRD §58).
  */
 import exported from './running/runs.json';

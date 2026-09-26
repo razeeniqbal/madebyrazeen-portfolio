@@ -32,7 +32,7 @@ export default function ContactPage() {
         <div className="page-grid gap-y-12">
           <SectionHeader as="h1" size="xl" eyebrow="Contact" title={['Let’s build', 'something useful.']} className="lg:col-span-9" />
           <div className="col-span-full hidden items-end justify-end lg:col-span-3 lg:flex">
-            <MiniRazeen pose="happy" height={132} />
+            <MiniRazeen pose="happy" height={190} />
           </div>
 
           <div className="col-span-full md:col-span-4 lg:col-span-5">

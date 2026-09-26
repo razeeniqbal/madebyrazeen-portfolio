@@ -11,7 +11,7 @@ export function Hero() {
   return (
     <Section surface="dark" grid className="!pb-12 !pt-10 md:!pt-14">
       <div className="page-grid gap-y-10">
-        {/* Annotation row — trimmed on mobile (PRD §38). */}
+        {/* Annotation row, trimmed on mobile (PRD §38). */}
         <div className="col-span-full flex items-start justify-between">
           <ul className="label hidden space-y-1 text-muted md:block" aria-label="Disciplines">
             {profile.disciplines.map((d) => (

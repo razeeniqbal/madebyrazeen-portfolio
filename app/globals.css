@@ -12,9 +12,9 @@
   --carbon-raised: 20 20 19;
   --warm: 243 241 235;      /* #F3F1EB */
   --warm-sunk: 232 229 221;
-  --grey: 154 154 148;      /* #9A9A94 — muted text on dark only */
-  --grey-ink: 94 94 89;     /* #5E5E59 — muted text on light (6:1 on warm) */
-  --lime: 216 255 62;       /* #D8FF3E — a signal, never a background field */
+  --grey: 154 154 148;      /* #9A9A94: muted text on dark only */
+  --grey-ink: 94 94 89;     /* #5E5E59: muted text on light (6:1 on warm) */
+  --lime: 216 255 62;       /* #D8FF3E: a signal, never a background field */
 
   --gutter: 1rem;
   --page-max: 90rem;
@@ -115,6 +115,17 @@
     text-transform: uppercase;
   }
 
+  /* Justified long-form copy (tablet and up). Phones stay left-aligned to avoid wide word gaps. */
+  @media (min-width: 768px) {
+    .justify-copy,
+    .justify-copy p {
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      text-wrap: pretty;
+    }
+  }
+
   /* Faint technical grid texture. Use selectively (PRD §10: not noise). */
   .bg-tech-grid {
     background-image:
@@ -154,25 +165,20 @@
     animation-delay: calc(var(--i) * 220ms - 120ms);
   }
 
-  /* Scroll reveals: only once JS has marked the page ready, so content never hides without JS. */
-  .reveal-ready [data-reveal] {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .reveal-ready [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Diagram construction: flow nodes light up left → right when revealed. */
-  .reveal-ready [data-reveal] .flow-node {
-    opacity: 0.25;
-    transition: opacity 0.4s ease-out;
-    transition-delay: calc(var(--i) * 120ms);
-  }
-  .reveal-ready [data-reveal].is-visible .flow-node {
-    opacity: 1;
+  /* Scroll reveals, CSS only (scroll-driven animations): nothing touches the DOM, so no
+     hydration mismatches. Browsers without support simply show the content. */
+  @supports (animation-timeline: view()) {
+    [data-reveal] {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+    /* Diagram construction: nodes light up left → right as the diagram enters. */
+    [data-reveal] .flow-node {
+      animation: node-in linear both;
+      animation-timeline: view();
+      animation-range: entry calc(10% + var(--i) * 6%) entry calc(45% + var(--i) * 6%);
+    }
   }
 
   /* Hero trajectory: nodes activate once on load. */
@@ -180,6 +186,70 @@
     animation: fade-in-node 0.35s ease-out both;
     animation-delay: calc(var(--i) * 160ms + 300ms);
   }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Chat mascot moods (components/v2/chat/BotAvatar.tsx). Motion, not decoration: each reflects state. */
+  .bot-anim { transform-origin: 50% 100%; }
+  .bot-idle { animation: bot-bob 3.2s ease-in-out infinite; }
+  .bot-wave { animation: bot-wave 0.9s ease-in-out 2; }
+  .bot-thinking { animation: bot-tilt 2.4s ease-in-out infinite; }
+  .bot-talking { animation: bot-nod 0.5s ease-in-out infinite; }
+  .bot-happy { animation: bot-hop 0.6s cubic-bezier(0.3, 0, 0.3, 1) 2; }
+  .bot-sleeping { animation: bot-breathe 4s ease-in-out infinite; }
+  .bot-confused { animation: bot-shake 0.5s ease-in-out 2; }
+  .bot-zzz { animation: bot-zzz 2.4s ease-in-out infinite; }
+  .ask-pop { animation: ask-pop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1.15) both; }
+}
+@keyframes bot-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-4px) rotate(-3deg); }
+  60% { transform: translateY(-1px) rotate(2deg); }
+}
+@keyframes bot-wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(5deg); }
+}
+@keyframes bot-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-4deg) translateY(-1px); }
+}
+@keyframes bot-nod {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@keyframes bot-hop {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-8px) scale(1.03); }
+  70% { transform: translateY(0) scale(0.98, 1.02); }
+}
+@keyframes bot-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02, 0.985); }
+}
+@keyframes bot-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px) rotate(-2deg); }
+  75% { transform: translateX(2px) rotate(2deg); }
+}
+@keyframes bot-zzz {
+  0% { opacity: 0; transform: translate(0, 4px); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: translate(6px, -10px); }
+}
+@keyframes ask-pop {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes node-in {
+  from { opacity: 0.25; }
+  to { opacity: 1; }
 }
 
 @keyframes seq-node {
@@ -207,7 +277,7 @@
 }
 
 /* ==========================================================================
-   V1 (archived) — every rule below is scoped to the .v1 shell so it cannot
+   V1 (archived): every rule below is scoped to the .v1 shell so it cannot
    leak into V2. Behaviour is unchanged from the original globals.css.
    ========================================================================== */
 

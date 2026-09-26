@@ -1,13 +1,12 @@
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/v2/layout/SiteHeader';
 import { SiteFooter } from '@/components/v2/layout/SiteFooter';
-import { RevealObserver } from '@/components/v2/motion/RevealObserver';
 import { AskWidget } from '@/components/v2/chat/AskWidget';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Razeen Iqbal — Engineer. Builder. Runner. Curious human.',
-    template: '%s — Razeen Iqbal',
+    default: 'Razeen Iqbal · Engineer. Builder. Runner. Curious human.',
+    template: '%s · Razeen Iqbal',
   },
   description:
     'Razeen Iqbal builds data systems, AI systems and products, experiments with ideas, and keeps learning, in engineering and outside of it.',
@@ -25,7 +24,6 @@ export default function V2Layout({ children }: Readonly<{ children: React.ReactN
         {children}
       </main>
       <SiteFooter />
-      <RevealObserver />
       <AskWidget />
     </div>
   );

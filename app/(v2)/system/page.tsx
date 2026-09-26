@@ -4,13 +4,14 @@ import { Wordmark } from '@/components/v2/identity/Wordmark';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
-import { assets, type MiniRazeenPose } from '@/lib/assets';
+import { assets, botMoods, type MiniRazeenPose } from '@/lib/assets';
+import { BotAvatar } from '@/components/v2/chat/BotAvatar';
 import { profile } from '@/content/profile';
 import { getProjects, type ProjectTier } from '@/content/projects';
 
 // M01 review page: the V2 foundation rendered on real content. Not linked or indexed.
 export const metadata: Metadata = {
-  title: 'System — razeeniqbal.',
+  title: 'System · razeeniqbal.',
   robots: { index: false, follow: false },
 };
 
@@ -178,6 +179,22 @@ export default function SystemPage() {
               <div key={pose} className="flex flex-col items-center gap-3">
                 <MiniRazeen pose={pose} height={150} />
                 <TechnicalLabel>{pose}</TechnicalLabel>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ── Chat mascot moods ────────────────────────────────── */}
+      <Section surface="dark" className="!pt-0">
+        <div className="page-grid gap-y-10">
+          <SectionHead index="04b" title="Chat mascot · moods (animated)" />
+          <div className="col-span-full flex flex-wrap items-end gap-x-10 gap-y-8">
+            {botMoods.map((m) => (
+              <div key={m} className="flex flex-col items-center gap-3">
+                <BotAvatar mood={m} variant="full" size={180} />
+                <BotAvatar mood={m} size={62} />
+                <TechnicalLabel>{m}</TechnicalLabel>
               </div>
             ))}
           </div>

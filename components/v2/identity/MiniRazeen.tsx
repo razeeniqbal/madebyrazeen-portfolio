@@ -21,6 +21,7 @@ export function MiniRazeen({ pose, height, className, decorative = true }: MiniR
       height={h}
       alt={decorative ? '' : a.alt}
       className={className}
+      style={{ width: w, height: h }}
     />
   );
 }

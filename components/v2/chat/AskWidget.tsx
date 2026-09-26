@@ -1,15 +1,16 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { assistantCopy } from '@/content/assistant';
-import { assets } from '@/lib/assets';
+import type { BotMood } from '@/lib/assets';
+import { BotAvatar } from './BotAvatar';
 import { cn } from '@/lib/utils';
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
 const STORE_KEY = 'ask-razeen:v1';
+const SLEEP_AFTER_MS = 60_000;
 
 /** Turns relative site links (/work/…) and URLs in plain-text answers into links. */
 function Linkified({ text }: { text: string }) {
@@ -35,6 +36,7 @@ function Linkified({ text }: { text: string }) {
 
 export function AskWidget() {
   const [open, setOpen] = useState(false);
+  const [teaser, setTeaser] = useState(false);
   const [available, setAvailable] = useState<boolean | null>(null);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
@@ -44,6 +46,43 @@ export function AskWidget() {
   const listRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+
+  // Mascot state inputs
+  const [hover, setHover] = useState(false);
+  const [greeting, setGreeting] = useState(false);
+  const [celebrate, setCelebrate] = useState(false);
+  const [trouble, setTrouble] = useState(false);
+  const [asleep, setAsleep] = useState(false);
+  const flash = (set: (v: boolean) => void, ms: number) => {
+    set(true);
+    setTimeout(() => set(false), ms);
+  };
+
+  // Wave hello once per visit.
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem('ask-razeen:greeted')) return;
+      sessionStorage.setItem('ask-razeen:greeted', '1');
+    } catch {}
+    const t = setTimeout(() => flash(setGreeting, 2600), 1200);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Doze off after a minute with no activity; any interaction wakes him up.
+  useEffect(() => {
+    let last = Date.now();
+    const wake = () => {
+      last = Date.now();
+      setAsleep(false);
+    };
+    const events = ['pointermove', 'keydown', 'scroll', 'touchstart'] as const;
+    events.forEach((e) => window.addEventListener(e, wake, { passive: true }));
+    const id = setInterval(() => Date.now() - last > SLEEP_AFTER_MS && setAsleep(true), 5000);
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, wake));
+      clearInterval(id);
+    };
+  }, []);
 
   // Restore this tab's conversation.
   useEffect(() => {
@@ -99,12 +138,19 @@ export function AskWidget() {
           body: JSON.stringify({ messages: history }),
           signal: abortRef.current.signal,
         });
-        if (res.status === 429) return append('You’ve asked a lot of questions. Please try again in a few minutes.');
+        if (res.status === 429) {
+          flash(setTrouble, 3000);
+          return append('You’ve asked a lot of questions. Please try again in a few minutes.');
+        }
         if (res.status === 503) {
           setAvailable(false);
+          flash(setTrouble, 3000);
           return append(assistantCopy.offline);
         }
-        if (!res.ok || !res.body) return append('Something went wrong. Please try again.');
+        if (!res.ok || !res.body) {
+          flash(setTrouble, 3000);
+          return append('Something went wrong. Please try again.');
+        }
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
@@ -113,8 +159,12 @@ export function AskWidget() {
           if (done) break;
           append(decoder.decode(value, { stream: true }));
         }
+        flash(setCelebrate, 2200);
       } catch (err) {
-        if ((err as Error).name !== 'AbortError') append('Connection lost. Please try again.');
+        if ((err as Error).name !== 'AbortError') {
+          flash(setTrouble, 3000);
+          append('Connection lost. Please try again.');
+        }
       } finally {
         setPending(false);
         abortRef.current = null;
@@ -143,11 +193,77 @@ export function AskWidget() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open, close]);
 
+  // One friendly nudge per visit: a speech bubble after a few seconds, only when the assistant is online.
+  useEffect(() => {
+    if (open || !available) {
+      setTeaser(false);
+      return;
+    }
+    try {
+      if (sessionStorage.getItem('ask-razeen:teased')) return;
+    } catch {}
+    const show = setTimeout(() => {
+      setTeaser(true);
+      try {
+        sessionStorage.setItem('ask-razeen:teased', '1');
+      } catch {}
+    }, 5000);
+    const hide = setTimeout(() => setTeaser(false), 19000);
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
+  }, [open, available]);
+
   const offline = available === false;
+  const last = messages[messages.length - 1];
+  const streaming = pending && last?.role === 'assistant' && last.content.length > 0;
+  const mood: BotMood = trouble
+    ? 'confused'
+    : pending
+      ? streaming
+        ? 'talking'
+        : 'thinking'
+      : celebrate
+        ? 'happy'
+        : hover || greeting
+          ? 'wave'
+          : open && offline
+            ? 'confused'
+            : asleep && !open
+              ? 'sleeping'
+              : 'idle';
   const showSuggestions = !messages.some((m) => m.role === 'user');
 
   return (
     <div data-print-hide data-surface="dark" className="!bg-transparent">
+      {/* Speech bubble nudge */}
+      {teaser && !open && (
+        <div
+          role="status"
+          className="ask-pop fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] w-[16rem] border border-carbon bg-warm p-4 text-carbon shadow-[0_12px_40px_rgb(0_0_0/0.3)] md:right-6"
+        >
+          <button
+            type="button"
+            onClick={() => setTeaser(false)}
+            aria-label="Dismiss"
+            className="absolute right-2 top-1.5 px-1 text-sm text-carbon/60 hover:text-carbon"
+          >
+            ✕
+          </button>
+          <p className="pr-4 text-sm">Hi! Curious about Razeen&apos;s work? Ask me anything.</p>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="label mt-3 border-b border-current pb-0.5"
+          >
+            Ask a question →
+          </button>
+          {/* tail pointing at the launcher */}
+          <span aria-hidden="true" className="absolute -bottom-[7px] right-10 h-3 w-3 rotate-45 border-b border-r border-carbon bg-warm" />
+        </div>
+      )}
+
       {/* Launcher */}
       <button
         ref={launcherRef}
@@ -155,16 +271,24 @@ export function AskWidget() {
         aria-expanded={open}
         aria-controls="ask-razeen"
         onClick={() => (open ? close() : setOpen(true))}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onFocus={() => setHover(true)}
+        onBlur={() => setHover(false)}
         className={cn(
-          'fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center gap-3 rounded-full border border-line bg-carbon py-1.5 pl-1.5 pr-4 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform hover:-translate-y-0.5 md:right-6',
+          'group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center gap-3 rounded-full border border-line bg-carbon py-1.5 pl-[4.25rem] pr-4 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform hover:-translate-y-0.5 md:right-6',
           open && 'max-md:hidden',
         )}
       >
-        <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-lime">
-          <Image src={assets.miniRazeen.neutral.src} alt="" width={30} height={35} className="mt-2" />
-          {!offline && available && (
-            <span aria-hidden="true" className="absolute right-0.5 top-0.5 h-2 w-2 rounded-full border border-carbon bg-lime" />
-          )}
+        {/* Mini Razeen peeks out of the pill; his pose follows the chat's state */}
+        <span aria-hidden="true" className="absolute -top-7 left-1 h-[62px] w-[62px]">
+          <BotAvatar mood={mood} size={62} className="drop-shadow-[0_4px_6px_rgb(0_0_0/0.35)]" />
+          <span
+            className={cn(
+              'absolute bottom-1 right-1 h-2.5 w-2.5 rounded-full border-2 border-carbon',
+              available ? 'bg-lime' : 'bg-grey',
+            )}
+          />
         </span>
         <span className="label">{open ? 'Close' : 'Ask about me'}</span>
       </button>
@@ -179,7 +303,7 @@ export function AskWidget() {
       >
         <header className="flex items-center justify-between border-b border-line px-4 py-3">
           <div className="flex items-center gap-3">
-            <Image src={assets.miniRazeen.happy.src} alt="" width={28} height={33} />
+            <BotAvatar mood={mood} size={36} className="overflow-hidden rounded-full bg-lime" />
             <div>
               <p className="text-sm font-semibold">{assistantCopy.name}</p>
               <p className="label flex items-center gap-1.5 text-muted">
@@ -197,7 +321,10 @@ export function AskWidget() {
         </header>
 
         <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-4" aria-live="polite">
-          <p className="max-w-[90%] text-sm text-warm/90">{offline ? assistantCopy.offline : assistantCopy.greeting}</p>
+          <div className="flex items-end gap-3">
+            {showSuggestions && <BotAvatar mood={mood} variant="full" size={110} className="shrink-0" />}
+            <p className="max-w-[90%] pb-2 text-sm text-warm/90">{offline ? assistantCopy.offline : assistantCopy.greeting}</p>
+          </div>
 
           {messages.map((m, i) => (
             <div key={i} className={m.role === 'user' ? 'flex justify-end' : undefined}>

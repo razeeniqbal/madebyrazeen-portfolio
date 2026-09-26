@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Wordmark } from '@/components/v2/identity/Wordmark';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
-import { primaryNav, contactHref, isActive } from '@/lib/site';
+import { primaryNav, contactHref, resumeHref, isActive } from '@/lib/site';
 import { profile } from '@/content/profile';
 import { cn } from '@/lib/utils';
 
@@ -85,6 +85,13 @@ export function SiteHeader() {
             {profile.loops.system.join(' · ')}
           </span>
           <Link
+            href={resumeHref}
+            aria-current={isActive(pathname, resumeHref) ? 'page' : undefined}
+            className={cn('label hidden py-2 transition-colors hover:text-ink md:inline-block', isActive(pathname, resumeHref) ? 'text-ink' : 'text-muted')}
+          >
+            Resume
+          </Link>
+          <Link
             href={contactHref}
             aria-current={isActive(pathname, contactHref) ? 'page' : undefined}
             className="label hidden border border-line px-4 py-2 transition-colors hover:border-lime hover:text-lime md:inline-block"
@@ -112,7 +119,7 @@ export function SiteHeader() {
       >
         <nav aria-label="Mobile" className="page-container flex min-h-full flex-col py-8">
           <ol className="border-t border-line">
-            {[...primaryNav, { label: 'Contact', href: contactHref }].map((item, i) => {
+            {[...primaryNav, { label: 'Resume', href: resumeHref }, { label: 'Contact', href: contactHref }].map((item, i) => {
               const active = isActive(pathname, item.href);
               return (
                 <li key={item.href} className="border-b border-line">

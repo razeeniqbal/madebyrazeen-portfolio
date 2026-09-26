@@ -4,7 +4,7 @@ import type { Note } from '@/content/notes';
 
 const statusLabel = { draft: 'Draft', 'in-writing': 'In writing', published: '' } as const;
 
-/** NOTE_001 · Topic — title — summary. Only notes with a body are links. */
+/** NOTE_001 · Topic, then title and summary. Only notes with a body are links. */
 export function NoteList({ notes }: { notes: Note[] }) {
   return (
     <ol>
