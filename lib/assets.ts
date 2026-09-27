@@ -78,7 +78,7 @@ export type MiniRazeenPose = keyof typeof assets.miniRazeen;
 /**
  * Mini Razeen Digital Icon System V1.0, cropped (not redrawn) from the icon sheet.
  * Each variant is drawn for a display size; pick by size rather than scaling one image everywhere.
- * 16px avatars read as noise, so the favicon stays the lime node (app/icon.svg).
+ * Tab icon: app/favicon.ico (16 minimal / 32 simplified / 48 standard) + app/icon.png (96, detailed).
  * Kept outside `assets` so these don't appear as cover/photo options in the admin.
  */
 export const avatarIcons = {
