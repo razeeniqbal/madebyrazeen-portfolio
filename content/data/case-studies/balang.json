@@ -1,0 +1,232 @@
+{
+  "project": "Balang",
+  "review": "approved",
+  "lede": "A Malaysian probability party game. Everyone can see what is in the jar; nobody knows the order it comes out in. Read the odds, bet on secret predictions, and play friends in rooms that need no server.",
+  "facts": [
+    {
+      "label": "Type",
+      "value": "Multiplayer party game · web / PWA"
+    },
+    {
+      "label": "Tagline",
+      "value": "Agak. Risiko. Menang."
+    },
+    {
+      "label": "Stack",
+      "value": "React 19 · TypeScript · Vite · PeerJS (WebRTC) · Vitest"
+    },
+    {
+      "label": "Live",
+      "value": "balang.madebyrazeen.com"
+    }
+  ],
+  "disclaimer": "",
+  "sections": [
+    {
+      "id": "overview",
+      "headline": "The balang is the game.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "Balang is built around one shared jar of familiar Malaysian kuih. Players know exactly what goes in. As tokens are drawn, they keep reassessing the odds, drop predictions that are becoming unlikely, lock their final choices, and decide whether to risk KAW-KAW."
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "The goal was a game that is easy to understand in the first round, strategic without needing advanced maths, and fast enough that people want another match straight away."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "headline": "One round, six steps.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "How a round plays",
+            "steps": [
+              "Read the jar",
+              "Get 6 cards",
+              "Shake and draw",
+              "Discard",
+              "Lock 2 (KAW-KAW?)",
+              "Score"
+            ]
+          }
+        },
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Read the jar",
+                "detail": "25 tokens of five kuih: onde-onde ×7, kuih lapis ×6, muruku ×5, dodol ×4, karipap ×3. The counts are public; the order is secret."
+              },
+              {
+                "title": "Predict",
+                "detail": "Each player gets six secret prediction cards, such as “more onde-onde than dodol” or “muruku exactly 3”. Harder predictions pay more and cost more when wrong."
+              },
+              {
+                "title": "Draw",
+                "detail": "Players take turns to shake the jar. 15 tokens come out and 10 stay in."
+              },
+              {
+                "title": "Discard and lock",
+                "detail": "After draw 3 you drop one card, after draw 6 two more, and after draw 10 you lock your final two."
+              },
+              {
+                "title": "KAW-KAW",
+                "detail": "When locking, you may go KAW-KAW on one card: double reward, double penalty."
+              },
+              {
+                "title": "Win",
+                "detail": "Correct cards score, wrong ones lose points. Three rounds; the highest total is JUARA."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "headline": "No backend, on purpose.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "flow",
+          "value": {
+            "label": "Balang multiplayer architecture",
+            "caption": "The host’s browser holds every secret; each guest only ever receives its own filtered view.",
+            "nodes": [
+              {
+                "type": "SOURCE",
+                "title": "Host creates room",
+                "detail": "Buat Bilik: the host browser becomes the game authority.",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "Game engine",
+                "detail": "Pure TypeScript state machine: draw order, hands, scoring, bots.",
+                "active": true
+              },
+              {
+                "type": "PROCESS",
+                "title": "Pricing",
+                "detail": "Card rewards priced from probability at deal time (Monte Carlo).",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "WebRTC",
+                "detail": "Guests join by code, link or QR over PeerJS.",
+                "active": false
+              },
+              {
+                "type": "OUTPUT",
+                "title": "Filtered views",
+                "detail": "Each guest sees only their own cards and the public jar.",
+                "active": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "headline": "Built to be fair and to survive dropouts.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Engine separate from UI",
+                "detail": "src/engine holds the game logic, prediction types, probability pricing, bots and statistics; the React UI only renders state."
+              },
+              {
+                "title": "12 prediction types",
+                "detail": "Each card type has its own evaluation and an “already decided” check, so cards can be stamped DAH PASTI or DAH GAGAL as soon as the outcome is certain."
+              },
+              {
+                "title": "Probability-priced rewards",
+                "detail": "Rewards come from the card’s chance of success at deal time, estimated with Monte Carlo simulation, and all balancing values live in one config file."
+              },
+              {
+                "title": "Bots",
+                "detail": "Bots play empty seats, and take over a guest’s turns if they disconnect until they rejoin from the same browser."
+              },
+              {
+                "title": "Turn timer",
+                "detail": "If the host sets a time limit and it runs out, a token is drawn or a card chosen automatically."
+              },
+              {
+                "title": "Assets pipeline",
+                "detail": "Sprites are sliced from the concept sheets by a Python script, so the art can be regenerated."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "balance",
+      "headline": "Letting bots test the maths.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "A reward table that looks fair on paper can still be broken in play. Because the engine runs without the UI, near-optimal bots can play many matches and report which cards and strategies dominate. The reward tiers were tuned against that report rather than by feel."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "learned",
+      "headline": "Small game, same lessons.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Put the rules in one place",
+                "detail": "A pure engine with tests made every UI change safe and made balancing possible."
+              },
+              {
+                "title": "Trust boundaries matter even in games",
+                "detail": "Keeping secrets on the host and sending filtered views stopped the easiest way to cheat."
+              },
+              {
+                "title": "Numbers should feel honest",
+                "detail": "Pricing rewards from real probabilities made risky choices feel fair when they paid off and when they did not."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

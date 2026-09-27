@@ -8,9 +8,9 @@ import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { PathNarrative } from '@/components/v2/about/PathNarrative';
 import { assets } from '@/lib/assets';
-import { profile } from '@/content/profile';
+import { profile, education, recognition } from '@/content/profile';
 import { getProjects } from '@/content/projects';
-import { exploring } from '@/content/lab';
+import { experience } from '@/content/experience';
 import { beyond, chapters, storyIntro, principles } from '@/content/story';
 
 export const metadata: Metadata = {
@@ -24,6 +24,8 @@ export const metadata: Metadata = {
 // Five moments: Intro · The path · How I think · Beyond the screen · Currently.
 export default function AboutPage() {
   const building = getProjects().filter((p) => p.status === 'in-progress');
+  const current = experience[0];
+  const latestEducation = education[0];
 
   return (
     <>
@@ -149,8 +151,47 @@ export default function AboutPage() {
       {/* 05 Currently */}
       <Section surface="dark" className="border-b border-line">
         <div className="page-grid gap-y-10">
-          <SectionHeader index="04" eyebrow="Currently" title={['Still iterating.']} size="md" className="lg:col-span-5" />
-          <dl className="col-span-full grid gap-x-6 gap-y-8 md:grid-cols-2 lg:col-span-6 lg:col-start-7">
+          {/* Career and education first (R05): where I work, what I studied, what I've earned, what I'm building. */}
+          <SectionHeader index="04" eyebrow="Currently" title={['Where I am', 'right now.']} size="md" className="lg:col-span-5" />
+          <dl className="col-span-full grid gap-x-6 gap-y-8 md:grid-cols-2 lg:col-span-7 lg:col-start-6">
+            {current && (
+              <div className="border-t border-line pt-4">
+                <dt className="label text-muted">Working</dt>
+                <dd className="mt-2">
+                  <p className="font-semibold">
+                    {current.role}, {current.company}
+                  </p>
+                  <p className="text-muted">
+                    {current.period} · {current.location.split(',')[0]}
+                  </p>
+                </dd>
+              </div>
+            )}
+            {latestEducation && (
+              <div className="border-t border-line pt-4">
+                <dt className="label text-muted">Education</dt>
+                <dd className="mt-2">
+                  <p className="font-semibold">
+                    {latestEducation.degree}, {latestEducation.field}
+                  </p>
+                  <p className="text-muted">
+                    {latestEducation.short} · {latestEducation.period} · CGPA {latestEducation.cgpa}
+                  </p>
+                </dd>
+              </div>
+            )}
+            {recognition.length > 0 && (
+              <div className="border-t border-line pt-4">
+                <dt className="label text-muted">Recognition</dt>
+                <dd className="mt-2 space-y-1">
+                  {recognition.slice(0, 3).map((r) => (
+                    <p key={r.title}>
+                      <span className="font-semibold">{r.title}</span> <span className="text-muted">· {r.year}</span>
+                    </p>
+                  ))}
+                </dd>
+              </div>
+            )}
             {building.length > 0 && (
               <div className="border-t border-line pt-4">
                 <dt className="label text-muted">Building</dt>
@@ -160,19 +201,10 @@ export default function AboutPage() {
                       {p.title}
                     </Link>
                   ))}
+                  <p className="text-muted">After hours, alongside the day job.</p>
                 </dd>
               </div>
             )}
-            <div className="border-t border-line pt-4">
-              <dt className="label text-muted">Exploring</dt>
-              <dd className="mt-2 space-y-1">
-                {exploring.map((e) => (
-                  <p key={e.label}>
-                    <span className="font-semibold">{e.label}</span> <span className="text-muted">· {e.detail}</span>
-                  </p>
-                ))}
-              </dd>
-            </div>
           </dl>
           <div className="col-span-full flex flex-wrap items-end justify-between gap-8 border-t border-line pt-8">
             <div className="flex flex-wrap gap-x-8 gap-y-4">

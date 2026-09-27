@@ -3,10 +3,59 @@
   "number": "003",
   "summary": "What training for distance and shipping software have in common.",
   "topic": "Running",
-  "status": "in-writing",
-  "date": null,
-  "readingMinutes": null,
+  "status": "published",
+  "date": "2026-09-27",
+  "readingMinutes": 4,
   "photo": "running.action",
   "photoCaption": "Race day",
-  "body": []
+  "body": [
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": true,
+        "body": [
+          "I am not a fast runner. What I have become, this year, is a consistent one: between January and September I ran outdoors in 35 of 36 weeks, with an unbroken streak of 33."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Consistency is not dramatic, which is exactly why it works. No single run in that streak mattered much. Together they changed the numbers in a way no single hard session could have."
+        ]
+      }
+    },
+    {
+      "discriminant": "list",
+      "value": {
+        "numbered": false,
+        "items": [
+          {
+            "title": "5K",
+            "detail": "My first recorded 5K effort in January took just over an hour. By June the best effort was 38:51."
+          },
+          {
+            "title": "Volume",
+            "detail": "Monthly distance built from 41 km in January to a peak of 93 km in April."
+          },
+          {
+            "title": "Distance",
+            "detail": "The first 10K came in March, and a half marathon in September."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "It is the same pattern I see in engineering. A codebase, a data platform or a skill improves through small, repeated, measured steps: input, process, iterate, progress. Skipping a week rarely breaks anything. Skipping the habit breaks everything.",
+          "So the goal for the next season is not a time. It is the next week, and the one after that."
+        ]
+      }
+    }
+  ]
 }

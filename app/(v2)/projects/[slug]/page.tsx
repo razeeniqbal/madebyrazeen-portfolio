@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
-import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { ProjectMeta } from '@/components/v2/work/ProjectMeta';
 import { getProject, getProjects } from '@/content/projects';
 import { getCaseStudy } from '@/content/case-studies';
@@ -95,7 +94,7 @@ export default async function ProjectPage({ params }: Params) {
             ))}
           </dl>
           {project.cover && (
-            <figure className="col-span-full">
+            <figure className="col-span-full lg:col-span-9">
               <Image
                 src={project.cover.src}
                 width={project.cover.width}
@@ -113,25 +112,69 @@ export default async function ProjectPage({ params }: Params) {
         </div>
       </Section>
 
+      {/* Write-up: overview, what I built, outcome, what I learned. Facts come from projects.json. */}
       <Section surface="light">
-        <div className="page-grid gap-y-10">
-          <div className="col-span-full flex items-start gap-8 md:col-span-6 lg:col-span-7">
-            <MiniRazeen pose="thinking" height={160} className="hidden shrink-0 md:block" />
-            <div>
-              <TechnicalLabel as="p" marker="//">
-                Full case study coming
-              </TechnicalLabel>
-              <p className="mt-4 text-lead">
-                {project.problem ??
-                  'The full write-up (problem, thinking, architecture, build, outcome and what I learned) is being written.'}
-              </p>
-            </div>
+        <div className="page-grid gap-y-12">
+          <div className="col-span-full space-y-12 lg:col-span-7">
+            {project.problem && (
+              <section>
+                <TechnicalLabel as="h2" marker="01 /">
+                  Overview
+                </TechnicalLabel>
+                <p className="justify-copy mt-4 text-lead">{project.problem}</p>
+              </section>
+            )}
+            {project.highlights.length > 0 && (
+              <section>
+                <TechnicalLabel as="h2" marker="02 /">
+                  What I built
+                </TechnicalLabel>
+                <ul className="mt-4">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex gap-3 border-t border-line py-3">
+                      <span aria-hidden="true" className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {project.outcome && (
+              <section>
+                <TechnicalLabel as="h2" marker="03 /">
+                  Outcome
+                </TechnicalLabel>
+                <p className="justify-copy mt-4">{project.outcome}</p>
+              </section>
+            )}
+            {project.learning && (
+              <section>
+                <TechnicalLabel as="h2" marker="04 /">
+                  What I learned
+                </TechnicalLabel>
+                <p className="justify-copy mt-4 text-muted">{project.learning}</p>
+              </section>
+            )}
           </div>
-          <div className="col-span-full flex flex-col items-start gap-5 md:col-span-2 lg:col-span-3 lg:col-start-10">
-            {project.links.live && <ArrowLink href={project.links.live} variant="primary">Live site</ArrowLink>}
-            {project.links.source && <ArrowLink href={project.links.source}>Source on GitHub</ArrowLink>}
+          <aside className="col-span-full flex flex-col items-start gap-5 lg:col-span-4 lg:col-start-9">
+            {project.role && (
+              <div className="w-full border-t border-line pt-3">
+                <p className="label text-muted">Role</p>
+                <p className="mt-1">{project.role}</p>
+              </div>
+            )}
+            {project.links.live && (
+              <ArrowLink href={project.links.live} variant="primary" arrow="↗">
+                Live site
+              </ArrowLink>
+            )}
+            {project.links.source && (
+              <ArrowLink href={project.links.source} arrow="↗">
+                Source on GitHub
+              </ArrowLink>
+            )}
             {project.confidential && <TechnicalLabel as="p">Private repository</TechnicalLabel>}
-          </div>
+          </aside>
         </div>
       </Section>
     </>

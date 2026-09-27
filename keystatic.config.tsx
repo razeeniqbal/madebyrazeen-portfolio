@@ -342,6 +342,7 @@ export default config({
             problem: fields.text({ label: 'Problem', multiline: true }),
             outcome: fields.text({ label: 'Outcome', multiline: true }),
             learning: fields.text({ label: 'Learning', multiline: true }),
+            highlights: textList('What I built (bullets)', 'Point'),
             stack: textList('Stack', 'Technology'),
             tags: textList('Tags', 'Tag'),
             links: fields.object({ live: fields.text({ label: 'Live URL' }), source: fields.text({ label: 'Source URL' }) }, { label: 'Links' }),

@@ -44,6 +44,8 @@ export interface Project {
   problem?: string;
   outcome?: string;
   learning?: string;
+  /** "What I built": short factual bullets shown on the project page. */
+  highlights: string[];
   stack: string[];
   tags: string[];
   links: { live?: string; source?: string };
@@ -77,6 +79,7 @@ export const projects: Project[] = data.items.map((p) => ({
   problem: p.problem || undefined,
   outcome: p.outcome || undefined,
   learning: p.learning || undefined,
+  highlights: (p as { highlights?: string[] }).highlights ?? [],
   links: { live: p.links.live || undefined, source: p.links.source || undefined },
   cover: resolveAsset(p.cover),
   metrics: p.metrics.length ? p.metrics.map((m) => ({ ...m, illustrative: m.illustrative || undefined })) : undefined,

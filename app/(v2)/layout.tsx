@@ -5,7 +5,7 @@ import { AskWidget } from '@/components/v2/chat/AskWidget';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Razeen Iqbal · Engineer. Builder. Runner. Curious human.',
+    default: 'Razeen Iqbal · Portfolio',
     template: '%s · Razeen Iqbal',
   },
   description:

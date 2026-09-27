@@ -8,7 +8,7 @@ import { assets } from '@/lib/assets';
 import { resumeHref } from '@/lib/site';
 import { profile } from '@/content/profile';
 import { featuredCredentials } from '@/content/achievements';
-import { credentialShortTitle, credentialYear, credentialVerifyUrl } from '@/lib/credentials';
+import { credentialCode, credentialShortTitle, credentialYear, credentialVerifyUrl } from '@/lib/credentials';
 
 /**
  * Home 01. Real photo + type, with a small credential strip attached to the portrait.
@@ -26,7 +26,8 @@ export function Hero() {
           <TechnicalLabel as="p">
             {profile.name} <span className="text-muted">/ {profile.role}</span>
           </TechnicalLabel>
-          <h1 className="mt-6 text-display-xl uppercase">
+          {/* Sized down from display-xl so the headline leads without swallowing the first screen. */}
+          <h1 className="mt-6 text-[clamp(2.75rem,5.8vw,6.75rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.045em]">
             {statement.map((line, i) => (
               <span key={line} className="block">
                 {i === statement.length - 1 ? line.replace(/\.$/, '') : line}
@@ -39,9 +40,9 @@ export function Hero() {
           <p className="mt-8 max-w-[34rem] text-lead text-muted">{profile.supporting}</p>
         </div>
 
-        {/* Portrait + credentials. lg offset = label + one headline line (display-xl: 7.2vw × 0.9, capped at 8.5rem):
+        {/* Portrait + credentials. lg offset = label + one headline line (5.8vw × 0.9, capped at 6.75rem):
             the portrait starts level with BUILDER., leaving room for the credential strip above the fold. */}
-        <div className="col-span-full md:col-span-3 md:row-span-2 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-[calc(2.5rem+min(6.5vw,7.65rem))]">
+        <div className="col-span-full md:col-span-3 md:row-span-2 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-[calc(2.5rem+min(5.22vw,6.075rem))]">
           <PhotoFrame
             image={assets.identity.hero}
             sizes="(min-width: 1024px) 38vw, (min-width: 768px) 40vw, 100vw"
@@ -60,7 +61,7 @@ export function Hero() {
                 </Link>
               </div>
               {/* Desktop: badges only, details on hover/focus (restrained). Touch/mobile: details written under each badge. */}
-              <ul className="mt-4 grid grid-cols-4 gap-x-3 gap-y-4 lg:flex lg:gap-4">
+              <ul className="mt-4 grid grid-cols-4 gap-x-3 gap-y-4">
                 {creds.map((c) => {
                   const url = credentialVerifyUrl(c);
                   const year = credentialYear(c);
@@ -74,12 +75,13 @@ export function Hero() {
                         className="block focus-visible:outline-offset-4"
                         {...(url && { target: '_blank', rel: 'noopener noreferrer' })}
                       >
-                        <CredentialBadge credential={c} size={44} className="transition-transform group-hover:-translate-y-0.5" />
-                        <span aria-hidden="true" className="mt-2 block text-xs font-medium leading-snug lg:hidden">
-                          {credentialShortTitle(c)}
+                        <CredentialBadge credential={c} size={60} className="transition-transform group-hover:-translate-y-0.5" />
+                        {/* Exam code under the badge (AI-102…); the full name shows on hover/focus. */}
+                        <span aria-hidden="true" className="label mt-2 block leading-snug text-ink">
+                          {credentialCode(c) ?? credentialShortTitle(c)}
                         </span>
-                        <span aria-hidden="true" className="mt-0.5 block text-[0.6875rem] leading-snug text-muted lg:hidden">
-                          {meta}
+                        <span aria-hidden="true" className="mt-0.5 block text-[0.6875rem] leading-snug text-muted">
+                          {c.organization}
                         </span>
                       </a>
                       <span

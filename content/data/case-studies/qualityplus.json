@@ -1,6 +1,6 @@
 {
   "project": "QualityPlus",
-  "review": "draft",
+  "review": "approved",
   "lede": "Data quality management, turned into a product. Score a dataset, fix what failed inside a governed workflow, and publish a version everyone can trust.",
   "facts": [
     {

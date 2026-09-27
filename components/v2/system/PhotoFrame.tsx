@@ -19,7 +19,8 @@ interface PhotoFrameProps {
 export function PhotoFrame({ image, sizes, caption, meta, mono, priority, aspect, className }: PhotoFrameProps) {
   return (
     <figure data-reveal={priority ? undefined : ''} className={cn('relative', className)}>
-      <div className={cn('relative overflow-hidden', aspect)}>
+      {/* Capped at ~3/4 of the viewport on desktop so a tall photo never hides the rest of the page; object-cover crops. */}
+      <div className={cn('relative overflow-hidden', aspect, 'lg:max-h-[75vh]')}>
         <Image
           src={image.src}
           width={image.width}

@@ -3,10 +3,67 @@
   "number": "002",
   "summary": "Patterns, lessons and practical insights from moving pipelines toward decisions.",
   "topic": "Data Engineering",
-  "status": "in-writing",
-  "date": null,
-  "readingMinutes": null,
+  "status": "published",
+  "date": "2026-09-27",
+  "readingMinutes": 5,
   "photo": "career.briefing2",
   "photoCaption": "Walking through a demo",
-  "body": []
+  "body": [
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": true,
+        "body": [
+          "Most conversations about AI at work start with the model. Mine usually end up somewhere less glamorous: the pipeline, the schema, the column nobody has validated in years. Working as a data engineer at AEM Energy Solutions has taught me that intelligence is the last layer you build, not the first."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "The work that made the AI projects possible was mostly foundation work. Looking back at the past year, it falls into a clear order."
+        ]
+      }
+    },
+    {
+      "discriminant": "list",
+      "value": {
+        "numbered": true,
+        "items": [
+          {
+            "title": "Make the data trustworthy",
+            "detail": "I built a Data Quality Platform from scratch, from database design to a working proof of concept. It is now the standard for checking upstream and downstream project data, because nothing downstream is better than the data going in."
+          },
+          {
+            "title": "Make it fast enough to use",
+            "detail": "We moved from a structured SQL setup to NoSQL so real-time AI inference could keep up, while keeping the data fully consistent across systems."
+          },
+          {
+            "title": "Make it labelled",
+            "detail": "Retraining models was blocked by manual labelling, so I automated it: local LLMs through Ollama label the unstructured data, and the refined classification models are deployed on AzureML."
+          },
+          {
+            "title": "Make the hard formats readable",
+            "detail": "Engineering drawings arrive as PDFs. Turning them into vectors made it possible to classify technical specifications semantically instead of by hand."
+          },
+          {
+            "title": "Make it safe",
+            "detail": "Before rolling out LLMs more widely I wrote the company’s first AI Cybersecurity Procedure, so speed never came at the cost of data privacy."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Only after those steps did the “intelligent” parts start to feel reliable: dashboards that people act on, assistants that answer from the right data, and models that can be retrained without a week of preparation.",
+          "If there is one lesson, it is this: every shortcut in the pipeline shows up later as a model problem. Build the foundation first, and the intelligence has somewhere solid to stand."
+        ]
+      }
+    }
+  ]
 }

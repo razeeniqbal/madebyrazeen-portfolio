@@ -12,13 +12,16 @@ interface ProjectFeatureProps {
   className?: string;
 }
 
-const titleSize = { flagship: 'text-display-lg', large: 'text-display-md', medium: 'text-display-sm' };
+const titleSize = { flagship: 'text-display-md', large: 'text-display-md', medium: 'text-display-sm' };
 
 /** Image-led project block. Size carries the hierarchy (PRD §18: not identical cards). */
 export function ProjectFeature({ project, size, sizes, className }: ProjectFeatureProps) {
+  const flagship = size === 'flagship';
   return (
     <article data-reveal className={cn('group', className)}>
-      <Link href={`/projects/${project.slug}`} className="block">
+      {/* Flagship: artwork and text side by side on desktop so the cover never fills the whole screen. */}
+      <Link href={`/projects/${project.slug}`} className={cn('block', flagship && 'lg:grid lg:grid-cols-12 lg:items-end lg:gap-x-10')}>
+        <div className={cn(flagship && 'lg:col-span-8')}>
         {!project.cover && (
           // No artwork yet: a typographic tile at the cover ratio, so the layout holds until art is added.
           <div className="relative flex aspect-[1672/941] flex-col justify-between overflow-hidden border border-line bg-raised p-5 md:p-7">
@@ -45,13 +48,14 @@ export function ProjectFeature({ project, size, sizes, className }: ProjectFeatu
             </span>
           </div>
         )}
-        <div className={cn('mt-5', size === 'flagship' && 'md:grid md:grid-cols-2 md:gap-10')}>
+        </div>
+        <div className={cn('mt-5', flagship && 'lg:col-span-4 lg:mt-0')}>
           <div>
             <ProjectMeta project={project} />
             <h3 className={cn('mt-3 transition-colors group-hover:text-signal', titleSize[size])}>{project.title}</h3>
           </div>
-          <div className={cn(size === 'flagship' ? 'mt-4 md:mt-7' : 'mt-3')}>
-            <p className={cn('max-w-prose text-muted', size === 'flagship' && 'text-lead')}>{project.summary}</p>
+          <div className={cn(flagship ? 'mt-4' : 'mt-3')}>
+            <p className={cn('max-w-prose text-muted', flagship && 'text-lead')}>{project.summary}</p>
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <TechnicalLabel>{project.stack.slice(0, 4).join(' · ')}</TechnicalLabel>
               <span className="label" aria-hidden="true">

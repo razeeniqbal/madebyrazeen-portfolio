@@ -1,6 +1,6 @@
 {
   "project": "Duplicate Question Detection (NLP)",
-  "review": "draft",
+  "review": "approved",
   "lede": "My Master's research: can duplicate questions be detected accurately without the heavy models? FastText embeddings plus PCA kept 83.68% accuracy while cutting training time by two thirds and memory by 83%.",
   "facts": [
     {

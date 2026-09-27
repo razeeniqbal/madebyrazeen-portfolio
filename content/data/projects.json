@@ -41,13 +41,14 @@
         }
       ],
       "caseStudy": true,
-      "role": "",
+      "role": "Solo builder",
       "problem": "",
       "outcome": "",
       "learning": "",
       "confidential": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": []
     },
     {
       "slug": "qualityplus",
@@ -79,12 +80,13 @@
       "cover": "projects.qualityplus",
       "confidential": true,
       "caseStudy": true,
-      "role": "",
+      "role": "Designer and developer",
       "outcome": "",
       "learning": "",
       "metrics": [],
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": []
     },
     {
       "slug": "nlp-semantic-similarity",
@@ -138,7 +140,8 @@
           "illustrative": false
         }
       ],
-      "draft": false
+      "draft": false,
+      "highlights": []
     },
     {
       "slug": "leadsightz",
@@ -165,16 +168,23 @@
         "live": "https://leadsightz.vercel.app",
         "source": "https://github.com/razeeniqbal/hackathon-cursor-leadsightz"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Technology lead (team of three)",
+      "problem": "Prospect research, qualification and outreach take sales teams hours per lead. The hackathon brief was to automate that loop with AI.",
+      "outcome": "Built in a weekend at the Cursor × Anthropic Hackathon MY 2025 (Monash University Malaysia, 6 and 7 December 2025) and deployed on Vercel. The team was a Top 20 nominee.",
+      "learning": "Scope is the real constraint in a hackathon: a narrow, working flow with Claude at its centre beat a wide set of half-built features.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Smart lead discovery: AI-assisted prospect identification",
+        "Automated qualification: Claude analyses and scores each lead",
+        "Personalised outreach messages generated at scale",
+        "Analytics dashboard for performance and conversion",
+        "Next.js, TypeScript and Tailwind, with Claude Sonnet 4.5 through the Anthropic API"
+      ]
     },
     {
       "slug": "edugen",
@@ -199,16 +209,23 @@
         "live": "https://edugen-rho.vercel.app",
         "source": "https://github.com/razeeniqbal/edugen"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo builder",
+      "problem": "SPM students need a lot of practice questions across many subjects, matched to the chapters they are actually studying.",
+      "outcome": "A live web app that generates 40 objective questions per quiz for seven SPM subjects, with explanations and a study dashboard.",
+      "learning": "Generation is the easy part. Constraining it to the syllabus, the right form level and a clear difficulty is what makes AI-generated questions useful.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Seven subjects: Mathematics, Additional Mathematics, Physics, Chemistry, Biology, Pendidikan Islam and Sejarah",
+        "Form 4 and Form 5 content, chosen chapter by chapter",
+        "Easy, medium and hard questions, each with a detailed explanation",
+        "Study dashboard: quiz history, average scores, strong and weak chapters",
+        "Questions generated with the Google Gemini API"
+      ]
     },
     {
       "slug": "job-matching-t2",
@@ -235,16 +252,23 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/job-matching-system-t2"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo builder (technical assessment)",
+      "problem": "An existing job-matching flow used hardcoded rules presented as a decision tree: rigid, redundant, and unable to explain its scores.",
+      "outcome": "A proof of concept on Streamlit that replaces the rules with an XGBoost model and explains every score, with a written architecture review of the old flow.",
+      "learning": "Explainability is a feature. SHAP values made the model easier to trust than the hand-written rules it replaced.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "XGBoost model trained on historical matches in place of hardcoded scoring",
+        "Feature engineering: semantic skill similarity, experience relative to requirements, education hierarchy, certification relevance",
+        "SHAP explanations showing which factors drove each score",
+        "Redesigned flow that computes features once and reuses them",
+        "Documented limitations: training data needs, cold start for new job categories"
+      ]
     },
     {
       "slug": "face-recognition",
@@ -269,16 +293,23 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/face-recognition-system"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo builder (technical assessment)",
+      "problem": "Build a face detection and recognition web app that is light enough to deploy without heavy dependencies such as dlib.",
+      "outcome": "A Streamlit app that detects, aligns and recognises faces from uploads or the camera, and reports accuracy, precision, recall and F1.",
+      "learning": "Classic computer vision still goes a long way: good detection and alignment mattered as much as the classifier.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Face detection with OpenCV’s DNN detector, falling back to Haar cascades",
+        "Face alignment using eye detection",
+        "Recognition with HOG features and an SVM classifier, trained on the LFW dataset",
+        "Data augmentation: flips, rotations and brightness changes",
+        "Model evaluation metrics shown in the app"
+      ]
     },
     {
       "slug": "hr-analytics",
@@ -304,16 +335,23 @@
         "live": "https://razeeniqbal-hr-analytics-dashboard-predictive-model.streamlit.app/",
         "source": "https://github.com/razeeniqbal/HR-Analytics-Dashboard-Predictive-Model"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo builder",
+      "problem": "Organisations want to know which employees are at risk of leaving, and why, before it happens.",
+      "outcome": "A live Streamlit dashboard on the IBM HR Analytics Attrition dataset that explores attrition drivers and predicts attrition risk.",
+      "learning": "The most useful output was not the prediction but the drivers: overtime, work-life balance and career growth explained more than salary did.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Exploratory analysis of department-level attrition trends",
+        "Feature engineering, scaling and encoding",
+        "Multiple models compared, including Logistic Regression and Random Forest",
+        "Interactive dashboard for exploring the data and getting predictions",
+        "Findings: overtime raises quit rates; work-life balance often matters more than salary; growth opportunities reduce turnover"
+      ]
     },
     {
       "slug": "aircraft-journey-extractor",
@@ -324,30 +362,39 @@
       "status": "shipped",
       "tier": "standard",
       "order": 6,
-      "summary": "Aircraft journey data extraction and analysis for flight-pattern insights.",
+      "summary": "Turns photos of aircraft journey summary forms, including handwriting, into structured JSON using Gemini’s vision model.",
       "stack": [
         "Python",
-        "pandas",
-        "Jupyter"
+        "Gemini 2.0 Flash",
+        "Prompt engineering",
+        "JSON"
       ],
       "tags": [
-        "Data Engineering",
-        "Aviation"
+        "Document AI",
+        "Vision",
+        "Extraction"
       ],
       "links": {
         "live": "",
         "source": "https://github.com/razeeniqbal/aircraft-journey-summary-extractor"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo builder (technical assessment)",
+      "problem": "Journey summary forms are partly handwritten and full of aviation abbreviations, which traditional OCR reads poorly.",
+      "outcome": "A single-step extractor that returns validated JSON (aircraft, registration, route, crew, fuel, load, defect message) in about two to three seconds per form.",
+      "learning": "Domain context in the prompt was the biggest lever: telling the model it is a maintenance technician and listing abbreviations lifted handwriting accuracy from about 60% to about 95%.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Gemini 2.0 Flash vision chosen over OCR plus NLP, AWS Textract and GPT-4 Vision, with the trade-offs documented",
+        "Prompt with aviation expertise and abbreviations (FWD, GND, A/C, DD, MEL)",
+        "JSON validation: required fields, integer types, clean-up of model output",
+        "Graceful batch processing: one bad form does not block the rest",
+        "Estimated cost of about $0.001 per form"
+      ]
     },
     {
       "slug": "job-matching-t1",
@@ -370,16 +417,23 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/job-matching-system-t1"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo builder (technical assessment)",
+      "problem": "Candidate-job scoring logic was hard to maintain and debug, and could not be extended or fed with new data easily.",
+      "outcome": "A modular Streamlit proof of concept that scores candidate-job fit from weighted skills, experience, education and certifications.",
+      "learning": "Separating configuration, scoring and UI made the system easier to reason about, and it set up the ML version that followed (T2).",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Weights and thresholds in a YAML configuration, not in code",
+        "Scoring service separated from data loading and visualisation",
+        "Dashboard with adjustable weights and a per-component score breakdown",
+        "Custom application input and JSON upload with validation",
+        "Export of results to JSON and CSV"
+      ]
     },
     {
       "slug": "plant-disease-classification",
@@ -404,16 +458,22 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/Plant-Disease-Classification"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo builder",
+      "problem": "Compare building an image classifier from scratch with transfer learning, and measure the difference properly rather than from a single run.",
+      "outcome": "VGG16 transfer learning reached 68.11% average validation accuracy against 48.07% for a custom CNN, across five training runs each.",
+      "learning": "Both models overfit (about 99% training accuracy), which made the case for regularisation and more varied data as clearly as the headline comparison.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Custom CNN: three convolution blocks with batch normalisation and a dense head",
+        "VGG16 pre-trained on ImageNet, frozen, with a new classification head",
+        "Five separate training phases per model for reliable averages",
+        "Training and validation accuracy and loss recorded for every phase"
+      ]
     },
     {
       "slug": "london-bike-sharing",
@@ -424,7 +484,7 @@
       "status": "shipped",
       "tier": "archive",
       "order": 3,
-      "summary": "Exploratory analysis of London bike-share usage patterns and weather effects.",
+      "summary": "Cleaning and preparing the London bike-sharing dataset in Python so it is ready for reliable analysis.",
       "stack": [
         "Python",
         "pandas",
@@ -438,16 +498,22 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/python-london-bike"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo analyst",
+      "problem": "Raw public datasets arrive with duplicates, inconsistent types and formats, and missing values.",
+      "outcome": "A cleaned, validated dataset and a notebook documenting every transformation.",
+      "learning": "Writing down each cleaning decision matters as much as the code: it is what makes the analysis reproducible.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Dataset pulled directly from Kaggle and extracted with Python",
+        "Duplicates removed and data types standardised with pandas",
+        "Dates and strings standardised",
+        "Validation checks for consistency and integrity"
+      ]
     },
     {
       "slug": "powerbi-food-prep",
@@ -470,16 +536,22 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/powerbi-apocolypse-food-prep"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo analyst",
+      "problem": "Turn a planning dataset kept in Excel into something people can explore and act on.",
+      "outcome": "An interactive Power BI dashboard built on data prepared in Excel.",
+      "learning": "Modelling the relationships between tables up front is what makes filters and drill-downs work naturally later.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Data prepared in Excel and transformed with Power Query",
+        "Data model with relationships between tables",
+        "Slicers, filters and drill-downs for exploration",
+        "Consistent formatting, tooltips and navigation"
+      ]
     },
     {
       "slug": "excel-bike-sales",
@@ -490,7 +562,7 @@
       "status": "shipped",
       "tier": "archive",
       "order": 5,
-      "summary": "Bike sales analysis with dynamic charts, pivot tables and demographic insights.",
+      "summary": "Cleaning a raw bike sales dataset in Excel so it is ready for analysis.",
       "stack": [
         "Excel"
       ],
@@ -501,16 +573,22 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/excel-bike-sales"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo analyst",
+      "problem": "The raw sales data had errors, duplicates, inconsistent formats and missing values.",
+      "outcome": "A clean, validated dataset with before-and-after versions published in the repository.",
+      "learning": "Most analysis time is spent before the first chart. Clean data makes every later step faster and more trustworthy.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Cleaning functions: TRIM, CLEAN, IFERROR, ISNUMBER, TEXT",
+        "Cross-checks with lookup formulas (VLOOKUP, INDEX and MATCH)",
+        "Duplicates removed and missing values handled",
+        "Validation rules to prevent future entry errors"
+      ]
     },
     {
       "slug": "excel-coffee-sales",
@@ -532,16 +610,22 @@
         "live": "",
         "source": "https://github.com/razeeniqbal/excel-coffee-sales"
       },
-      "role": "",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "role": "Solo analyst",
+      "problem": "Sales data is hard to read in rows; decision-makers need the trends at a glance.",
+      "outcome": "An interactive Excel dashboard of coffee orders that a beginner can filter and explore.",
+      "learning": "A well-designed spreadsheet dashboard can answer most day-to-day questions before a BI tool is needed.",
       "confidential": false,
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Pivot tables and pivot charts for summaries",
+        "Slicers and drop-downs for interactive filtering",
+        "Conditional formatting to highlight key figures",
+        "Documentation for updating the data"
+      ]
     },
     {
       "slug": "balang",
@@ -554,9 +638,9 @@
       "order": 2,
       "summary": "A Malaysian probability party game: read the jar of 25 kuih tokens, bet on secret prediction cards, and play friends in peer-to-peer rooms with no backend.",
       "role": "Designer and developer",
-      "problem": "",
-      "outcome": "",
-      "learning": "",
+      "problem": "Party games about probability are usually either pure luck or pure maths. I wanted one that is easy to learn in a round, social with friends, and still rewards reading the odds, without running a server.",
+      "outcome": "A playable multiplayer game at balang.madebyrazeen.com: rooms by code, link or QR, three-round matches, bots that fill empty seats, and a shareable result card.",
+      "learning": "Keeping the engine as plain, tested TypeScript separate from the UI made balancing possible: near-optimal bots could play thousands of rounds while I tuned the rewards.",
       "stack": [
         "React",
         "TypeScript",
@@ -592,10 +676,17 @@
           "illustrative": false
         }
       ],
-      "caseStudy": false,
+      "caseStudy": true,
       "confidential": false,
       "draft": false,
-      "placeholder": false
+      "placeholder": false,
+      "highlights": [
+        "Game engine as a pure state machine: 25 tokens of five kuih, a secret draw order, 12 prediction card types",
+        "Rewards priced from each card’s probability at deal time using Monte Carlo simulation",
+        "Peer-to-peer rooms over WebRTC (PeerJS): the host’s browser is the authority and guests only receive their own view",
+        "Bots take over a player’s turns if they disconnect, until they reconnect",
+        "Discard and lock phases plus KAW-KAW (double reward, double penalty) for risk management"
+      ]
     }
   ]
 }
