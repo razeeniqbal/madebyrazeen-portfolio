@@ -133,8 +133,13 @@ def main() -> None:
         if run["distanceKm"] > 0 and run["durationSec"] > 0:
             runs.append({k: v for k, v in run.items() if v is not None})
 
-    runs.sort(key=lambda r: r["date"], reverse=True)
+    # Accumulate instead of overwrite: runs that have scrolled out of the RUN_LIMIT window are kept,
+    # and a re-fetched run replaces its older copy (same activity id).
     previous = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
+    fetched = {r["id"] for r in runs}
+    kept = [r for r in (json.loads(previous) if previous.strip() else []) if r.get("id") not in fetched]
+    runs = runs + kept
+    runs.sort(key=lambda r: r["date"], reverse=True)
     text = json.dumps(runs, indent=1) + "\n"
     OUT.write_text(text, encoding="utf-8")
     # Stamp only when the data changed, so the UI date means "data last updated", not "script last ran".

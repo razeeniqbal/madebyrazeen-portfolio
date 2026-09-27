@@ -1,10 +1,12 @@
 # Pulls recent Garmin runs into content/running/runs.json and commits the change,
 # which triggers a normal Vercel redeploy. The site itself never calls Garmin.
+# runs.json accumulates: older runs stay even after they leave the RUN_LIMIT window.
+# Full history before the sync comes from the Strava export (content/running/strava.json).
 #
 # Setup (repo → Settings → Secrets and variables → Actions):
 #   GARMIN_EMAIL, GARMIN_PASSWORD
-# If your Garmin account uses MFA, run the script locally once with GARMINTOKENS set,
-# then store the token files instead (see scripts/garmin/README.md).
+#   GARMIN_TOKENS (optional): use this if the password login fails (MFA or Garmin blocking
+#   logins from GitHub's servers). See scripts/garmin/README.md › "If the login fails".
 
 name: Garmin sync
 
@@ -12,6 +14,10 @@ on:
   schedule:
     - cron: '0 22 * * *' # 06:00 Malaysia time
   workflow_dispatch:
+    inputs:
+      run_limit:
+        description: 'How many recent Garmin activities to scan (use 1000 once for a full backfill)'
+        default: '60'
 
 permissions:
   contents: write
@@ -25,10 +31,20 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r scripts/garmin/requirements.txt
+      - name: Restore saved Garmin login (optional)
+        env:
+          GARMIN_TOKENS: ${{ secrets.GARMIN_TOKENS }}
+        run: |
+          if [ -n "$GARMIN_TOKENS" ]; then
+            mkdir -p "$HOME/.garminconnect"
+            echo "$GARMIN_TOKENS" | base64 -d | tar -xz -C "$HOME/.garminconnect"
+            echo "GARMINTOKENS=$HOME/.garminconnect" >> "$GITHUB_ENV"
+          fi
       - run: python scripts/garmin/export_runs.py
         env:
           GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
           GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+          RUN_LIMIT: ${{ github.event.inputs.run_limit || '60' }}
       - name: Commit if changed
         run: |
           if git diff --quiet -- content/running/runs.json; then
