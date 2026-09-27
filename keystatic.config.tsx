@@ -532,6 +532,8 @@ export default config({
         }),
         date: fields.date({ label: 'Published date' }),
         readingMinutes: fields.integer({ label: 'Reading minutes' }),
+        photo: imageSelect('Photo (list thumbnail + top of the entry)'),
+        photoCaption: fields.text({ label: 'Photo caption' }),
         body: contentBlocks('Body'),
       },
     }),

@@ -6,6 +6,8 @@
   "status": "draft",
   "date": null,
   "readingMinutes": 4,
+  "photo": "identity.milestone",
+  "photoCaption": "Engineer by training",
   "body": [
     {
       "discriminant": "text",

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
+import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { CaseStudyBlock } from '@/components/v2/case-study/CaseStudyBlocks';
 import { getNote, getReadableNotes } from '@/content/notes';
@@ -64,6 +65,17 @@ export default async function NotePage({ params }: Params) {
             <h1 className="mt-4 text-display-md">{note.title}</h1>
             <p className="mt-4 text-lead text-muted">{note.summary}</p>
           </header>
+
+          {note.photo && (
+            <PhotoFrame
+              image={note.photo.image}
+              sizes="(min-width: 768px) 44rem, 100vw"
+              aspect="aspect-[3/2]"
+              caption={note.photo.caption}
+              priority
+              className="mt-10"
+            />
+          )}
 
           {/* Reading measure: prose blocks already cap at ~65ch. */}
           <div className="mt-10 space-y-8 [&_p]:text-[1.0625rem] [&_p]:leading-[1.75]">

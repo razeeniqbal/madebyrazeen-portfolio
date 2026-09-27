@@ -7,7 +7,7 @@
       "issuedDate": "September 2023",
       "description": "Expert in Power BI data visualization, modeling, and business intelligence solutions.",
       "category": "certification",
-      "image": "/achievements/microsoft-powerbi.jpg",
+      "image": "/achievements/microsoft-certified-associate.png",
       "credentialUrl": "https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874",
       "credentialId": "DE6CEB296EC4D874",
       "featured": true
@@ -511,7 +511,7 @@
       "issuedDate": "",
       "description": "Designing and implementing Azure AI solutions.",
       "category": "certification",
-      "image": "",
+      "image": "/achievements/microsoft-certified-associate.png",
       "credentialUrl": "",
       "credentialId": "",
       "featured": true
@@ -523,7 +523,7 @@
       "issuedDate": "",
       "description": "Data engineering with Microsoft Fabric.",
       "category": "certification",
-      "image": "",
+      "image": "/achievements/microsoft-certified-associate.png",
       "credentialUrl": "",
       "credentialId": "",
       "featured": true
@@ -535,7 +535,7 @@
       "issuedDate": "",
       "description": "Generative AI strategy and adoption on Google Cloud.",
       "category": "certification",
-      "image": "",
+      "image": "/achievements/google-generative-ai-leader.png",
       "credentialUrl": "",
       "credentialId": "",
       "featured": true

@@ -6,6 +6,8 @@
   "status": "draft",
   "date": null,
   "readingMinutes": 5,
+  "photo": "identity.graduation",
+  "photoCaption": "Master’s in AI",
   "body": [
     {
       "discriminant": "text",

@@ -201,7 +201,8 @@ export function AskWidget() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open, close]);
 
-  // One friendly nudge per visit: a speech bubble after a few seconds, only when the assistant is online.
+  // One friendly nudge per visit, only when the assistant is online, and only once the visitor has
+  // scrolled past the first screen (so it never sits on top of hero content such as the credentials).
   useEffect(() => {
     if (open || !available) {
       setTeaser(false);
@@ -210,16 +211,21 @@ export function AskWidget() {
     try {
       if (sessionStorage.getItem('ask-razeen:teased')) return;
     } catch {}
-    const show = setTimeout(() => {
+    const start = Date.now();
+    let hide: ReturnType<typeof setTimeout> | undefined;
+    const onScroll = () => {
+      if (window.scrollY < window.innerHeight * 0.8 || Date.now() - start < 5000) return;
+      window.removeEventListener('scroll', onScroll);
       setTeaser(true);
       try {
         sessionStorage.setItem('ask-razeen:teased', '1');
       } catch {}
-    }, 5000);
-    const hide = setTimeout(() => setTeaser(false), 19000);
+      hide = setTimeout(() => setTeaser(false), 14000);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
-      clearTimeout(show);
-      clearTimeout(hide);
+      window.removeEventListener('scroll', onScroll);
+      if (hide) clearTimeout(hide);
     };
   }, [open, available]);
 

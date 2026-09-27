@@ -6,6 +6,8 @@
   "status": "draft",
   "date": null,
   "readingMinutes": 4,
+  "photo": "projects.qualityplus",
+  "photoCaption": "QualityPlus",
   "body": [
     {
       "discriminant": "text",

@@ -6,6 +6,8 @@
   "status": "draft",
   "date": null,
   "readingMinutes": 5,
+  "photo": "projects.balang",
+  "photoCaption": "Balang",
   "body": [
     {
       "discriminant": "text",

@@ -6,6 +6,8 @@
   "status": "draft",
   "date": null,
   "readingMinutes": 4,
+  "photo": "running.race",
+  "photoCaption": "Road race",
   "body": [
     {
       "discriminant": "text",

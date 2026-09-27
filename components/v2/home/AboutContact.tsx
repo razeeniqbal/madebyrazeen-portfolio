@@ -59,14 +59,17 @@ export function ContactBlock({ index = '11', surface = 'dark', title = ['Let’s
           Have an idea, project, opportunity, or interesting problem?
         </p>
         <div className="col-span-full flex flex-wrap items-center gap-x-8 gap-y-5">
-          <ArrowLink href={`mailto:${contact.email}`} variant="primary">
-            Let&apos;s talk
+          <ArrowLink href="/contact" variant="primary">
+            Connect
           </ArrowLink>
           <ArrowLink href={contact.linkedin}>LinkedIn</ArrowLink>
           <ArrowLink href={contact.github}>GitHub</ArrowLink>
         </div>
-        <TechnicalLabel as="p" className="col-span-full">
-          {contact.email}
+        {/* Email addresses stay lowercase: the label style uppercases everything else. */}
+        <TechnicalLabel as="p" className="col-span-full normal-case tracking-[0.04em]">
+          <a href={`mailto:${contact.email}`} className="underline-offset-4 hover:underline">
+            {contact.email}
+          </a>
         </TechnicalLabel>
       </div>
     </Section>
