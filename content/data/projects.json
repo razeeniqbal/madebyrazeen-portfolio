@@ -7,8 +7,8 @@
       "year": 2026,
       "category": "product",
       "status": "in-progress",
-      "tier": "flagship",
-      "order": 1,
+      "tier": "featured",
+      "order": 3,
       "summary": "Race-intelligence lab for Sepang International Circuit: circuit geometry, simulated telemetry, replay, weather scenarios and Monte Carlo strategy.",
       "stack": [
         "React",
@@ -56,7 +56,7 @@
       "year": 2025,
       "category": "data",
       "status": "live",
-      "tier": "featured",
+      "tier": "flagship",
       "order": 1,
       "summary": "Data quality management turned into a product: scored checks, a remediation-to-publish workflow for trusted data, and AI assistance at three points.",
       "problem": "Oil & gas datasets arrive incomplete, duplicated and inconsistent, and fixing them happens in spreadsheets with no audit trail.",
@@ -94,7 +94,7 @@
       "category": "research",
       "status": "shipped",
       "tier": "featured",
-      "order": 2,
+      "order": 1,
       "summary": "Master's research: FastText embeddings plus PCA to detect duplicate questions on 404k Quora pairs, keeping 83.68% accuracy while cutting training time by two thirds and memory by 83%.",
       "stack": [
         "Python",
@@ -540,6 +540,60 @@
       "cover": "none",
       "metrics": [],
       "caseStudy": false,
+      "draft": false,
+      "placeholder": false
+    },
+    {
+      "slug": "balang",
+      "number": "016",
+      "title": "Balang",
+      "year": 2026,
+      "category": "product",
+      "status": "live",
+      "tier": "featured",
+      "order": 2,
+      "summary": "A Malaysian probability party game: read the jar of 25 kuih tokens, bet on secret prediction cards, and play friends in peer-to-peer rooms with no backend.",
+      "role": "Designer and developer",
+      "problem": "",
+      "outcome": "",
+      "learning": "",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "PeerJS (WebRTC)",
+        "Vitest"
+      ],
+      "tags": [
+        "Game",
+        "Probability",
+        "Multiplayer",
+        "Monte Carlo"
+      ],
+      "links": {
+        "live": "https://balang.madebyrazeen.com",
+        "source": "https://github.com/razeeniqbal/balang"
+      },
+      "cover": "none",
+      "metrics": [
+        {
+          "label": "Tokens per round",
+          "value": "25",
+          "illustrative": false
+        },
+        {
+          "label": "Prediction card types",
+          "value": "12",
+          "illustrative": false
+        },
+        {
+          "label": "Backend servers",
+          "value": "0",
+          "illustrative": false
+        }
+      ],
+      "caseStudy": false,
+      "confidential": false,
       "draft": false,
       "placeholder": false
     }

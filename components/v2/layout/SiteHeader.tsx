@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Wordmark } from '@/components/v2/identity/Wordmark';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
+import { Avatar } from '@/components/v2/identity/Avatar';
 import { primaryNav, contactHref, resumeHref, isActive } from '@/lib/site';
 import { profile } from '@/content/profile';
 import { cn } from '@/lib/utils';
@@ -49,7 +50,9 @@ export function SiteHeader() {
       </a>
 
       <div className="page-container flex h-16 items-center justify-between gap-6">
-        <Link href="/" className="text-xl">
+        {/* [Mini Razeen] razeeniqbal. : the avatar supports the wordmark, never outweighs it (spec §9). */}
+        <Link href="/" className="flex items-center gap-2.5 text-xl">
+          <Avatar size={32} priority />
           <Wordmark />
         </Link>
 
@@ -89,7 +92,7 @@ export function SiteHeader() {
             aria-current={isActive(pathname, resumeHref) ? 'page' : undefined}
             className={cn('label hidden py-2 transition-colors hover:text-ink md:inline-block', isActive(pathname, resumeHref) ? 'text-ink' : 'text-muted')}
           >
-            Resume
+            Resume ↗
           </Link>
           <Link
             href={contactHref}

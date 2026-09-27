@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: note.title,
     description: note.summary,
     // Drafts are readable by link but kept out of search until published.
-    alternates: { canonical: `/notes/${note.slug}` },
+    alternates: { canonical: `/stories/${note.slug}` },
     robots: note.status === 'published' ? undefined : { index: false, follow: true },
     openGraph: { type: 'article', title: note.title, description: note.summary, publishedTime: note.date },
   };
@@ -42,14 +42,14 @@ export default async function NotePage({ params }: Params) {
           '@type': 'Article',
           headline: note.title,
           description: note.summary,
-          url: `${SITE_URL}/notes/${note.slug}`,
+          url: `${SITE_URL}/stories/${note.slug}`,
           ...(note.date && { datePublished: note.date }),
           author: { '@type': 'Person', name: 'Razeen Iqbal', url: SITE_URL },
         }}
       />
       <article className="page-container">
         <div className="mx-auto max-w-[44rem]">
-          <ArrowLink href="/notes">All notes</ArrowLink>
+          <ArrowLink href="/stories">All stories</ArrowLink>
 
           {note.status === 'draft' && (
             <p className="label mt-8 border border-current px-3 py-2">Draft · not yet published · wording under review</p>
@@ -57,7 +57,7 @@ export default async function NotePage({ params }: Params) {
 
           <header className="mt-10 border-b border-line pb-8">
             <TechnicalLabel as="p">
-              Note_{note.number} · {note.topic}
+              Story_{note.number} · {note.topic}
               {note.readingMinutes && ` · ${note.readingMinutes} min read`}
               {note.date && ` · ${note.date}`}
             </TechnicalLabel>
@@ -73,7 +73,7 @@ export default async function NotePage({ params }: Params) {
           </div>
 
           <footer className="mt-16 border-t border-line pt-8">
-            <ArrowLink href="/notes">More field notes</ArrowLink>
+            <ArrowLink href="/stories">More stories</ArrowLink>
           </footer>
         </div>
       </article>

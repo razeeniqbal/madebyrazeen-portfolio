@@ -5,34 +5,36 @@ import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { assets } from '@/lib/assets';
 import { contact } from '@/content/profile';
-import { achievements } from '@/content/achievements';
+import { storyPath } from '@/content/story';
 import { home } from '@/content/home';
 
+/** Home 03. The journey in four steps (same data as the About path diagram), a real photo, one link. */
 export function AboutTeaser() {
-  const certifications = achievements.filter((a) => a.category === 'certification').length;
   return (
-    <Section surface="light">
+    <Section surface="dark">
       <div className="page-grid gap-y-10">
         <PhotoFrame
           image={assets.career.collaboration}
           sizes="(min-width: 1024px) 58vw, 100vw"
           caption="People · ideas · conversations"
-          meta="Workshop"
           className="col-span-full lg:col-span-7"
         />
         <div className="col-span-full lg:col-span-4 lg:col-start-9 lg:self-end">
-          <SectionHeader index="10" eyebrow="About" title={home.aboutTeaser.title} size="md" />
+          <SectionHeader index="02" eyebrow="About" title={home.aboutTeaser.title} size="md" />
+          <ol className="mt-8" aria-label="Career path">
+            {storyPath.map((step, i) => (
+              <li key={step.label} className="flex items-baseline gap-4 border-t border-line py-2.5">
+                <span className="label w-10 text-muted">{step.year}</span>
+                <span className="font-semibold">{step.label}</span>
+                {i < storyPath.length - 1 ? (
+                  <span aria-hidden="true" className="ml-auto text-muted">↓</span>
+                ) : (
+                  <span aria-hidden="true" className="ml-auto h-2 w-2 self-center rounded-full bg-lime" />
+                )}
+              </li>
+            ))}
+          </ol>
           <p className="justify-copy mt-6 text-muted">{home.aboutTeaser.body}</p>
-          <dl className="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-4">
-            <div>
-              <dt className="label text-muted">Certifications</dt>
-              <dd className="text-display-sm">{certifications}</dd>
-            </div>
-            <div>
-              <dt className="label text-muted">Master&apos;s</dt>
-              <dd className="text-display-sm">AI</dd>
-            </div>
-          </dl>
           <div className="mt-8">
             <ArrowLink href="/about">More about me</ArrowLink>
           </div>
@@ -42,11 +44,17 @@ export function AboutTeaser() {
   );
 }
 
-export function ContactBlock({ index = '11' }: { index?: string }) {
+interface ContactBlockProps {
+  index?: string;
+  surface?: 'dark' | 'light';
+  title?: [string, string];
+}
+
+export function ContactBlock({ index = '11', surface = 'dark', title = ['Let’s build', 'something useful.'] }: ContactBlockProps) {
   return (
-    <Section surface="dark" grid>
+    <Section surface={surface} grid={surface === 'dark'}>
       <div className="page-grid gap-y-10">
-        <SectionHeader index={index} eyebrow="Contact" title={['Let’s build', 'something useful.']} size="xl" className="lg:col-span-9" />
+        <SectionHeader index={index} eyebrow="Contact" title={title} size="xl" className="lg:col-span-9" />
         <p className="col-span-full text-lead text-muted md:col-span-5 lg:col-span-5">
           Have an idea, project, opportunity, or interesting problem?
         </p>

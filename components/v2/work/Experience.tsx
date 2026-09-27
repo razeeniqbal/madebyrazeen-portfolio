@@ -4,9 +4,15 @@ import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { experience } from '@/content/experience';
 import { education } from '@/content/profile';
 
-export function Experience({ index = '05', flush = true }: { index?: string; flush?: boolean }) {
+interface ExperienceProps {
+  index?: string;
+  flush?: boolean;
+  surface?: 'dark' | 'light';
+}
+
+export function Experience({ index = '05', flush = true, surface = 'light' }: ExperienceProps) {
   return (
-    <Section surface="light" className={flush ? '!pt-0' : undefined}>
+    <Section surface={surface} className={flush ? '!pt-0' : undefined}>
       <div className="page-grid gap-y-10">
         <SectionHeader index={index} eyebrow="Experience" title={['Engineer by training.', 'Builder by curiosity.']} size="md" />
 

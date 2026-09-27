@@ -76,7 +76,7 @@ export function buildKnowledge(): string {
     `## Lab experiments\n${experiments.map((e) => `- ${e.title} (${e.status}): ${e.summary}`).join('\n')}\nCurrently exploring:\n${exploring.map((e) => `- ${e.label}: ${e.detail}`).join('\n')}`,
   );
 
-  out.push(`## Field notes\n${notes.map((n) => `- ${n.title} (${n.status}): ${n.summary}`).join('\n')}`);
+  out.push(`## Stories (writing)\n${notes.map((n) => `- ${n.title} (${n.status}): ${n.summary}`).join('\n')}`);
 
   out.push(
     `## Running\nRazeen runs road races. ${isSampleData() ? 'The running statistics on the site are currently SAMPLE data, not real results; do not quote them as Razeen’s times.' : 'Running data on the site is synced from Garmin.'} Running page: ${SITE_URL}/running`,

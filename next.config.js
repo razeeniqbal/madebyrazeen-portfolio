@@ -29,6 +29,9 @@ const nextConfig = {
     return [
       { source: '/projects', destination: '/work', permanent: true },
       { source: '/achievements', destination: '/about', permanent: true },
+      // Notes became Stories (refinement spec §27).
+      { source: '/notes', destination: '/stories', permanent: true },
+      { source: '/notes/:slug', destination: '/stories/:slug', permanent: true },
       { source: '/dashboard', destination: '/lab', permanent: true },
       { source: '/smart-talk', destination: '/lab', permanent: true },
     ];

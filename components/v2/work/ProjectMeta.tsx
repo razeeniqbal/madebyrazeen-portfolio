@@ -2,17 +2,18 @@ import type { Project } from '@/content/projects';
 import { projectCategories } from '@/content/projects';
 import { cn } from '@/lib/utils';
 
+// Stored values stay as they are; the display vocabulary is Shipped / Active / Experiment / Archived.
 const statusLabel: Record<Project['status'], string> = {
-  live: 'Live',
-  'in-progress': 'In progress',
+  live: 'Shipped · Live',
+  'in-progress': 'Active',
   shipped: 'Shipped',
-  prototype: 'Prototype',
+  prototype: 'Experiment',
   archived: 'Archived',
 };
 
 export const categoryLabel = (c: Project['category']) => projectCategories.find((p) => p.value === c)?.label ?? c;
 
-/** PROJECT / 001 · 2026 · DATA ENGINEERING · ● IN PROGRESS */
+/** PROJECT / 001 · 2026 · DATA ENGINEERING · ● ACTIVE */
 export function ProjectMeta({ project, className }: { project: Project; className?: string }) {
   const active = project.status === 'in-progress' || project.status === 'live';
   return (

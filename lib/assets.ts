@@ -65,6 +65,29 @@ export const assets = {
 
 export type MiniRazeenPose = keyof typeof assets.miniRazeen;
 
+/**
+ * Mini Razeen Digital Icon System V1.0, cropped (not redrawn) from the icon sheet.
+ * Each variant is drawn for a display size; pick by size rather than scaling one image everywhere.
+ * 16px avatars read as noise, so the favicon stays the lime node (app/icon.svg).
+ * Kept outside `assets` so these don't appear as cover/photo options in the admin.
+ */
+export const avatarIcons = {
+  detailed: img('/assets/v2/identity/mini-razeen/icon/detailed.png', 242, 242, 'Mini Razeen'), // 96px+
+  standard: img('/assets/v2/identity/mini-razeen/icon/standard.png', 167, 167, 'Mini Razeen'), // 48px
+  simplified: img('/assets/v2/identity/mini-razeen/icon/simplified.png', 123, 123, 'Mini Razeen'), // 32px
+  micro: img('/assets/v2/identity/mini-razeen/icon/micro.png', 80, 80, 'Mini Razeen'), // 24px
+  minimal: img('/assets/v2/identity/mini-razeen/icon/minimal.png', 51, 51, 'Mini Razeen'), // 16px, use sparingly
+  mono: img('/assets/v2/identity/mini-razeen/icon/mono.png', 95, 121, 'Mini Razeen, single colour'), // print / light surfaces
+  circular: img('/assets/v2/identity/mini-razeen/icon/circular.png', 121, 121, 'Mini Razeen'), // social / profile
+  app: img('/assets/v2/identity/mini-razeen/icon/app.png', 144, 143, 'Mini Razeen app icon'),
+} as const;
+
+export type AvatarVariant = keyof typeof avatarIcons;
+
+/** The icon-system variant drawn for a given display size. */
+export const avatarFor = (px: number): AvatarVariant =>
+  px >= 96 ? 'detailed' : px >= 48 ? 'standard' : px >= 32 ? 'simplified' : px >= 24 ? 'micro' : 'minimal';
+
 /** Resolves a CMS image key like "career.aws" to its asset; "none" or unknown → undefined. */
 export function resolveAsset(key: string | null | undefined): ImageAsset | undefined {
   if (!key || key === 'none') return undefined;

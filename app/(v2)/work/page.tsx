@@ -4,6 +4,9 @@ import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ProjectFeature } from '@/components/v2/work/ProjectFeature';
 import { ProjectIndex } from '@/components/v2/work/ProjectIndex';
+import { Experience } from '@/components/v2/work/Experience';
+import { Capabilities } from '@/components/v2/work/Capabilities';
+import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { getProjects, getProjectsByTier } from '@/content/projects';
 
 export const metadata: Metadata = {
@@ -12,7 +15,7 @@ export const metadata: Metadata = {
   description: 'Data systems, AI systems, products and experiments by Razeen Iqbal.',
 };
 
-// Highlighted work up top, then a filterable index of everything (PRD §18, M04).
+// The professional evidence hub (refinement spec §19): highlighted work, every project, then experience and capabilities.
 export default function WorkPage() {
   const highlighted = getProjectsByTier('flagship', 'featured');
 
@@ -39,6 +42,16 @@ export default function WorkPage() {
             Index · every project
           </TechnicalLabel>
           <ProjectIndex projects={getProjects()} />
+        </div>
+      </Section>
+
+      <Experience index="01" flush={false} surface="dark" />
+      <Capabilities index="02" />
+
+      <Section surface="light" className="border-t border-line !py-12">
+        <div className="page-container flex flex-wrap items-center justify-between gap-6">
+          <TechnicalLabel>Unfinished builds, experiments and live GitHub activity</TechnicalLabel>
+          <ArrowLink href="/lab">Enter the lab</ArrowLink>
         </div>
       </Section>
     </>

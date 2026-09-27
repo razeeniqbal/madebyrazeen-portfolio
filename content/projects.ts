@@ -95,6 +95,13 @@ export function getProjectsByTier(...tiers: ProjectTier[]): Project[] {
   return getProjects().filter((p) => tiers.includes(p.tier));
 }
 
+/** Home "Selected work": finished highlighted projects only; active builds (e.g. Sepang) stay on /work and /lab. */
+export function getHomeProjects(count = 3): Project[] {
+  return getProjectsByTier('flagship', 'featured')
+    .filter((p) => p.status !== 'in-progress' && p.status !== 'prototype')
+    .slice(0, count);
+}
+
 export function getProject(slug: string): Project | undefined {
   return getProjects().find((p) => p.slug === slug);
 }

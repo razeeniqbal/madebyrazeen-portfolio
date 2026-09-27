@@ -23,11 +23,13 @@ import json
 import math
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 from garminconnect import Garmin
 
 OUT = Path(__file__).resolve().parents[2] / "content" / "running" / "runs.json"
+META = OUT.with_name("meta.json")  # { syncedAt, source, runs }: powers "Garmin · updated" in the UI
 PRIVACY_TRIM_M = 300
 MAX_ROUTE_POINTS = 160
 RUN_TYPES = {"running", "street_running", "track_running", "trail_running", "treadmill_running"}
@@ -125,7 +127,19 @@ def main() -> None:
             runs.append({k: v for k, v in run.items() if v is not None})
 
     runs.sort(key=lambda r: r["date"], reverse=True)
-    OUT.write_text(json.dumps(runs, indent=1) + "\n", encoding="utf-8")
+    previous = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
+    text = json.dumps(runs, indent=1) + "\n"
+    OUT.write_text(text, encoding="utf-8")
+    # Stamp only when the data changed, so the UI date means "data last updated", not "script last ran".
+    if text != previous or not META.exists():
+        META.write_text(
+            json.dumps(
+                {"syncedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"), "source": "garmin", "runs": len(runs)},
+                indent=1,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
     print(f"Wrote {len(runs)} runs to {OUT}")
 
 

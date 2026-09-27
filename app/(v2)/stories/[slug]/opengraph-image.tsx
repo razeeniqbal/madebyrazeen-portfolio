@@ -14,8 +14,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const n = getNote((await params).slug);
   return renderOg({
     kind: 'Technical note',
-    index: n ? `Note_${n.number}` : undefined,
-    title: n?.title ?? 'Field notes',
+    index: n ? `Story_${n.number}` : undefined,
+    title: n?.title ?? 'Stories',
     subtitle: 'Patterns. Lessons. Practical insights.',
     meta: n?.topic,
     surface: 'light',

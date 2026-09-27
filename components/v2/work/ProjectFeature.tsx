@@ -19,6 +19,17 @@ export function ProjectFeature({ project, size, sizes, className }: ProjectFeatu
   return (
     <article data-reveal className={cn('group', className)}>
       <Link href={`/work/${project.slug}`} className="block">
+        {!project.cover && (
+          // No artwork yet: a typographic tile at the cover ratio, so the layout holds until art is added.
+          <div className="relative flex aspect-[1672/941] flex-col justify-between overflow-hidden border border-line bg-raised p-5 md:p-7">
+            <TechnicalLabel>Project / {project.number}</TechnicalLabel>
+            <p className="text-display-lg leading-none text-ink transition-transform duration-700 ease-out group-hover:translate-x-1 motion-reduce:transition-none">
+              {project.title}
+              <span aria-hidden="true" className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-lime" />
+            </p>
+            {project.links.live && <TechnicalLabel>{project.links.live.replace(/^https?:\/\//, '')}</TechnicalLabel>}
+          </div>
+        )}
         {project.cover && (
           <div className="relative overflow-hidden border border-line bg-raised">
             <Image

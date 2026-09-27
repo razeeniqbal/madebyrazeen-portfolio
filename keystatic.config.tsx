@@ -501,7 +501,7 @@ export default config({
     }),
 
     notes: collection({
-      label: 'Field notes',
+      label: 'Stories',
       slugField: 'title',
       path: 'content/data/notes/*',
       format: json,

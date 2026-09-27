@@ -4,7 +4,9 @@ import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { ContributionGraph } from '@/components/v2/lab/ContributionGraph';
-import { experiments, type Experiment } from '@/content/lab';
+import { experiments, exploring, type Experiment } from '@/content/lab';
+import { ProjectRow } from '@/components/v2/work/ProjectRow';
+import { getProjects } from '@/content/projects';
 import { fetchGitHubStats } from '@/lib/github';
 import { contact } from '@/content/profile';
 import { cn } from '@/lib/utils';
@@ -33,6 +35,7 @@ export default async function LabPage() {
   const gh = await fetchGitHubStats(process.env.GITHUB_TOKEN);
   const langs = gh ? Object.entries(gh.topLanguages) : [];
   const langTotal = langs.reduce((s, [, n]) => s + n, 0);
+  const building = getProjects().filter((p) => p.status === 'in-progress');
 
   return (
     <>
@@ -90,6 +93,40 @@ export default async function LabPage() {
               );
             })}
           </ol>
+        </div>
+      </Section>
+
+      {/* Currently building (unfinished projects, e.g. Sepang Vision Lab) + currently exploring, moved off Home */}
+      <Section surface="light" className="!pt-0">
+        <div className="page-grid gap-y-12">
+          {building.length > 0 && (
+            <div className="col-span-full lg:col-span-7">
+              <TechnicalLabel as="h2" marker="//" className="mb-6">
+                Currently building · {building.length}
+              </TechnicalLabel>
+              <ol>
+                {building.map((p) => (
+                  <ProjectRow key={p.slug} project={p} />
+                ))}
+              </ol>
+            </div>
+          )}
+          <div className={cn('col-span-full', building.length > 0 && 'lg:col-span-4 lg:col-start-9')}>
+            <TechnicalLabel as="h2" marker="//" className="mb-6">
+              Currently exploring
+            </TechnicalLabel>
+            <ul>
+              {exploring.map((e) => (
+                <li key={e.label} className="flex gap-4 border-t border-line py-4">
+                  <span aria-hidden="true" className="mt-2 h-2 w-2 shrink-0 rounded-full border border-ink" />
+                  <span>
+                    <span className="font-semibold">{e.label}</span>
+                    <span className="block text-sm text-muted">{e.detail}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Section>
 

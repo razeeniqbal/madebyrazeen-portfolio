@@ -6,21 +6,21 @@ import { NoteList } from '@/components/v2/notes/NoteList';
 import { notes } from '@/content/notes';
 
 export const metadata: Metadata = {
-  alternates: { canonical: '/notes' },
-  title: 'Notes',
-  description: 'Field notes on data engineering, AI, product building and running.',
+  alternates: { canonical: '/stories' },
+  title: 'Stories',
+  description: 'Stories on engineering, AI, data, building, learning and running: what I think, learn and discover while building.',
 };
 
-// Notes are visually quieter than project pages: one light surface, reading first (PRD §30).
-export default function NotesPage() {
+// Stories are visually quieter than project pages: one light surface, reading first (PRD §30).
+export default function StoriesPage() {
   return (
     <Section surface="light" className="!pt-16">
       <div className="page-grid gap-y-12">
         <SectionHeader
           as="h1"
           size="xl"
-          eyebrow="Field notes"
-          title={['Patterns.', 'Lessons.', 'Practical insights.']}
+          eyebrow="Stories"
+          title={['Things I’ve learned', 'along the way.']}
           className="lg:col-span-9"
         />
         <div className="col-span-full hidden items-end justify-end lg:col-span-3 lg:flex">

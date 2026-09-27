@@ -1,43 +1,22 @@
 import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
-import { Trajectory } from '@/components/v2/system/Trajectory';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { assets } from '@/lib/assets';
+import { resumeHref } from '@/lib/site';
 import { profile } from '@/content/profile';
 
+/** Home 01. Low density: real photo + type. The lime period is the node later motion grows from. */
 export function Hero() {
   const { statement } = profile;
   return (
-    <Section surface="dark" grid className="!pb-12 !pt-10 md:!pt-14">
-      <div className="page-grid gap-y-10">
-        {/* Annotation row, trimmed on mobile (PRD §38). */}
-        <div className="col-span-full flex items-start justify-between">
-          <ul className="label hidden space-y-1 text-muted md:block" aria-label="Disciplines">
-            {profile.disciplines.map((d) => (
-              <li key={d}>{d}</li>
-            ))}
-          </ul>
-          <TechnicalLabel as="p" className="md:hidden">
-            {profile.name}
-          </TechnicalLabel>
-          <TechnicalLabel as="p" className="text-right">
-            <span aria-hidden="true" className="mr-2 text-ink">+</span>
-            {profile.coordinates.label}
-            <span className="hidden md:inline">
-              <br />
-              {profile.coordinates.lat}
-              <br />
-              {profile.coordinates.lng}
-            </span>
-          </TechnicalLabel>
-        </div>
-
+    <Section surface="dark" className="!pb-20 !pt-12 md:!pt-20">
+      <div className="page-grid gap-y-12">
         <div className="col-span-full md:col-span-5 lg:col-span-7 lg:self-end">
-          <TechnicalLabel as="p" className="hidden md:block">
-            {profile.name}
+          <TechnicalLabel as="p">
+            {profile.name} <span className="text-muted">/ {profile.role}</span>
           </TechnicalLabel>
-          <h1 className="mt-4 text-display-xl uppercase">
+          <h1 className="mt-6 text-display-xl uppercase">
             {statement.map((line, i) => (
               <span key={line} className="block">
                 {i === statement.length - 1 ? line.replace(/\.$/, '') : line}
@@ -50,9 +29,11 @@ export function Hero() {
           <p className="mt-8 max-w-[34rem] text-lead text-muted">{profile.supporting}</p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
             <ArrowLink href="/work" variant="primary">
-              Explore my work
+              View my work
             </ArrowLink>
-            <ArrowLink href="/about">About me</ArrowLink>
+            <ArrowLink href={resumeHref} arrow="↗">
+              Resume
+            </ArrowLink>
           </div>
         </div>
 
@@ -63,13 +44,8 @@ export function Hero() {
           priority
           aspect="aspect-[4/5] md:aspect-square"
           caption="Real Razeen"
-          meta="Build / Learn / Run / Repeat"
           className="col-span-full md:col-span-3 lg:col-span-5 lg:self-end"
         />
-
-        <div className="col-span-full border-t border-line pt-6">
-          <Trajectory steps={profile.loops.philosophy} animate />
-        </div>
       </div>
     </Section>
   );

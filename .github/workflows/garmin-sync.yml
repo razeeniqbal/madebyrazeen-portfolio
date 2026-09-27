@@ -36,7 +36,7 @@ jobs:
           else
             git config user.name "garmin-sync"
             git config user.email "actions@users.noreply.github.com"
-            git add content/running/runs.json
+            git add content/running/runs.json content/running/meta.json
             git commit -m "chore(running): sync Garmin runs"
             git push
           fi

@@ -4,10 +4,20 @@ import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { assets } from '@/lib/assets';
-import { getLatestRun, formatDuration, formatPace } from '@/content/running';
+import { getLatestRun, getSyncInfo, formatDuration, formatPace } from '@/content/running';
 
+const shortDate = (iso: string) =>
+  new Date(iso.length === 10 ? `${iso}T00:00:00Z` : iso).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+
+/** Home 05. A small preview only: the full dashboard lives on /running. Real data, never invented. */
 export function RunningTeaser() {
   const run = getLatestRun();
+  const sync = getSyncInfo();
 
   return (
     <Section surface="dark">
@@ -21,15 +31,21 @@ export function RunningTeaser() {
           className="col-span-full md:col-span-4 lg:col-span-5"
         />
 
-        <div className="col-span-full flex flex-col md:col-span-4 lg:col-span-6 lg:col-start-7">
-          <SectionHeader index="06" eyebrow="Beyond work" title={['Running keeps', 'me grounded.']} />
+        <div className="col-span-full flex flex-col md:col-span-4 lg:col-span-6 lg:col-start-7 lg:self-end">
+          <SectionHeader index="04" eyebrow="Running" title={['Running has become', 'my other kind of', 'problem solving.']} size="md" />
 
           {run && (
             <div className="mt-12">
-              <div className="flex items-center justify-between border-t border-line pt-4">
-                <TechnicalLabel>Latest run</TechnicalLabel>
-                {run.sample && (
+              <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line pt-4">
+                <TechnicalLabel>Latest run · {shortDate(run.date)}</TechnicalLabel>
+                {run.sample ? (
                   <TechnicalLabel className="border border-current px-1.5">Sample data · Garmin sync coming</TechnicalLabel>
+                ) : (
+                  sync && (
+                    <TechnicalLabel>
+                      {sync.source} · updated {shortDate(sync.syncedAt)}
+                    </TechnicalLabel>
+                  )
                 )}
               </div>
               <dl className="mt-6 grid grid-cols-3 gap-4">
@@ -50,12 +66,7 @@ export function RunningTeaser() {
             </div>
           )}
 
-          <p className="mt-10 text-lead">
-            Consistency compounds.
-            <br />
-            <span className="text-muted">In training and engineering.</span>
-          </p>
-          <div className="mt-8">
+          <div className="mt-10">
             <ArrowLink href="/running">Explore running</ArrowLink>
           </div>
         </div>

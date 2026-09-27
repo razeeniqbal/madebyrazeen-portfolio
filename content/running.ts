@@ -8,6 +8,7 @@
  *      surface labels it "Sample data" (PRD §58).
  */
 import exported from './running/runs.json';
+import meta from './running/meta.json';
 
 export interface Split {
   km: number; // split distance in km (last split may be partial)
@@ -134,3 +135,9 @@ export function formatPaceSec(secPerKm: number): string {
   }
   return `${m}:${String(s).padStart(2, '0')}`;
 }
+
+// ── Sync metadata ───────────────────────────────────────────────────────────
+
+/** When the exported data last changed (written by the export script), or undefined for sample data. */
+export const getSyncInfo = (): { syncedAt: string; source: string } | undefined =>
+  isSampleData() || !meta?.syncedAt ? undefined : { syncedAt: meta.syncedAt, source: meta.source };
