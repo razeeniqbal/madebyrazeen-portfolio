@@ -2,6 +2,7 @@
 // Lab stays a secondary destination (footer, /projects).
 export const primaryNav = [
   { label: 'About', href: '/about' },
+  { label: 'Experience', href: '/experience' },
   { label: 'Projects', href: '/projects' },
   { label: 'Journal', href: '/journal' },
   { label: 'Running', href: '/running' },
@@ -9,7 +10,6 @@ export const primaryNav = [
 
 export const contactHref = '/contact';
 export const resumeHref = '/resume';
-export const labHref = '/lab';
 
 export function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);

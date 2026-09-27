@@ -27,7 +27,9 @@ const nextConfig = {
   // V1 URLs → their V2 homes. V1 itself lives on at /archive/v1.
   async redirects() {
     return [
-      { source: '/achievements', destination: '/projects#credentials', permanent: true },
+      { source: '/achievements', destination: '/experience#credentials', permanent: true },
+      // Lab was removed; its live coding activity moved to Experience.
+      { source: '/lab', destination: '/experience#coding-activity', permanent: true },
       // Work became Projects; Notes became Stories, then Journal. Every old URL lands directly on the current one.
       { source: '/work', destination: '/projects', permanent: true },
       { source: '/work/:slug', destination: '/projects/:slug', permanent: true },
@@ -35,8 +37,8 @@ const nextConfig = {
       { source: '/stories/:slug', destination: '/journal/:slug', permanent: true },
       { source: '/notes', destination: '/journal', permanent: true },
       { source: '/notes/:slug', destination: '/journal/:slug', permanent: true },
-      { source: '/dashboard', destination: '/lab', permanent: true },
-      { source: '/smart-talk', destination: '/lab', permanent: true },
+      { source: '/dashboard', destination: '/experience#coding-activity', permanent: true },
+      { source: '/smart-talk', destination: '/experience#coding-activity', permanent: true },
     ];
   },
 

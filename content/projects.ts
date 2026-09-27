@@ -98,7 +98,7 @@ export function getProjectsByTier(...tiers: ProjectTier[]): Project[] {
   return getProjects().filter((p) => tiers.includes(p.tier));
 }
 
-/** Home "Selected work": finished highlighted projects only; active builds (e.g. Sepang) stay on /projects and /lab. */
+/** Home "Selected work": finished highlighted projects only; active builds (e.g. Sepang) are listed on /projects. */
 export function getHomeProjects(count = 3): Project[] {
   return getProjectsByTier('flagship', 'featured')
     .filter((p) => p.status !== 'in-progress' && p.status !== 'prototype')

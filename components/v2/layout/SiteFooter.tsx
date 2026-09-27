@@ -57,11 +57,6 @@ export function SiteFooter() {
             </Link>
           </li>
           <li>
-            <Link href="/lab" className="inline-block py-1.5 hover:text-lime">
-              Lab
-            </Link>
-          </li>
-          <li>
             <Link href="/contact" className="inline-block py-1.5 hover:text-lime">
               Contact
             </Link>

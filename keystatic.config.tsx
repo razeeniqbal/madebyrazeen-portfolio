@@ -117,7 +117,7 @@ export default config({
     navigation: {
       Site: ['profile', 'home', 'story', 'contact', 'assistant'],
       Work: ['projects', 'caseStudies', 'experience', 'capabilities', 'achievements'],
-      Writing: ['notes', 'lab'],
+      Writing: ['notes'],
     },
   },
 
@@ -431,32 +431,6 @@ export default config({
       },
     }),
 
-    lab: singleton({
-      label: 'Lab',
-      path: 'content/data/lab',
-      format: json,
-      schema: {
-        experiments: fields.array(
-          fields.object({
-            slug: fields.text({ label: 'Slug' }),
-            title: fields.text({ label: 'Title' }),
-            summary: fields.text({ label: 'Summary', multiline: true }),
-            status: fields.select({
-              label: 'Status',
-              options: ['live', 'prototype', 'planned'].map((v) => ({ label: v, value: v })),
-              defaultValue: 'prototype',
-            }),
-            href: fields.text({ label: 'Link' }),
-            external: fields.checkbox({ label: 'External link' }),
-          }),
-          { label: 'Experiments', itemLabel: (p) => `${p.fields.title.value} · ${p.fields.status.value}` },
-        ),
-        exploring: fields.array(fields.object({ label: fields.text({ label: 'Label' }), detail: fields.text({ label: 'Detail' }) }), {
-          label: 'Currently exploring (homepage)',
-          itemLabel: (p) => p.fields.label.value,
-        }),
-      },
-    }),
   },
 
   collections: {

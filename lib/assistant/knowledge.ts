@@ -12,7 +12,6 @@ import { achievements } from '@/content/achievements';
 import { capabilities } from '@/content/capabilities';
 import { chapters } from '@/content/story';
 import { availability, helpWith } from '@/content/contact';
-import { experiments, exploring } from '@/content/lab';
 import { notes } from '@/content/notes';
 import { isSampleData, getTotals, getPersonalBests, getRaces, formatDuration } from '@/content/running';
 import { SITE_URL } from '@/lib/site';
@@ -70,10 +69,6 @@ export function buildKnowledge(): string {
         return `### ${p.title} (${p.year}, ${p.status}${p.placeholder ? ', details still being written' : ''})\n${p.summary}\nStack: ${p.stack.join(', ')}${links ? `\n${links}` : ''}${p.confidential ? '\nRepository is private.' : ''}\nPage: ${SITE_URL}/projects/${p.slug}${detail}`;
       })
       .join('\n')}`,
-  );
-
-  out.push(
-    `## Lab experiments\n${experiments.map((e) => `- ${e.title} (${e.status}): ${e.summary}`).join('\n')}\nCurrently exploring:\n${exploring.map((e) => `- ${e.label}: ${e.detail}`).join('\n')}`,
   );
 
   out.push(`## Journal (writing, at /journal)\n${notes.map((n) => `- ${n.title} (${n.status}): ${n.summary}`).join('\n')}`);
