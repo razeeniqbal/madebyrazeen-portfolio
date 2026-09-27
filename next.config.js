@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Optional: build into another folder (e.g. when OneDrive or a dev server locks .next). Default .next.
+  ...(process.env.NEXT_DIST_DIR && { distDir: process.env.NEXT_DIST_DIR }),
   // Optimize for lower memory usage
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
