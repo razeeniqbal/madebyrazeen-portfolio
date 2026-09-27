@@ -306,7 +306,7 @@ export default config({
       schema: {
         items: fields.array(
           fields.object({
-            slug: fields.text({ label: 'Slug (URL: /work/<slug>)' }),
+            slug: fields.text({ label: 'Slug (URL: /projects/<slug>)' }),
             number: fields.text({ label: 'Number (e.g. 001)' }),
             title: fields.text({ label: 'Title' }),
             year: fields.integer({ label: 'Year' }),
@@ -508,7 +508,7 @@ export default config({
     }),
 
     notes: collection({
-      label: 'Stories',
+      label: 'Journal',
       slugField: 'title',
       path: 'content/data/notes/*',
       format: json,

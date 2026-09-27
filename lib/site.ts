@@ -1,9 +1,9 @@
-// R03: About leads (the site is a person, not only a portfolio), then Work · Stories · Running; Resume ↗ sits apart.
-// Lab stays a secondary destination (footer, /work).
+// R03: About leads (the site is a person, not only a portfolio), then Projects · Journal · Running; Resume ↗ sits apart.
+// Lab stays a secondary destination (footer, /projects).
 export const primaryNav = [
   { label: 'About', href: '/about' },
-  { label: 'Work', href: '/work' },
-  { label: 'Stories', href: '/stories' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Journal', href: '/journal' },
   { label: 'Running', href: '/running' },
 ] as const;
 

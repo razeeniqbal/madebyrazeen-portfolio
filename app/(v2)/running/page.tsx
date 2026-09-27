@@ -305,10 +305,10 @@ export default function RunningPage() {
             className="col-span-full md:col-span-4 lg:col-span-5"
           />
           <div className="col-span-full self-end md:col-span-4 lg:col-span-6 lg:col-start-7">
-            <SectionHeader index="07" eyebrow="Running stories" title={['Further than', 'yesterday.']} size="md" />
-            <p className="mt-6 max-w-prose text-muted">Race reports and training reflections will live here, alongside the other stories.</p>
+            <SectionHeader index="07" eyebrow="From the journal" title={['Further than', 'yesterday.']} size="md" />
+            <p className="mt-6 max-w-prose text-muted">Race reports and training reflections will live in the journal.</p>
             <div className="mt-6">
-              <ArrowLink href="/stories">Read stories</ArrowLink>
+              <ArrowLink href="/journal">Read the journal</ArrowLink>
             </div>
           </div>
         </div>

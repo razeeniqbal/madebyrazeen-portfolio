@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     'Who Razeen is, how a civil engineer became a data and AI engineer, the loop he works by, and what happens away from the screen.',
 };
 
-// About = meeting Razeen, not reading the CV twice (R03 §9). Credentials and experience live on /work and /resume.
+// About = meeting Razeen, not reading the CV twice (R03 §9). Credentials and experience live on /projects and /resume.
 // Five moments: Intro · The path · How I think · Beyond the screen · Currently.
 export default function AboutPage() {
   const building = getProjects().filter((p) => p.status === 'in-progress');
@@ -141,7 +141,7 @@ export default function AboutPage() {
           </div>
           <div className="col-span-full flex flex-wrap gap-x-8 gap-y-4 border-t border-line pt-6">
             <ArrowLink href="/running">Running</ArrowLink>
-            <ArrowLink href="/stories">Stories</ArrowLink>
+            <ArrowLink href="/journal">Journal</ArrowLink>
           </div>
         </div>
       </Section>
@@ -156,7 +156,7 @@ export default function AboutPage() {
                 <dt className="label text-muted">Building</dt>
                 <dd className="mt-2 space-y-1">
                   {building.map((p) => (
-                    <Link key={p.slug} href={`/work/${p.slug}`} className="block font-semibold hover:underline">
+                    <Link key={p.slug} href={`/projects/${p.slug}`} className="block font-semibold hover:underline">
                       {p.title}
                     </Link>
                   ))}
@@ -176,10 +176,10 @@ export default function AboutPage() {
           </dl>
           <div className="col-span-full flex flex-wrap items-end justify-between gap-8 border-t border-line pt-8">
             <div className="flex flex-wrap gap-x-8 gap-y-4">
-              <ArrowLink href="/work" variant="primary">
-                Explore work
+              <ArrowLink href="/projects" variant="primary">
+                Explore projects
               </ArrowLink>
-              <ArrowLink href="/stories">Read stories</ArrowLink>
+              <ArrowLink href="/journal">Read the journal</ArrowLink>
               <ArrowLink href="/running">Running</ArrowLink>
               <ArrowLink href="/resume" arrow="↗">
                 View resume

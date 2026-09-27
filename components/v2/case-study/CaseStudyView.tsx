@@ -36,7 +36,7 @@ export function CaseStudyView({ project, study, next }: CaseStudyViewProps) {
       <Section surface="dark" grid className="!pt-16">
         <div className="page-grid gap-y-10">
           <div className="col-span-full flex flex-wrap items-center justify-between gap-4">
-            <ArrowLink href="/work">All work</ArrowLink>
+            <ArrowLink href="/projects">All projects</ArrowLink>
             {study.review === 'draft' && (
               <TechnicalLabel className="border border-current px-2 py-1">Drafted from project docs · under review</TechnicalLabel>
             )}
@@ -116,7 +116,7 @@ export function CaseStudyView({ project, study, next }: CaseStudyViewProps) {
             <TechnicalLabel as="p" marker={`${String(study.sections.length + 1).padStart(2, '0')} /`}>
               Next project
             </TechnicalLabel>
-            <Link href={`/work/${next.slug}`} className="group mt-6 flex items-baseline justify-between gap-6">
+            <Link href={`/projects/${next.slug}`} className="group mt-6 flex items-baseline justify-between gap-6">
               <span className="text-display-lg transition-colors group-hover:text-signal">{next.title}</span>
               <span aria-hidden="true" className="text-display-md transition-transform group-hover:translate-x-2">
                 →

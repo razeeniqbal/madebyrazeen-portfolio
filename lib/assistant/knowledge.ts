@@ -67,7 +67,7 @@ export function buildKnowledge(): string {
         const detail = study
           ? `\nCase study: ${study.lede}\n${study.sections.map((s) => `#### ${s.headline}\n${s.blocks.map(blockText).filter(Boolean).join('\n')}`).join('\n')}`
           : '';
-        return `### ${p.title} (${p.year}, ${p.status}${p.placeholder ? ', details still being written' : ''})\n${p.summary}\nStack: ${p.stack.join(', ')}${links ? `\n${links}` : ''}${p.confidential ? '\nRepository is private.' : ''}\nPage: ${SITE_URL}/work/${p.slug}${detail}`;
+        return `### ${p.title} (${p.year}, ${p.status}${p.placeholder ? ', details still being written' : ''})\n${p.summary}\nStack: ${p.stack.join(', ')}${links ? `\n${links}` : ''}${p.confidential ? '\nRepository is private.' : ''}\nPage: ${SITE_URL}/projects/${p.slug}${detail}`;
       })
       .join('\n')}`,
   );
@@ -76,7 +76,7 @@ export function buildKnowledge(): string {
     `## Lab experiments\n${experiments.map((e) => `- ${e.title} (${e.status}): ${e.summary}`).join('\n')}\nCurrently exploring:\n${exploring.map((e) => `- ${e.label}: ${e.detail}`).join('\n')}`,
   );
 
-  out.push(`## Stories (writing)\n${notes.map((n) => `- ${n.title} (${n.status}): ${n.summary}`).join('\n')}`);
+  out.push(`## Journal (writing, at /journal)\n${notes.map((n) => `- ${n.title} (${n.status}): ${n.summary}`).join('\n')}`);
 
   if (isSampleData()) {
     out.push(

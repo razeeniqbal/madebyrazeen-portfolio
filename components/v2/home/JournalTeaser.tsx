@@ -4,8 +4,8 @@ import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { NoteList } from '@/components/v2/notes/NoteList';
 import { notes } from '@/content/notes';
 
-/** Home 04. Three stories, text only. Unpublished ones show their "In writing" / "Draft" badge. */
-export function StoriesTeaser() {
+/** Home 04. Three journal entries, text only. Unpublished ones show their "In writing" / "Draft" badge. */
+export function JournalTeaser() {
   const latest = notes.slice(0, 3);
   if (latest.length === 0) return null;
 
@@ -14,7 +14,7 @@ export function StoriesTeaser() {
       <div className="page-grid gap-y-12">
         <SectionHeader
           index="03"
-          eyebrow="Stories"
+          eyebrow="Journal"
           title={['Things I’ve learned', 'along the way.']}
           size="md"
           className="lg:col-span-5"
@@ -22,7 +22,7 @@ export function StoriesTeaser() {
         <div className="col-span-full lg:col-span-6 lg:col-start-7">
           <NoteList notes={latest} />
           <div className="border-t border-line pt-8">
-            <ArrowLink href="/stories">All stories</ArrowLink>
+            <ArrowLink href="/journal">All entries</ArrowLink>
           </div>
         </div>
       </div>

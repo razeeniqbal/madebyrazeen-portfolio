@@ -12,9 +12,11 @@ type Msg = { role: 'user' | 'assistant'; content: string };
 const STORE_KEY = 'ask-razeen:v1';
 const SLEEP_AFTER_MS = 60_000;
 
-/** Turns relative site links (/work/…) and URLs in plain-text answers into links. */
+/** Turns relative site links (/projects/…) and URLs in plain-text answers into links. Old paths still redirect. */
 function Linkified({ text }: { text: string }) {
-  const parts = text.split(/(https?:\/\/[^\s)]+|(?<![\w/])\/(?:work|about|resume|contact|lab|running|notes|archive)(?:\/[\w-]+)?(?:#[\w-]+)?)/g);
+  const parts = text.split(
+    /(https?:\/\/[^\s)]+|(?<![\w/])\/(?:projects|journal|work|about|resume|contact|lab|running|notes|archive)(?:\/[\w-]+)?(?:#[\w-]+)?)/g,
+  );
   return (
     <>
       {parts.map((p, i) =>

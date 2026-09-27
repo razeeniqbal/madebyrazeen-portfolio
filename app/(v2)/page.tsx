@@ -1,6 +1,6 @@
 import { Hero } from '@/components/v2/home/Hero';
 import { SelectedWork } from '@/components/v2/home/SelectedWork';
-import { StoriesTeaser } from '@/components/v2/home/StoriesTeaser';
+import { JournalTeaser } from '@/components/v2/home/JournalTeaser';
 import { RunningTeaser } from '@/components/v2/home/RunningTeaser';
 import { AboutTeaser, ContactBlock } from '@/components/v2/home/AboutContact';
 import { JsonLd } from '@/components/v2/seo/JsonLd';
@@ -32,7 +32,7 @@ export default function HomePage() {
       <Hero />
       <SelectedWork />
       <AboutTeaser />
-      <StoriesTeaser />
+      <JournalTeaser />
       <RunningTeaser />
       <ContactBlock index="05" surface="light" title={['Have an idea?', 'Let’s build something.']} />
     </>

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/resume' },
 };
 
-// Curated credential list: featured first, then vendor certifications worth a CV line. Everything else: /work#credentials.
+// Curated credential list: featured first, then vendor certifications worth a CV line. Everything else: /projects#credentials.
 const CV_ISSUERS = ['Microsoft', 'Google Cloud', 'Anthropic', 'Apache', 'Axiata', 'Board of Engineers Malaysia', 'Python Institute'];
 const MAX_CERTS = 8;
 
@@ -174,7 +174,7 @@ export default function ResumePage() {
                   <li key={p.slug} data-keep className="text-sm">
                     <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                       <p className="font-bold">
-                        <Link href={`/work/${p.slug}`} className="hover:underline">
+                        <Link href={`/projects/${p.slug}`} className="hover:underline">
                           {p.title}
                         </Link>
                       </p>
@@ -191,7 +191,7 @@ export default function ResumePage() {
                             Live ↗
                           </a>
                         )}
-                        <Link href={`/work/${p.slug}`} className="hover:underline">
+                        <Link href={`/projects/${p.slug}`} className="hover:underline">
                           {p.caseStudy ? 'Case study →' : 'Details →'}
                         </Link>
                       </span>
@@ -231,7 +231,7 @@ export default function ResumePage() {
                   <Cert key={a.id} a={a} />
                 ))}
               </ul>
-              <Link href="/work#credentials" className="label mt-4 inline-block text-muted hover:text-ink" data-print-hide>
+              <Link href="/projects#credentials" className="label mt-4 inline-block text-muted hover:text-ink" data-print-hide>
                 View all {certTotal} credentials →
               </Link>
             </Block>

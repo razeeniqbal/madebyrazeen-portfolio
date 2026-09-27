@@ -5,7 +5,7 @@ import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ProjectFeature } from '@/components/v2/work/ProjectFeature';
 import { getHomeProjects, getProjects } from '@/content/projects';
 
-/** Home 02. One primary + two supporting, finished work only (active builds live on /work and /lab). */
+/** Home 02. One primary + two supporting, finished work only (active builds live on /projects and /lab). */
 export function SelectedWork() {
   const [primary, ...supporting] = getHomeProjects(3);
   const total = getProjects().length;
@@ -41,7 +41,7 @@ export function SelectedWork() {
         )}
 
         <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
-          <ArrowLink href="/work">View all work</ArrowLink>
+          <ArrowLink href="/projects">View all projects</ArrowLink>
           <TechnicalLabel>{total} projects · experience · capabilities</TechnicalLabel>
         </div>
       </div>

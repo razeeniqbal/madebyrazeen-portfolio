@@ -15,7 +15,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   return renderOg({
     kind: 'Project',
     index: p ? `// ${p.number}` : undefined,
-    title: p?.title ?? 'Work',
+    title: p?.title ?? 'Projects',
     subtitle: p?.summary,
     meta: p ? `${p.year} · ${p.stack.slice(0, 3).join(' · ')}` : undefined,
   });

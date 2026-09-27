@@ -18,7 +18,7 @@ const projectLd = (p: Project) => ({
   '@type': p.links.source ? 'SoftwareSourceCode' : 'CreativeWork',
   name: p.title,
   description: p.summary,
-  url: `${SITE_URL}/work/${p.slug}`,
+  url: `${SITE_URL}/projects/${p.slug}`,
   dateCreated: String(p.year),
   author: { '@type': 'Person', name: 'Razeen Iqbal', url: SITE_URL },
   keywords: [...p.tags, ...p.stack].join(', '),
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: project.title,
     description: study?.lede ?? project.summary,
-    alternates: { canonical: `/work/${project.slug}` },
+    alternates: { canonical: `/projects/${project.slug}` },
   };
 }
 
@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: Params) {
       <Section surface="dark" className="!pt-16">
         <div className="page-grid gap-y-10">
           <div className="col-span-full">
-            <ArrowLink href="/work">All work</ArrowLink>
+            <ArrowLink href="/projects">All projects</ArrowLink>
           </div>
           <div className="col-span-full lg:col-span-8">
             <ProjectMeta project={project} />

@@ -13,8 +13,8 @@ import { recognition } from '@/content/profile';
 import { getProjects, getProjectsByTier } from '@/content/projects';
 
 export const metadata: Metadata = {
-  alternates: { canonical: '/work' },
-  title: 'Work',
+  alternates: { canonical: '/projects' },
+  title: 'Projects',
   description: 'Data systems, AI systems, products and experiments by Razeen Iqbal.',
 };
 

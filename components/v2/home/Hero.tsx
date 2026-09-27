@@ -55,7 +55,7 @@ export function Hero() {
             <div className="mt-8">
               <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
                 <TechnicalLabel as="h2">Selected credentials</TechnicalLabel>
-                <Link href="/work#credentials" className="label text-muted transition-colors hover:text-ink">
+                <Link href="/projects#credentials" className="label text-muted transition-colors hover:text-ink">
                   View all →
                 </Link>
               </div>
@@ -69,7 +69,7 @@ export function Hero() {
                   return (
                     <li key={c.id} className="group relative">
                       <a
-                        href={url ?? '/work#credentials'}
+                        href={url ?? '/projects#credentials'}
                         aria-label={label}
                         className="block focus-visible:outline-offset-4"
                         {...(url && { target: '_blank', rel: 'noopener noreferrer' })}
@@ -98,8 +98,8 @@ export function Hero() {
         </div>
 
         <div className="col-span-full flex flex-wrap items-center gap-x-8 gap-y-5 md:col-span-5 lg:col-span-7 lg:row-start-2 lg:mt-10 lg:self-start">
-          <ArrowLink href="/work" variant="primary">
-            View my work
+          <ArrowLink href="/projects" variant="primary">
+            View my projects
           </ArrowLink>
           <ArrowLink href={resumeHref} arrow="↗">
             Resume

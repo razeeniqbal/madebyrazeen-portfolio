@@ -15,7 +15,7 @@ export default function NotFound() {
           pose="thinking"
           actions={[
             { href: '/', label: 'Back home' },
-            { href: '/work', label: 'See the work' },
+            { href: '/projects', label: 'See the projects' },
           ]}
         />
       </main>

@@ -13,7 +13,7 @@ export function NoteList({ notes }: { notes: Note[] }) {
           <>
             <div className="flex items-center justify-between gap-4">
               <TechnicalLabel>
-                Story_{n.number} · {n.topic}
+                Entry_{n.number} · {n.topic}
                 {n.readingMinutes && ` · ${n.readingMinutes} min`}
               </TechnicalLabel>
               {n.status !== 'published' && (
@@ -27,7 +27,7 @@ export function NoteList({ notes }: { notes: Note[] }) {
         return (
           <li key={n.slug} className="border-t border-line">
             {n.body ? (
-              <Link href={`/stories/${n.slug}`} className="group block py-5">
+              <Link href={`/journal/${n.slug}`} className="group block py-5">
                 {inner}
               </Link>
             ) : (

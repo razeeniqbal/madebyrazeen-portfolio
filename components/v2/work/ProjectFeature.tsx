@@ -18,7 +18,7 @@ const titleSize = { flagship: 'text-display-lg', large: 'text-display-md', mediu
 export function ProjectFeature({ project, size, sizes, className }: ProjectFeatureProps) {
   return (
     <article data-reveal className={cn('group', className)}>
-      <Link href={`/work/${project.slug}`} className="block">
+      <Link href={`/projects/${project.slug}`} className="block">
         {!project.cover && (
           // No artwork yet: a typographic tile at the cover ratio, so the layout holds until art is added.
           <div className="relative flex aspect-[1672/941] flex-col justify-between overflow-hidden border border-line bg-raised p-5 md:p-7">

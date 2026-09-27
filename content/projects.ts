@@ -4,9 +4,9 @@
  * Edit in the admin (/keystatic → Projects) or content/data/projects.json.
  * To add a project: add one entry. To promote/demote one: change `tier`.
  *   flagship  – full-width feature on the homepage (keep to 1)
- *   featured  – large tile on the homepage + top of /work
- *   standard  – listed on /work
- *   archive   – listed on /work under "Earlier work"
+ *   featured  – large tile on the homepage + top of /projects
+ *   standard  – listed on /projects
+ *   archive   – listed on /projects under "Earlier work"
  * `order` sorts within a tier (lower first). `draft: true` hides it everywhere
  * until the content is confirmed. A long-form case study lives in
  * content/data/case-studies/<slug>.json (admin → Case studies).
@@ -95,7 +95,7 @@ export function getProjectsByTier(...tiers: ProjectTier[]): Project[] {
   return getProjects().filter((p) => tiers.includes(p.tier));
 }
 
-/** Home "Selected work": finished highlighted projects only; active builds (e.g. Sepang) stay on /work and /lab. */
+/** Home "Selected work": finished highlighted projects only; active builds (e.g. Sepang) stay on /projects and /lab. */
 export function getHomeProjects(count = 3): Project[] {
   return getProjectsByTier('flagship', 'featured')
     .filter((p) => p.status !== 'in-progress' && p.status !== 'prototype')
