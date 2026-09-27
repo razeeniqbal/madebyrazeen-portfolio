@@ -225,12 +225,18 @@ export default config({
             path: fields.text({ label: 'Path label' }),
             title: textList('Title lines', 'Line'),
             lede: fields.text({ label: 'Lede', multiline: true }),
+            body: paragraphList('Intro paragraphs (1–2)'),
             note: fields.text({ label: 'Note', multiline: true }),
           },
           { label: 'Intro' },
         ),
+        beyond: fields.object(
+          { title: textList('Title lines', 'Line'), body: paragraphList('Paragraphs') },
+          { label: 'Beyond the screen' },
+        ),
         chapters: fields.array(
           fields.object({
+            stage: fields.text({ label: 'Stage (e.g. Civil engineering)' }),
             period: fields.text({ label: 'Period (include “now” for the current chapter)' }),
             title: fields.text({ label: 'Title' }),
             body: paragraphList('Paragraphs'),
@@ -242,11 +248,11 @@ export default config({
             credentialDate: fields.text({ label: 'Credential date' }),
             credentialUrl: fields.text({ label: 'Credential verify URL' }),
           }),
-          { label: 'Chapters', itemLabel: (p) => `${p.fields.period.value} · ${p.fields.title.value}` },
+          { label: 'Path chapters (About)', itemLabel: (p) => `${p.fields.stage.value} · ${p.fields.period.value}` },
         ),
         outro: fields.text({ label: 'Closing line' }),
         path: fields.array(fields.object({ label: fields.text({ label: 'Stage' }), year: fields.text({ label: 'Year' }) }), {
-          label: 'Path diagram (hero)',
+          label: 'Path steps (Home teaser)',
           itemLabel: (p) => `${p.fields.year.value} · ${p.fields.label.value}`,
         }),
         principles: fields.array(fields.object({ title: fields.text({ label: 'Step' }), detail: fields.text({ label: 'Detail', multiline: true }) }), {
@@ -417,6 +423,7 @@ export default config({
             image: fields.text({ label: 'Image path (V1 only)' }),
             credentialUrl: fields.text({ label: 'Verify URL' }),
             credentialId: fields.text({ label: 'Credential ID' }),
+            featured: fields.checkbox({ label: 'Featured (Home hero + Resume, pick 3–4)', defaultValue: false }),
           }),
           { label: 'Credentials', itemLabel: (p) => `${p.fields.title.value} · ${p.fields.organization.value}` },
         ),

@@ -84,9 +84,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-6">
-          <span className="label hidden text-muted xl:inline" aria-hidden="true">
-            {profile.loops.system.join(' · ')}
-          </span>
           <Link
             href={resumeHref}
             aria-current={isActive(pathname, resumeHref) ? 'page' : undefined}

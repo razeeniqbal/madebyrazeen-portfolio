@@ -1,141 +1,106 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Section } from '@/components/v2/system/Section';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
-import { ContactBlock } from '@/components/v2/home/AboutContact';
-import { CredentialList } from '@/components/v2/about/CredentialList';
-import { StoryTimeline } from '@/components/v2/about/StoryTimeline';
-import { PathDiagram } from '@/components/v2/about/PathDiagram';
-import { AskButton } from '@/components/v2/contact/AskButton';
+import { PathNarrative } from '@/components/v2/about/PathNarrative';
 import { assets } from '@/lib/assets';
-import { profile, recognition, education } from '@/content/profile';
-import { achievements } from '@/content/achievements';
+import { profile } from '@/content/profile';
 import { getProjects } from '@/content/projects';
-import { chapters, storyIntro, storyOutro, storyPath, principles } from '@/content/story';
+import { exploring } from '@/content/lab';
+import { beyond, chapters, storyIntro, principles } from '@/content/story';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/about' },
   title: 'About',
   description:
-    'Engineer by training, builder by curiosity. The long way from civil engineering to data engineering and AI, told as a journal.',
+    'Who Razeen is, how a civil engineer became a data and AI engineer, the loop he works by, and what happens away from the screen.',
 };
 
-const gallery = [
-  { a: assets.career.briefing1, label: 'Industry demo', span: 'col-span-full md:col-span-8 lg:col-span-6' },
-  { a: assets.career.aws, label: 'AWS', span: 'col-span-2 md:col-span-4 lg:col-span-2' },
-  { a: assets.career.networking, label: 'Conference', span: 'col-span-2 md:col-span-4 lg:col-span-2' },
-  { a: assets.identity.graduation, label: 'Master’s in AI', span: 'col-span-full md:col-span-4 lg:col-span-2' },
-];
-
+// About = meeting Razeen, not reading the CV twice (R03 §9). Credentials and experience live on /work and /resume.
+// Five moments: Intro · The path · How I think · Beyond the screen · Currently.
 export default function AboutPage() {
-  // "At a glance": every number is derived from content, never typed in.
-  const dataSince = Number(storyPath.find((s) => /data/i.test(s.label))?.year) || undefined;
-  const glance = [
-    dataSince && { value: `${new Date().getFullYear() - dataSince}+`, label: 'Years building with data', note: `Since ${dataSince}` },
-    { value: String(getProjects().length), label: 'Projects on this site', note: 'Shipped, shared or in progress' },
-    { value: String(achievements.length), label: 'Certifications & courses', note: 'Microsoft, Google, IBM & more' },
-    { value: education[0]?.cgpa, label: `${education[0]?.degree}’s in ${education[0]?.field}`, note: `${education[0]?.short} · CGPA` },
-  ].filter(Boolean) as { value: string; label: string; note: string }[];
+  const building = getProjects().filter((p) => p.status === 'in-progress');
 
   return (
     <>
-      {/* Hero */}
-      <Section surface="dark" grid className="!pt-14">
+      {/* 01 Intro */}
+      <Section surface="dark" className="!pt-14">
         <div className="page-grid gap-y-12">
-          <div className="col-span-full lg:col-span-7">
-            <p className="label">
-              <span className="text-muted">cat</span> {storyIntro.file} <span className="text-muted"># {storyIntro.path}</span>
-            </p>
-            <h1 className="mt-6 text-display-xl">
-              {storyIntro.title.map((line, i) => (
+          <div className="col-span-full md:col-span-5 lg:col-span-7 lg:self-center">
+            <TechnicalLabel as="p">About Razeen</TechnicalLabel>
+            {/* Same words as the Home hero, set smaller and in sentence case so it isn't the hero twice. */}
+            <h1 className="mt-6 text-display-lg">
+              {[profile.statement.slice(0, 2).join(' '), ...profile.statement.slice(2)].map((line, i, all) => (
                 <span key={line} className="block">
-                  {i === storyIntro.title.length - 1 ? line.replace(/\.$/, '') : line}
-                  {i === storyIntro.title.length - 1 && (
+                  {i === all.length - 1 ? line.replace(/\.$/, '') : line}
+                  {i === all.length - 1 && (
                     <span aria-hidden="true" className="ml-[0.04em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-lime" />
                   )}
                 </span>
               ))}
             </h1>
-            <p className="justify-copy mt-8 max-w-prose text-lead text-muted">{storyIntro.lede}</p>
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-              <ArrowLink href="/resume" variant="primary">
-                Resume
-              </ArrowLink>
-              <ArrowLink href="#story">Read the story</ArrowLink>
+            <div className="mt-10 max-w-prose space-y-4">
+              <p className="justify-copy text-lead">{storyIntro.lede}</p>
+              {storyIntro.body.map((p) => (
+                <p key={p.slice(0, 32)} className="justify-copy text-muted">
+                  {p}
+                </p>
+              ))}
             </div>
           </div>
           <PhotoFrame
-            image={assets.identity.milestone}
-            sizes="(min-width: 1024px) 38vw, 100vw"
+            image={assets.identity.portraitFormal}
+            sizes="(min-width: 1024px) 34vw, (min-width: 768px) 38vw, 100vw"
             aspect="aspect-[4/5]"
             priority
             caption="Real Razeen"
-            meta={profile.coordinates.label}
-            className="col-span-full md:col-span-5 lg:col-span-5"
+            className="col-span-full md:col-span-3 lg:col-span-4 lg:col-start-9"
           />
-
-          <div className="col-span-full border-t border-line pt-8">
-            <PathDiagram steps={storyPath} />
-          </div>
-
-          <dl className="col-span-full grid grid-cols-2 gap-x-6 gap-y-8 border-t border-line pt-8 lg:grid-cols-4">
-            {glance.map((g) => (
-              <div key={g.label}>
-                <dt className="label text-muted">{g.label}</dt>
-                <dd className="mt-2 font-display text-display-md font-extrabold tabular-nums">{g.value}</dd>
-                <dd className="mt-1 text-sm text-muted">{g.note}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
       </Section>
 
-      {/* Story */}
-      <Section surface="light" id="story" aria-labelledby="story-title">
-        <div className="page-grid gap-y-12">
-          <div className="col-span-full flex items-end justify-between gap-6">
-            <div>
-              <TechnicalLabel as="p" marker="01 /">
-                The story
-              </TechnicalLabel>
-              <h2 id="story-title" className="mt-4 text-display-lg uppercase">
-                Told step
-                <br />
-                by step.
-              </h2>
-              <p className="mt-4 max-w-prose text-muted">{storyIntro.note}</p>
-            </div>
-            <div className="hidden shrink-0 md:block">
-              <MiniRazeen pose="exploring" height={170} />
-            </div>
+      {/* 02 The path */}
+      <Section surface="light" id="path">
+        <div className="page-container">
+          <SectionHeader index="01" eyebrow="The path" title={storyIntro.title} size="md" />
+          <div className="mt-12">
+            <PathNarrative chapters={chapters} />
           </div>
-          <div className="col-span-full lg:col-span-10">
-            <StoryTimeline chapters={chapters} />
-          </div>
-          <p className="label col-span-full border-t border-line pt-6">{storyOutro}</p>
         </div>
       </Section>
 
-      {/* How I work */}
-      <Section surface="dark" grid>
+      {/* 03 How I think */}
+      <Section surface="dark">
         <div className="page-grid gap-y-12">
-          <SectionHeader index="02" eyebrow="How I work" title={['One loop.', 'Everywhere.']} className="lg:col-span-8">
-            <p className="mt-6 max-w-prose text-muted">The same loop runs through pipelines, models, products and long runs.</p>
+          <SectionHeader index="02" eyebrow="How I think" title={['One loop.', 'Everywhere.']} size="md" className="lg:col-span-6">
+            <p className="mt-6 max-w-prose text-muted">
+              The same loop runs through pipelines, models, products, learning and long runs.
+            </p>
           </SectionHeader>
-          <ol className="col-span-full grid gap-px bg-line md:grid-cols-2 lg:grid-cols-4">
+          <TechnicalLabel as="p" className="col-span-full self-end lg:col-span-5 lg:col-start-8 lg:text-right">
+            {profile.loops.system.join(' · ')}
+          </TechnicalLabel>
+          <ol className="col-span-full grid gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
             {principles.map((p, i) => {
               const last = i === principles.length - 1;
               return (
-                <li key={p.title} data-reveal className="bg-surface p-6 lg:p-8">
-                  <p className="label flex items-center gap-2 text-muted">
-                    <span aria-hidden="true" className={last ? 'h-2.5 w-2.5 rounded-full bg-lime' : 'h-2.5 w-2.5 rounded-full border border-muted'} />
-                    {String(i + 1).padStart(2, '0')}
-                    {!last && <span aria-hidden="true">→</span>}
+                <li key={p.title} className="border-t border-line pt-5">
+                  <p className="flex items-center gap-3">
+                    <span
+                      aria-hidden="true"
+                      className={last ? 'h-2.5 w-2.5 rounded-full bg-lime' : 'h-2.5 w-2.5 rounded-full border border-muted'}
+                    />
+                    <span className="text-display-sm uppercase">{p.title}</span>
+                    {!last && (
+                      <span aria-hidden="true" className="ml-auto text-muted">
+                        →
+                      </span>
+                    )}
                   </p>
-                  <h3 className="mt-6 text-display-sm uppercase">{p.title}</h3>
                   <p className="mt-3 text-muted">{p.detail}</p>
                 </li>
               );
@@ -144,51 +109,87 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Credentials */}
-      <Section surface="light" id="credentials">
-        <div className="page-grid gap-y-10">
-          <SectionHeader
-            index="03"
-            eyebrow="Credentials"
-            title={[`${achievements.length} certifications`, '& courses.']}
-            size="md"
-            className="lg:col-span-9"
-          />
-          <div className="col-span-full hidden items-end justify-end lg:col-span-3 lg:flex">
-            <MiniRazeen pose="learning" height={140} />
-          </div>
-          <div className="col-span-full">
-            <CredentialList items={achievements} initial={8} />
-          </div>
-        </div>
-      </Section>
-
-      {/* People & places */}
-      <Section surface="dark">
+      {/* 04 Beyond the screen */}
+      <Section surface="light">
         <div className="page-grid gap-y-8">
-          <SectionHeader index="04" eyebrow="People · ideas · conversations" title={['Learn. Collaborate.', 'Experiment. Grow.']} size="md" />
-          {gallery.map(({ a, label, span }) => (
-            <PhotoFrame key={a.src} image={a} sizes="(min-width: 1024px) 40vw, 100vw" aspect="aspect-[4/5]" caption={label} className={span} />
-          ))}
-          <div className="col-span-full grid gap-6 border-t border-line pt-6 md:grid-cols-3">
-            {recognition.map((r) => (
-              <div key={r.title}>
-                <TechnicalLabel as="p">{r.year}</TechnicalLabel>
-                <p className="mt-1 text-xl font-semibold">{r.title}</p>
-                <p className="text-sm text-muted">{r.detail}</p>
-              </div>
+          <SectionHeader index="03" eyebrow="Beyond the screen" title={beyond.title} size="md" className="lg:col-span-7" />
+          <div className="col-span-full space-y-3 self-end lg:col-span-4 lg:col-start-9">
+            {beyond.body.map((p) => (
+              <p key={p.slice(0, 32)} className="justify-copy text-muted">
+                {p}
+              </p>
             ))}
-            <div className="flex flex-col items-start justify-end gap-4">
-              <ArrowLink href="/resume">View resume</ArrowLink>
-              <AskButton question="What is Razeen's background in data and AI?">Ask about my background</AskButton>
-            </div>
+          </div>
+          {/* Editorial composition: one tall running photo, a wide event photo, two portraits. Ratios chosen so both columns end level on desktop. */}
+          <PhotoFrame
+            image={assets.running.race}
+            sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 100vw"
+            aspect="aspect-[4/5] lg:aspect-[3/5]"
+            caption="Race day"
+            className="col-span-full md:col-span-4 lg:col-span-5"
+          />
+          <div className="col-span-full grid grid-cols-2 gap-x-4 gap-y-8 md:col-span-4 md:gap-x-6 lg:col-span-7">
+            <PhotoFrame
+              image={assets.career.briefing1}
+              sizes="(min-width: 1024px) 55vw, (min-width: 768px) 50vw, 100vw"
+              aspect="aspect-[16/10]"
+              caption="Industry demo"
+              className="col-span-2"
+            />
+            <PhotoFrame image={assets.career.aws} sizes="(min-width: 1024px) 27vw, 50vw" aspect="aspect-square" caption="AWS" />
+            <PhotoFrame image={assets.career.networking} sizes="(min-width: 1024px) 27vw, 50vw" aspect="aspect-square" caption="Conference" />
+          </div>
+          <div className="col-span-full flex flex-wrap gap-x-8 gap-y-4 border-t border-line pt-6">
+            <ArrowLink href="/running">Running</ArrowLink>
+            <ArrowLink href="/stories">Stories</ArrowLink>
           </div>
         </div>
       </Section>
 
-      <div className="border-t border-line">
-        <ContactBlock index="05" />
-      </div>
+      {/* 05 Currently */}
+      <Section surface="dark" className="border-b border-line">
+        <div className="page-grid gap-y-10">
+          <SectionHeader index="04" eyebrow="Currently" title={['Still iterating.']} size="md" className="lg:col-span-5" />
+          <dl className="col-span-full grid gap-x-6 gap-y-8 md:grid-cols-2 lg:col-span-6 lg:col-start-7">
+            {building.length > 0 && (
+              <div className="border-t border-line pt-4">
+                <dt className="label text-muted">Building</dt>
+                <dd className="mt-2 space-y-1">
+                  {building.map((p) => (
+                    <Link key={p.slug} href={`/work/${p.slug}`} className="block font-semibold hover:underline">
+                      {p.title}
+                    </Link>
+                  ))}
+                </dd>
+              </div>
+            )}
+            <div className="border-t border-line pt-4">
+              <dt className="label text-muted">Exploring</dt>
+              <dd className="mt-2 space-y-1">
+                {exploring.map((e) => (
+                  <p key={e.label}>
+                    <span className="font-semibold">{e.label}</span> <span className="text-muted">· {e.detail}</span>
+                  </p>
+                ))}
+              </dd>
+            </div>
+          </dl>
+          <div className="col-span-full flex flex-wrap items-end justify-between gap-8 border-t border-line pt-8">
+            <div className="flex flex-wrap gap-x-8 gap-y-4">
+              <ArrowLink href="/work" variant="primary">
+                Explore work
+              </ArrowLink>
+              <ArrowLink href="/stories">Read stories</ArrowLink>
+              <ArrowLink href="/running">Running</ArrowLink>
+              <ArrowLink href="/resume" arrow="↗">
+                View resume
+              </ArrowLink>
+            </div>
+            {/* The one Mini Razeen on About: personality, not representation. */}
+            <MiniRazeen pose="laptop" height={96} />
+          </div>
+        </div>
+      </Section>
     </>
   );
 }

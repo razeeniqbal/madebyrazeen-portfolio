@@ -3,13 +3,7 @@
 import { useMemo, useState } from 'react';
 import type { Achievement } from '@/content/achievements';
 import { cn } from '@/lib/utils';
-
-// Vendor landing pages that don't verify anything; hide those links rather than imply verification.
-const GENERIC_URLS = new Set([
-  'https://learn.microsoft.com/en-us/certifications/',
-  'https://www.pythoninstitute.org/',
-  'https://www.cloudskillsboost.google/',
-]);
+import { credentialVerifyUrl } from '@/lib/credentials';
 
 const monthIndex = (d: string) => {
   const t = Date.parse(`1 ${d}`);
@@ -76,7 +70,7 @@ export function CredentialList({ items, initial }: { items: Achievement[]; initi
 
       <ol className="mt-2">
         {(initial && !expanded && org === 'all' && !query ? results.slice(0, initial) : results).map((a) => {
-          const verify = a.credentialUrl && !GENERIC_URLS.has(a.credentialUrl) ? a.credentialUrl : undefined;
+          const verify = credentialVerifyUrl(a);
           return (
             <li
               key={a.id}

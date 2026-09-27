@@ -275,8 +275,10 @@ export function AskWidget() {
         onMouseLeave={() => setHover(false)}
         onFocus={() => setHover(true)}
         onBlur={() => setHover(false)}
+        aria-label={open ? 'Close the assistant' : 'Ask about me'}
         className={cn(
-          'group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center gap-3 rounded-full border border-line bg-carbon py-1.5 pl-[4.25rem] pr-4 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform hover:-translate-y-0.5 md:right-6',
+          // Collapsed by default (R03: must not cover hero content); the label slides out on hover/focus or while open.
+          'group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center rounded-full border border-line bg-carbon py-1.5 pl-[3.75rem] pr-3 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform hover:-translate-y-0.5 md:right-6',
           open && 'max-md:hidden',
         )}
       >
@@ -290,7 +292,15 @@ export function AskWidget() {
             )}
           />
         </span>
-        <span className="label">{open ? 'Close' : 'Ask about me'}</span>
+        <span
+          aria-hidden="true"
+          className={cn(
+            'label overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-300 motion-reduce:transition-none',
+            open || hover ? 'max-w-[8rem] opacity-100' : 'max-w-0 opacity-0',
+          )}
+        >
+          {open ? 'Close' : 'Ask about me'}
+        </span>
       </button>
 
       {/* Panel */}

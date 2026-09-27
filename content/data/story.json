@@ -6,15 +6,19 @@
       "The long way from",
       "concrete to code."
     ],
-    "lede": "I’m Razeen, a data engineer in Malaysia who started out as a civil engineer. I build systems, test ideas in public repos, and run long distances to keep my head straight.",
-    "note": "Told step by step and kept as a journal, so it grows as I do."
+    "lede": "I’m Razeen, a data engineer and AI solutions engineer in Malaysia who started out as a civil engineer. I build systems, test ideas in public repos, and run long distances to keep my head straight.",
+    "note": "Told step by step and kept as a journal, so it grows as I do.",
+    "body": [
+      "This page is the longer version of that sentence: how a civil engineer ended up building data platforms and AI tools, the loop I use for all of it, and what happens away from the screen."
+    ]
   },
   "chapters": [
     {
-      "period": "2017 – 2021",
+      "stage": "Civil engineering",
+      "period": "2017 – 2022",
       "title": "Engineer by training",
       "body": [
-        "Civil Engineering at Universiti Putra Malaysia. Four years of structures, soils and calculations that had to be right the first time. It taught me to respect systems long before I built software ones."
+        "Civil Engineering at Universiti Putra Malaysia: four years of structures, soils and calculations that had to be right the first time. I registered as a Graduate Engineer with the Board of Engineers Malaysia and the Institution of Engineers Malaysia, and joined G&P Geotechnic. The engineering was real. So was the pile of repetitive work around it."
       ],
       "photo": "none",
       "photoCaption": "",
@@ -25,24 +29,11 @@
       "pose": "none"
     },
     {
-      "period": "2022",
-      "title": "Registered, and restless",
-      "body": [
-        "I registered as a Graduate Engineer with the Board of Engineers Malaysia and the Institution of Engineers Malaysia, and joined G&P Geotechnic. The engineering was real. So was the pile of repetitive work around it."
-      ],
-      "photo": "none",
-      "photoCaption": "",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "thinking"
-    },
-    {
-      "period": "2022 – 2024",
+      "stage": "Data analytics",
+      "period": "2022 – 2025",
       "title": "Automating the boring parts",
       "body": [
-        "I started writing Python and VBA to do the repetitive parts of geotechnical analysis for me, and cut a lot of manual effort. Somewhere in there I realised I cared more about the data than the drawings."
+        "I taught myself Python and VBA to do the repetitive parts of geotechnical analysis, and realised I cared more about the data than the drawings. I studied at night for the Certified Data Analyst Associate, PCEP and Power BI certifications, then left engineering for a Data Analyst role at EISmartwork, building models on more than ten million records and dashboards people actually used."
       ],
       "photo": "none",
       "photoCaption": "",
@@ -53,27 +44,14 @@
       "pose": "none"
     },
     {
-      "period": "2023",
-      "title": "Making it official",
+      "stage": "Artificial intelligence",
+      "period": "2024 – 2025",
+      "title": "Going deeper",
       "body": [
-        "I studied at night and turned the curiosity into credentials: Certified Data Analyst Associate, the PCEP Python certification, and Microsoft’s Power BI Data Analyst Associate."
+        "Analytics made me want to understand the models, not just use them, so I started a Master’s in Artificial Intelligence at UMPSA while working. I finished with a CGPA of 3.76 and a thesis on efficient duplicate-question detection, spoke as a Google Speaker at AI Build 2025 and made the Top 20 of AWS National 2025 for training large language models."
       ],
-      "photo": "none",
-      "photoCaption": "",
-      "credentialTitle": "Microsoft Certified: Power BI Data Analyst Associate",
-      "credentialIssuer": "Microsoft",
-      "credentialDate": "Sep 2023",
-      "credentialUrl": "https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874",
-      "pose": "learning"
-    },
-    {
-      "period": "2024",
-      "title": "Switching lanes",
-      "body": [
-        "I left engineering for a Data Analyst role at EISmartwork, building models on datasets of more than ten million records and dashboards people actually used. At the same time I started a Master’s in Artificial Intelligence at UMPSA."
-      ],
-      "photo": "none",
-      "photoCaption": "",
+      "photo": "identity.graduation",
+      "photoCaption": "Master’s in AI",
       "credentialTitle": "",
       "credentialIssuer": "",
       "credentialDate": "",
@@ -81,11 +59,26 @@
       "pose": "none"
     },
     {
-      "period": "2025",
-      "title": "Master’s, and a microphone",
+      "stage": "Data engineering",
+      "period": "Jun 2025 – now",
+      "title": "Building the foundations",
       "body": [
-        "I finished the Master’s in AI (CGPA 3.76). I was invited as a Google Speaker at AI Build 2025 and made the Top 20 of AWS National 2025 for training large language models.",
-        "At the Cursor × Anthropic hackathon we built LeadSightz, a sales-automation platform, in a weekend."
+        "At AEM Energy Solutions the models only work if the data underneath them does, so I build the pipelines, the platforms and the AI tooling for the energy sector. The problems there led to QualityPlus: a tool that scores data quality and turns the failures into a review workflow instead of a spreadsheet."
+      ],
+      "photo": "career.briefing2",
+      "photoCaption": "Walking through a demo",
+      "credentialTitle": "",
+      "credentialIssuer": "",
+      "credentialDate": "",
+      "credentialUrl": "",
+      "pose": "none"
+    },
+    {
+      "stage": "Building systems",
+      "period": "Now",
+      "title": "Same curiosity, different tracks",
+      "body": [
+        "Outside the day job I build to find out: LeadSightz in a weekend at the Cursor × Anthropic hackathon, Balang as a party game about probability, and Sepang Vision Lab, a digital twin that started as a question about how far public race data can go. Some ship, some don’t. Each one teaches me something the next one needs."
       ],
       "photo": "career.cursorAnthropic",
       "photoCaption": "Cursor × Anthropic hackathon",
@@ -94,48 +87,6 @@
       "credentialDate": "",
       "credentialUrl": "",
       "pose": "none"
-    },
-    {
-      "period": "Jun 2025 – now",
-      "title": "Data engineer, for real",
-      "body": [
-        "At AEM Energy Solutions I build data pipelines and analytics for the energy sector. The problems there led to QualityPlus: a tool that scores data quality and turns the failures into a review workflow instead of a spreadsheet."
-      ],
-      "photo": "career.briefing2",
-      "photoCaption": "Walking through a demo",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "laptop"
-    },
-    {
-      "period": "2026",
-      "title": "Same curiosity, different tracks",
-      "body": [
-        "Sepang Vision Lab started as a question about how far public race data can go. Seventeen milestones later it’s a digital twin with replay, strategy simulation and an AI race engineer that is only allowed to explain the simulator."
-      ],
-      "photo": "none",
-      "photoCaption": "",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "none"
-    },
-    {
-      "period": "Always",
-      "title": "Running, and the long game",
-      "body": [
-        "Outside work I run road races. It’s the same loop as engineering: show up, measure, adjust, repeat. Progress you only notice over months."
-      ],
-      "photo": "running.race",
-      "photoCaption": "Race day",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "running"
     }
   ],
   "outro": "Input → process → iterate → progress. Still iterating.",
@@ -145,15 +96,19 @@
       "year": "2017"
     },
     {
-      "label": "Data",
+      "label": "Data analytics",
       "year": "2022"
     },
     {
-      "label": "AI",
+      "label": "Artificial intelligence",
       "year": "2024"
     },
     {
-      "label": "Systems",
+      "label": "Data engineering",
+      "year": "2025"
+    },
+    {
+      "label": "Building systems",
       "year": "Now"
     }
   ],
@@ -174,5 +129,15 @@
       "title": "Progress",
       "detail": "Ship, write down what I learned, and carry it into the next project. Or the next run."
     }
-  ]
+  ],
+  "beyond": {
+    "title": [
+      "The work matters.",
+      "So does everything around it."
+    ],
+    "body": [
+      "Outside work I run road races. It’s the same loop as engineering: show up, measure, adjust, repeat. Progress you only notice over months.",
+      "The rest happens around people: hackathons, industry demos, conferences, and the odd stage."
+    ]
+  }
 }

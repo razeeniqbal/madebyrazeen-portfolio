@@ -2,14 +2,15 @@
   "items": [
     {
       "id": "1",
-      "title": "Microsoft Certified: Power BI Data Analyst Associate",
+      "title": "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
       "organization": "Microsoft",
       "issuedDate": "September 2023",
       "description": "Expert in Power BI data visualization, modeling, and business intelligence solutions.",
       "category": "certification",
       "image": "/achievements/microsoft-powerbi.jpg",
       "credentialUrl": "https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874",
-      "credentialId": "DE6CEB296EC4D874"
+      "credentialId": "DE6CEB296EC4D874",
+      "featured": true
     },
     {
       "id": "2",
@@ -20,7 +21,8 @@
       "category": "certification",
       "image": "/achievements/microsoft-ai.jpg",
       "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "3",
@@ -31,7 +33,8 @@
       "category": "certification",
       "image": "/achievements/microsoft-azure.jpg",
       "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "4",
@@ -42,7 +45,8 @@
       "category": "certification",
       "image": "/achievements/microsoft-security.jpg",
       "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
-      "credentialId": "B563D7D85230C4E"
+      "credentialId": "B563D7D85230C4E",
+      "featured": false
     },
     {
       "id": "5",
@@ -53,7 +57,8 @@
       "category": "certification",
       "image": "/achievements/python-pcep.jpg",
       "credentialUrl": "https://www.pythoninstitute.org/",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "6",
@@ -64,7 +69,8 @@
       "category": "certification",
       "image": "/achievements/google-bigquery.jpg",
       "credentialUrl": "https://www.cloudskillsboost.google/",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "7",
@@ -75,7 +81,8 @@
       "category": "certification",
       "image": "/achievements/google-vertex.jpg",
       "credentialUrl": "https://www.cloudskillsboost.google/",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "8",
@@ -86,7 +93,8 @@
       "category": "certification",
       "image": "/achievements/ibm-data-python.jpg",
       "credentialId": "f69be515945f41848da758a3534cdab8",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "9",
@@ -97,7 +105,8 @@
       "category": "certification",
       "image": "/achievements/ibm-ds101.jpg",
       "credentialId": "634f673197544ce38cb9aa2587fd0782",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "10",
@@ -108,7 +117,8 @@
       "category": "certification",
       "image": "/achievements/ibm-methodology.jpg",
       "credentialId": "e952973f82c443d98d0786eca34a0b00",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "11",
@@ -119,7 +129,8 @@
       "category": "certification",
       "image": "/achievements/ibm-visualization.jpg",
       "credentialId": "9bc9df5cd4c1437abb293d2f716f13e4",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "12",
@@ -130,7 +141,8 @@
       "category": "certification",
       "image": "/achievements/ibm-python101.jpg",
       "credentialId": "509f8539dbcd468ca020aa6b8f71cdda",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "13",
@@ -141,7 +153,8 @@
       "category": "certification",
       "image": "/achievements/ibm-tools.jpg",
       "credentialId": "582b153478374211a18a550be919f0bd",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "14",
@@ -152,7 +165,8 @@
       "category": "certification",
       "image": "/achievements/ibm-hadoop.jpg",
       "credentialId": "af90efc4fdc44ccd98108ec86dcdba48",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "15",
@@ -163,7 +177,8 @@
       "category": "certification",
       "image": "/achievements/ibm-bigdata.jpg",
       "credentialId": "8f38bc90d85f433dbe74495bb2b9e56f",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "16",
@@ -174,7 +189,8 @@
       "category": "certification",
       "image": "/achievements/ibm-spark.jpg",
       "credentialId": "d96c42857dbf40ec9c9a6b69f50fa285",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "17",
@@ -185,7 +201,8 @@
       "category": "certification",
       "image": "/achievements/ibm-ai-fundamentals.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "18",
@@ -196,7 +213,8 @@
       "category": "certification",
       "image": "/achievements/deeplearning-embeddings.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "19",
@@ -207,7 +225,8 @@
       "category": "course",
       "image": "/achievements/linkedin-linear.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "20",
@@ -218,7 +237,8 @@
       "category": "course",
       "image": "/achievements/linkedin-ai.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "21",
@@ -229,7 +249,8 @@
       "category": "course",
       "image": "/achievements/mereka-copilot.jpg",
       "credentialId": "fb6bb11d",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "22",
@@ -240,7 +261,8 @@
       "category": "course",
       "image": "/achievements/mereka-genai.jpg",
       "credentialId": "7f1306b8",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "23",
@@ -251,7 +273,8 @@
       "category": "course",
       "image": "/achievements/mereka-responsible.jpg",
       "credentialId": "cd838cb5",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "24",
@@ -262,7 +285,8 @@
       "category": "course",
       "image": "/achievements/mereka-getstarted.jpg",
       "credentialId": "75b5641c",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "25",
@@ -273,7 +297,8 @@
       "category": "course",
       "image": "/achievements/mereka-aiforall.jpg",
       "credentialId": "d6179ae4",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "26",
@@ -284,7 +309,8 @@
       "category": "certification",
       "image": "/achievements/apu-analyst.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "27",
@@ -295,7 +321,8 @@
       "category": "certification",
       "image": "/achievements/iem-graduate.jpg",
       "credentialId": "119043",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "28",
@@ -306,7 +333,8 @@
       "category": "certification",
       "image": "/achievements/bem-graduate.jpg",
       "credentialId": "G1207508A",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "29",
@@ -317,7 +345,8 @@
       "category": "certification",
       "image": "/achievements/ibm-ai-foundations.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "30",
@@ -328,7 +357,8 @@
       "category": "certification",
       "image": "/achievements/ibm-agile.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "31",
@@ -339,7 +369,8 @@
       "category": "certification",
       "image": "/achievements/ibm-data-fundamentals.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "32",
@@ -350,7 +381,8 @@
       "category": "certification",
       "image": "/achievements/ibm-ds-level1.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "33",
@@ -361,7 +393,8 @@
       "category": "certification",
       "image": "/achievements/ibm-ds-level2.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "34",
@@ -372,7 +405,8 @@
       "category": "certification",
       "image": "/achievements/ibm-ds-methodologies.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "35",
@@ -383,7 +417,8 @@
       "category": "certification",
       "image": "/achievements/ibm-ds-tools.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "36",
@@ -394,7 +429,8 @@
       "category": "certification",
       "image": "/achievements/ibm-data-analysis-python.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "37",
@@ -405,7 +441,8 @@
       "category": "certification",
       "image": "/achievements/ibm-data-viz-python.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "38",
@@ -416,7 +453,8 @@
       "category": "certification",
       "image": "/achievements/ibm-python-ds.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "39",
@@ -427,7 +465,8 @@
       "category": "certification",
       "image": "/achievements/ibm-hadoop-level1.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "40",
@@ -438,7 +477,8 @@
       "category": "certification",
       "image": "/achievements/ibm-spark-level1.jpg",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "41",
@@ -449,7 +489,8 @@
       "category": "course",
       "image": "/achievements/mereka-ai-basics.jpg",
       "credentialId": "e484d41b",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "42",
@@ -460,7 +501,8 @@
       "category": "course",
       "image": "/achievements/mereka-search.jpg",
       "credentialId": "f9f3a231",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "featured": false
     },
     {
       "id": "43",
@@ -471,7 +513,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": true
     },
     {
       "id": "44",
@@ -482,7 +525,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": true
     },
     {
       "id": "45",
@@ -493,7 +537,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": true
     },
     {
       "id": "46",
@@ -504,7 +549,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "47",
@@ -515,7 +561,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "48",
@@ -526,7 +573,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "49",
@@ -537,7 +585,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     },
     {
       "id": "50",
@@ -548,7 +597,8 @@
       "category": "certification",
       "image": "",
       "credentialUrl": "",
-      "credentialId": ""
+      "credentialId": "",
+      "featured": false
     }
   ]
 }

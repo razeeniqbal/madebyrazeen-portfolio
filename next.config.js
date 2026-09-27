@@ -28,7 +28,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: '/projects', destination: '/work', permanent: true },
-      { source: '/achievements', destination: '/about', permanent: true },
+      { source: '/achievements', destination: '/work#credentials', permanent: true },
       // Notes became Stories (refinement spec §27).
       { source: '/notes', destination: '/stories', permanent: true },
       { source: '/notes/:slug', destination: '/stories/:slug', permanent: true },

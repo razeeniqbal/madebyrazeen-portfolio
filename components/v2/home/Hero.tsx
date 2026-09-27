@@ -1,18 +1,28 @@
+import Link from 'next/link';
 import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
+import { CredentialBadge } from '@/components/v2/credentials/CredentialBadge';
 import { assets } from '@/lib/assets';
 import { resumeHref } from '@/lib/site';
 import { profile } from '@/content/profile';
+import { featuredCredentials } from '@/content/achievements';
+import { credentialShortTitle, credentialYear, credentialVerifyUrl } from '@/lib/credentials';
 
-/** Home 01. Low density: real photo + type. The lime period is the node later motion grows from. */
+/**
+ * Home 01. Real photo + type, with a small credential strip attached to the portrait.
+ * Desktop: the portrait starts level with the second headline line (editorial asymmetry, not centred).
+ * Mobile order: text → portrait → credentials → CTAs.
+ */
 export function Hero() {
   const { statement } = profile;
+  const creds = featuredCredentials.slice(0, 4);
+
   return (
-    <Section surface="dark" className="!pb-20 !pt-12 md:!pt-20">
-      <div className="page-grid gap-y-12">
-        <div className="col-span-full md:col-span-5 lg:col-span-7 lg:self-end">
+    <Section surface="dark" className="!pb-20 !pt-12 md:!pt-16">
+      <div className="page-grid gap-y-10 lg:grid-rows-[auto_1fr] lg:gap-y-0">
+        <div className="col-span-full md:col-span-5 lg:col-span-7">
           <TechnicalLabel as="p">
             {profile.name} <span className="text-muted">/ {profile.role}</span>
           </TechnicalLabel>
@@ -27,25 +37,74 @@ export function Hero() {
             ))}
           </h1>
           <p className="mt-8 max-w-[34rem] text-lead text-muted">{profile.supporting}</p>
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-            <ArrowLink href="/work" variant="primary">
-              View my work
-            </ArrowLink>
-            <ArrowLink href={resumeHref} arrow="↗">
-              Resume
-            </ArrowLink>
-          </div>
         </div>
 
-        <PhotoFrame
-          image={assets.identity.hero}
-          sizes="(min-width: 1024px) 38vw, (min-width: 768px) 40vw, 100vw"
-          mono
-          priority
-          aspect="aspect-[4/5] md:aspect-square"
-          caption="Real Razeen"
-          className="col-span-full md:col-span-3 lg:col-span-5 lg:self-end"
-        />
+        {/* Portrait + credentials. lg offset = label + one headline line (display-xl: 7.2vw × 0.9, capped at 8.5rem):
+            the portrait starts level with BUILDER., leaving room for the credential strip above the fold. */}
+        <div className="col-span-full md:col-span-3 md:row-span-2 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-[calc(2.5rem+min(6.5vw,7.65rem))]">
+          <PhotoFrame
+            image={assets.identity.hero}
+            sizes="(min-width: 1024px) 38vw, (min-width: 768px) 40vw, 100vw"
+            mono
+            priority
+            aspect="aspect-[4/5] md:aspect-square lg:aspect-[5/4]"
+            caption="Real Razeen"
+          />
+
+          {creds.length > 0 && (
+            <div className="mt-8">
+              <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
+                <TechnicalLabel as="h2">Selected credentials</TechnicalLabel>
+                <Link href="/work#credentials" className="label text-muted transition-colors hover:text-ink">
+                  View all →
+                </Link>
+              </div>
+              {/* Desktop: badges only, details on hover/focus (restrained). Touch/mobile: details written under each badge. */}
+              <ul className="mt-4 grid grid-cols-4 gap-x-3 gap-y-4 lg:flex lg:gap-4">
+                {creds.map((c) => {
+                  const url = credentialVerifyUrl(c);
+                  const year = credentialYear(c);
+                  const meta = `${c.organization}${year ? ` · ${year}` : ''}`;
+                  const label = `${credentialShortTitle(c)}, ${meta}${url ? ' (verify)' : ''}`;
+                  return (
+                    <li key={c.id} className="group relative">
+                      <a
+                        href={url ?? '/work#credentials'}
+                        aria-label={label}
+                        className="block focus-visible:outline-offset-4"
+                        {...(url && { target: '_blank', rel: 'noopener noreferrer' })}
+                      >
+                        <CredentialBadge credential={c} size={44} className="transition-transform group-hover:-translate-y-0.5" />
+                        <span aria-hidden="true" className="mt-2 block text-xs font-medium leading-snug lg:hidden">
+                          {credentialShortTitle(c)}
+                        </span>
+                        <span aria-hidden="true" className="mt-0.5 block text-[0.6875rem] leading-snug text-muted lg:hidden">
+                          {meta}
+                        </span>
+                      </a>
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 hidden w-max max-w-[14rem] border border-line bg-carbon px-2.5 py-1.5 text-xs leading-snug text-warm opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 lg:block"
+                      >
+                        <span className="block font-medium">{credentialShortTitle(c)}</span>
+                        <span className="block text-muted">{meta}</span>
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <div className="col-span-full flex flex-wrap items-center gap-x-8 gap-y-5 md:col-span-5 lg:col-span-7 lg:row-start-2 lg:mt-10 lg:self-start">
+          <ArrowLink href="/work" variant="primary">
+            View my work
+          </ArrowLink>
+          <ArrowLink href={resumeHref} arrow="↗">
+            Resume
+          </ArrowLink>
+        </div>
       </div>
     </Section>
   );

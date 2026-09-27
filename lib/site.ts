@@ -1,9 +1,10 @@
-// Refinement spec §9: Work · Stories · Running · About, then Resume ↗. Lab stays reachable from the footer and /work.
+// R03: About leads (the site is a person, not only a portfolio), then Work · Stories · Running; Resume ↗ sits apart.
+// Lab stays a secondary destination (footer, /work).
 export const primaryNav = [
+  { label: 'About', href: '/about' },
   { label: 'Work', href: '/work' },
   { label: 'Stories', href: '/stories' },
   { label: 'Running', href: '/running' },
-  { label: 'About', href: '/about' },
 ] as const;
 
 export const contactHref = '/contact';
