@@ -194,11 +194,23 @@ export function AskWidget() {
 
   useEffect(() => {
     if (!open) return;
-    // Move focus into the dialog: the input, or the close button while offline.
-    (inputRef.current && !inputRef.current.disabled ? inputRef.current : closeRef.current)?.focus();
+    // Move focus into the dialog. With a mouse: the input, ready to type. On touch screens: the close
+    // button, so the keyboard doesn't pop up over the suggested questions.
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+    (finePointer && inputRef.current && !inputRef.current.disabled ? inputRef.current : closeRef.current)?.focus();
+
+    // On phones the panel is a bottom sheet: stop the page behind it from scrolling while it's open.
+    const sheet = window.matchMedia('(max-width: 767px)').matches;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    if (sheet) root.style.overflow = 'hidden';
+
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close();
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      if (sheet) root.style.overflow = previous;
+    };
   }, [open, close]);
 
   // One friendly nudge per visit, only when the assistant is online, and only once the visitor has
@@ -345,7 +357,7 @@ export function AskWidget() {
           </button>
         </header>
 
-        <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-4" aria-live="polite">
+        <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4" aria-live="polite">
           <div className="flex items-end gap-3">
             <p className="max-w-[90%] pb-2 text-sm text-warm/90">{offline ? assistantCopy.offline : assistantCopy.greeting}</p>
           </div>
@@ -405,7 +417,7 @@ export function AskWidget() {
               maxLength={600}
               disabled={offline}
               placeholder={offline ? 'Assistant offline' : 'Ask about Razeen’s work…'}
-              className="min-w-0 flex-1 border border-line bg-transparent px-3 py-2 text-sm text-warm placeholder:text-muted focus:border-lime focus:outline-none"
+              className="min-w-0 flex-1 border border-line bg-transparent px-3 py-2 text-base text-warm placeholder:text-muted focus:border-lime focus:outline-none md:text-sm"
             />
             <button
               type="submit"
