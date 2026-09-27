@@ -2,16 +2,23 @@ import type { Metadata } from 'next';
 import { Section } from '@/components/v2/system/Section';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
+import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
-import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { RouteMap } from '@/components/v2/running/RouteMap';
+import { MonthlyChart, WeekStrip } from '@/components/v2/running/RunCharts';
+import { RunLog } from '@/components/v2/running/RunLog';
 import { assets } from '@/lib/assets';
 import {
+  getRuns,
   getLatestRun,
-  getLatestRouteRun,
   getPersonalBests,
   getRaces,
+  getTotals,
+  getMonthly,
+  getWeekly,
+  getSyncInfo,
   isSampleData,
+  formatDate,
   formatDuration,
   formatPace,
   formatPaceSec,
@@ -20,7 +27,7 @@ import {
 export const metadata: Metadata = {
   alternates: { canonical: '/running' },
   title: 'Running',
-  description: 'Same steps. Better insights. Running data and stories from Razeen Iqbal.',
+  description: 'Personal bests, races and every outdoor run from Razeen Iqbal, synced from Garmin and Strava.',
 };
 
 const principles = ['Consistency', 'Iteration', 'Measurement', 'Adaptation', 'Progress', 'Endurance'];
@@ -29,12 +36,21 @@ function SampleBadge() {
   return <TechnicalLabel className="border border-current px-1.5">Sample data · Garmin sync coming</TechnicalLabel>;
 }
 
+// Order (R04): personal bests lead, then the year in numbers, races, the latest outdoor run and every run.
+// Treadmill runs are excluded throughout (content/running.ts).
 export default function RunningPage() {
+  const runs = getRuns();
   const run = getLatestRun();
-  const routeRun = run?.route ? run : getLatestRouteRun();
   const sample = isSampleData();
   const bests = getPersonalBests();
+  const achieved = bests.filter((b) => b.sec);
+  const next = bests.find((b) => !b.sec);
   const races = getRaces();
+  const totals = getTotals();
+  const months = getMonthly();
+  const weeks = getWeekly();
+  const activeWeeks = weeks.filter((w) => w.runs > 0).length;
+  const sync = getSyncInfo();
   const avgPace = run ? run.durationSec / run.distanceKm : 0;
 
   return (
@@ -47,11 +63,16 @@ export default function RunningPage() {
             <p className="mt-8 max-w-prose text-lead text-muted">
               Running is where engineering habits meet real life: show up, measure, adjust, repeat. Consistency compounds.
             </p>
-            {sample && (
-              <div className="mt-8">
+            <p className="label mt-8 text-muted">
+              {sample ? (
                 <SampleBadge />
-              </div>
-            )}
+              ) : (
+                <>
+                  {totals.runs} outdoor runs · {totals.km.toFixed(0)} km since {formatDate(totals.since ?? '', { month: 'short', year: 'numeric' })}
+                  {sync && ` · updated ${formatDate(sync.syncedAt)}`}
+                </>
+              )}
+            </p>
           </div>
           <PhotoFrame
             image={assets.running.action}
@@ -65,13 +86,103 @@ export default function RunningPage() {
         </div>
       </Section>
 
-      {/* Latest run */}
+      {/* 01 Personal bests: the highlight */}
+      <Section surface="light">
+        <div className="page-grid gap-y-10">
+          <SectionHeader index="01" eyebrow="Personal bests" title={['Fastest so far.']} size="md" className="lg:col-span-6" />
+          <p className="col-span-full self-end text-muted lg:col-span-5 lg:col-start-8">
+            Fastest continuous effort inside any outdoor run, measured from the GPS track the way Garmin and Strava do. Treadmill
+            runs don&apos;t count.
+          </p>
+          <dl className="col-span-full grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+            {achieved.map((b) => (
+              <div key={b.key} className="border-t-2 border-ink pt-4">
+                <dt className="label text-muted">{b.label}</dt>
+                <dd className="mt-3 font-display text-display-md font-extrabold tabular-nums">{formatDuration(b.sec!)}</dd>
+                <dd className="mt-2 text-sm">
+                  {formatPaceSec(b.sec! / b.km)} <span className="text-muted">/km</span>
+                </dd>
+                {b.run && (
+                  <dd className="mt-1 text-sm text-muted">
+                    {b.run.race ? <span className="font-medium text-ink">{b.run.race.name}</span> : b.run.title} · {formatDate(b.run.date)}
+                  </dd>
+                )}
+              </div>
+            ))}
+          </dl>
+          {next && (
+            <p className="col-span-full flex items-center gap-3 border-t border-line pt-5">
+              <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full border border-ink" />
+              <span className="font-semibold">{next.label}</span>
+              <span className="text-muted">· not run yet. The next line on this list.</span>
+            </p>
+          )}
+        </div>
+      </Section>
+
+      {/* 02 In numbers */}
+      {!sample && (
+        <Section surface="dark">
+          <div className="page-grid gap-y-12">
+            <SectionHeader index="02" eyebrow="In numbers" title={['Kilometre', 'by kilometre.']} size="md" className="lg:col-span-6" />
+            <dl className="col-span-full grid grid-cols-2 gap-x-6 gap-y-8 lg:col-span-6 lg:grid-cols-2 lg:self-end">
+              {[
+                { k: 'Outdoor runs', v: String(totals.runs) },
+                { k: 'Distance', v: `${totals.km.toFixed(0)} km` },
+                { k: 'Time on feet', v: `${Math.round(totals.durationSec / 3600)} h` },
+                { k: 'Longest run', v: totals.longest ? `${totals.longest.distanceKm.toFixed(1)} km` : '·' },
+              ].map((m) => (
+                <div key={m.k} className="border-t border-line pt-3">
+                  <dt className="label text-muted">{m.k}</dt>
+                  <dd className="mt-2 text-display-sm tabular-nums">{m.v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="col-span-full lg:col-span-7">
+              <TechnicalLabel as="h3" className="mb-4">
+                Distance per month (km)
+              </TechnicalLabel>
+              <MonthlyChart months={months} />
+            </div>
+            <div className="col-span-full lg:col-span-4 lg:col-start-9">
+              <TechnicalLabel as="h3" className="mb-4">
+                Consistency · {activeWeeks} of {weeks.length} weeks with a run
+              </TechnicalLabel>
+              <WeekStrip weeks={weeks} />
+            </div>
+          </div>
+        </Section>
+      )}
+
+      {/* 03 Races */}
+      {races.length > 0 && (
+        <Section surface="light">
+          <div className="page-grid gap-y-8">
+            <SectionHeader index="03" eyebrow="Races" title={['Bib on.']} size="md" className="lg:col-span-5" />
+            <ol className="col-span-full lg:col-span-7 lg:col-start-6">
+              {races.map((r) => {
+                const time = r.elapsedSec ?? r.durationSec;
+                return (
+                  <li key={r.id} className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 border-t border-line py-4 md:grid-cols-[7rem_1fr_5rem_5.5rem]">
+                    <span className="label text-muted md:order-none">{formatDate(r.date)}</span>
+                    <span className="order-first font-semibold md:order-none">{r.race?.name}</span>
+                    <span className="tabular-nums text-muted md:text-ink">{r.distanceKm.toFixed(2)} km</span>
+                    <span className="text-right tabular-nums">{formatDuration(time)}</span>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </Section>
+      )}
+
+      {/* 04 Latest outdoor run */}
       {run && (
-        <Section surface="dark" className="!pt-0">
+        <Section surface="dark">
           <div className="page-grid gap-y-10">
             <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
-              <TechnicalLabel as="h2" marker="01 /">
-                Latest run · {new Date(`${run.date}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })}
+              <TechnicalLabel as="h2" marker="04 /">
+                Latest outdoor run · {formatDate(run.date)}
               </TechnicalLabel>
               {run.sample && <SampleBadge />}
             </div>
@@ -79,7 +190,7 @@ export default function RunningPage() {
             <dl className="col-span-full grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-6">
               {[
                 { k: 'Distance', v: run.distanceKm.toFixed(2), u: 'km' },
-                { k: 'Time', v: formatDuration(run.durationSec), u: '' },
+                { k: 'Moving time', v: formatDuration(run.durationSec), u: '' },
                 { k: 'Avg pace', v: formatPace(run), u: '/km' },
                 { k: 'Avg HR', v: run.avgHr?.toString(), u: 'bpm' },
                 { k: 'Elevation', v: run.elevationGainM?.toString(), u: 'm' },
@@ -97,20 +208,16 @@ export default function RunningPage() {
                 ))}
             </dl>
 
-            {routeRun?.route && (
+            {run.route && (
               <figure className="col-span-full lg:col-span-7">
                 <RouteMap
-                  route={routeRun.route}
-                  distanceKm={routeRun.distanceKm}
-                  label={`Route of the ${routeRun.distanceKm.toFixed(2)} km run${routeRun.sample ? ' (sample shape)' : ''}.`}
+                  route={run.route}
+                  distanceKm={run.distanceKm}
+                  label={`Route of the ${run.distanceKm.toFixed(2)} km run${run.sample ? ' (sample shape)' : ''}.`}
                 />
                 <figcaption className="mt-2 flex justify-between gap-4">
-                  <TechnicalLabel>
-                    {routeRun === run
-                      ? `Route · ${run.sample ? 'sample shape' : 'ends trimmed for privacy'}`
-                      : `Latest outdoor route · ${new Date(`${routeRun.date}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })}`}
-                  </TechnicalLabel>
-                  <TechnicalLabel>{routeRun.distanceKm.toFixed(2)} km</TechnicalLabel>
+                  <TechnicalLabel>Route · {run.sample ? 'sample shape' : 'ends trimmed for privacy'}</TechnicalLabel>
+                  <TechnicalLabel>{run.distanceKm.toFixed(2)} km</TechnicalLabel>
                 </figcaption>
               </figure>
             )}
@@ -124,7 +231,9 @@ export default function RunningPage() {
                       <th scope="col" className="label py-2 font-normal text-muted">Km</th>
                       <th scope="col" className="label py-2 font-normal text-muted">Pace</th>
                       <th scope="col" className="label py-2 text-right font-normal text-muted">vs avg</th>
-                      <th scope="col" className="w-1/3 py-2"><span className="sr-only">Relative pace</span></th>
+                      <th scope="col" className="w-1/3 py-2">
+                        <span className="sr-only">Relative pace</span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -136,9 +245,7 @@ export default function RunningPage() {
                         <tr key={i} className="border-b border-line">
                           <td className="py-2">{s.km < 1 ? (i + s.km).toFixed(2) : i + 1}</td>
                           <td className="py-2">{formatPaceSec(pace)}</td>
-                          <td className="py-2 text-right">
-                            {delta === 0 ? '±0' : `${faster ? '−' : '+'}${Math.abs(delta)}s`}
-                          </td>
+                          <td className="py-2 text-right">{delta === 0 ? '±0' : `${faster ? '−' : '+'}${Math.abs(delta)}s`}</td>
                           <td className="py-2 pl-4" aria-hidden="true">
                             <span
                               className={faster ? 'block h-1.5 bg-lime' : 'block h-1.5 border border-muted'}
@@ -157,10 +264,26 @@ export default function RunningPage() {
         </Section>
       )}
 
+      {/* 05 Every run */}
+      {!sample && (
+        <Section surface="light" id="all-runs">
+          <div className="page-container">
+            <SectionHeader index="05" eyebrow="Every run" title={['All of them.']} size="md">
+              <p className="mt-4 max-w-prose text-muted">
+                {runs.length} outdoor runs, newest first. Routes are shapes only: the ends are cut and no coordinates are published.
+              </p>
+            </SectionHeader>
+            <div className="mt-10">
+              <RunLog runs={runs} />
+            </div>
+          </div>
+        </Section>
+      )}
+
       {/* Why running */}
-      <Section surface="light">
+      <Section surface="dark">
         <div className="page-grid gap-y-10">
-          <SectionHeader index="02" eyebrow="Why it connects" title={['Training is an', 'engineering loop.']} size="md" className="lg:col-span-6" />
+          <SectionHeader index="06" eyebrow="Why it connects" title={['Training is an', 'engineering loop.']} size="md" className="lg:col-span-6" />
           <ol className="col-span-full grid grid-cols-2 gap-x-6 md:grid-cols-3 lg:col-span-6">
             {principles.map((p, i) => (
               <li key={p} className="border-t border-line py-4">
@@ -172,57 +295,7 @@ export default function RunningPage() {
         </div>
       </Section>
 
-      {/* PBs + races */}
-      <Section surface="light" className="!pt-0">
-        <div className="page-grid gap-y-12">
-          <div className="col-span-full lg:col-span-5">
-            <TechnicalLabel as="h2" marker="03 /" className="mb-4">
-              Personal bests
-            </TechnicalLabel>
-            <dl>
-              {bests.map((b) => (
-                <div key={b.label} className="flex items-baseline justify-between border-t border-line py-3">
-                  <dt className="font-semibold">{b.label}</dt>
-                  <dd className="tabular-nums">
-                    {b.run ? (
-                      <>
-                        {formatDuration(b.run.durationSec)}
-                        {b.run.sample && <span className="label ml-2 text-muted">sample</span>}
-                      </>
-                    ) : (
-                      <span className="label text-muted">Awaiting data</span>
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div className="col-span-full lg:col-span-6 lg:col-start-7">
-            <TechnicalLabel as="h2" marker="04 /" className="mb-4">
-              Race history
-            </TechnicalLabel>
-            {races.length > 0 ? (
-              <ol>
-                {races.map((r) => (
-                  <li key={r.id} className="grid grid-cols-[6rem_1fr_auto] gap-4 border-t border-line py-3">
-                    <span className="label text-muted">{r.date}</span>
-                    <span className="font-semibold">{r.race?.name}</span>
-                    <span className="tabular-nums">{formatDuration(r.durationSec)}</span>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <div className="flex items-center gap-6 border-t border-line py-6">
-                <MiniRazeen pose="running" height={96} />
-                <p className="text-muted">No races synced yet. They&apos;ll appear here once Garmin data is connected.</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </Section>
-
-      <Section surface="dark">
+      <Section surface="light">
         <div className="page-grid gap-y-8">
           <PhotoFrame
             image={assets.running.race}
@@ -232,10 +305,11 @@ export default function RunningPage() {
             className="col-span-full md:col-span-4 lg:col-span-5"
           />
           <div className="col-span-full self-end md:col-span-4 lg:col-span-6 lg:col-start-7">
-            <SectionHeader index="05" eyebrow="Running stories" title={['Further than', 'yesterday.']} size="md" />
-            <p className="mt-6 max-w-prose text-muted">
-              Race reports and training reflections will live here, alongside the field notes.
-            </p>
+            <SectionHeader index="07" eyebrow="Running stories" title={['Further than', 'yesterday.']} size="md" />
+            <p className="mt-6 max-w-prose text-muted">Race reports and training reflections will live here, alongside the other stories.</p>
+            <div className="mt-6">
+              <ArrowLink href="/stories">Read stories</ArrowLink>
+            </div>
           </div>
         </div>
       </Section>

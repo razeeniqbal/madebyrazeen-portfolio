@@ -20,6 +20,7 @@ Optional:
 from __future__ import annotations
 
 import json
+import re
 import math
 import os
 import sys
@@ -34,6 +35,8 @@ PRIVACY_TRIM_M = 300
 MAX_ROUTE_POINTS = 160
 RUN_TYPES = {"running", "street_running", "track_running", "trail_running", "treadmill_running"}
 RACE_KEYWORDS = [k.strip().lower() for k in os.getenv("RACE_KEYWORDS", "race,marathon").split(",") if k.strip()]
+# Same event-name rule as scripts/strava/import_export.py: a year ("Perkeso Run 2026"), HM, Ekiden, Debut.
+RACE_PATTERNS = re.compile(r"\b20\d\d\b|\bhm\b|ekiden|debut", re.I)
 
 
 def haversine(a: tuple[float, float], b: tuple[float, float]) -> float:
@@ -105,23 +108,27 @@ def main() -> None:
             continue
         aid = a["activityId"]
         name = a.get("activityName") or "Run"
+        indoor = a["activityType"]["typeKey"] == "treadmill_running"
         print(f"- {a.get('startTimeLocal')} {name}")
         run = {
             "id": str(aid),
             "date": (a.get("startTimeLocal") or "")[:10],
             "title": name,
             "distanceKm": round((a.get("distance") or 0) / 1000, 2),
-            "durationSec": round(a.get("duration") or 0),
+            # Moving time for pace; elapsed kept separately (races are timed on elapsed).
+            "durationSec": round(a.get("movingDuration") or a.get("duration") or 0),
+            "elapsedSec": round(a.get("elapsedDuration") or a.get("duration") or 0),
             "avgHr": round(a["averageHR"]) if a.get("averageHR") else None,
             "maxHr": round(a["maxHR"]) if a.get("maxHR") else None,
             "elevationGainM": round(a["elevationGain"]) if a.get("elevationGain") else None,
             "cadenceSpm": round(a["averageRunningCadenceInStepsPerMinute"])
             if a.get("averageRunningCadenceInStepsPerMinute")
             else None,
-            "splits": splits_for(client, aid),
-            "route": route_for(client, aid),
+            "splits": None if indoor else splits_for(client, aid),
+            "route": None if indoor else route_for(client, aid),
+            "indoor": indoor,
         }
-        if any(k in name.lower() for k in RACE_KEYWORDS):
+        if not indoor and (any(k in name.lower() for k in RACE_KEYWORDS) or RACE_PATTERNS.search(name)):
             run["race"] = {"name": name}
         if run["distanceKm"] > 0 and run["durationSec"] > 0:
             runs.append({k: v for k, v in run.items() if v is not None})

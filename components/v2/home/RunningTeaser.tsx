@@ -4,20 +4,13 @@ import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { assets } from '@/lib/assets';
-import { getLatestRun, getSyncInfo, formatDuration, formatPace } from '@/content/running';
+import { getPersonalBests, getTotals, isSampleData, formatDuration, formatPaceSec } from '@/content/running';
 
-const shortDate = (iso: string) =>
-  new Date(iso.length === 10 ? `${iso}T00:00:00Z` : iso).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
-
-/** Home 05. A small preview only: the full dashboard lives on /running. Real data, never invented. */
+/** Home 05. Personal bests lead (not the latest run, which may be a short easy one). Real data, never invented. */
 export function RunningTeaser() {
-  const run = getLatestRun();
-  const sync = getSyncInfo();
+  const sample = isSampleData();
+  const totals = getTotals();
+  const bests = getPersonalBests().filter((b) => b.sec && ['5k', '10k', 'half'].includes(b.key));
 
   return (
     <Section surface="dark">
@@ -34,32 +27,24 @@ export function RunningTeaser() {
         <div className="col-span-full flex flex-col md:col-span-4 lg:col-span-6 lg:col-start-7 lg:self-end">
           <SectionHeader index="04" eyebrow="Running" title={['Running has become', 'my other kind of', 'problem solving.']} size="md" />
 
-          {run && (
+          {sample ? (
+            <p className="mt-12 border-t border-line pt-4">
+              <TechnicalLabel className="border border-current px-1.5">Sample data · Garmin sync coming</TechnicalLabel>
+            </p>
+          ) : (
             <div className="mt-12">
               <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line pt-4">
-                <TechnicalLabel>Latest run · {shortDate(run.date)}</TechnicalLabel>
-                {run.sample ? (
-                  <TechnicalLabel className="border border-current px-1.5">Sample data · Garmin sync coming</TechnicalLabel>
-                ) : (
-                  sync && (
-                    <TechnicalLabel>
-                      {sync.source} · updated {shortDate(sync.syncedAt)}
-                    </TechnicalLabel>
-                  )
-                )}
+                <TechnicalLabel>Personal bests</TechnicalLabel>
+                <TechnicalLabel>
+                  {totals.runs} outdoor runs · {totals.km.toFixed(0)} km
+                </TechnicalLabel>
               </div>
               <dl className="mt-6 grid grid-cols-3 gap-4">
-                {[
-                  { k: 'Distance', v: run.distanceKm.toFixed(2), u: 'km' },
-                  { k: 'Time', v: formatDuration(run.durationSec), u: '' },
-                  { k: 'Pace', v: formatPace(run), u: '/km' },
-                ].map((m) => (
-                  <div key={m.k}>
-                    <dt className="label text-muted">{m.k}</dt>
-                    <dd className="mt-1 text-display-sm tabular-nums">
-                      {m.v}
-                      {m.u && <span className="ml-1 text-base font-normal text-muted">{m.u}</span>}
-                    </dd>
+                {bests.map((b) => (
+                  <div key={b.key}>
+                    <dt className="label text-muted">{b.short}</dt>
+                    <dd className="mt-1 text-display-sm tabular-nums">{formatDuration(b.sec!)}</dd>
+                    <dd className="mt-1 text-sm text-muted">{formatPaceSec(b.sec! / b.km)} /km</dd>
                   </div>
                 ))}
               </dl>

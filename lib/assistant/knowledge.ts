@@ -14,7 +14,7 @@ import { chapters } from '@/content/story';
 import { availability, helpWith } from '@/content/contact';
 import { experiments, exploring } from '@/content/lab';
 import { notes } from '@/content/notes';
-import { isSampleData } from '@/content/running';
+import { isSampleData, getTotals, getPersonalBests, getRaces, formatDuration } from '@/content/running';
 import { SITE_URL } from '@/lib/site';
 
 function blockText(b: Block): string {
@@ -78,9 +78,23 @@ export function buildKnowledge(): string {
 
   out.push(`## Stories (writing)\n${notes.map((n) => `- ${n.title} (${n.status}): ${n.summary}`).join('\n')}`);
 
-  out.push(
-    `## Running\nRazeen runs road races. ${isSampleData() ? 'The running statistics on the site are currently SAMPLE data, not real results; do not quote them as Razeen’s times.' : 'Running data on the site is synced from Garmin.'} Running page: ${SITE_URL}/running`,
-  );
+  if (isSampleData()) {
+    out.push(
+      `## Running\nRazeen runs road races. The running statistics on the site are currently SAMPLE data, not real results; do not quote them as Razeen’s times. Running page: ${SITE_URL}/running`,
+    );
+  } else {
+    const t = getTotals();
+    const pbs = getPersonalBests()
+      .filter((b) => b.sec)
+      .map((b) => `${b.label}: ${formatDuration(b.sec!)}${b.run ? ` (${b.run.race?.name ?? b.run.date})` : ''}`)
+      .join('; ');
+    const races = getRaces()
+      .map((r) => `${r.date} ${r.race?.name} ${r.distanceKm} km in ${formatDuration(r.elapsedSec ?? r.durationSec)}`)
+      .join('; ');
+    out.push(
+      `## Running\nRazeen runs road races. Data synced from Garmin and Strava; treadmill runs excluded. ${t.runs} outdoor runs, ${t.km.toFixed(0)} km since ${t.since}. Personal bests (fastest efforts): ${pbs}. Races: ${races}. Running page: ${SITE_URL}/running`,
+    );
+  }
 
   const byIssuer = new Map<string, string[]>();
   achievements.forEach((a) => byIssuer.set(a.organization, [...(byIssuer.get(a.organization) ?? []), `${a.title} (${a.issuedDate})`]));

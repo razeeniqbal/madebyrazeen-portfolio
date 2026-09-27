@@ -42,7 +42,7 @@ Production edits go through GitHub: you sign in with GitHub, and each save becom
 A floating button on every V2 page, plus "Ask the assistant" buttons on Contact and About.
 
 - **Scope:** it answers only questions about Razeen, using only what the site says. The knowledge is built automatically from `content/data` (`lib/assistant/knowledge.ts`), so editing content in the admin updates what it knows on the next deploy. Anything off-topic is declined in one sentence; unknowns point to `/contact`; sample and illustrative numbers are flagged as such.
-- **Model:** `claude-opus-5` at low effort, with server-side refusal fallback. Override with `CHAT_MODEL`.
+- **Model:** `claude-haiku-4-5` (lowest cost; answers are short and grounded in site content). Override with `CHAT_MODEL`, e.g. `claude-sonnet-5` for stronger answers.
 - **Cost controls:**
   - The long system prompt is prompt-cached.
   - `max_tokens` is 2048.

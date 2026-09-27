@@ -2,12 +2,15 @@
  * Running data layer. UI components depend only on the `Run` shape and the
  * getters below, so the source can change without touching the page.
  *
- * Source order:
- *   1. content/running/runs.json: written by scripts/garmin/export_runs.py (real data)
- *   2. SAMPLE_RUNS below: used only while runs.json is empty, and every
- *      surface labels it "Sample data" (PRD §58).
+ * Sources (merged, de-duplicated, newest first):
+ *   1. content/running/runs.json: daily Garmin sync (scripts/garmin/export_runs.py)
+ *   2. content/running/strava.json: full history from a Strava export (scripts/strava/import_export.py),
+ *      which adds best efforts, race names and the treadmill flag
+ *   3. SAMPLE_RUNS below: only while both are empty, labelled "Sample data" everywhere (PRD §58).
+ * Treadmill / indoor runs are dropped: no route, and their pace is not comparable.
  */
 import exported from './running/runs.json';
+import stravaExport from './running/strava.json';
 import meta from './running/meta.json';
 
 export interface Split {
@@ -33,7 +36,16 @@ export interface Run {
   route?: [number, number][];
   race?: { name: string };
   sample?: boolean;
+  /** Treadmill / indoor: excluded from everything on the site. */
+  indoor?: boolean;
+  /** Elapsed time incl. pauses (durationSec is moving time). */
+  elapsedSec?: number;
+  /** Fastest continuous efforts inside the run, in seconds (from the GPS stream). */
+  bestEfforts?: Partial<Record<EffortKey, number>>;
+  source?: 'garmin' | 'strava';
 }
+
+export type EffortKey = '1k' | '5k' | '10k' | 'half' | 'marathon';
 
 // ── Sample data (labelled everywhere it appears) ───────────────────────────
 const sampleSplits = ['5:52', '5:48', '5:41', '5:36', '5:38', '5:44', '5:49', '5:46', '5:42', '5:37'].map((p, i) => {
@@ -71,48 +83,144 @@ const SAMPLE_RUNS: Run[] = [
 ];
 
 // ── Getters ─────────────────────────────────────────────────────────────────
+const GENERIC_TITLE = /^(run|treadmill run|morning run|afternoon run|evening run|night run|outdoor running)$/i;
+
+/** Same run from both sources: same local date and distance within 3%. */
+const sameRun = (a: Run, b: Run) =>
+  a.date === b.date && Math.abs(a.distanceKm - b.distanceKm) <= Math.max(a.distanceKm, b.distanceKm) * 0.03;
+
+function merged(): Run[] {
+  const out: Run[] = [...(stravaExport as Run[])];
+  for (const g of exported as Run[]) {
+    const twin = out.findIndex((x) => sameRun(x, g));
+    if (twin === -1) {
+      // Garmin-only (newer than the Strava export). Older syncs carry no indoor flag: no route means treadmill.
+      out.push({ ...g, source: 'garmin', indoor: g.indoor ?? !g.route });
+    } else if (GENERIC_TITLE.test(out[twin].title) && !GENERIC_TITLE.test(g.title)) {
+      out[twin] = { ...out[twin], title: g.title };
+    }
+  }
+  return out;
+}
+
+const REAL: Run[] = merged()
+  .filter((r) => !r.indoor)
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+/** Outdoor runs, newest first (sample data only when no real data exists). */
 export function getRuns(): Run[] {
-  const real = exported as Run[];
-  const runs = real.length > 0 ? real : SAMPLE_RUNS;
-  return [...runs].sort((a, b) => b.date.localeCompare(a.date));
+  return REAL.length > 0 ? REAL : SAMPLE_RUNS;
 }
 
 export const getLatestRun = (): Run | undefined => getRuns()[0];
 
-/** Most recent run with a GPS route (treadmill runs have none). */
+/** Most recent run with a GPS route. */
 export const getLatestRouteRun = (): Run | undefined => getRuns().find((r) => r.route && r.route.length > 1);
 
-export const isSampleData = () => (exported as Run[]).length === 0;
+export const isSampleData = () => REAL.length === 0;
 
 /** Race results among the runs (those with `race` set). */
 export const getRaces = () => getRuns().filter((r) => r.race);
 
-/** Fastest effort at or above each standard distance, from whole-run times. */
-export function getPersonalBests() {
-  const targets = [
-    { label: '5K', km: 5 },
-    { label: '10K', km: 10 },
-    { label: 'Half marathon', km: 21.0975 },
-    { label: 'Marathon', km: 42.195 },
-  ];
+export const PB_TARGETS: { key: EffortKey; label: string; short: string; km: number }[] = [
+  { key: '1k', label: '1 kilometre', short: '1K', km: 1 },
+  { key: '5k', label: '5 kilometres', short: '5K', km: 5 },
+  { key: '10k', label: '10 kilometres', short: '10K', km: 10 },
+  { key: 'half', label: 'Half marathon', short: 'Half', km: 21.0975 },
+  { key: 'marathon', label: 'Marathon', short: 'Full', km: 42.195 },
+];
+
+export interface PersonalBest {
+  key: EffortKey;
+  label: string;
+  short: string;
+  km: number;
+  sec?: number;
+  run?: Run;
+}
+
+/**
+ * Fastest continuous effort per distance (best efforts from the GPS stream, as Strava and Garmin do).
+ * Runs without streams fall back to their whole moving time when the run is that distance (within 8%).
+ */
+export function getPersonalBests(): PersonalBest[] {
   const runs = getRuns();
-  return targets.map((t) => {
-    const eligible = runs.filter((r) => r.distanceKm >= t.km && r.distanceKm < t.km * 1.08);
-    const best = eligible.sort((a, b) => a.durationSec / a.distanceKm - b.durationSec / b.distanceKm)[0];
-    return { ...t, run: best };
+  return PB_TARGETS.map((t) => {
+    let best: { sec: number; run: Run } | undefined;
+    for (const r of runs) {
+      const fallback = !r.bestEfforts && r.distanceKm >= t.km && r.distanceKm < t.km * 1.08 ? (r.durationSec * t.km) / r.distanceKm : undefined;
+      const effort = r.bestEfforts?.[t.key] ?? fallback;
+      if (effort && (!best || effort < best.sec)) best = { sec: Math.round(effort), run: r };
+    }
+    return { ...t, ...best };
   });
 }
 
 export function getTotals() {
   const runs = getRuns();
+  const longest = runs.reduce<Run | undefined>((m, r) => (!m || r.distanceKm > m.distanceKm ? r : m), undefined);
   return {
     runs: runs.length,
-    km: runs.reduce((s, r) => s + r.distanceKm, 0),
-    durationSec: runs.reduce((s, r) => s + r.durationSec, 0),
+    km: runs.reduce((acc, r) => acc + r.distanceKm, 0),
+    durationSec: runs.reduce((acc, r) => acc + r.durationSec, 0),
+    longest,
+    since: runs.length ? runs[runs.length - 1].date : undefined,
   };
 }
 
+/** Distance per calendar month, oldest first, including empty months in between. */
+export function getMonthly(): { month: string; km: number; runs: number }[] {
+  const runs = getRuns();
+  if (!runs.length) return [];
+  const byMonth = new Map<string, { km: number; runs: number }>();
+  for (const r of runs) {
+    const m = r.date.slice(0, 7);
+    const cur = byMonth.get(m) ?? { km: 0, runs: 0 };
+    byMonth.set(m, { km: cur.km + r.distanceKm, runs: cur.runs + 1 });
+  }
+  const out: { month: string; km: number; runs: number }[] = [];
+  const [fy, fm] = runs[runs.length - 1].date.slice(0, 7).split('-').map(Number);
+  const last = runs[0].date.slice(0, 7);
+  for (let y = fy, m = fm; ; ) {
+    const key = `${y}-${String(m).padStart(2, '0')}`;
+    if (key > last) break;
+    out.push({ month: key, ...(byMonth.get(key) ?? { km: 0, runs: 0 }) });
+    if (m === 12) {
+      m = 1;
+      y += 1;
+    } else m += 1;
+  }
+  return out;
+}
+
+/** Weeks (Monday start) from the first run to the latest, with the outdoor runs in each. */
+export function getWeekly(): { weekStart: string; runs: number; km: number }[] {
+  const runs = getRuns();
+  if (!runs.length) return [];
+  const monday = (iso: string) => {
+    const d = new Date(`${iso}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+    return d;
+  };
+  const weeks = new Map<string, { runs: number; km: number }>();
+  for (const r of runs) {
+    const k = monday(r.date).toISOString().slice(0, 10);
+    const cur = weeks.get(k) ?? { runs: 0, km: 0 };
+    weeks.set(k, { runs: cur.runs + 1, km: cur.km + r.distanceKm });
+  }
+  const out: { weekStart: string; runs: number; km: number }[] = [];
+  const end = monday(runs[0].date);
+  for (const d = monday(runs[runs.length - 1].date); d <= end; d.setUTCDate(d.getUTCDate() + 7)) {
+    const k = d.toISOString().slice(0, 10);
+    out.push({ weekStart: k, ...(weeks.get(k) ?? { runs: 0, km: 0 }) });
+  }
+  return out;
+}
+
 // ── Formatting ──────────────────────────────────────────────────────────────
+export const formatDate = (iso: string, opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' }) =>
+  new Date(`${iso.slice(0, 10)}T00:00:00Z`).toLocaleDateString('en-GB', { ...opts, timeZone: 'UTC' });
+
 export function formatDuration(sec: number): string {
   const h = Math.floor(sec / 3600);
   const m = Math.floor((sec % 3600) / 60);
