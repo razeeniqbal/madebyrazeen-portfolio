@@ -6,7 +6,8 @@ import { notes } from '@/content/notes';
 
 /** Home 04. Three journal entries, text only. Unpublished ones show their "In writing" / "Draft" badge. */
 export function JournalTeaser() {
-  const latest = notes.slice(0, 3);
+  // Readable entries first (newest first), then planned topics.
+  const latest = [...notes].sort((a, b) => Number(Boolean(b.body)) - Number(Boolean(a.body))).slice(0, 3);
   if (latest.length === 0) return null;
 
   return (

@@ -1,0 +1,58 @@
+{
+  "title": "The first ten kilometres",
+  "number": "006",
+  "summary": "From a first 10K in March to a half marathon in September, measured one run at a time.",
+  "topic": "Running",
+  "status": "draft",
+  "date": null,
+  "readingMinutes": 4,
+  "body": [
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": true,
+        "body": [
+          "On 13 March 2026 I ran ten kilometres without stopping for the first time. I named the activity exactly what it felt like: “FIRST 10KM RUN !”. Six months later I finished the BOOM RUN half marathon, 21.42 km."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Neither run was fast. That is not the point of this page. The point is what happened in between: the boring, repeated, measurable work that engineering already taught me to trust."
+        ]
+      }
+    },
+    {
+      "discriminant": "list",
+      "value": {
+        "numbered": false,
+        "items": [
+          {
+            "title": "Show up",
+            "detail": "88 outdoor runs and about 509 km since January."
+          },
+          {
+            "title": "Measure",
+            "detail": "Heart rate, pace and splits on every run, synced to this site."
+          },
+          {
+            "title": "Race",
+            "detail": "Six events so far, including Perkeso Run 2026, Score 10km Debut and BOOM RUN 2026."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Running is the same loop as building software: input, process, iterate, progress. The difference is that you cannot refactor your legs overnight. Progress only shows up over months, which is exactly why it is worth writing down."
+        ]
+      }
+    }
+  ]
+}

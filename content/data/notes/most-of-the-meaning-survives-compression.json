@@ -1,0 +1,59 @@
+{
+  "title": "Most of the meaning survives compression",
+  "number": "004",
+  "summary": "What 404,290 Quora question pairs taught me about trading accuracy for speed.",
+  "topic": "AI",
+  "status": "draft",
+  "date": null,
+  "readingMinutes": 5,
+  "body": [
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": true,
+        "body": [
+          "My Master’s project started with a simple question: do you really need a heavy model to spot duplicate questions? The strongest published detectors use deep networks. They are accurate, and they are expensive to train and to serve."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "I worked with the Quora Question Pairs dataset: 404,290 pairs, about 37% of them duplicates. Each question became FastText word vectors, each pair became 1,200 features, and then Principal Component Analysis squeezed those features down before a classifier made the call."
+        ]
+      }
+    },
+    {
+      "discriminant": "list",
+      "value": {
+        "numbered": false,
+        "items": [
+          {
+            "title": "The baseline",
+            "detail": "XGBoost on all 1,200 features reached 84.01% accuracy."
+          },
+          {
+            "title": "The compressed version",
+            "detail": "At 200 dimensions it reached 83.68%, a third of a percentage point lower."
+          },
+          {
+            "title": "The cost",
+            "detail": "Training time fell by 66.7% on average and memory by 83.4%, from 3.2 GB to 0.53 GB."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "The number I keep coming back to is not the accuracy. It is the shape of the trade-off: throw away five sixths of the features and you lose almost nothing. Most of the meaning survives.",
+          "It changed how I evaluate models at work too. A model that is slightly better but too expensive to run has not really solved the problem. Cost belongs in the evaluation from day one."
+        ]
+      }
+    }
+  ]
+}

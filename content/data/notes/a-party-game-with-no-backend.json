@@ -1,0 +1,63 @@
+{
+  "title": "A party game with no backend",
+  "number": "007",
+  "summary": "Building Balang: probability, kuih and peer-to-peer rooms that run entirely in the browser.",
+  "topic": "Product",
+  "status": "draft",
+  "date": null,
+  "readingMinutes": 5,
+  "body": [
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": true,
+        "body": [
+          "Balang is a Malaysian probability party game. A jar holds 25 kuih tokens of five kinds, everyone can see the counts, and nobody knows the order they will come out in. You bet on secret prediction cards and then watch the jar decide."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "The fun constraint was infrastructure: I wanted friends to play together without me running a server."
+        ]
+      }
+    },
+    {
+      "discriminant": "list",
+      "value": {
+        "numbered": false,
+        "items": [
+          {
+            "title": "The host is the server",
+            "detail": "Whoever creates the room holds the secret draw order, every hand, and the bots. Guests only ever receive their own filtered view."
+          },
+          {
+            "title": "Peer to peer",
+            "detail": "Players connect over WebRTC with PeerJS, using a room code, an invite link or a QR code."
+          },
+          {
+            "title": "Fair rewards",
+            "detail": "Each of the 12 card types is priced from its probability at deal time using Monte Carlo simulation, so harder predictions pay more."
+          },
+          {
+            "title": "Dropped connections",
+            "detail": "If a guest disconnects, a bot plays their turns until they come back."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "The engine is plain TypeScript with tests, separate from the React UI. That separation made balancing possible: I could let near-optimal bots play thousands of rounds and adjust the reward tiers until no single strategy dominated.",
+          "It is a small project, but it has the same shape as the bigger ones: a clear rule set, honest numbers, and a system that keeps working when something drops out."
+        ]
+      }
+    }
+  ]
+}

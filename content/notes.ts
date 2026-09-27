@@ -44,7 +44,7 @@ export const notes: Note[] = readCollection<CmsNote>('notes')
       body: body.length ? body : undefined,
     };
   })
-  .sort((a, b) => a.number.localeCompare(b.number));
+  .sort((a, b) => b.number.localeCompare(a.number)); // newest entry first
 
 export const getPublishedNotes = () => notes.filter((n) => n.status === 'published');
 export const getReadableNotes = () => notes.filter((n) => n.status !== 'in-writing' && n.body);

@@ -1,0 +1,58 @@
+{
+  "title": "Automating the boring parts",
+  "number": "005",
+  "summary": "How repetitive geotechnical work pushed a civil engineer toward Python, data and eventually AI.",
+  "topic": "Retrospective",
+  "status": "draft",
+  "date": null,
+  "readingMinutes": 4,
+  "body": [
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": true,
+        "body": [
+          "I trained as a civil engineer at Universiti Putra Malaysia and started my career at G&P Geotechnic. The engineering was real. So was the pile of repetitive work around it: the same calculations, the same spreadsheets, the same reports."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "So I taught myself Python and VBA and started automating the boring parts. That cut the manual effort on those workflows by about 30%, but the bigger change was in me: I realised I cared more about the data than the drawings."
+        ]
+      }
+    },
+    {
+      "discriminant": "list",
+      "value": {
+        "numbered": true,
+        "items": [
+          {
+            "title": "Nights",
+            "detail": "I studied for the Certified Data Analyst Associate, PCEP and Power BI certifications."
+          },
+          {
+            "title": "The switch",
+            "detail": "I left engineering for a Data Analyst role at EISmartwork, building models on more than ten million records."
+          },
+          {
+            "title": "Going deeper",
+            "detail": "I started a Master’s in AI at UMPSA while working, and finished with a CGPA of 3.76."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Looking back, nothing about the move was a clean break. Engineering taught me to respect systems. Automation taught me that the most useful software starts with somebody being annoyed by a spreadsheet."
+        ]
+      }
+    }
+  ]
+}
