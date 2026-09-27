@@ -11,13 +11,16 @@ export interface ImageAsset {
   width: number;
   height: number;
   alt: string;
+  /** Cover art only: 'real' when every number painted on it is a true figure (no "illustrative" label). */
+  figures?: 'illustrative' | 'real';
 }
 
-const img = (src: AssetPath, width: number, height: number, alt: string): ImageAsset => ({
+const img = (src: AssetPath, width: number, height: number, alt: string, figures?: ImageAsset['figures']): ImageAsset => ({
   src,
   width,
   height,
   alt,
+  ...(figures && { figures }),
 });
 
 export const assets = {
@@ -41,6 +44,13 @@ export const assets = {
     sepang: img('/assets/v2/projects/sepang-vision-lab/cover.webp', 1672, 941, 'Sepang Vision Lab cover: a race car on track beside the Sepang circuit map and telemetry charts'),
     qualityplus: img('/assets/v2/projects/qualityplus/cover.webp', 1672, 941, 'QualityPlus cover: raw data flowing through completeness, uniqueness, validity, consistency and AI rule-check stages into clean data'),
     nlp: img('/assets/v2/projects/nlp-research/cover.webp', 1672, 941, 'AI / NLP research cover: two questions tokenised, embedded and compared in a semantic space'),
+    balang: img(
+      '/assets/v2/projects/balang/cover.webp',
+      1672,
+      941,
+      'Balang cover: a glass kuih jar with a red lid on a green game table, kuih tokens drawn one by one, prediction cards and phones joining a room',
+      'real',
+    ),
   },
   running: {
     action: img('/assets/v2/running/run-action.webp', 1605, 2400, 'Razeen running toward the camera, arms raised, during a road race'),

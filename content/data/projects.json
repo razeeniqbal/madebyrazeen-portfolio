@@ -574,7 +574,7 @@
         "live": "https://balang.madebyrazeen.com",
         "source": "https://github.com/razeeniqbal/balang"
       },
-      "cover": "none",
+      "cover": "projects.balang",
       "metrics": [
         {
           "label": "Tokens per round",

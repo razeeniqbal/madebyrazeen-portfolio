@@ -41,7 +41,7 @@ export function ProjectFeature({ project, size, sizes, className }: ProjectFeatu
               className="w-full transition-transform duration-700 ease-out group-hover:scale-[1.015] motion-reduce:transition-none"
             />
             <span className="label absolute bottom-0 right-0 bg-carbon/85 px-2 py-1 text-[0.625rem] text-warm/80">
-              Cover art · figures illustrative
+              {project.cover.figures === 'real' ? 'Cover art' : 'Cover art · figures illustrative'}
             </span>
           </div>
         )}

@@ -106,7 +106,7 @@ export default async function ProjectPage({ params }: Params) {
                 className="w-full border border-line"
               />
               <figcaption className="mt-2">
-                <TechnicalLabel>Cover art · figures illustrative</TechnicalLabel>
+                <TechnicalLabel>{project.cover.figures === 'real' ? 'Cover art' : 'Cover art · figures illustrative'}</TechnicalLabel>
               </figcaption>
             </figure>
           )}
