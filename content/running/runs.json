@@ -4,75 +4,32 @@
   "date": "2026-09-22",
   "title": "Treadmill Running",
   "distanceKm": 5.0,
-  "durationSec": 3015,
+  "durationSec": 2862,
+  "elapsedSec": 3015,
   "avgHr": 155,
   "maxHr": 169,
   "cadenceSpm": 144,
-  "splits": [
-   {
-    "km": 1.0,
-    "durationSec": 759
-   },
-   {
-    "km": 1.0,
-    "durationSec": 686
-   },
-   {
-    "km": 1.0,
-    "durationSec": 683
-   },
-   {
-    "km": 1.0,
-    "durationSec": 713
-   },
-   {
-    "km": 0.29,
-    "durationSec": 174
-   }
-  ]
+  "indoor": true
  },
  {
   "id": "24355826468",
   "date": "2026-09-14",
   "title": "Treadmill Running",
   "distanceKm": 5.2,
-  "durationSec": 3600,
+  "durationSec": 3462,
+  "elapsedSec": 3600,
   "avgHr": 131,
   "maxHr": 160,
   "cadenceSpm": 142,
-  "splits": [
-   {
-    "km": 1.0,
-    "durationSec": 752
-   },
-   {
-    "km": 1.0,
-    "durationSec": 677
-   },
-   {
-    "km": 1.0,
-    "durationSec": 672
-   },
-   {
-    "km": 1.0,
-    "durationSec": 666
-   },
-   {
-    "km": 1.0,
-    "durationSec": 584
-   },
-   {
-    "km": 0.23,
-    "durationSec": 250
-   }
-  ]
+  "indoor": true
  },
  {
   "id": "24340187556",
   "date": "2026-09-13",
   "title": "Putrajaya Running",
   "distanceKm": 21.42,
-  "durationSec": 12194,
+  "durationSec": 12117,
+  "elapsedSec": 12194,
   "avgHr": 169,
   "maxHr": 187,
   "elevationGainM": 132,
@@ -780,82 +737,40 @@
     0.5806,
     0.2358
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "24295620868",
   "date": "2026-09-09",
   "title": "Treadmill Running",
   "distanceKm": 6.12,
-  "durationSec": 3600,
+  "durationSec": 3587,
+  "elapsedSec": 3600,
   "avgHr": 159,
   "maxHr": 176,
   "cadenceSpm": 157,
-  "splits": [
-   {
-    "km": 1.0,
-    "durationSec": 613
-   },
-   {
-    "km": 1.0,
-    "durationSec": 586
-   },
-   {
-    "km": 1.0,
-    "durationSec": 590
-   },
-   {
-    "km": 1.0,
-    "durationSec": 595
-   },
-   {
-    "km": 1.0,
-    "durationSec": 596
-   },
-   {
-    "km": 1.0,
-    "durationSec": 555
-   },
-   {
-    "km": 0.12,
-    "durationSec": 66
-   }
-  ]
+  "indoor": true
  },
  {
   "id": "24283614543",
   "date": "2026-09-08",
   "title": "Treadmill Running",
   "distanceKm": 4.5,
-  "durationSec": 2320,
+  "durationSec": 2265,
+  "elapsedSec": 2320,
   "avgHr": 162,
   "maxHr": 177,
   "cadenceSpm": 155,
-  "splits": [
-   {
-    "km": 1.0,
-    "durationSec": 652
-   },
-   {
-    "km": 1.0,
-    "durationSec": 627
-   },
-   {
-    "km": 1.0,
-    "durationSec": 657
-   },
-   {
-    "km": 0.66,
-    "durationSec": 384
-   }
-  ]
+  "indoor": true
  },
  {
   "id": "24257687909",
   "date": "2026-09-06",
   "title": "Cyberjaya Running",
   "distanceKm": 5.01,
-  "durationSec": 2887,
+  "durationSec": 2885,
+  "elapsedSec": 2887,
   "avgHr": 154,
   "maxHr": 172,
   "elevationGainM": 10,
@@ -1507,43 +1422,20 @@
     0.6161,
     0.1111
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "24230071213",
   "date": "2026-09-04",
   "title": "Treadmill Running",
   "distanceKm": 5.2,
-  "durationSec": 3600,
+  "durationSec": 3468,
+  "elapsedSec": 3600,
   "avgHr": 149,
   "maxHr": 169,
   "cadenceSpm": 135,
-  "splits": [
-   {
-    "km": 1.0,
-    "durationSec": 555
-   },
-   {
-    "km": 1.0,
-    "durationSec": 667
-   },
-   {
-    "km": 1.0,
-    "durationSec": 657
-   },
-   {
-    "km": 1.0,
-    "durationSec": 682
-   },
-   {
-    "km": 1.0,
-    "durationSec": 675
-   },
-   {
-    "km": 0.65,
-    "durationSec": 363
-   }
-  ]
+  "indoor": true
  },
  {
   "id": "24046550588",
@@ -1551,6 +1443,7 @@
   "title": "Sungai Karang - Easy Run",
   "distanceKm": 1.86,
   "durationSec": 1091,
+  "elapsedSec": 1091,
   "avgHr": 135,
   "maxHr": 156,
   "elevationGainM": 22,
@@ -2122,14 +2015,16 @@
     0.491,
     0.759
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "24020939534",
   "date": "2026-08-18",
   "title": "Kuala Lumpur Running",
   "distanceKm": 5.0,
-  "durationSec": 3474,
+  "durationSec": 3470,
+  "elapsedSec": 3474,
   "avgHr": 121,
   "maxHr": 153,
   "elevationGainM": 51,
@@ -2785,14 +2680,16 @@
     0.799,
     0.2689
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23988226013",
   "date": "2026-08-15",
   "title": "Putrajaya Running",
   "distanceKm": 15.01,
-  "durationSec": 9060,
+  "durationSec": 9034,
+  "elapsedSec": 9546,
   "avgHr": 148,
   "maxHr": 172,
   "elevationGainM": 10,
@@ -3464,14 +3361,16 @@
     0.5387,
     0.4012
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23937675655",
   "date": "2026-08-11",
   "title": "Putrajaya Running",
   "distanceKm": 5.01,
-  "durationSec": 2793,
+  "durationSec": 2792,
+  "elapsedSec": 2793,
   "avgHr": 153,
   "maxHr": 167,
   "cadenceSpm": 145,
@@ -4122,7 +4021,8 @@
     0.3858,
     0.8353
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23921199669",
@@ -4130,6 +4030,7 @@
   "title": "Seri Kembangan Running",
   "distanceKm": 0.5,
   "durationSec": 379,
+  "elapsedSec": 379,
   "avgHr": 144,
   "maxHr": 148,
   "cadenceSpm": 106,
@@ -4138,14 +4039,16 @@
     "km": 0.5,
     "durationSec": 379
    }
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23921198405",
   "date": "2026-08-10",
   "title": "Seri Kembangan Running",
   "distanceKm": 2.5,
-  "durationSec": 1247,
+  "durationSec": 1242,
+  "elapsedSec": 1247,
   "avgHr": 160,
   "maxHr": 184,
   "elevationGainM": 2,
@@ -4785,14 +4688,16 @@
     0.3386,
     0.1873
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23905291516",
   "date": "2026-08-09",
   "title": "Putrajaya Running",
   "distanceKm": 5.01,
-  "durationSec": 3241,
+  "durationSec": 3187,
+  "elapsedSec": 3391,
   "avgHr": 126,
   "maxHr": 167,
   "elevationGainM": 3,
@@ -5452,14 +5357,16 @@
     0.3497,
     0.9452
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23846949059",
   "date": "2026-08-04",
   "title": "Seri Kembangan Running",
   "distanceKm": 5.06,
-  "durationSec": 3001,
+  "durationSec": 2989,
+  "elapsedSec": 3001,
   "avgHr": 154,
   "maxHr": 169,
   "elevationGainM": 5,
@@ -6115,14 +6022,16 @@
     0.2434,
     0.1998
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23823361755",
   "date": "2026-08-02",
   "title": "Kuala Lumpur Running",
   "distanceKm": 10.01,
-  "durationSec": 6046,
+  "durationSec": 6014,
+  "elapsedSec": 6046,
   "avgHr": 157,
   "maxHr": 172,
   "elevationGainM": 9,
@@ -6734,14 +6643,16 @@
     0.5279,
     0.4393
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23761717401",
   "date": "2026-07-28",
   "title": "Kuala Lumpur Running",
   "distanceKm": 8.01,
-  "durationSec": 4928,
+  "durationSec": 4925,
+  "elapsedSec": 4928,
   "avgHr": 137,
   "maxHr": 177,
   "elevationGainM": 21,
@@ -7317,14 +7228,16 @@
     0.0476,
     0.6885
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23733023987",
   "date": "2026-07-26",
   "title": "Bandar Baru Bangi Running",
   "distanceKm": 3.54,
-  "durationSec": 2567,
+  "durationSec": 2523,
+  "elapsedSec": 2567,
   "avgHr": 126,
   "maxHr": 158,
   "elevationGainM": 14,
@@ -7948,14 +7861,16 @@
     0.5136,
     0.3621
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23676732174",
   "date": "2026-07-21",
   "title": "Kuala Lumpur Running",
   "distanceKm": 5.0,
-  "durationSec": 3050,
+  "durationSec": 3046,
+  "elapsedSec": 3050,
   "avgHr": 136,
   "maxHr": 151,
   "elevationGainM": 11,
@@ -8623,14 +8538,16 @@
     0.0201,
     0.6303
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23636307828",
   "date": "2026-07-18",
   "title": "Putrajaya Running",
   "distanceKm": 10.5,
-  "durationSec": 5791,
+  "durationSec": 5773,
+  "elapsedSec": 5791,
   "avgHr": 162,
   "maxHr": 182,
   "elevationGainM": 57,
@@ -9250,14 +9167,16 @@
     0.7848,
     0.0
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23593301420",
   "date": "2026-07-14",
   "title": "Kuala Lumpur Running",
   "distanceKm": 5.01,
-  "durationSec": 2832,
+  "durationSec": 2830,
+  "elapsedSec": 2832,
   "avgHr": 153,
   "maxHr": 167,
   "elevationGainM": 10,
@@ -9909,14 +9828,16 @@
     0.0239,
     0.6544
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23509021207",
   "date": "2026-07-07",
   "title": "Kuala Lumpur Running",
   "distanceKm": 5.01,
-  "durationSec": 2679,
+  "durationSec": 2677,
+  "elapsedSec": 2679,
   "avgHr": 161,
   "maxHr": 177,
   "elevationGainM": 46,
@@ -10580,14 +10501,16 @@
     0.7543,
     0.2564
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23481912013",
   "date": "2026-07-05",
   "title": "Kuantan Running",
   "distanceKm": 9.89,
-  "durationSec": 5182,
+  "durationSec": 5171,
+  "elapsedSec": 5182,
   "avgHr": 171,
   "maxHr": 187,
   "elevationGainM": 30,
@@ -11103,14 +11026,16 @@
     0.3853,
     0.4108
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23428379277",
   "date": "2026-06-30",
   "title": "Kuala Lumpur Running",
   "distanceKm": 5.01,
-  "durationSec": 2576,
+  "durationSec": 2574,
+  "elapsedSec": 2576,
   "avgHr": 162,
   "maxHr": 186,
   "elevationGainM": 42,
@@ -11758,14 +11683,16 @@
     0.7522,
     0.2586
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23386475831",
   "date": "2026-06-26",
   "title": "Kuala Lumpur Running",
   "distanceKm": 10.0,
-  "durationSec": 5650,
+  "durationSec": 5569,
+  "elapsedSec": 5650,
   "avgHr": 161,
   "maxHr": 181,
   "elevationGainM": 57,
@@ -12289,58 +12216,28 @@
     0.524,
     0.9963
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23362002880",
   "date": "2026-06-24",
   "title": "Treadmill Running",
   "distanceKm": 7.0,
-  "durationSec": 3607,
+  "durationSec": 3595,
+  "elapsedSec": 3607,
   "avgHr": 151,
   "maxHr": 169,
   "cadenceSpm": 158,
-  "splits": [
-   {
-    "km": 1.0,
-    "durationSec": 531
-   },
-   {
-    "km": 1.0,
-    "durationSec": 501
-   },
-   {
-    "km": 1.0,
-    "durationSec": 506
-   },
-   {
-    "km": 1.0,
-    "durationSec": 505
-   },
-   {
-    "km": 1.0,
-    "durationSec": 521
-   },
-   {
-    "km": 1.0,
-    "durationSec": 529
-   },
-   {
-    "km": 1.0,
-    "durationSec": 513
-   },
-   {
-    "km": 0.0,
-    "durationSec": 2
-   }
-  ]
+  "indoor": true
  },
  {
   "id": "23317785981",
   "date": "2026-06-20",
   "title": "Kuala Lumpur International Airport Running",
   "distanceKm": 5.43,
-  "durationSec": 2687,
+  "durationSec": 2685,
+  "elapsedSec": 2687,
   "avgHr": 173,
   "maxHr": 190,
   "elevationGainM": 34,
@@ -12980,14 +12877,16 @@
     0.538,
     0.5105
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23240156095",
   "date": "2026-06-14",
   "title": "Putrajaya Running",
   "distanceKm": 5.08,
-  "durationSec": 3260,
+  "durationSec": 3231,
+  "elapsedSec": 3260,
   "avgHr": 134,
   "maxHr": 162,
   "cadenceSpm": 133,
@@ -13658,14 +13557,16 @@
     0.3867,
     0.819
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23157327771",
   "date": "2026-06-07",
   "title": "Kuala Lumpur Running",
   "distanceKm": 4.31,
-  "durationSec": 2362,
+  "durationSec": 2360,
+  "elapsedSec": 2362,
   "avgHr": 155,
   "maxHr": 171,
   "elevationGainM": 15,
@@ -14321,14 +14222,16 @@
     0.4971,
     0.25
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23142953167",
   "date": "2026-06-05",
   "title": "Kuala Lumpur International Airport Running",
   "distanceKm": 5.51,
-  "durationSec": 3292,
+  "durationSec": 3277,
+  "elapsedSec": 3292,
   "avgHr": 152,
   "maxHr": 184,
   "elevationGainM": 34,
@@ -14980,14 +14883,16 @@
     0.4965,
     0.5157
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23115440174",
   "date": "2026-06-03",
   "title": "Kuantan Running",
   "distanceKm": 5.11,
-  "durationSec": 2405,
+  "durationSec": 2402,
+  "elapsedSec": 2406,
   "avgHr": 169,
   "maxHr": 185,
   "elevationGainM": 1,
@@ -15639,14 +15544,16 @@
     0.7604,
     0.8809
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23097531193",
   "date": "2026-06-02",
   "title": "Kuantan Running",
   "distanceKm": 10.02,
-  "durationSec": 5889,
+  "durationSec": 5862,
+  "elapsedSec": 5889,
   "avgHr": 150,
   "maxHr": 167,
   "elevationGainM": 23,
@@ -16090,14 +15997,16 @@
     0.0584,
     0.6514
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23089267255",
   "date": "2026-06-01",
   "title": "Sungai Karang Running",
   "distanceKm": 5.01,
-  "durationSec": 2929,
+  "durationSec": 2924,
+  "elapsedSec": 2929,
   "avgHr": 152,
   "maxHr": 165,
   "elevationGainM": 53,
@@ -16745,14 +16654,16 @@
     0.5071,
     0.5237
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23073292494",
   "date": "2026-05-31",
   "title": "Sungai Karang Running",
   "distanceKm": 3.03,
-  "durationSec": 1661,
+  "durationSec": 1657,
+  "elapsedSec": 1661,
   "avgHr": 147,
   "maxHr": 170,
   "elevationGainM": 32,
@@ -17352,7 +17263,8 @@
     0.5014,
     0.8943
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23067928872",
@@ -17360,6 +17272,7 @@
   "title": "Sungai Karang Running",
   "distanceKm": 2.01,
   "durationSec": 982,
+  "elapsedSec": 982,
   "avgHr": 164,
   "maxHr": 176,
   "elevationGainM": 17,
@@ -17947,14 +17860,16 @@
     0.4917,
     0.3351
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "23001227429",
   "date": "2026-05-25",
   "title": "Kuantan Running",
   "distanceKm": 10.0,
-  "durationSec": 5499,
+  "durationSec": 5494,
+  "elapsedSec": 5499,
   "avgHr": 151,
   "maxHr": 175,
   "elevationGainM": 19,
@@ -18470,14 +18385,16 @@
     0.1771,
     0.7075
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "22980904096",
   "date": "2026-05-23",
   "title": "Seri Kembangan Running",
   "distanceKm": 2.31,
-  "durationSec": 1253,
+  "durationSec": 1249,
+  "elapsedSec": 1253,
   "avgHr": 148,
   "maxHr": 163,
   "elevationGainM": 1,
@@ -19121,7 +19038,8 @@
     0.3732,
     0.2945
    ]
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "22972745401",
@@ -19129,6 +19047,7 @@
   "title": "Putrajaya Running",
   "distanceKm": 0.65,
   "durationSec": 322,
+  "elapsedSec": 322,
   "avgHr": 179,
   "maxHr": 189,
   "elevationGainM": 2,
@@ -19138,14 +19057,16 @@
     "km": 0.65,
     "durationSec": 322
    }
-  ]
+  ],
+  "indoor": false
  },
  {
   "id": "22972678726",
   "date": "2026-05-22",
   "title": "Putrajaya Running",
   "distanceKm": 10.0,
-  "durationSec": 5349,
+  "durationSec": 5332,
+  "elapsedSec": 6469,
   "avgHr": 166,
   "maxHr": 188,
   "elevationGainM": 22,
@@ -19661,6 +19582,7 @@
     0.3269,
     1.0
    ]
-  ]
+  ],
+  "indoor": false
  }
 ]
