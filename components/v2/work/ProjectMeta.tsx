@@ -2,12 +2,11 @@ import type { Project } from '@/content/projects';
 import { projectCategories } from '@/content/projects';
 import { cn } from '@/lib/utils';
 
-// Stored values stay as they are; the display vocabulary is Shipped / Active / Experiment / Archived.
 const statusLabel: Record<Project['status'], string> = {
-  live: 'Shipped · Live',
-  'in-progress': 'Active',
-  shipped: 'Shipped',
-  prototype: 'Experiment',
+  active: 'Active',
+  'under-construction': 'Under construction',
+  'proof-of-concept': 'Proof of concept',
+  completed: 'Completed',
   archived: 'Archived',
 };
 
@@ -15,7 +14,7 @@ export const categoryLabel = (c: Project['category']) => projectCategories.find(
 
 /** PROJECT / 001 · 2026 · DATA ENGINEERING · ● ACTIVE */
 export function ProjectMeta({ project, className }: { project: Project; className?: string }) {
-  const active = project.status === 'in-progress' || project.status === 'live';
+  const active = project.status === 'active' || project.status === 'under-construction';
   return (
     <dl className={cn('label flex flex-wrap gap-x-6 gap-y-1 text-muted', className)}>
       <div>
@@ -35,6 +34,7 @@ export function ProjectMeta({ project, className }: { project: Project; classNam
         <dd className="flex items-center gap-2">
           <span aria-hidden="true" className={cn('h-1.5 w-1.5 rounded-full', active ? 'bg-lime' : 'border border-current')} />
           {statusLabel[project.status]}
+          {project.links.live && ' · Live'}
         </dd>
       </div>
       {project.placeholder && (

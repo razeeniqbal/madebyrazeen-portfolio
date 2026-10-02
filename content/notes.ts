@@ -3,14 +3,23 @@
  * Bodies reuse the case-study block types (text, list, table, flow…).
  *
  * status:
- *   'published':  listed and indexed.
- *   'draft':      has a body; readable at /journal/<slug> with a DRAFT banner, noindex.
- *   'in-writing': planned topic only; listed, not linked.
- * To publish: set status to Published and add a date.
+ *   'published': the only state that appears anywhere public (Journal, Home, sitemap, JSON-LD, assistant).
+ *   'draft':     work in progress, never public.
+ *   'archived':  withdrawn, kept for history, never public.
+ * To publish: set status to Published and add the real publication date. Dates are never assigned automatically.
+ * category: building | learning | notes.
  */
 import type { Block } from './case-studies/types';
 import { resolveAsset, type ImageAsset } from '@/lib/assets';
 import { fromCmsBlocks, readCollection, type CmsBlock } from './case-studies/cms';
+
+export type JournalCategory = 'building' | 'learning' | 'notes';
+
+export const journalCategories: { value: JournalCategory; label: string }[] = [
+  { value: 'building', label: 'Building' },
+  { value: 'learning', label: 'Learning' },
+  { value: 'notes', label: 'Notes' },
+];
 
 export interface Note {
   slug: string;
@@ -18,7 +27,8 @@ export interface Note {
   title: string;
   summary: string;
   topic: 'Data Engineering' | 'AI' | 'Product' | 'Architecture' | 'Running' | 'Retrospective';
-  status: 'published' | 'draft' | 'in-writing';
+  status: 'published' | 'draft' | 'archived';
+  category: JournalCategory;
   date?: string; // ISO
   readingMinutes?: number;
   /** Real photo or project artwork from the asset manifest. */
@@ -45,6 +55,7 @@ export const notes: Note[] = readCollection<CmsNote>('notes')
       summary: data.summary,
       topic: data.topic,
       status: data.status,
+      category: data.category ?? 'notes',
       date: data.date ?? undefined,
       readingMinutes: data.readingMinutes ?? undefined,
       photo: image ? { image, caption: data.photoCaption ?? '' } : undefined,
@@ -53,6 +64,10 @@ export const notes: Note[] = readCollection<CmsNote>('notes')
   })
   .sort((a, b) => b.number.localeCompare(a.number)); // newest entry first
 
-export const getPublishedNotes = () => notes.filter((n) => n.status === 'published');
-export const getReadableNotes = () => notes.filter((n) => n.status !== 'in-writing' && n.body);
-export const getNote = (slug: string) => getReadableNotes().find((n) => n.slug === slug);
+/** The only entries that may appear publicly. */
+export const getPublishedJournalEntries = (): Note[] => notes.filter((n) => n.status === 'published' && n.body);
+/** @deprecated alias kept for existing call sites. */
+export const getPublishedNotes = getPublishedJournalEntries;
+/** Entries with a public page: published only. */
+export const getReadableNotes = getPublishedJournalEntries;
+export const getNote = (slug: string) => getPublishedJournalEntries().find((n) => n.slug === slug);

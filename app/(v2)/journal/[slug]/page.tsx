@@ -26,7 +26,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: note.summary,
     // Drafts are readable by link but kept out of search until published.
     alternates: { canonical: `/journal/${note.slug}` },
-    robots: note.status === 'published' ? undefined : { index: false, follow: true },
     openGraph: { type: 'article', title: note.title, description: note.summary, publishedTime: note.date },
   };
 }
@@ -51,10 +50,6 @@ export default async function NotePage({ params }: Params) {
       <article className="page-container">
         <div className="mx-auto max-w-[44rem]">
           <ArrowLink href="/journal">All entries</ArrowLink>
-
-          {note.status === 'draft' && (
-            <p className="label mt-8 border border-current px-3 py-2">Draft · not yet published · wording under review</p>
-          )}
 
           <header className="mt-10 border-b border-line pb-8">
             <TechnicalLabel as="p">

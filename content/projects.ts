@@ -7,6 +7,9 @@
  *   featured  – large tile on the homepage + top of /projects
  *   standard  – listed on /projects
  *   archive   – listed on /projects under "Earlier work"
+ * `kind` is the portfolio hierarchy (primary-build, professional-system, experiment, research, small-build);
+ * `tier` + `order` decide presentation. `origin` is the "why it exists" line (e.g. "Personal interest → Real product").
+ * `visibility: 'private'` keeps a record out of every public page.
  * `order` sorts within a tier (lower first). `draft: true` hides it everywhere
  * until the content is confirmed. A long-form case study lives in
  * content/data/case-studies/<slug>.json (admin → Case studies).
@@ -19,7 +22,9 @@ export type ProjectTier = 'flagship' | 'featured' | 'standard' | 'archive';
 
 export type ProjectCategory = 'ai' | 'data' | 'product' | 'analytics' | 'research';
 
-export type ProjectStatus = 'live' | 'in-progress' | 'shipped' | 'prototype' | 'archived';
+export type ProjectStatus = 'active' | 'under-construction' | 'proof-of-concept' | 'completed' | 'archived';
+
+export type ProjectKind = 'primary-build' | 'professional-system' | 'experiment' | 'research' | 'small-build';
 
 export interface ProjectMetric {
   label: string;
@@ -57,6 +62,14 @@ export interface Project {
   draft?: boolean;
   /** Published with stand-in copy; the UI marks it "details coming". */
   placeholder?: boolean;
+  kind: ProjectKind;
+  tagline?: string;
+  /** Long form of a short name, e.g. VSB → Volleyball SDN BHD. */
+  fullName?: string;
+  origin?: string;
+  /** The product's core loop, step by step (e.g. See → Select → Transform → Verify → Run → Export). */
+  loop: string[];
+  visibility: 'public' | 'private';
 }
 
 export const projectCategories: { value: ProjectCategory; label: string }[] = [
@@ -79,7 +92,13 @@ export const projects: Project[] = data.items.map((p) => ({
   problem: p.problem || undefined,
   outcome: p.outcome || undefined,
   learning: p.learning || undefined,
-  highlights: (p as { highlights?: string[] }).highlights ?? [],
+  highlights: p.highlights ?? [],
+  kind: p.kind as ProjectKind,
+  tagline: p.tagline || undefined,
+  fullName: p.fullName || undefined,
+  origin: p.origin || undefined,
+  loop: p.loop ?? [],
+  visibility: (p.visibility || 'public') as 'public' | 'private',
   links: { live: p.links.live || undefined, source: p.links.source || undefined },
   cover: resolveAsset(p.cover),
   metrics: p.metrics.length ? p.metrics.map((m) => ({ ...m, illustrative: m.illustrative || undefined })) : undefined,
@@ -90,7 +109,7 @@ const tierRank: Record<ProjectTier, number> = { flagship: 0, featured: 1, standa
 /** All published projects, flagship first. */
 export function getProjects(): Project[] {
   return projects
-    .filter((p) => !p.draft)
+    .filter((p) => !p.draft && p.visibility === 'public')
     .sort((a, b) => tierRank[a.tier] - tierRank[b.tier] || a.order - b.order);
 }
 
@@ -98,12 +117,19 @@ export function getProjectsByTier(...tiers: ProjectTier[]): Project[] {
   return getProjects().filter((p) => tiers.includes(p.tier));
 }
 
-/** Home "Selected work": finished highlighted projects only; active builds (e.g. Sepang) are listed on /projects. */
+/** Home "Selected work": highlighted projects that can be shown as working; under-construction builds stay on /projects. */
 export function getHomeProjects(count = 3): Project[] {
   return getProjectsByTier('flagship', 'featured')
-    .filter((p) => p.status !== 'in-progress' && p.status !== 'prototype')
+    .filter((p) => p.status !== 'under-construction')
     .slice(0, count);
 }
+
+/** Projects of one kind (e.g. the primary builds: VSB, FORMA, Sepang Vision Lab, BALANG), in presentation order. */
+export const getProjectsByKind = (...kinds: ProjectKind[]): Project[] => getProjects().filter((p) => kinds.includes(p.kind));
+
+/** Builds still being worked on (active or under construction). */
+export const getActiveBuilds = (): Project[] =>
+  getProjectsByKind('primary-build').filter((p) => p.status === 'active' || p.status === 'under-construction');
 
 export function getProject(slug: string): Project | undefined {
   return getProjects().find((p) => p.slug === slug);

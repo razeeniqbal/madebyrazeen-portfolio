@@ -61,11 +61,6 @@ export function SiteFooter() {
               Contact
             </Link>
           </li>
-          <li>
-            <Link href="/archive" className="inline-block py-1.5 hover:text-lime">
-              Archive
-            </Link>
-          </li>
         </ul>
 
         <div className="col-span-full flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">

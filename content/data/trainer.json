@@ -1,0 +1,88 @@
+{
+  "engagements": [
+    {
+      "slug": "aem-internal-training",
+      "title": "Internal technical training",
+      "role": "Internal Technical Trainer / Knowledge Sharing",
+      "organization": "AEM Energy Solutions Sdn Bhd",
+      "partners": [],
+      "dateStart": null,
+      "dateEnd": null,
+      "year": null,
+      "format": "Internal technical training / knowledge sharing",
+      "audience": "Internal",
+      "summary": "Internal technical training and knowledge sharing.",
+      "topics": [
+        "Power BI Fundamentals & Dashboard Development",
+        "Power Query for Data Cleaning & Transformation",
+        "Python for Data Analysis & Automation",
+        "SQL Fundamentals & Data Querying",
+        "Introduction to Google Cloud AI & Vertex AI",
+        "Git & GitHub Fundamentals"
+      ],
+      "evidence": [],
+      "featured": true,
+      "visibility": "public"
+    },
+    {
+      "slug": "google-ai-build-2025",
+      "title": "Google AI Build 2025",
+      "role": "Speaker / Technical Sharing",
+      "organization": "Universiti Putra Malaysia",
+      "partners": [],
+      "dateStart": null,
+      "dateEnd": null,
+      "year": 2025,
+      "format": "Online",
+      "audience": "UPM students",
+      "summary": "Gave students exposure to Google's Data and AI technologies and showed what they can explore and build.",
+      "topics": [
+        "BigQuery ML",
+        "Vertex AI",
+        "Practical AI use cases"
+      ],
+      "evidence": [],
+      "featured": true,
+      "visibility": "public"
+    },
+    {
+      "slug": "cloud-essentials-suk-perak",
+      "title": "Cloud Essentials untuk SUK Perak",
+      "role": "Trainer",
+      "organization": "SUK Perak",
+      "partners": [
+        "Google Malaysia",
+        "Awantec"
+      ],
+      "dateStart": "2026-08-05",
+      "dateEnd": "2026-08-06",
+      "year": 2026,
+      "format": "Face-to-face, 2 days: theory, hands-on and capstone / consultation",
+      "audience": "Technical and management participants from relevant SUK Perak digital and related units.",
+      "summary": "Two days of Google Cloud training for SUK Perak, from cloud foundations to AI services.",
+      "topics": [
+        "Google Cloud ecosystem",
+        "Compute",
+        "Storage",
+        "Cloud SQL",
+        "VPC",
+        "Hybrid Cloud",
+        "Cloud VPN",
+        "High Availability",
+        "Disaster Recovery",
+        "Database migration",
+        "Landing Zone",
+        "IAM",
+        "Governance",
+        "FinOps",
+        "Vertex AI",
+        "Document AI",
+        "AI innovation",
+        "Capstone"
+      ],
+      "evidence": [],
+      "featured": true,
+      "visibility": "public"
+    }
+  ]
+}

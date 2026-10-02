@@ -6,7 +6,7 @@ import { AboutTeaser, ContactBlock } from '@/components/v2/home/AboutContact';
 import { JsonLd } from '@/components/v2/seo/JsonLd';
 import { SITE_URL } from '@/lib/site';
 import { contact, education, profile } from '@/content/profile';
-import { experience } from '@/content/experience';
+import { getCurrentRole } from '@/content/experience';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = { alternates: { canonical: '/' } };
@@ -17,7 +17,7 @@ const person = {
   name: profile.name,
   url: SITE_URL,
   jobTitle: profile.role,
-  worksFor: { '@type': 'Organization', name: experience[0].company },
+  worksFor: { '@type': 'Organization', name: getCurrentRole()?.company },
   alumniOf: education.map((e) => ({ '@type': 'CollegeOrUniversity', name: e.institution })),
   sameAs: [contact.github, contact.linkedin],
   knowsAbout: ['Data engineering', 'Artificial intelligence', 'Machine learning', 'Product engineering'],

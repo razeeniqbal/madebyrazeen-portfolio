@@ -1,7 +1,7 @@
 {
   "project": "Sepang Vision Lab",
   "review": "approved",
-  "lede": "A motorsport digital twin and race-strategy research platform built around Sepang International Circuit. You don’t drive the car. You act as the race engineer.",
+  "lede": "A motorsport digital twin and race-strategy research platform built around Sepang International Circuit. You do not drive the car. You act as the race engineer.",
   "facts": [
     {
       "label": "Role",
@@ -239,7 +239,7 @@
               },
               {
                 "title": "AI race engineer",
-                "detail": "The model may call exactly one tool, which re-runs the captured comparison. It can’t change inputs, and only simulator-derived numbers are shown. The no-AI path is labelled no-AI."
+                "detail": "The model may call exactly one tool, which re-runs the captured comparison. It cannot change inputs, and only simulator-derived numbers are shown. The no-AI path is labelled no-AI."
               }
             ]
           }

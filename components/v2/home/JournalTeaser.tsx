@@ -2,12 +2,11 @@ import { Section } from '@/components/v2/system/Section';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { NoteList } from '@/components/v2/notes/NoteList';
-import { notes } from '@/content/notes';
+import { getPublishedJournalEntries } from '@/content/notes';
 
-/** Home 04. Three journal entries, text only. Unpublished ones show their "In writing" / "Draft" badge. */
+/** Home 04. The three newest published journal entries; nothing at all when none are published. */
 export function JournalTeaser() {
-  // Readable entries first (newest first), then planned topics.
-  const latest = [...notes].sort((a, b) => Number(Boolean(b.body)) - Number(Boolean(a.body))).slice(0, 3);
+  const latest = getPublishedJournalEntries().slice(0, 3);
   if (latest.length === 0) return null;
 
   return (
@@ -16,7 +15,7 @@ export function JournalTeaser() {
         <SectionHeader
           index="03"
           eyebrow="Journal"
-          title={['Things I’ve learned', 'along the way.']}
+          title={['Things I have learned', 'along the way.']}
           size="md"
           className="lg:col-span-5"
         />

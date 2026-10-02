@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local build-check output (NEXT_DIST_DIR=.next-verify).
+    ".next-verify/**",
+    // Other tools' local worktrees (not part of this project).
+    ".kilo/**",
   ]),
 ]);
 

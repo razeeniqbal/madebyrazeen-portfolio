@@ -29,11 +29,11 @@ export function Experience({ index = '05', flush = true, surface = 'light' }: Ex
               <div className="col-span-4 md:col-span-6 lg:col-span-4">
                 <h3 className="text-display-sm">{r.role}</h3>
                 <p className="mt-1 text-muted">
-                  {r.company} · {r.location.split(',')[0]}
+                  {[r.company, r.location?.split(',')[0]].filter(Boolean).join(' · ')}
                 </p>
               </div>
               <ul className="col-span-4 space-y-1.5 text-sm text-muted md:col-span-6 md:col-start-3 lg:col-span-6 lg:col-start-7">
-                {(r.worked ? [r.worked, r.changed, r.learned].filter(Boolean) : r.highlights.slice(0, 3)).map((h) => (
+                {r.highlights.slice(0, 3).map((h) => (
                   <li key={h} className="flex gap-3">
                     <span aria-hidden="true">→</span>
                     {h}

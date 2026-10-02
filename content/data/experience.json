@@ -1,57 +1,351 @@
 {
   "roles": [
     {
-      "company": "AEM Energy Solutions",
-      "role": "Data Engineer",
-      "period": "Jun 2025 - Present",
-      "start": 2025,
+      "id": "aem-energy-solutions",
+      "company": "AEM Energy Solutions Sdn Bhd",
+      "role": "AI Data Engineer",
+      "employmentType": "contract",
+      "workMode": "Hybrid",
+      "startDate": "2025-06-01",
+      "endDate": null,
+      "isCurrent": true,
+      "datesConfirmed": true,
+      "relationship": "primary",
       "location": "Kuala Lumpur, Malaysia",
-      "type": "Hybrid",
-      "highlights": [
-        "Built AI SaaS infrastructure: an in-house LLM framework with custom pre-training corpora and APIs for AI assistants",
-        "Architected a Data Quality Platform from scratch, now the enterprise standard for upstream and downstream data",
-        "Automated dataset labelling with Ollama and deployed refined classification models to AzureML",
-        "Turned PDF engineering drawings into vectors for semantic classification of technical specs",
-        "Redesigned Power BI and Python dashboards, improving decision-making accuracy by 30%",
-        "Authored the company's first AI Cybersecurity Procedure for safe LLM adoption",
-        "Led the SQL to NoSQL migration for real-time AI inference with 100% data consistency"
+      "summary": "Data engineering, data migration, automation, data quality, AI systems and agentic workflows.",
+      "responsibilities": [],
+      "technologies": [
+        "Python",
+        "MSSQL",
+        "n8n",
+        "Ollama Cloud",
+        "Excel",
+        "VBA"
       ],
-      "worked": "",
-      "changed": "",
-      "learned": ""
+      "careerSignificance": "",
+      "progression": [],
+      "selectedWork": [
+        {
+          "id": "udps-migration",
+          "name": "UDPs Migration",
+          "context": "PETRONAS",
+          "type": "Data migration",
+          "status": "",
+          "scale": "Approximately 700,000 records",
+          "description": "Developed a Python-based migration workflow to move approximately 700,000 records from an MSSQL source into a NoSQL target through an existing API. A significant part of the work involved understanding the API behaviour, interpreting responses, and building error handling around migration failures.",
+          "significance": "",
+          "technologies": [
+            "Python",
+            "MSSQL",
+            "Existing API"
+          ],
+          "aiUsed": false,
+          "flow": [
+            "MSSQL",
+            "Python",
+            "Existing API",
+            "NoSQL"
+          ],
+          "recognition": "",
+          "projectSlug": "",
+          "visibility": "public"
+        },
+        {
+          "id": "wellsight-toolstring-recommendation",
+          "name": "Wellsight Toolstring Recommendation",
+          "context": "AEM product / proof of concept",
+          "type": "Agentic AI",
+          "status": "proof-of-concept",
+          "scale": "Approximately 200,000 records",
+          "description": "Built a proof of concept for an agentic workflow that recommends suitable toolstrings based on available data and the activity being performed. The workflow processes context, produces a recommendation, and explains the reasoning behind it. Part of the challenge involved shaping the final response into a structured output that could be consumed reliably by the frontend application.",
+          "significance": "",
+          "technologies": [
+            "n8n",
+            "Ollama Cloud",
+            "Agentic AI"
+          ],
+          "aiUsed": true,
+          "flow": [
+            "Database / activity context",
+            "n8n agentic workflow",
+            "Ollama Cloud",
+            "Toolstring recommendation",
+            "Reasoning",
+            "Structured application output"
+          ],
+          "recognition": "",
+          "projectSlug": "",
+          "visibility": "public"
+        },
+        {
+          "id": "qualityplus",
+          "name": "QualityPlus",
+          "context": "AEM Energy Solutions",
+          "type": "Data quality + agentic AI",
+          "status": "proof-of-concept",
+          "scale": "",
+          "description": "A data-quality proof of concept. A structured quality assessment checks validity, uniqueness, completeness and comparison against master data. AI assistance then recommends what to investigate, summarizes findings, explains results and suggests possible remediation approaches. People review the findings, evaluate the recommendations and approve the appropriate action.",
+          "significance": "",
+          "technologies": [
+            "n8n",
+            "Ollama Cloud",
+            "Agentic AI",
+            "Data-quality workflows"
+          ],
+          "aiUsed": true,
+          "flow": [
+            "Data",
+            "Quality assessment",
+            "Findings",
+            "AI assistance",
+            "Human review",
+            "Approved action",
+            "Result"
+          ],
+          "recognition": "Demonstrated at SPE AI Summit",
+          "projectSlug": "qualityplus",
+          "visibility": "public"
+        },
+        {
+          "id": "petronas-data-migration-excel-automation",
+          "name": "PETRONAS Data Migration & Excel Automation",
+          "context": "PETRONAS",
+          "type": "Data migration + automation",
+          "status": "",
+          "scale": "",
+          "description": "Supported PETRONAS data migration workflows through structured Excel templates and VBA automation. The work focused on reducing repetitive manual preparation by automating parts of the Excel-based workflow.",
+          "significance": "",
+          "technologies": [
+            "Excel",
+            "VBA"
+          ],
+          "aiUsed": false,
+          "flow": [],
+          "recognition": "",
+          "projectSlug": "",
+          "visibility": "public"
+        },
+        {
+          "id": "aem-movie-night",
+          "name": "AEM Movie Night",
+          "context": "AEM internal",
+          "type": "Internal build",
+          "status": "",
+          "scale": "",
+          "description": "A small booking system built for an office movie-night activity.",
+          "significance": "Turning a small manual coordination problem into a usable system.",
+          "technologies": [],
+          "aiUsed": false,
+          "flow": [],
+          "recognition": "",
+          "projectSlug": "aem-movie-night",
+          "visibility": "public"
+        }
+      ],
+      "confidential": false,
+      "visibility": "public"
     },
     {
-      "company": "EISmartwork",
+      "id": "intellilabs-ai",
+      "company": "IntelliLabs AI",
+      "role": "Assistant Fullstack AI Engineer",
+      "employmentType": "contract",
+      "workMode": "",
+      "startDate": null,
+      "endDate": null,
+      "isCurrent": false,
+      "datesConfirmed": false,
+      "relationship": "parallel",
+      "location": "",
+      "summary": "End-to-end development of AI-enabled web applications.",
+      "responsibilities": [
+        "Frontend implementation",
+        "Backend implementation",
+        "AI feature integration",
+        "Application delivery",
+        "Deployment"
+      ],
+      "technologies": [],
+      "careerSignificance": "Expanded the ability to turn data and AI ideas into complete software products.",
+      "progression": [],
+      "selectedWork": [],
+      "confidential": true,
+      "visibility": "public"
+    },
+    {
+      "id": "eismartwork",
+      "company": "EISmartwork Sdn Bhd",
       "role": "Data Analyst",
-      "period": "May 2024 - May 2025",
-      "start": 2024,
+      "employmentType": "contract",
+      "workMode": "Onsite",
+      "startDate": "2024-05-05",
+      "endDate": "2025-05-09",
+      "isCurrent": false,
+      "datesConfirmed": true,
+      "relationship": "primary",
       "location": "Kuala Lumpur, Malaysia",
-      "type": "Onsite",
-      "highlights": [
-        "Improved operational efficiency by 20% with predictive ML models on 10M+ records",
-        "Engineered ELT pipelines and cut database query times by 40%",
-        "Automated data transformation in Python, saving 30+ hours of manual work a month",
-        "Designed 5+ interactive dashboards, halving report generation time"
+      "summary": "",
+      "responsibilities": [
+        "Dashboard development and maintenance",
+        "Data transformation",
+        "Data preparation",
+        "Reporting",
+        "Work below the visualization layer"
       ],
-      "worked": "",
-      "changed": "",
-      "learned": ""
+      "technologies": [
+        "Power BI",
+        "MSSQL"
+      ],
+      "careerSignificance": "Where data became the primary profession.",
+      "progression": [
+        "Power BI",
+        "Data transformation",
+        "Data preparation",
+        "Interest below the dashboard",
+        "Data engineering"
+      ],
+      "selectedWork": [
+        {
+          "id": "pcms",
+          "name": "PCMS",
+          "context": "PETRONAS",
+          "type": "Dashboards",
+          "status": "",
+          "scale": "Millions of records",
+          "description": "PETRONAS resource-monitoring dashboards built with Power BI and MSSQL on datasets containing millions of records.",
+          "significance": "",
+          "technologies": [
+            "Power BI",
+            "MSSQL"
+          ],
+          "aiUsed": false,
+          "flow": [],
+          "recognition": "",
+          "projectSlug": "",
+          "visibility": "public"
+        },
+        {
+          "id": "irms",
+          "name": "IRMS",
+          "context": "PETRONAS",
+          "type": "Systems operations",
+          "status": "",
+          "scale": "",
+          "description": "Worked closer to the operational and system side of an existing PETRONAS resource-management environment: command-line activities in a virtual-machine and network-related environment, and system updates with attention to minimizing disruption.",
+          "significance": "",
+          "technologies": [],
+          "aiUsed": false,
+          "flow": [],
+          "recognition": "",
+          "projectSlug": "",
+          "visibility": "public"
+        }
+      ],
+      "confidential": false,
+      "visibility": "public"
     },
     {
-      "company": "G&P Geotechnic",
-      "role": "Engineer",
-      "period": "Aug 2022 - May 2024",
-      "start": 2022,
+      "id": "gnp-geotechnic",
+      "company": "G&P Professional / G&P Geotechnic Sdn Bhd",
+      "role": "Geotechnical Engineer",
+      "employmentType": "permanent",
+      "workMode": "Onsite",
+      "startDate": "2022-08-15",
+      "endDate": "2024-04-30",
+      "isCurrent": false,
+      "datesConfirmed": true,
+      "relationship": "primary",
       "location": "Kuala Lumpur, Malaysia",
-      "type": "Onsite",
-      "highlights": [
-        "Taught myself Python and VBA to automate engineering workflows, cutting manual effort by 30%",
-        "Delivered high-accuracy data analysis and visualisation with Excel and Grapher across infrastructure projects",
-        "Redesigned engineering reporting into end-to-end analysis workflows for senior decision-makers"
+      "summary": "",
+      "responsibilities": [
+        "Geotechnical engineering calculations",
+        "Technical reporting",
+        "Field and site activities",
+        "Large time-series equipment datasets",
+        "Data visualization",
+        "Abnormal-reading investigation",
+        "Historical pattern analysis",
+        "Future-reading prediction where applicable",
+        "Python automation",
+        "Excel and VBA automation"
       ],
-      "worked": "",
-      "changed": "",
-      "learned": ""
+      "technologies": [
+        "Python",
+        "Excel",
+        "VBA"
+      ],
+      "careerSignificance": "The major transition point between engineering and data.",
+      "progression": [
+        "Engineering",
+        "Calculations and reporting",
+        "Large datasets",
+        "Visualization",
+        "Automation",
+        "Python and VBA",
+        "Data"
+      ],
+      "selectedWork": [],
+      "confidential": false,
+      "visibility": "public"
+    },
+    {
+      "id": "3dtech-solutions",
+      "company": "3Dtech Solutions Sdn. Bhd.",
+      "role": "BIM Engineer",
+      "employmentType": "",
+      "workMode": "",
+      "startDate": "2022-02-01",
+      "endDate": "2022-08-01",
+      "isCurrent": false,
+      "datesConfirmed": true,
+      "relationship": "primary",
+      "location": "",
+      "summary": "",
+      "responsibilities": [
+        "Converted 2D construction drawings into coordinated 3D BIM models.",
+        "Reviewed and coordinated models to identify conflicts between building elements.",
+        "Checked coordination issues before construction.",
+        "Conducted site inspections comparing actual construction conditions with the BIM model."
+      ],
+      "technologies": [],
+      "careerSignificance": "Introduced a stronger digital representation of physical engineering systems.",
+      "progression": [
+        "2D drawing",
+        "3D model",
+        "Coordination",
+        "Site verification"
+      ],
+      "selectedWork": [],
+      "confidential": false,
+      "visibility": "public"
+    },
+    {
+      "id": "zafa-bina-ptt-construction",
+      "company": "Zafa Bina Sdn Bhd & PTT Construction Sdn Bhd",
+      "role": "Project Engineer",
+      "employmentType": "",
+      "workMode": "",
+      "startDate": "2020-08-01",
+      "endDate": "2022-01-30",
+      "isCurrent": false,
+      "datesConfirmed": true,
+      "relationship": "primary",
+      "location": "",
+      "summary": "",
+      "responsibilities": [
+        "Site coordination",
+        "Worker coordination",
+        "Construction drawing review",
+        "Site planning",
+        "Measurement and calculation checking",
+        "Construction monitoring"
+      ],
+      "technologies": [],
+      "careerSignificance": "The beginning of the professional story: working with physical systems, drawings, constraints, coordination and execution.",
+      "progression": [],
+      "selectedWork": [],
+      "confidential": false,
+      "visibility": "public"
     }
   ]
 }

@@ -18,6 +18,10 @@
     {
       "label": "Repository",
       "value": "Private"
+    },
+    {
+      "label": "Status",
+      "value": "Proof of concept · demonstrated at SPE AI Summit"
     }
   ],
   "disclaimer": "",
@@ -77,7 +81,7 @@
           "value": {
             "lead": false,
             "body": [
-              "A score on its own isn’t enough; people need a way to act on it. So the score becomes the start of a workflow. AI can suggest at each step, but a person always decides."
+              "A score on its own is not enough; people need a way to act on it. So the score becomes the start of a workflow. AI can suggest at each step, but a person always decides."
             ]
           }
         }
@@ -92,7 +96,7 @@
           "discriminant": "flow",
           "value": {
             "label": "QualityPlus architecture",
-            "caption": "The AI features are optional. If a webhook isn’t configured, that feature is hidden and the core workflow still works.",
+            "caption": "The AI features are optional. If a webhook is not configured, that feature is hidden and the core workflow still works.",
             "nodes": [
               {
                 "type": "SOURCE",
@@ -120,8 +124,8 @@
               },
               {
                 "type": "MODEL",
-                "title": "Mistral 7B",
-                "detail": "Self-hosted via Ollama, plus an O&G knowledge base.",
+                "title": "Ollama Cloud",
+                "detail": "Models served through Ollama Cloud, called from n8n agentic workflows.",
                 "active": false
               },
               {
@@ -210,7 +214,7 @@
               },
               {
                 "title": "Derived state",
-                "detail": "Workflow phase is computed from failed, addressed and pending counts rather than stored, so it can’t drift."
+                "detail": "Workflow phase is computed from failed, addressed and pending counts rather than stored, so it cannot drift."
               },
               {
                 "title": "A pivot",
@@ -284,7 +288,7 @@
     },
     {
       "id": "learned",
-      "headline": "Suggest, don’t decide.",
+      "headline": "Suggest, do not decide.",
       "surface": "default",
       "blocks": [
         {
@@ -302,7 +306,7 @@
               },
               {
                 "title": "Governance is a feature",
-                "detail": "Rules only get reused once there’s a review step people trust."
+                "detail": "Rules only get reused once there is a review step people trust."
               }
             ]
           }

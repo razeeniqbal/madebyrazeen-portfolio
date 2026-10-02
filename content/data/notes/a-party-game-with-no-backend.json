@@ -3,11 +3,12 @@
   "number": "007",
   "summary": "Building Balang: probability, kuih and peer-to-peer rooms that run entirely in the browser.",
   "topic": "Product",
-  "status": "published",
-  "date": "2026-09-27",
+  "status": "archived",
+  "date": null,
   "readingMinutes": 5,
   "photo": "projects.balang",
   "photoCaption": "Balang",
+  "category": "building",
   "body": [
     {
       "discriminant": "text",

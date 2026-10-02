@@ -9,8 +9,8 @@ import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { PathNarrative } from '@/components/v2/about/PathNarrative';
 import { assets } from '@/lib/assets';
 import { profile, education, recognition } from '@/content/profile';
-import { getProjects } from '@/content/projects';
-import { experience } from '@/content/experience';
+import { getActiveBuilds } from '@/content/projects';
+import { getCurrentRole } from '@/content/experience';
 import { beyond, chapters, storyIntro, principles } from '@/content/story';
 
 export const metadata: Metadata = {
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     'Who Razeen is, how a civil engineer became a data and AI engineer, the loop he works by, and what happens away from the screen.',
 };
 
-// About = meeting Razeen, not reading the CV twice (R03 §9). Credentials and experience live on /projects and /resume.
+// About = meeting Razeen, not reading the CV twice (R03 §9). Credentials and experience live on /experience and /resume.
 // Five moments: Intro · The path · How I think · Beyond the screen · Currently.
 export default function AboutPage() {
-  const building = getProjects().filter((p) => p.status === 'in-progress');
-  const current = experience[0];
+  const building = getActiveBuilds();
+  const current = getCurrentRole();
   const latestEducation = education[0];
 
   return (
@@ -162,7 +162,7 @@ export default function AboutPage() {
                     {current.role}, {current.company}
                   </p>
                   <p className="text-muted">
-                    {current.period} · {current.location.split(',')[0]}
+                    {[current.period, current.location?.split(',')[0]].filter(Boolean).join(' · ')}
                   </p>
                 </dd>
               </div>
@@ -201,7 +201,6 @@ export default function AboutPage() {
                       {p.title}
                     </Link>
                   ))}
-                  <p className="text-muted">After hours, alongside the day job.</p>
                 </dd>
               </div>
             )}

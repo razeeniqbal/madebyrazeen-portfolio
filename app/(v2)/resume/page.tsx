@@ -6,7 +6,7 @@ import { CredentialBadge } from '@/components/v2/credentials/CredentialBadge';
 import { Avatar } from '@/components/v2/identity/Avatar';
 import { Wordmark } from '@/components/v2/identity/Wordmark';
 import { profile, contact, education, recognition, bio } from '@/content/profile';
-import { experience } from '@/content/experience';
+import { getResumeRoles } from '@/content/experience';
 import { capabilities } from '@/content/capabilities';
 import { achievements, type Achievement } from '@/content/achievements';
 import { getProjectsByTier, type Project } from '@/content/projects';
@@ -24,10 +24,10 @@ const CV_ISSUERS = ['Microsoft', 'Google Cloud', 'Anthropic', 'Apache', 'Axiata'
 const MAX_CERTS = 8;
 
 const statusText: Record<Project['status'], string> = {
-  live: 'Live',
-  shipped: 'Shipped',
-  'in-progress': 'In development',
-  prototype: 'Experiment',
+  active: 'Active',
+  'under-construction': 'In development',
+  'proof-of-concept': 'Proof of concept',
+  completed: 'Completed',
   archived: 'Archived',
 };
 
@@ -145,12 +145,12 @@ export default function ResumePage() {
           <div data-area="main" className="space-y-10 print:space-y-5">
             <Block title="Work experience">
               <ol className="space-y-7 print:space-y-4">
-                {experience.map((r) => (
+                {getResumeRoles().map((r) => (
                   <li key={r.company} data-keep>
                     <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                       <p className="label">{r.period}</p>
                       <p className="label text-muted">
-                        {r.location.split(',')[0]} · {r.type}
+                        {[r.location?.split(',')[0], r.workMode ?? (r.relationship === 'parallel' ? 'Parallel' : undefined)].filter(Boolean).join(' · ')}
                       </p>
                     </div>
                     <h3 className="mt-1.5 text-lg font-bold leading-tight print:text-[11pt]">{r.company}</h3>

@@ -12,11 +12,10 @@ import { cn } from '@/lib/utils';
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  // The mobile menu belongs to the page it was opened on: navigating elsewhere closes it, with no effect needed.
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const open = openOn === pathname;
   const toggleRef = useRef<HTMLButtonElement>(null);
-
-  // Close on navigation.
-  useEffect(() => setOpen(false), [pathname]);
 
   // Lock scroll and close on Escape while the mobile menu is open.
   useEffect(() => {
@@ -25,7 +24,7 @@ export function SiteHeader() {
     document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setOpen(false);
+        setOpenOn(null);
         toggleRef.current?.focus();
       }
     };
@@ -104,7 +103,7 @@ export function SiteHeader() {
             className="label py-2 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            onClick={() => setOpen((o) => !o)}
+            onClick={() => setOpenOn(open ? null : pathname)}
           >
             {open ? 'Close' : 'Menu'}
           </button>

@@ -1,0 +1,43 @@
+# Quality gates for every push and pull request. Any failing step fails the run.
+#   typecheck · lint · content schema (Keystatic) · writing rules · production build · internal links
+# The writing check reports file, field and phrase; it never rewrites content.
+
+name: CI
+
+on:
+  push:
+    branches: [master, v2]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    env:
+      # Local storage mode: the admin reads content/ from the checkout, no GitHub app needed.
+      NEXT_PUBLIC_KEYSTATIC_STORAGE: ''
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npx eslint .
+      - name: Content matches the Keystatic schema
+        run: npm run check:content
+      - name: Writing rules
+        run: npm run check:writing
+      - name: Production build
+        run: npm run build
+      - name: Internal links
+        run: |
+          npm start -- --port 3000 &
+          npx --yes wait-on@8 http://localhost:3000 --timeout 60000
+          npm run check:links
