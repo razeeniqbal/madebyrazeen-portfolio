@@ -3,11 +3,12 @@
   "number": "004",
   "summary": "What 404,290 Quora question pairs taught me about trading accuracy for speed.",
   "topic": "AI",
-  "status": "published",
-  "date": "2026-09-27",
+  "status": "archived",
+  "date": null,
   "readingMinutes": 5,
   "photo": "identity.graduation",
   "photoCaption": "Master’s in AI",
+  "category": "learning",
   "body": [
     {
       "discriminant": "text",

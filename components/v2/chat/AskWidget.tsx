@@ -15,7 +15,7 @@ const SLEEP_AFTER_MS = 60_000;
 /** Turns relative site links (/projects/…) and URLs in plain-text answers into links. Old paths still redirect. */
 function Linkified({ text }: { text: string }) {
   const parts = text.split(
-    /(https?:\/\/[^\s)]+|(?<![\w/])\/(?:projects|journal|work|about|resume|contact|lab|running|notes|archive)(?:\/[\w-]+)?(?:#[\w-]+)?)/g,
+    /(https?:\/\/[^\s)]+|(?<![\w/])\/(?:projects|journal|work|experience|about|resume|contact|running)(?:\/[\w-]+)?(?:#[\w-]+)?)/g,
   );
   return (
     <>

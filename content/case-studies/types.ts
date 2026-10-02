@@ -11,9 +11,11 @@ export type SectionId =
   | 'overview'
   | 'problem'
   | 'idea'
+  | 'rules'
   | 'architecture'
   | 'data'
   | 'build'
+  | 'balance'
   | 'interface'
   | 'outcome'
   | 'learned';
@@ -22,9 +24,11 @@ export const sectionTitles: Record<SectionId, string> = {
   overview: 'Overview',
   problem: 'The problem',
   idea: 'The idea',
+  rules: 'The rules',
   architecture: 'System architecture',
   data: 'Data / intelligence',
   build: 'Build',
+  balance: 'Balance',
   interface: 'Interface',
   outcome: 'Outcome',
   learned: 'What I learned',

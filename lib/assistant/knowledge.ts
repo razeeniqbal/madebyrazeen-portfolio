@@ -5,14 +5,16 @@
  * and therefore cacheable.
  */
 import { profile, contact, education, recognition, bio } from '@/content/profile';
-import { experience } from '@/content/experience';
+import { getExperience } from '@/content/experience';
+import { getTrainerEngagements } from '@/content/trainer';
+import { getLifeInterests } from '@/content/life';
 import { getProjects } from '@/content/projects';
 import { getCaseStudy, type Block } from '@/content/case-studies';
 import { achievements } from '@/content/achievements';
 import { capabilities } from '@/content/capabilities';
 import { chapters } from '@/content/story';
 import { availability, helpWith } from '@/content/contact';
-import { notes } from '@/content/notes';
+import { getPublishedJournalEntries } from '@/content/notes';
 import { isSampleData, getTotals, getPersonalBests, getRaces, formatDuration } from '@/content/running';
 import { SITE_URL } from '@/lib/site';
 
@@ -43,13 +45,47 @@ export function buildKnowledge(): string {
   out.push(`Languages: ${profile.languages.join(', ')}`);
   out.push(`Contact: email ${contact.email}, LinkedIn ${contact.linkedin}, GitHub ${contact.github}. Contact page: ${SITE_URL}/contact. Online resume: ${SITE_URL}/resume.`);
 
-  out.push(`## Bio\n${bio.story.join('\n')}`);
+  out.push(`## Summary\n${bio.short}`);
 
   out.push(`## Story (About page)\n${chapters.map((c) => `### ${c.period}: ${c.title}\n${c.body.join('\n')}`).join('\n')}`);
 
+  // Career from the canonical record. Unconfirmed dates are said to be unconfirmed, never guessed;
+  // confidential roles stay high-level (no client or project detail is stored for them).
   out.push(
-    `## Experience\n${experience
-      .map((r) => `### ${r.role}, ${r.company} (${r.period}, ${r.location}, ${r.type})\n${r.highlights.map((h) => `- ${h}`).join('\n')}`)
+    `## Experience\n${getExperience()
+      .map((r) => {
+        const when = r.datesConfirmed ? r.period : `${r.employmentType ?? 'role'}, dates not confirmed on the site`;
+        const head = `### ${r.role}, ${r.company} (${[when, r.location, r.relationship === 'parallel' ? 'parallel to the main career' : ''].filter(Boolean).join(', ')})`;
+        const lines = [
+          r.summary,
+          ...r.responsibilities.map((x) => `- ${x}`),
+          r.careerSignificance && `Career significance: ${r.careerSignificance}`,
+          r.confidential && 'Client and project details are confidential.',
+          ...r.selectedWork
+            .filter((w) => w.visibility === 'public')
+            .map(
+              (w) =>
+                `- Selected work: ${w.name} (${[w.context, w.type, w.scale, w.status].filter(Boolean).join(', ')}). ${w.description}${w.recognition ? ` ${w.recognition}.` : ''} Technology: ${w.technologies.join(', ') || 'not specified'}. AI used: ${w.aiUsed ? 'yes' : 'no'}.`,
+            ),
+        ];
+        return [head, ...lines.filter(Boolean)].join('\n');
+      })
+      .join('\n')}`,
+  );
+
+  out.push(
+    `## Training and speaking\n${getTrainerEngagements()
+      .map((e) => {
+        const when = e.dateStart ? `${e.dateStart}${e.dateEnd && e.dateEnd !== e.dateStart ? ` to ${e.dateEnd}` : ''}` : e.year ? String(e.year) : '';
+        const meta = [e.organization + (e.partners.length ? ` with ${e.partners.join(', ')}` : ''), e.role, when, e.format].filter(Boolean).join('; ');
+        return `- ${e.title} (${meta}). ${e.summary} Topics: ${e.topics.join(', ')}.`;
+      })
+      .join('\n')}`,
+  );
+
+  out.push(
+    `## Life\n${getLifeInterests()
+      .map((l) => `- ${l.name} (${l.type})${l.relatedProject ? `: connected to the ${l.relatedProject} project` : ''}. Page: ${SITE_URL}${l.href}`)
       .join('\n')}`,
   );
 
@@ -71,7 +107,11 @@ export function buildKnowledge(): string {
       .join('\n')}`,
   );
 
-  out.push(`## Journal (writing, at /journal)\n${notes.map((n) => `- ${n.title} (${n.status}): ${n.summary}`).join('\n')}`);
+  // Only published entries; drafts and archived entries are never shared.
+  const published = getPublishedJournalEntries();
+  out.push(
+    `## Journal (writing, at /journal)\n${published.length ? published.map((n) => `- ${n.title} (${n.date}): ${n.summary}`).join('\n') : 'No journal entries are published yet.'}`,
+  );
 
   if (isSampleData()) {
     out.push(

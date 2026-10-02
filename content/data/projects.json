@@ -6,7 +6,7 @@
       "title": "Sepang Vision Lab",
       "year": 2026,
       "category": "product",
-      "status": "in-progress",
+      "status": "under-construction",
       "tier": "featured",
       "order": 3,
       "summary": "Race-intelligence lab for Sepang International Circuit: circuit geometry, simulated telemetry, replay, weather scenarios and Monte Carlo strategy.",
@@ -48,7 +48,17 @@
       "confidential": false,
       "draft": false,
       "placeholder": false,
-      "highlights": []
+      "highlights": [],
+      "kind": "primary-build",
+      "tagline": "",
+      "fullName": "",
+      "origin": "Curiosity → Experiment",
+      "loop": [
+        "Observe",
+        "Predict",
+        "Simulate"
+      ],
+      "visibility": "public"
     },
     {
       "slug": "qualityplus",
@@ -56,7 +66,7 @@
       "title": "QualityPlus",
       "year": 2025,
       "category": "data",
-      "status": "live",
+      "status": "proof-of-concept",
       "tier": "flagship",
       "order": 1,
       "summary": "Data quality management turned into a product: scored checks, a remediation-to-publish workflow for trusted data, and AI assistance at three points.",
@@ -66,7 +76,7 @@
         "TypeScript",
         "Supabase",
         "n8n",
-        "Ollama / Mistral 7B"
+        "Ollama Cloud"
       ],
       "tags": [
         "Data Quality",
@@ -81,12 +91,18 @@
       "confidential": true,
       "caseStudy": true,
       "role": "Designer and developer",
-      "outcome": "",
+      "outcome": "Proof of concept demonstrated at SPE AI Summit.",
       "learning": "",
       "metrics": [],
       "draft": false,
       "placeholder": false,
-      "highlights": []
+      "highlights": [],
+      "kind": "professional-system",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "nlp-semantic-similarity",
@@ -94,7 +110,7 @@
       "title": "Duplicate Question Detection (NLP)",
       "year": 2025,
       "category": "research",
-      "status": "shipped",
+      "status": "completed",
       "tier": "featured",
       "order": 1,
       "summary": "Master's research: FastText embeddings plus PCA to detect duplicate questions on 404k Quora pairs, keeping 83.68% accuracy while cutting training time by two thirds and memory by 83%.",
@@ -141,7 +157,13 @@
         }
       ],
       "draft": false,
-      "highlights": []
+      "highlights": [],
+      "kind": "research",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "leadsightz",
@@ -149,7 +171,7 @@
       "title": "LeadSightz",
       "year": 2025,
       "category": "ai",
-      "status": "shipped",
+      "status": "completed",
       "tier": "standard",
       "order": 1,
       "summary": "Cursor × Anthropic Hackathon 2025: sales automation with Claude for intelligent lead management and insights.",
@@ -184,7 +206,13 @@
         "Personalised outreach messages generated at scale",
         "Analytics dashboard for performance and conversion",
         "Next.js, TypeScript and Tailwind, with Claude Sonnet 4.5 through the Anthropic API"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "edugen",
@@ -192,7 +220,7 @@
       "title": "EduGen",
       "year": 2025,
       "category": "ai",
-      "status": "live",
+      "status": "completed",
       "tier": "standard",
       "order": 2,
       "summary": "AI-powered SPM question generator for Malaysian students.",
@@ -225,7 +253,13 @@
         "Easy, medium and hard questions, each with a detailed explanation",
         "Study dashboard: quiz history, average scores, strong and weak chapters",
         "Questions generated with the Google Gemini API"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "job-matching-t2",
@@ -233,7 +267,7 @@
       "title": "Job Matching System T2",
       "year": 2025,
       "category": "ai",
-      "status": "shipped",
+      "status": "completed",
       "tier": "standard",
       "order": 3,
       "summary": "XGBoost-powered job matching with semantic analysis for accurate candidate–job matching.",
@@ -268,7 +302,13 @@
         "SHAP explanations showing which factors drove each score",
         "Redesigned flow that computes features once and reuses them",
         "Documented limitations: training data needs, cold start for new job categories"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "face-recognition",
@@ -276,7 +316,7 @@
       "title": "Face Recognition System",
       "year": 2025,
       "category": "ai",
-      "status": "shipped",
+      "status": "completed",
       "tier": "standard",
       "order": 4,
       "summary": "OpenCV face recognition with a Streamlit interface, HOG feature extraction and SVM classification.",
@@ -309,7 +349,13 @@
         "Recognition with HOG features and an SVM classifier, trained on the LFW dataset",
         "Data augmentation: flips, rotations and brightness changes",
         "Model evaluation metrics shown in the app"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "hr-analytics",
@@ -317,7 +363,7 @@
       "title": "HR Analytics & Attrition Model",
       "year": 2025,
       "category": "analytics",
-      "status": "live",
+      "status": "completed",
       "tier": "standard",
       "order": 5,
       "summary": "Predict employee attrition with ML models and an interactive dashboard for retention insights.",
@@ -351,7 +397,13 @@
         "Multiple models compared, including Logistic Regression and Random Forest",
         "Interactive dashboard for exploring the data and getting predictions",
         "Findings: overtime raises quit rates; work-life balance often matters more than salary; growth opportunities reduce turnover"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "aircraft-journey-extractor",
@@ -359,7 +411,7 @@
       "title": "Aircraft Journey Summary Extractor",
       "year": 2025,
       "category": "data",
-      "status": "shipped",
+      "status": "completed",
       "tier": "standard",
       "order": 6,
       "summary": "Turns photos of aircraft journey summary forms, including handwriting, into structured JSON using Gemini’s vision model.",
@@ -394,7 +446,13 @@
         "JSON validation: required fields, integer types, clean-up of model output",
         "Graceful batch processing: one bad form does not block the rest",
         "Estimated cost of about $0.001 per form"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "job-matching-t1",
@@ -402,7 +460,7 @@
       "title": "Job Matching System T1",
       "year": 2025,
       "category": "ai",
-      "status": "shipped",
+      "status": "completed",
       "tier": "archive",
       "order": 1,
       "summary": "Modular job matching with quantitative scoring on skills, experience and education.",
@@ -433,7 +491,13 @@
         "Dashboard with adjustable weights and a per-component score breakdown",
         "Custom application input and JSON upload with validation",
         "Export of results to JSON and CSV"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "plant-disease-classification",
@@ -441,7 +505,7 @@
       "title": "Plant Disease Classification",
       "year": 2025,
       "category": "ai",
-      "status": "shipped",
+      "status": "completed",
       "tier": "archive",
       "order": 2,
       "summary": "Transfer learning with CNNs to classify plant diseases from leaf images.",
@@ -473,7 +537,13 @@
         "VGG16 pre-trained on ImageNet, frozen, with a new classification head",
         "Five separate training phases per model for reliable averages",
         "Training and validation accuracy and loss recorded for every phase"
-      ]
+      ],
+      "kind": "research",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "london-bike-sharing",
@@ -481,7 +551,7 @@
       "title": "London Bike Sharing Analysis",
       "year": 2024,
       "category": "analytics",
-      "status": "shipped",
+      "status": "completed",
       "tier": "archive",
       "order": 3,
       "summary": "Cleaning and preparing the London bike-sharing dataset in Python so it is ready for reliable analysis.",
@@ -513,7 +583,13 @@
         "Duplicates removed and data types standardised with pandas",
         "Dates and strings standardised",
         "Validation checks for consistency and integrity"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "powerbi-food-prep",
@@ -521,7 +597,7 @@
       "title": "Power BI Apocalypse Food Prep",
       "year": 2024,
       "category": "analytics",
-      "status": "shipped",
+      "status": "completed",
       "tier": "archive",
       "order": 4,
       "summary": "Power BI dashboard for food-preparation planning with resource tracking.",
@@ -551,7 +627,13 @@
         "Data model with relationships between tables",
         "Slicers, filters and drill-downs for exploration",
         "Consistent formatting, tooltips and navigation"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "excel-bike-sales",
@@ -559,7 +641,7 @@
       "title": "Excel Bike Sales Dashboard",
       "year": 2024,
       "category": "analytics",
-      "status": "shipped",
+      "status": "completed",
       "tier": "archive",
       "order": 5,
       "summary": "Cleaning a raw bike sales dataset in Excel so it is ready for analysis.",
@@ -588,7 +670,13 @@
         "Cross-checks with lookup formulas (VLOOKUP, INDEX and MATCH)",
         "Duplicates removed and missing values handled",
         "Validation rules to prevent future entry errors"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "excel-coffee-sales",
@@ -596,7 +684,7 @@
       "title": "Excel Coffee Sales Dashboard",
       "year": 2024,
       "category": "analytics",
-      "status": "shipped",
+      "status": "completed",
       "tier": "archive",
       "order": 6,
       "summary": "Coffee sales trends and customer segmentation in an interactive Excel dashboard.",
@@ -625,7 +713,13 @@
         "Slicers and drop-downs for interactive filtering",
         "Conditional formatting to highlight key figures",
         "Documentation for updating the data"
-      ]
+      ],
+      "kind": "experiment",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     },
     {
       "slug": "balang",
@@ -633,7 +727,7 @@
       "title": "Balang",
       "year": 2026,
       "category": "product",
-      "status": "live",
+      "status": "active",
       "tier": "featured",
       "order": 2,
       "summary": "A Malaysian probability party game: read the jar of 25 kuih tokens, bet on secret prediction cards, and play friends in peer-to-peer rooms with no backend.",
@@ -686,7 +780,165 @@
         "Peer-to-peer rooms over WebRTC (PeerJS): the host’s browser is the authority and guests only receive their own view",
         "Bots take over a player’s turns if they disconnect, until they reconnect",
         "Discard and lock phases plus KAW-KAW (double reward, double penalty) for risk management"
-      ]
+      ],
+      "kind": "primary-build",
+      "tagline": "Agak. Risiko. Menang.",
+      "fullName": "",
+      "origin": "Social experience → Game",
+      "loop": [
+        "Observe",
+        "Predict",
+        "Draw",
+        "Reassess",
+        "Discard / keep",
+        "Lock bet",
+        "Risk",
+        "Result"
+      ],
+      "visibility": "public"
+    },
+    {
+      "slug": "vsb",
+      "number": "017",
+      "title": "VSB",
+      "year": 2026,
+      "category": "product",
+      "status": "active",
+      "tier": "standard",
+      "order": 0,
+      "summary": "A Malaysian social-volleyball platform where organizers create sessions and players discover games, see who is playing, book places and take part in a community.",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "React Router"
+      ],
+      "tags": [
+        "Community",
+        "Booking",
+        "Sport"
+      ],
+      "links": {
+        "live": "https://vsb.madebyrazeen.com",
+        "source": "https://github.com/razeeniqbal/vsb"
+      },
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "role": "",
+      "problem": "Coordinating social volleyball sessions through WhatsApp and individual messages is unnecessarily difficult.",
+      "outcome": "",
+      "learning": "",
+      "highlights": [
+        "Session discovery",
+        "Booking",
+        "Players",
+        "Community",
+        "Player identity"
+      ],
+      "confidential": false,
+      "draft": false,
+      "placeholder": false,
+      "kind": "primary-build",
+      "tagline": "",
+      "fullName": "Volleyball SDN BHD",
+      "origin": "Personal interest → Real product",
+      "loop": [],
+      "visibility": "public"
+    },
+    {
+      "slug": "forma",
+      "number": "018",
+      "title": "FORMA",
+      "year": 2026,
+      "category": "data",
+      "status": "active",
+      "tier": "standard",
+      "order": 0,
+      "summary": "A visual data workbench that makes the path from messy input to a reliable pipeline easier to see, work with and reproduce, while keeping engineering control.",
+      "stack": [
+        "TypeScript",
+        "React",
+        "React Flow",
+        "Python (pandas)"
+      ],
+      "tags": [
+        "Data Engineering",
+        "Pipelines",
+        "Data Quality"
+      ],
+      "links": {
+        "live": "",
+        "source": "https://github.com/razeeniqbal/forma"
+      },
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "role": "",
+      "problem": "Data engineering repeatedly requires inspecting, selecting, cleaning, transforming, validating, running and reviewing data through workflows that are often fragmented across code and tools.",
+      "outcome": "",
+      "learning": "",
+      "highlights": [
+        "Core loop: see, select, transform, verify, run, export",
+        "Pipeline stages: source, select, extract, clean, transform, validate, load",
+        "Pipelines shown step by step on a canvas",
+        "Exceptions go to a review queue instead of being lost",
+        "Exports readable Python that produces the same output"
+      ],
+      "confidential": false,
+      "draft": false,
+      "placeholder": false,
+      "kind": "primary-build",
+      "tagline": "Shape messy data into reliable pipelines.",
+      "fullName": "",
+      "origin": "Work problem → Engineering tool",
+      "loop": [
+        "See",
+        "Select",
+        "Transform",
+        "Verify",
+        "Run",
+        "Export"
+      ],
+      "visibility": "public"
+    },
+    {
+      "slug": "aem-movie-night",
+      "number": "019",
+      "title": "AEM Movie Night",
+      "year": 2026,
+      "category": "product",
+      "status": "completed",
+      "tier": "standard",
+      "order": 9,
+      "summary": "A small booking system built for an office movie-night activity.",
+      "stack": [],
+      "tags": [
+        "Internal tool",
+        "Booking"
+      ],
+      "links": {
+        "live": "",
+        "source": ""
+      },
+      "cover": "none",
+      "metrics": [],
+      "caseStudy": false,
+      "role": "",
+      "problem": "Turning a small manual coordination problem into a usable system.",
+      "outcome": "",
+      "learning": "",
+      "highlights": [],
+      "confidential": true,
+      "draft": false,
+      "placeholder": false,
+      "kind": "small-build",
+      "tagline": "",
+      "fullName": "",
+      "origin": "",
+      "loop": [],
+      "visibility": "public"
     }
   ]
 }

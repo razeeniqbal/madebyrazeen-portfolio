@@ -3,11 +3,12 @@
   "number": "002",
   "summary": "Patterns, lessons and practical insights from moving pipelines toward decisions.",
   "topic": "Data Engineering",
-  "status": "published",
-  "date": "2026-09-27",
+  "status": "archived",
+  "date": null,
   "readingMinutes": 5,
   "photo": "career.briefing2",
   "photoCaption": "Walking through a demo",
+  "category": "building",
   "body": [
     {
       "discriminant": "text",

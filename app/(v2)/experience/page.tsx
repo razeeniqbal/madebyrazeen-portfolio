@@ -8,7 +8,7 @@ import { CredentialList } from '@/components/v2/work/CredentialList';
 import { CodingActivity } from '@/components/v2/experience/CodingActivity';
 import { achievements } from '@/content/achievements';
 import { recognition } from '@/content/profile';
-import { experience } from '@/content/experience';
+import { getExperience } from '@/content/experience';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/experience' },
@@ -29,7 +29,7 @@ export default function ExperiencePage() {
           <SectionHeader
             as="h1"
             size="xl"
-            eyebrow={`Experience · ${experience.length} roles`}
+            eyebrow={`Experience · ${getExperience().length} roles`}
             title={['Where the', 'work happened.']}
             className="lg:col-span-8"
           />

@@ -24,8 +24,8 @@
   ],
   "quickAnswers": [
     {
-      "q": "What’s the best way to reach you?",
-      "a": "Email. It’s the channel I check most reliably."
+      "q": "What is the best way to reach you?",
+      "a": "Email. It is the channel I check most reliably."
     },
     {
       "q": "Where are you based?",
@@ -33,10 +33,10 @@
     },
     {
       "q": "Can I see a CV first?",
-      "a": "Yes. There’s an online resume with a PDF download."
+      "a": "Yes. There is an online resume with a PDF download."
     },
     {
-      "q": "Not sure it’s a fit?",
+      "q": "Not sure it is a fit?",
       "a": "Ask the assistant in the corner. It answers questions about my work and background."
     }
   ]

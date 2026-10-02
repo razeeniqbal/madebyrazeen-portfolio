@@ -115,8 +115,8 @@ export default config({
   ui: {
     brand: { name: 'razeeniqbal. admin' },
     navigation: {
-      Site: ['profile', 'home', 'story', 'contact', 'assistant'],
-      Work: ['projects', 'caseStudies', 'experience', 'capabilities', 'achievements'],
+      Site: ['profile', 'home', 'story', 'contact', 'assistant', 'life'],
+      Work: ['experience', 'trainer', 'projects', 'caseStudies', 'capabilities', 'achievements'],
       Writing: ['notes'],
     },
   },
@@ -179,7 +179,7 @@ export default config({
           fields.object({ year: fields.text({ label: 'Year' }), title: fields.text({ label: 'Title' }), detail: fields.text({ label: 'Detail' }) }),
           { label: 'Recognition', itemLabel: (p) => p.fields.title.value },
         ),
-        bio: fields.object({ short: fields.text({ label: 'Short bio', multiline: true }), story: paragraphList('Long bio (V1 & assistant)') }, { label: 'Bio' }),
+        bio: fields.object({ short: fields.text({ label: 'Short bio', multiline: true }) }, { label: 'Bio' }),
       },
     }),
 
@@ -188,25 +188,6 @@ export default config({
       path: 'content/data/home',
       format: json,
       schema: {
-        intro: fields.object(
-          {
-            title: textList('Title lines', 'Line'),
-            pillars: textList('Pillars', 'Pillar'),
-            lead: fields.text({ label: 'Lead', multiline: true }),
-            body: fields.text({ label: 'Body', multiline: true }),
-          },
-          { label: '01 · Intro' },
-        ),
-        featured: fields.object(
-          {
-            project: fields.text({ label: 'Project slug (for the case-study link)' }),
-            eyebrow: fields.text({ label: 'Eyebrow' }),
-            title: textList('Title lines', 'Line'),
-            lead: fields.text({ label: 'Lead', multiline: true }),
-            body: fields.text({ label: 'Body', multiline: true }),
-          },
-          { label: '03 · Featured system' },
-        ),
         aboutTeaser: fields.object(
           { title: textList('Title lines', 'Line'), body: fields.text({ label: 'Body', multiline: true }) },
           { label: '10 · About teaser' },
@@ -323,9 +304,30 @@ export default config({
             }),
             status: fields.select({
               label: 'Status',
-              options: ['live', 'in-progress', 'shipped', 'prototype', 'archived'].map((v) => ({ label: v, value: v })),
-              defaultValue: 'shipped',
+              options: [
+                { label: 'Active', value: 'active' },
+                { label: 'Under construction', value: 'under-construction' },
+                { label: 'Proof of concept', value: 'proof-of-concept' },
+                { label: 'Completed', value: 'completed' },
+                { label: 'Archived', value: 'archived' },
+              ],
+              defaultValue: 'active',
             }),
+            kind: fields.select({
+              label: 'Kind (portfolio hierarchy)',
+              options: [
+                { label: 'Primary build', value: 'primary-build' },
+                { label: 'Professional system', value: 'professional-system' },
+                { label: 'Experiment', value: 'experiment' },
+                { label: 'Research', value: 'research' },
+                { label: 'Small build', value: 'small-build' },
+              ],
+              defaultValue: 'experiment',
+            }),
+            tagline: fields.text({ label: 'Tagline' }),
+            fullName: fields.text({ label: 'Full name (e.g. Volleyball SDN BHD)' }),
+            origin: fields.text({ label: 'Origin (e.g. Personal interest → Real product)' }),
+            loop: textList('Core loop (step by step)', 'Step'),
             tier: fields.select({
               label: 'Tier (where it shows)',
               options: [
@@ -359,6 +361,7 @@ export default config({
             caseStudy: fields.checkbox({ label: 'Has a case study' }),
             draft: fields.checkbox({ label: 'Draft (hidden everywhere)' }),
             placeholder: fields.checkbox({ label: 'Placeholder (shows “details coming”)' }),
+            visibility: fields.select({ label: 'Visibility', options: [{ label: 'Public', value: 'public' }, { label: 'Private (never shown)', value: 'private' }], defaultValue: 'public' }),
           }),
           { label: 'Projects', itemLabel: (p) => `${p.fields.number.value} · ${p.fields.title.value} · ${p.fields.tier.value}` },
         ),
@@ -372,22 +375,105 @@ export default config({
       schema: {
         roles: fields.array(
           fields.object({
+            id: fields.text({ label: 'ID (stable, kebab-case)' }),
             company: fields.text({ label: 'Company' }),
             role: fields.text({ label: 'Role' }),
-            period: fields.text({ label: 'Period' }),
-            start: fields.integer({ label: 'Start year' }),
-            location: fields.text({ label: 'Location' }),
-            type: fields.select({
-              label: 'Work mode',
-              options: ['Hybrid', 'Onsite', 'Remote', 'Full-time', 'Part-time', 'Internship'].map((v) => ({ label: v, value: v })),
-              defaultValue: 'Onsite',
+            employmentType: fields.select({
+              label: 'Employment type',
+              options: [{ label: 'Not set', value: '' }, { label: 'Permanent', value: 'permanent' }, { label: 'Contract', value: 'contract' }, { label: 'Full-time', value: 'full-time' }, { label: 'Part-time', value: 'part-time' }, { label: 'Internship', value: 'internship' }],
+              defaultValue: '',
             }),
-            highlights: textList('Highlights', 'Highlight'),
-            worked: fields.text({ label: 'What I worked on (optional)', multiline: true }),
-            changed: fields.text({ label: 'What changed (optional)', multiline: true }),
-            learned: fields.text({ label: 'What I learned (optional)', multiline: true }),
+            workMode: fields.select({
+              label: 'Work mode',
+              options: [{ label: 'Not set', value: '' }, { label: 'Hybrid', value: 'Hybrid' }, { label: 'Onsite', value: 'Onsite' }, { label: 'Remote', value: 'Remote' }],
+              defaultValue: '',
+            }),
+            startDate: fields.date({ label: 'Start date' }),
+            endDate: fields.date({ label: 'End date (empty while current)' }),
+            isCurrent: fields.checkbox({ label: 'Current role' }),
+            datesConfirmed: fields.checkbox({ label: 'Dates confirmed (unchecked: dates are never shown)', defaultValue: true }),
+            relationship: fields.select({
+              label: 'Relationship',
+              options: [{ label: 'Primary career', value: 'primary' }, { label: 'Parallel (alongside the primary role)', value: 'parallel' }],
+              defaultValue: 'primary',
+            }),
+            location: fields.text({ label: 'Location' }),
+            summary: fields.text({ label: 'Summary', multiline: true }),
+            responsibilities: textList('Responsibilities', 'Responsibility'),
+            technologies: textList('Technologies', 'Technology'),
+            careerSignificance: fields.text({ label: 'Career significance', multiline: true }),
+            progression: textList('Conceptual progression (step by step)', 'Step'),
+            selectedWork: fields.array(
+              fields.object({
+                id: fields.text({ label: 'ID' }),
+                name: fields.text({ label: 'Name' }),
+                context: fields.text({ label: 'Context (e.g. client or product)' }),
+                type: fields.text({ label: 'Type' }),
+                status: fields.select({ label: 'Status', options: [{ label: 'Not set', value: '' }, { label: 'Active', value: 'active' }, { label: 'Under construction', value: 'under-construction' }, { label: 'Proof of concept', value: 'proof-of-concept' }, { label: 'Completed', value: 'completed' }, { label: 'Archived', value: 'archived' }], defaultValue: '' }),
+                scale: fields.text({ label: 'Scale (e.g. Approximately 700,000 records)' }),
+                description: fields.text({ label: 'Description', multiline: true }),
+                significance: fields.text({ label: 'Significance (optional)', multiline: true }),
+                technologies: textList('Technologies', 'Technology'),
+                aiUsed: fields.checkbox({ label: 'AI used' }),
+                flow: textList('Flow (step by step)', 'Step'),
+                recognition: fields.text({ label: 'Recognition' }),
+                projectSlug: fields.text({ label: 'Project slug (links to /projects/<slug>)' }),
+                visibility: fields.select({ label: 'Visibility', options: [{ label: 'Public', value: 'public' }, { label: 'Private (never shown)', value: 'private' }], defaultValue: 'public' }),
+              }),
+              { label: 'Selected work', itemLabel: (p) => p.fields.name.value },
+            ),
+            confidential: fields.checkbox({ label: 'Confidential (high-level only)' }),
+            visibility: fields.select({ label: 'Visibility', options: [{ label: 'Public', value: 'public' }, { label: 'Private (never shown)', value: 'private' }], defaultValue: 'public' }),
           }),
           { label: 'Roles', itemLabel: (p) => `${p.fields.role.value} · ${p.fields.company.value}` },
+        ),
+      },
+    }),
+
+    trainer: singleton({
+      label: 'Trainer',
+      path: 'content/data/trainer',
+      format: json,
+      schema: {
+        engagements: fields.array(
+          fields.object({
+            slug: fields.text({ label: 'Slug' }),
+            title: fields.text({ label: 'Title' }),
+            role: fields.text({ label: 'Role' }),
+            organization: fields.text({ label: 'Organization' }),
+            partners: textList('Partners', 'Partner'),
+            dateStart: fields.date({ label: 'Start date (leave empty if unknown)' }),
+            dateEnd: fields.date({ label: 'End date' }),
+            year: fields.integer({ label: 'Year (only when no exact date is known)' }),
+            format: fields.text({ label: 'Format' }),
+            audience: fields.text({ label: 'Audience', multiline: true }),
+            summary: fields.text({ label: 'Summary', multiline: true }),
+            topics: textList('Topics', 'Topic'),
+            evidence: textList('Evidence (asset keys or URLs of real photos / screenshots)', 'Item'),
+            featured: fields.checkbox({ label: 'Featured' }),
+            visibility: fields.select({ label: 'Visibility', options: [{ label: 'Public', value: 'public' }, { label: 'Private (never shown)', value: 'private' }], defaultValue: 'public' }),
+          }),
+          { label: 'Engagements', itemLabel: (p) => p.fields.title.value },
+        ),
+      },
+    }),
+
+    life: singleton({
+      label: 'Life',
+      path: 'content/data/life',
+      format: json,
+      schema: {
+        interests: fields.array(
+          fields.object({
+            slug: fields.text({ label: 'Slug' }),
+            name: fields.text({ label: 'Name' }),
+            type: fields.select({ label: 'Type', options: [{ label: 'Sport', value: 'sport' }, { label: 'Interest', value: 'interest' }], defaultValue: 'interest' }),
+            href: fields.text({ label: 'Links to (e.g. /running, /projects/vsb)' }),
+            relatedProject: fields.text({ label: 'Related project slug' }),
+            dataSource: fields.select({ label: 'Data source', options: [{ label: 'None', value: '' }, { label: 'Running pipeline (Garmin / Strava)', value: 'running' }], defaultValue: '' }),
+            visibility: fields.select({ label: 'Visibility', options: [{ label: 'Public', value: 'public' }, { label: 'Private (never shown)', value: 'private' }], defaultValue: 'public' }),
+          }),
+          { label: 'Interests', itemLabel: (p) => p.fields.name.value },
         ),
       },
     }),
@@ -459,7 +545,7 @@ export default config({
           fields.object({
             id: fields.select({
               label: 'Section',
-              options: ['overview', 'problem', 'idea', 'architecture', 'data', 'build', 'interface', 'outcome', 'learned'].map((v) => ({
+              options: ['overview', 'problem', 'idea', 'rules', 'architecture', 'data', 'build', 'balance', 'interface', 'outcome', 'learned'].map((v) => ({
                 label: v,
                 value: v,
               })),
@@ -497,15 +583,24 @@ export default config({
           defaultValue: 'Data Engineering',
         }),
         status: fields.select({
-          label: 'Status',
+          label: 'Status (only Published is ever public)',
           options: [
+            { label: 'Draft', value: 'draft' },
             { label: 'Published', value: 'published' },
-            { label: 'Draft (readable by link, not indexed)', value: 'draft' },
-            { label: 'In writing (title only)', value: 'in-writing' },
+            { label: 'Archived', value: 'archived' },
           ],
-          defaultValue: 'in-writing',
+          defaultValue: 'draft',
         }),
-        date: fields.date({ label: 'Published date' }),
+        category: fields.select({
+          label: 'Category',
+          options: [
+            { label: 'Building', value: 'building' },
+            { label: 'Learning', value: 'learning' },
+            { label: 'Notes', value: 'notes' },
+          ],
+          defaultValue: 'notes',
+        }),
+        date: fields.date({ label: 'Published date (the real one; never filled automatically)' }),
         readingMinutes: fields.integer({ label: 'Reading minutes' }),
         photo: imageSelect('Photo (list thumbnail + top of the entry)'),
         photoCaption: fields.text({ label: 'Photo caption' }),

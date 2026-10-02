@@ -1,33 +1,9 @@
 {
-  "intro": {
-    "title": [
-      "I turn ideas",
-      "into systems."
-    ],
-    "pillars": [
-      "Data.",
-      "AI.",
-      "Products.",
-      "Experiments."
-    ],
-    "lead": "I'm a data engineer at AEM Energy Solutions, building pipelines and analytics for the energy sector. I trained as a civil engineer, moved into data, and went on to a Master's in AI.",
-    "body": "Most of what I make starts as a question and ends as a system someone can use: a data platform, a model, a product, or an experiment that didn't work and taught me why."
-  },
-  "featured": {
-    "project": "qualityplus",
-    "eyebrow": "Featured system · QualityPlus",
-    "title": [
-      "From messy data",
-      "to data you can trust."
-    ],
-    "lead": "Data quality management, turned into a product.",
-    "body": "Fixing bad data usually happens in spreadsheets with no trail. QualityPlus scores it, lets people fix it inside a review workflow, and publishes a version everyone can rely on."
-  },
   "aboutTeaser": {
     "title": [
       "Same curiosity.",
       "Different tracks."
     ],
-    "body": "Civil engineering taught me to respect systems. Data taught me to question them. I still work the same way: input, process, iterate, progress, whether it's a pipeline, a model or a long run."
+    "body": "Civil engineering taught me to respect systems. Data taught me to question them. I still work the same way: input, process, iterate, progress, whether it is a pipeline, a model or a long run."
   }
 }

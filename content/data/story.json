@@ -6,7 +6,7 @@
       "The long way from",
       "concrete to code."
     ],
-    "lede": "I’m Razeen, a data engineer and AI solutions engineer in Malaysia who started out as a civil engineer. I build systems, test ideas in public repos, and run long distances to keep my head straight.",
+    "lede": "I am Razeen, a data engineer and AI solutions engineer in Malaysia who started out as a civil engineer. I build systems, test ideas in public repos, and run long distances to keep my head straight.",
     "note": "Told step by step and kept as a journal, so it grows as I do.",
     "body": [
       "This page is the longer version of that sentence: how a civil engineer ended up building data platforms and AI tools, the loop I use for all of it, and what happens away from the screen."
@@ -78,7 +78,7 @@
       "period": "Now",
       "title": "Same curiosity, different tracks",
       "body": [
-        "Outside the day job I build to find out: LeadSightz in a weekend at the Cursor × Anthropic hackathon, Balang as a party game about probability, and Sepang Vision Lab, a digital twin that started as a question about how far public race data can go. Some ship, some don’t. Each one teaches me something the next one needs."
+        "Outside the day job I build to find out: LeadSightz in a weekend at the Cursor × Anthropic hackathon, Balang as a party game about probability, and Sepang Vision Lab, a digital twin that started as a question about how far public race data can go. Some ship, some do not. Each one teaches me something the next one needs."
       ],
       "photo": "career.cursorAnthropic",
       "photoCaption": "Cursor × Anthropic hackathon",
@@ -123,7 +123,7 @@
     },
     {
       "title": "Iterate",
-      "detail": "Measure against a baseline. If the clever version doesn't beat the simple one, say so and try again."
+      "detail": "Measure against a baseline. If the clever version does not beat the simple one, say so and try again."
     },
     {
       "title": "Progress",
@@ -136,7 +136,7 @@
       "So does everything around it."
     ],
     "body": [
-      "Outside work I run road races. It’s the same loop as engineering: show up, measure, adjust, repeat. Progress you only notice over months.",
+      "Outside work I run road races. It is the same loop as engineering: show up, measure, adjust, repeat. Progress you only notice over months.",
       "The rest happens around people: hackathons, industry demos, conferences, and the odd stage."
     ]
   }

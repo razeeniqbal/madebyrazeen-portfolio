@@ -1,0 +1,31 @@
+{
+  "interests": [
+    {
+      "slug": "running",
+      "name": "Running",
+      "type": "sport",
+      "href": "/running",
+      "relatedProject": "",
+      "dataSource": "running",
+      "visibility": "public"
+    },
+    {
+      "slug": "volleyball",
+      "name": "Volleyball",
+      "type": "sport",
+      "href": "/projects/vsb",
+      "relatedProject": "vsb",
+      "dataSource": "",
+      "visibility": "public"
+    },
+    {
+      "slug": "formula-1",
+      "name": "Formula 1",
+      "type": "interest",
+      "href": "/projects/sepang-vision-lab",
+      "relatedProject": "sepang-vision-lab",
+      "dataSource": "",
+      "visibility": "public"
+    }
+  ]
+}

@@ -102,12 +102,6 @@
     }
   ],
   "bio": {
-    "short": "Data Engineer and AI Solutions Engineer with a Master of Science in AI. I build end-to-end data systems and practical AI applications: RAG pipelines, LLM fine-tuning, data quality platforms and dashboards.",
-    "story": [
-      "My journey started in civil engineering, but I discovered my passion for data and AI during my time at G&P Geotechnic, where I automated engineering workflows and built data solutions. That spark led me to become a Certified Data Analyst and pursue a Master's in Artificial Intelligence, and I haven't looked back since.",
-      "Now as a Data Engineer at AEM Energy Solutions, I build AI infrastructure and data platforms for the energy sector: an in-house LLM framework and APIs, a Data Quality Platform that became the enterprise standard, and pipelines that turn engineering PDFs into searchable vectors. Before this, at EISmartwork, I built prediction models on datasets of over 10 million records and dashboards that cut report generation time in half.",
-      "I hold a Master of Science in AI from UMPSA with a CGPA of 3.76, and certifications from Microsoft, Google Cloud, Anthropic and IBM. In 2025 I spoke as a Google Speaker at AI Build, made the Top 20 of AWS National and of the Cursor x Anthropic Hackathon, and won the Innovation Challenge at the Axiata Digital Leadership Programme.",
-      "What drives me? Turning messy data into clear insights, building systems that learn and improve, and staying ahead in the fast-moving world of AI. Whether it's designing data workflows, training smart models, or creating visual dashboards, I'm passionate about solving tough problems that make a real difference."
-    ]
+    "short": "Data Engineer and AI Solutions Engineer with a Master of Science in AI. I build end-to-end data systems and practical AI applications: RAG pipelines, LLM fine-tuning, data quality platforms and dashboards."
   }
 }

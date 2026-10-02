@@ -3,11 +3,12 @@
   "number": "003",
   "summary": "What training for distance and shipping software have in common.",
   "topic": "Running",
-  "status": "published",
-  "date": "2026-09-27",
+  "status": "archived",
+  "date": null,
   "readingMinutes": 4,
   "photo": "running.action",
   "photoCaption": "Race day",
+  "category": "notes",
   "body": [
     {
       "discriminant": "text",
