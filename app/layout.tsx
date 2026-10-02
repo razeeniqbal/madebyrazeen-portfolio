@@ -15,7 +15,7 @@ const mono = JetBrains_Mono({
   display: 'swap',
 });
 
-// Base metadata; the (v2) layout and V1 archive layout refine it.
+// Base metadata; the (v2) layout refines it.
 export const metadata: Metadata = {
   metadataBase: new URL('https://portfolio.madebyrazeen.com'),
   title: 'Razeen Iqbal',
@@ -29,7 +29,7 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
-// Each route group ((v1), (v2)) supplies its own shell and colour context.
+// The (v2) route group supplies the shell and colour context.
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable}`} suppressHydrationWarning>

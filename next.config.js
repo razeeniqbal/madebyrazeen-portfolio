@@ -26,7 +26,7 @@ const nextConfig = {
     '/api/chat': ['./content/data/**/*'],
   },
 
-  // V1 URLs → their V2 homes. V1 itself lives on at /archive/v1.
+  // Old URLs → their current homes. V1 and its archive were removed (V2.0 Phase 1); their URLs land on Home.
   async redirects() {
     return [
       { source: '/achievements', destination: '/experience#credentials', permanent: true },
@@ -39,6 +39,8 @@ const nextConfig = {
       { source: '/stories/:slug', destination: '/journal/:slug', permanent: true },
       { source: '/notes', destination: '/journal', permanent: true },
       { source: '/notes/:slug', destination: '/journal/:slug', permanent: true },
+      { source: '/archive', destination: '/', permanent: true },
+      { source: '/archive/:path*', destination: '/', permanent: true },
       { source: '/dashboard', destination: '/experience#coding-activity', permanent: true },
       { source: '/smart-talk', destination: '/experience#coding-activity', permanent: true },
     ];
