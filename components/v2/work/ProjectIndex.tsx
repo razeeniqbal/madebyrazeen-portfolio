@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { ProjectRow } from './ProjectRow';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { projectCategories, type Project, type ProjectCategory } from '@/content/projects';
@@ -10,17 +11,13 @@ type Filter = ProjectCategory | 'all';
 
 /** Filterable editorial index of every project. Category is mirrored to ?category= for shareable links. */
 export function ProjectIndex({ projects }: { projects: Project[] }) {
-  const [category, setCategory] = useState<Filter>('all');
+  // The URL is the state: ?category= is read here, and replaceState below keeps it (and this value) in sync.
+  const params = useSearchParams();
+  const fromUrl = params.get('category');
+  const category: Filter = projectCategories.some((p) => p.value === fromUrl) ? (fromUrl as ProjectCategory) : 'all';
   const [query, setQuery] = useState('');
 
-  // Read the initial filter from the URL after mount (keeps the page statically rendered).
-  useEffect(() => {
-    const c = new URLSearchParams(window.location.search).get('category') as Filter | null;
-    if (c && projectCategories.some((p) => p.value === c)) setCategory(c);
-  }, []);
-
   const choose = (c: Filter) => {
-    setCategory(c);
     const url = new URL(window.location.href);
     if (c === 'all') url.searchParams.delete('category');
     else url.searchParams.set('category', c);
@@ -95,7 +92,7 @@ export function ProjectIndex({ projects }: { projects: Project[] }) {
       ) : (
         <div className="flex flex-col items-center gap-4 py-16 text-center">
           <MiniRazeen pose="thinking" height={160} />
-          <p className="label text-muted">// No results</p>
+          <p className="label text-muted">{'// No results'}</p>
           <p className="text-xl font-semibold">Nothing matches that. Yet.</p>
           <button
             type="button"

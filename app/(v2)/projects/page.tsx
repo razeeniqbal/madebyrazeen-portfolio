@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Section } from '@/components/v2/system/Section';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
@@ -38,7 +39,9 @@ export default function ProjectsPage() {
           <TechnicalLabel as="h2" marker="//" className="mb-8">
             Index · every project
           </TechnicalLabel>
-          <ProjectIndex projects={getProjects()} />
+          <Suspense fallback={null}>
+            <ProjectIndex projects={getProjects()} />
+          </Suspense>
         </div>
       </Section>
     </>

@@ -3,6 +3,12 @@ const GITHUB_USERNAME = 'razeeniqbal';
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_GRAPHQL = 'https://api.github.com/graphql';
 
+/** The fields this module reads from GitHub's repository list. */
+interface GitHubRepo {
+  stargazers_count?: number;
+  language?: string | null;
+}
+
 export interface GitHubStats {
   repos: number;
   followers: number;
@@ -42,14 +48,14 @@ export async function fetchGitHubStats(token?: string): Promise<GitHubStats | nu
       { headers }
     );
     if (!reposResponse.ok) throw new Error('Failed to fetch repositories');
-    const repos = await reposResponse.json();
+    const repos = (await reposResponse.json()) as GitHubRepo[];
 
     // Calculate total stars
-    const totalStars = repos.reduce((acc: number, repo: any) => acc + (repo.stargazers_count || 0), 0);
+    const totalStars = repos.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
 
     // Calculate top languages
     const languages: { [key: string]: number } = {};
-    repos.forEach((repo: any) => {
+    repos.forEach((repo) => {
       if (repo.language) {
         languages[repo.language] = (languages[repo.language] || 0) + 1;
       }

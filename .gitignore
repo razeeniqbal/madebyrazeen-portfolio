@@ -47,3 +47,6 @@ __pycache__/
 
 # local build checks
 /.next-verify/
+
+# other tools' local worktrees
+/.kilo/
