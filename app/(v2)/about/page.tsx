@@ -34,7 +34,7 @@ export default function AboutPage() {
         <div className="page-grid gap-y-12">
           <div className="col-span-full md:col-span-5 lg:col-span-7 lg:self-center">
             <TechnicalLabel as="p">About Razeen</TechnicalLabel>
-            {/* Same words as the Home hero, set smaller and in sentence case so it isn't the hero twice. */}
+            {/* Same words as the Home hero, set smaller and in sentence case so it is not the hero twice. */}
             <h1 className="mt-6 text-display-lg">
               {[profile.statement.slice(0, 2).join(' '), ...profile.statement.slice(2)].map((line, i, all) => (
                 <span key={line} className="block">
@@ -151,16 +151,16 @@ export default function AboutPage() {
       {/* 05 Currently */}
       <Section surface="dark" className="border-b border-line">
         <div className="page-grid gap-y-10">
-          {/* Career and education first (R05): where I work, what I studied, what I've earned, what I'm building. */}
+          {/* Career and education first (R05): where I work, what I studied, what I have earned, what I am building. */}
           <SectionHeader index="04" eyebrow="Currently" title={['Where I am', 'right now.']} size="md" className="lg:col-span-5" />
           <dl className="col-span-full grid gap-x-6 gap-y-8 md:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {current && (
               <div className="border-t border-line pt-4">
                 <dt className="label text-muted">Working</dt>
                 <dd className="mt-2">
-                  <p className="font-semibold">
+                  <Link href={`/experience#${current.id}`} className="block font-semibold hover:underline">
                     {current.role}, {current.company}
-                  </p>
+                  </Link>
                   <p className="text-muted">
                     {[current.period, current.location?.split(',')[0]].filter(Boolean).join(' · ')}
                   </p>
@@ -210,8 +210,9 @@ export default function AboutPage() {
               <ArrowLink href="/projects" variant="primary">
                 Explore projects
               </ArrowLink>
-              <ArrowLink href="/journal">Read the journal</ArrowLink>
-              <ArrowLink href="/running">Running</ArrowLink>
+              <ArrowLink href="/experience">Experience</ArrowLink>
+              <ArrowLink href="/trainer">Training</ArrowLink>
+              <ArrowLink href="/life">Life</ArrowLink>
               <ArrowLink href="/resume" arrow="↗">
                 View resume
               </ArrowLink>

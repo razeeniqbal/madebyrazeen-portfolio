@@ -58,8 +58,11 @@ export default function RunningPage() {
       {/* Header */}
       <Section surface="dark" grid className="!pt-16">
         <div className="page-grid gap-y-10">
+          <div className="col-span-full">
+            <ArrowLink href="/life#running">Back to Life</ArrowLink>
+          </div>
           <div className="col-span-full md:col-span-5 lg:col-span-7 lg:self-end">
-            <SectionHeader as="h1" size="xl" eyebrow="Running" title={['Same steps.', 'Better insights.']} />
+            <SectionHeader as="h1" size="xl" eyebrow="Life / Running" title={['Same steps.', 'Better insights.']} />
             <p className="mt-8 max-w-prose text-lead text-muted">
               Running is where engineering habits meet real life: show up, measure, adjust, repeat. Consistency compounds.
             </p>

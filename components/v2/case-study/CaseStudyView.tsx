@@ -3,6 +3,7 @@ import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { ProjectMeta } from '@/components/v2/work/ProjectMeta';
+import { ProjectContext } from '@/components/v2/work/ProjectContext';
 import { CaseStudyBlock } from './CaseStudyBlocks';
 import { sectionTitles, type CaseStudy, type SectionId } from '@/content/case-studies';
 import type { Project } from '@/content/projects';
@@ -38,7 +39,10 @@ export function CaseStudyView({ project, study, next }: CaseStudyViewProps) {
       <Section surface="dark" grid className="!pt-16">
         <div className="page-grid gap-y-10">
           <div className="col-span-full flex flex-wrap items-center justify-between gap-4">
-            <ArrowLink href="/projects">All projects</ArrowLink>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+              <ArrowLink href="/projects">All projects</ArrowLink>
+              <ProjectContext slug={project.slug} />
+            </div>
             {study.review === 'draft' && (
               <TechnicalLabel className="border border-current px-2 py-1">Drafted from project docs · under review</TechnicalLabel>
             )}

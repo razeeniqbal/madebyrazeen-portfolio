@@ -468,6 +468,7 @@ export default config({
             slug: fields.text({ label: 'Slug' }),
             name: fields.text({ label: 'Name' }),
             type: fields.select({ label: 'Type', options: [{ label: 'Sport', value: 'sport' }, { label: 'Interest', value: 'interest' }], defaultValue: 'interest' }),
+            body: paragraphList('Text on the Life page'),
             href: fields.text({ label: 'Links to (e.g. /running, /projects/vsb)' }),
             relatedProject: fields.text({ label: 'Related project slug' }),
             dataSource: fields.select({ label: 'Data source', options: [{ label: 'None', value: '' }, { label: 'Running pipeline (Garmin / Strava)', value: 'running' }], defaultValue: '' }),

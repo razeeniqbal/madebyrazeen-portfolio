@@ -127,6 +127,38 @@ export function getHomeProjects(count = 3): Project[] {
 /** Projects of one kind (e.g. the primary builds: VSB, FORMA, Sepang Vision Lab, BALANG), in presentation order. */
 export const getProjectsByKind = (...kinds: ProjectKind[]): Project[] => getProjects().filter((p) => kinds.includes(p.kind));
 
+/** The four primary builds in their fixed order (VSB, FORMA, Sepang Vision Lab, BALANG), set by `order`. */
+export const getPrimaryBuilds = (): Project[] => getProjectsByKind('primary-build').sort((a, b) => a.order - b.order);
+
+export interface ProjectGroup {
+  id: string;
+  label: string;
+  projects: Project[];
+}
+
+/**
+ * Everything below the primary builds, grouped by kind. Older experiments (tier `archive`) are their own
+ * group so the main list stays current. Empty groups are dropped.
+ */
+export function getSecondaryProjectGroups(): ProjectGroup[] {
+  const rest = getProjects().filter((p) => p.kind !== 'primary-build');
+  const groups: ProjectGroup[] = [
+    { id: 'professional', label: 'Professional systems', projects: rest.filter((p) => p.kind === 'professional-system') },
+    { id: 'research', label: 'Research', projects: rest.filter((p) => p.kind === 'research') },
+    {
+      id: 'experiments',
+      label: 'Experiments and small builds',
+      projects: rest.filter((p) => (p.kind === 'experiment' || p.kind === 'small-build') && p.tier !== 'archive'),
+    },
+    {
+      id: 'earlier',
+      label: 'Earlier work',
+      projects: rest.filter((p) => (p.kind === 'experiment' || p.kind === 'small-build') && p.tier === 'archive'),
+    },
+  ];
+  return groups.filter((g) => g.projects.length > 0);
+}
+
 /** Builds still being worked on (active or under construction). */
 export const getActiveBuilds = (): Project[] =>
   getProjectsByKind('primary-build').filter((p) => p.status === 'active' || p.status === 'under-construction');

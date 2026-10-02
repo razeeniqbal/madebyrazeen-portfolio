@@ -18,7 +18,11 @@ export function Experience({ index = '05', flush = true, surface = 'light' }: Ex
 
         <ol className="col-span-full">
           {experience.map((r, i) => (
-            <li key={r.company} className="grid grid-cols-4 gap-x-4 gap-y-3 border-t border-line py-8 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6">
+            <li
+              key={r.id}
+              id={r.id}
+              className="grid scroll-mt-20 grid-cols-4 gap-x-4 gap-y-3 border-t border-line py-8 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-6"
+            >
               <p className="label col-span-4 flex items-center gap-2 md:col-span-2">
                 <span
                   aria-hidden="true"
@@ -31,6 +35,7 @@ export function Experience({ index = '05', flush = true, surface = 'light' }: Ex
                 <p className="mt-1 text-muted">
                   {[r.company, r.location?.split(',')[0]].filter(Boolean).join(' · ')}
                 </p>
+                {r.careerSignificance && <p className="label mt-3 max-w-prose normal-case tracking-normal text-ink">{r.careerSignificance}</p>}
               </div>
               <ul className="col-span-4 space-y-1.5 text-sm text-muted md:col-span-6 md:col-start-3 lg:col-span-6 lg:col-start-7">
                 {r.highlights.slice(0, 3).map((h) => (

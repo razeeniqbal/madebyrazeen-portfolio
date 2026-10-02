@@ -5,10 +5,10 @@
  * and therefore cacheable.
  */
 import { profile, contact, education, recognition, bio } from '@/content/profile';
-import { getExperience } from '@/content/experience';
+import { getExperience, getRoleForProject } from '@/content/experience';
 import { getTrainerEngagements } from '@/content/trainer';
 import { getLifeInterests } from '@/content/life';
-import { getProjects } from '@/content/projects';
+import { getProjects, getPrimaryBuilds } from '@/content/projects';
 import { getCaseStudy, type Block } from '@/content/case-studies';
 import { achievements } from '@/content/achievements';
 import { capabilities } from '@/content/capabilities';
@@ -16,7 +16,7 @@ import { chapters } from '@/content/story';
 import { availability, helpWith } from '@/content/contact';
 import { getPublishedJournalEntries } from '@/content/notes';
 import { isSampleData, getTotals, getPersonalBests, getRaces, formatDuration } from '@/content/running';
-import { SITE_URL } from '@/lib/site';
+import { SITE_URL, primaryNav, utilityNav } from '@/lib/site';
 
 function blockText(b: Block): string {
   switch (b.kind) {
@@ -46,6 +46,13 @@ export function buildKnowledge(): string {
   out.push(`Contact: email ${contact.email}, LinkedIn ${contact.linkedin}, GitHub ${contact.github}. Contact page: ${SITE_URL}/contact. Online resume: ${SITE_URL}/resume.`);
 
   out.push(`## Summary\n${bio.short}`);
+
+  // The site map comes from the navigation itself; routes owned by a section (/running under Life) are named.
+  out.push(
+    `## Site sections\n${primaryNav
+      .map((s) => `- ${s.label}: ${SITE_URL}${s.href}${s.also.length ? ` (also ${s.also.map((a) => `${SITE_URL}${a}`).join(', ')}, which belongs to ${s.label})` : ''}`)
+      .join('\n')}\nUtilities: ${utilityNav.map((u) => `${u.label} ${SITE_URL}${u.href}`).join(', ')}.`,
+  );
 
   out.push(`## Story (About page)\n${chapters.map((c) => `### ${c.period}: ${c.title}\n${c.body.join('\n')}`).join('\n')}`);
 
@@ -84,8 +91,11 @@ export function buildKnowledge(): string {
   );
 
   out.push(
-    `## Life\n${getLifeInterests()
-      .map((l) => `- ${l.name} (${l.type})${l.relatedProject ? `: connected to the ${l.relatedProject} project` : ''}. Page: ${SITE_URL}${l.href}`)
+    `## Life (section page: ${SITE_URL}/life; the descriptions are in Razeen's own words)\n${getLifeInterests()
+      .map((l) => {
+        const project = l.relatedProject ? getProjects().find((p) => p.slug === l.relatedProject) : undefined;
+        return `- ${l.name} (${l.type}). ${l.body.join(' ')}${project ? ` This interest led to the project ${project.title}.` : ''} Page: ${SITE_URL}${l.href}`;
+      })
       .join('\n')}`,
   );
 
@@ -95,14 +105,18 @@ export function buildKnowledge(): string {
   out.push(`## What Razeen can help with\n${helpWith.map((h) => `- ${h.title}: ${h.detail}`).join('\n')}`);
 
   out.push(
-    `## Projects\n${getProjects()
+    `## Projects\nPrimary builds (Razeen's own, in order): ${getPrimaryBuilds()
+      .map((p) => `${p.title}${p.origin ? ` (${p.origin})` : ''}`)
+      .join(', ')}. Other projects are professional systems, research and experiments.\n${getProjects()
       .map((p) => {
         const links = [p.links.live && `live: ${p.links.live}`, p.links.source && `source: ${p.links.source}`].filter(Boolean).join(', ');
         const study = getCaseStudy(p.slug);
         const detail = study
           ? `\nCase study: ${study.lede}\n${study.sections.map((s) => `#### ${s.headline}\n${s.blocks.map(blockText).filter(Boolean).join('\n')}`).join('\n')}`
           : '';
-        return `### ${p.title} (${p.year}, ${p.status}${p.placeholder ? ', details still being written' : ''})\n${p.summary}\nStack: ${p.stack.join(', ')}${links ? `\n${links}` : ''}${p.confidential ? '\nRepository is private.' : ''}\nPage: ${SITE_URL}/projects/${p.slug}${detail}`;
+        const role = getRoleForProject(p.slug);
+        const owner = role ? `\nBelongs to Razeen's work at ${role.company} (${role.role}); see ${SITE_URL}/experience#${role.id}.` : '';
+        return `### ${p.title} (${p.year}, ${p.status}, ${p.kind.replace('-', ' ')}${p.placeholder ? ', details still being written' : ''})\n${p.summary}${owner}\nStack: ${p.stack.join(', ')}${links ? `\n${links}` : ''}${p.confidential ? '\nRepository is private.' : ''}\nPage: ${SITE_URL}/projects/${p.slug}${detail}`;
       })
       .join('\n')}`,
   );

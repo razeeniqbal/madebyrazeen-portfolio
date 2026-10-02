@@ -729,7 +729,7 @@
       "category": "product",
       "status": "active",
       "tier": "featured",
-      "order": 2,
+      "order": 4,
       "summary": "A Malaysian probability party game: read the jar of 25 kuih tokens, bet on secret prediction cards, and play friends in peer-to-peer rooms with no backend.",
       "role": "Designer and developer",
       "problem": "Party games about probability are usually either pure luck or pure maths. I wanted one that is easy to learn in a round, social with friends, and still rewards reading the odds, without running a server.",
@@ -805,7 +805,7 @@
       "category": "product",
       "status": "active",
       "tier": "standard",
-      "order": 0,
+      "order": 1,
       "summary": "A Malaysian social-volleyball platform where organizers create sessions and players discover games, see who is playing, book places and take part in a community.",
       "stack": [
         "React",
@@ -855,7 +855,7 @@
       "category": "data",
       "status": "active",
       "tier": "standard",
-      "order": 0,
+      "order": 2,
       "summary": "A visual data workbench that makes the path from messy input to a reliable pipeline easier to see, work with and reproduce, while keeping engineering control.",
       "stack": [
         "TypeScript",

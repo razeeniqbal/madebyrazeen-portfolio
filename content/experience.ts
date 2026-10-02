@@ -145,5 +145,12 @@ export const getResumeRoles = (): Role[] => getExperience();
 export const getSelectedWork = (): (SelectedWork & { roleId: string; company: string })[] =>
   getExperience().flatMap((r) => r.selectedWork.filter((w) => w.visibility === 'public').map((w) => ({ ...w, roleId: r.id, company: r.company })));
 
+/** The public role whose selected work links to this project (e.g. QualityPlus → AEM Energy Solutions). */
+export const getRoleForProject = (slug: string): Role | undefined =>
+  getExperience().find((r) => r.selectedWork.some((w) => w.visibility === 'public' && w.projectSlug === slug));
+
+/** Company name without the legal suffix, for tight labels: "AEM Energy Solutions Sdn Bhd" → "AEM Energy Solutions". */
+export const shortCompany = (company: string) => company.replace(/\s+Sdn\.?\s+Bhd\.?$/i, '');
+
 /** Kept for existing call sites: the public career in display order. */
 export const experience: Role[] = getExperience();

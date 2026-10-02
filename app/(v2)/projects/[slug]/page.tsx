@@ -5,6 +5,7 @@ import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { ProjectMeta } from '@/components/v2/work/ProjectMeta';
+import { ProjectContext } from '@/components/v2/work/ProjectContext';
 import { getProject, getProjects } from '@/content/projects';
 import { getCaseStudy } from '@/content/case-studies';
 import { CaseStudyView } from '@/components/v2/case-study/CaseStudyView';
@@ -66,8 +67,9 @@ export default async function ProjectPage({ params }: Params) {
       <JsonLd data={projectLd(project)} />
       <Section surface="dark" className="!pt-16">
         <div className="page-grid gap-y-10">
-          <div className="col-span-full">
+          <div className="col-span-full flex flex-wrap items-center gap-x-8 gap-y-3">
             <ArrowLink href="/projects">All projects</ArrowLink>
+            <ProjectContext slug={project.slug} />
           </div>
           <div className="col-span-full lg:col-span-8">
             <ProjectMeta project={project} />

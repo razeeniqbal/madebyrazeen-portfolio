@@ -9,13 +9,17 @@ interface ProjectFeatureProps {
   project: Project;
   size: 'flagship' | 'large' | 'medium';
   sizes: string;
+  /** Position in a ranked set, e.g. the primary builds 01 to 04. */
+  index?: string;
+  /** Show the origin line (PERSONAL INTEREST → REAL PRODUCT) when the project has one. */
+  showOrigin?: boolean;
   className?: string;
 }
 
 const titleSize = { flagship: 'text-display-md', large: 'text-display-md', medium: 'text-display-sm' };
 
 /** Image-led project block. Size carries the hierarchy (PRD §18: not identical cards). */
-export function ProjectFeature({ project, size, sizes, className }: ProjectFeatureProps) {
+export function ProjectFeature({ project, size, sizes, index, showOrigin, className }: ProjectFeatureProps) {
   const flagship = size === 'flagship';
   return (
     <article data-reveal className={cn('group', className)}>
@@ -52,7 +56,11 @@ export function ProjectFeature({ project, size, sizes, className }: ProjectFeatu
         <div className={cn('mt-5', flagship && 'lg:col-span-4 lg:mt-0')}>
           <div>
             <ProjectMeta project={project} />
-            <h3 className={cn('mt-3 transition-colors group-hover:text-signal', titleSize[size])}>{project.title}</h3>
+            <h3 className={cn('mt-3 transition-colors group-hover:text-signal', titleSize[size])}>
+              {index && <span className="label mr-3 align-middle text-muted">{index}</span>}
+              {project.title}
+            </h3>
+            {showOrigin && project.origin && <TechnicalLabel as="p" className="mt-2 text-ink">{project.origin}</TechnicalLabel>}
           </div>
           <div className={cn(flagship ? 'mt-4' : 'mt-3')}>
             <p className={cn('max-w-prose text-muted', flagship && 'text-lead')}>{project.summary}</p>
