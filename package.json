@@ -9,6 +9,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "check:content": "tsx scripts/check-keystatic.ts",
+    "check:writing": "node scripts/check-writing.mjs",
+    "check:links": "node scripts/check-links.mjs",
     "clean": "powershell -Command \"Remove-Item -Path .next -Recurse -Force -ErrorAction SilentlyContinue\""
   },
   "dependencies": {
@@ -30,6 +34,7 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.3"
   },
   "description": "Retro indie/90s portfolio built with Next.js",
