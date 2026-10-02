@@ -1,7 +1,7 @@
 // Reads every singleton and collection through the Keystatic reader, which validates each
 // file against keystatic.config.tsx. A schema/data mismatch throws and fails the check.
-import { createReader } from "@keystatic/core/reader";
-import config from "../keystatic.config";
+import { createReader } from '@keystatic/core/reader';
+import config from '../keystatic.config';
 
 async function main() {
   const reader = createReader(process.cwd(), config);

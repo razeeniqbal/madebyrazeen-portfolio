@@ -10,8 +10,8 @@ export default function NotFound() {
       <main id="main" className="flex-1">
         <EmptyState
           code="404 · Path not found"
-          title="This route doesn't exist. Yet."
-          body="The link may be old, or I haven't built this part. The trajectory continues elsewhere."
+          title="This route does not exist. Yet."
+          body="The link may be old, or I have not built this part. The trajectory continues elsewhere."
           pose="thinking"
           actions={[
             { href: '/', label: 'Back home' },

@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /**
- * Writing-rule check for canonical authored content (content/data/**\/*.json).
+ * Writing-rule check for public-facing text:
+ * - canonical authored content (content/data/**\/*.json), reported by JSON path;
+ * - UI strings in code (app/, components/, lib/), reported by line, with comments stripped first.
  *
  * Flags contractions, the em dash character and a short list of banned phrases, and reports
- * file, JSON path and the matched text. It never rewrites anything: fix the source by hand.
+ * file, location and the matched text. It never rewrites anything: fix the source by hand.
  *
- * Not scanned: generated data (content/running), archived or draft journal entries, lockfiles.
+ * Not scanned: generated data (content/running), archived or draft journal entries, lockfiles, comments.
  * Possessives ("Razeen's", "Malaysia's") are not contractions and are not flagged.
  *
  * Exit code 1 when anything is found, so CI fails on new violations.
@@ -15,6 +17,7 @@ import { join, relative, sep } from 'node:path';
 
 const ROOT = process.cwd();
 const CONTENT = join(ROOT, 'content', 'data');
+const CODE_DIRS = ['app', 'components', 'lib'].map((d) => join(ROOT, d));
 
 // Generated or machine-written data, never authored prose.
 const EXCLUDED_DIRS = [join(CONTENT, 'running')];
@@ -36,13 +39,23 @@ const rules = [
   },
 ];
 
-function walk(dir) {
+function walk(dir, exts) {
   return readdirSync(dir).flatMap((name) => {
     const p = join(dir, name);
     if (EXCLUDED_DIRS.includes(p)) return [];
-    if (statSync(p).isDirectory()) return walk(p);
-    return p.endsWith('.json') ? [p] : [];
+    if (statSync(p).isDirectory()) return walk(p, exts);
+    return exts.some((e) => p.endsWith(e)) ? [p] : [];
   });
+}
+
+/**
+ * Blanks out comments while keeping line numbers: block comments (including JSX {/* *\/}) and
+ * line comments that start a line or follow whitespace. "//" inside a string such as marker="//" stays.
+ */
+function stripComments(src) {
+  return src
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+    .replace(/(^|\s)\/\/.*$/gm, '$1');
 }
 
 /** Journal entries that are not published are not public content; skip them. */
@@ -58,20 +71,31 @@ function* strings(value, path) {
 }
 
 const findings = [];
-for (const file of walk(CONTENT)) {
+const rel = (file) => relative(ROOT, file).split(sep).join('/');
+
+for (const file of walk(CONTENT, ['.json'])) {
   const data = JSON.parse(readFileSync(file, 'utf8'));
   if (isUnpublishedJournal(file, data)) continue;
   for (const [path, text] of strings(data, '')) {
     for (const { rule, re } of rules) {
       for (const m of text.matchAll(re)) {
-        findings.push({ file: relative(ROOT, file).split(sep).join('/'), path, rule, match: m[0] });
+        findings.push({ file: rel(file), path, rule, match: m[0] });
       }
     }
   }
 }
 
+for (const file of CODE_DIRS.flatMap((d) => walk(d, ['.ts', '.tsx']))) {
+  const lines = stripComments(readFileSync(file, 'utf8')).split('\n');
+  lines.forEach((line, i) => {
+    for (const { rule, re } of rules) {
+      for (const m of line.matchAll(re)) findings.push({ file: rel(file), path: `line ${i + 1}`, rule, match: m[0] });
+    }
+  });
+}
+
 if (findings.length === 0) {
-  console.log('Writing rules: no violations in canonical content.');
+  console.log('Writing rules: no violations in content or UI strings.');
   process.exit(0);
 }
 for (const f of findings) console.log(`${f.file}  ${f.path}  [${f.rule}]  "${f.match}"`);

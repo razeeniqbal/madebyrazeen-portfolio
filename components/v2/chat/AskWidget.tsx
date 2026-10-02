@@ -15,7 +15,7 @@ const SLEEP_AFTER_MS = 60_000;
 /** Turns relative site links (/projects/…) and URLs in plain-text answers into links. Old paths still redirect. */
 function Linkified({ text }: { text: string }) {
   const parts = text.split(
-    /(https?:\/\/[^\s)]+|(?<![\w/])\/(?:projects|journal|work|experience|about|resume|contact|running)(?:\/[\w-]+)?(?:#[\w-]+)?)/g,
+    /(https?:\/\/[^\s)]+|(?<![\w/])\/(?:projects|journal|work|experience|trainer|life|about|resume|contact|running)(?:\/[\w-]+)?(?:#[\w-]+)?)/g,
   );
   return (
     <>
@@ -148,7 +148,7 @@ export function AskWidget() {
         });
         if (res.status === 429) {
           flash(setTrouble, 3000);
-          return append('You’ve asked a lot of questions. Please try again in a few minutes.');
+          return append('You have asked a lot of questions. Please try again in a few minutes.');
         }
         if (res.status === 503) {
           setAvailable(false);

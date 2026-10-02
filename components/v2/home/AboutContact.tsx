@@ -50,7 +50,7 @@ interface ContactBlockProps {
   title?: [string, string];
 }
 
-export function ContactBlock({ index = '11', surface = 'dark', title = ['Let’s build', 'something useful.'] }: ContactBlockProps) {
+export function ContactBlock({ index = '11', surface = 'dark', title = ['Let us build', 'something useful.'] }: ContactBlockProps) {
   return (
     <Section surface={surface} grid={surface === 'dark'}>
       <div className="page-grid gap-y-10">
