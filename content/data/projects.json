@@ -8,6 +8,7 @@
       "category": "product",
       "status": "under-construction",
       "tier": "featured",
+      "resume": true,
       "order": 3,
       "summary": "Race-intelligence lab for Sepang International Circuit: circuit geometry, simulated telemetry, replay, weather scenarios and Monte Carlo strategy.",
       "stack": [
@@ -68,6 +69,7 @@
       "category": "data",
       "status": "proof-of-concept",
       "tier": "flagship",
+      "resume": false,
       "order": 1,
       "summary": "Data quality management turned into a product: scored checks, a remediation-to-publish workflow for trusted data, and AI assistance at three points.",
       "problem": "Oil & gas datasets arrive incomplete, duplicated and inconsistent, and fixing them happens in spreadsheets with no audit trail.",
@@ -112,6 +114,7 @@
       "category": "research",
       "status": "completed",
       "tier": "featured",
+      "resume": false,
       "order": 1,
       "summary": "Master's research: FastText embeddings plus PCA to detect duplicate questions on 404k Quora pairs, keeping 83.68% accuracy while cutting training time by two thirds and memory by 83%.",
       "stack": [
@@ -173,6 +176,7 @@
       "category": "ai",
       "status": "completed",
       "tier": "standard",
+      "resume": false,
       "order": 1,
       "summary": "Cursor × Anthropic Hackathon 2025: sales automation with Claude for intelligent lead management and insights.",
       "stack": [
@@ -222,6 +226,7 @@
       "category": "ai",
       "status": "completed",
       "tier": "standard",
+      "resume": false,
       "order": 2,
       "summary": "AI-powered SPM question generator for Malaysian students.",
       "stack": [
@@ -269,6 +274,7 @@
       "category": "ai",
       "status": "completed",
       "tier": "standard",
+      "resume": false,
       "order": 3,
       "summary": "XGBoost-powered job matching with semantic analysis for accurate candidate–job matching.",
       "stack": [
@@ -318,6 +324,7 @@
       "category": "ai",
       "status": "completed",
       "tier": "standard",
+      "resume": false,
       "order": 4,
       "summary": "OpenCV face recognition with a Streamlit interface, HOG feature extraction and SVM classification.",
       "stack": [
@@ -365,6 +372,7 @@
       "category": "analytics",
       "status": "completed",
       "tier": "standard",
+      "resume": false,
       "order": 5,
       "summary": "Predict employee attrition with ML models and an interactive dashboard for retention insights.",
       "stack": [
@@ -413,6 +421,7 @@
       "category": "data",
       "status": "completed",
       "tier": "standard",
+      "resume": false,
       "order": 6,
       "summary": "Turns photos of aircraft journey summary forms, including handwriting, into structured JSON using Gemini’s vision model.",
       "stack": [
@@ -462,6 +471,7 @@
       "category": "ai",
       "status": "completed",
       "tier": "archive",
+      "resume": false,
       "order": 1,
       "summary": "Modular job matching with quantitative scoring on skills, experience and education.",
       "stack": [
@@ -507,6 +517,7 @@
       "category": "ai",
       "status": "completed",
       "tier": "archive",
+      "resume": false,
       "order": 2,
       "summary": "Transfer learning with CNNs to classify plant diseases from leaf images.",
       "stack": [
@@ -553,6 +564,7 @@
       "category": "analytics",
       "status": "completed",
       "tier": "archive",
+      "resume": false,
       "order": 3,
       "summary": "Cleaning and preparing the London bike-sharing dataset in Python so it is ready for reliable analysis.",
       "stack": [
@@ -599,6 +611,7 @@
       "category": "analytics",
       "status": "completed",
       "tier": "archive",
+      "resume": false,
       "order": 4,
       "summary": "Power BI dashboard for food-preparation planning with resource tracking.",
       "stack": [
@@ -643,6 +656,7 @@
       "category": "analytics",
       "status": "completed",
       "tier": "archive",
+      "resume": false,
       "order": 5,
       "summary": "Cleaning a raw bike sales dataset in Excel so it is ready for analysis.",
       "stack": [
@@ -686,6 +700,7 @@
       "category": "analytics",
       "status": "completed",
       "tier": "archive",
+      "resume": false,
       "order": 6,
       "summary": "Coffee sales trends and customer segmentation in an interactive Excel dashboard.",
       "stack": [
@@ -729,6 +744,7 @@
       "category": "product",
       "status": "active",
       "tier": "featured",
+      "resume": false,
       "order": 4,
       "summary": "A Malaysian probability party game: read the jar of 25 kuih tokens, bet on secret prediction cards, and play friends in peer-to-peer rooms with no backend.",
       "role": "Designer and developer",
@@ -805,6 +821,7 @@
       "category": "product",
       "status": "active",
       "tier": "standard",
+      "resume": true,
       "order": 1,
       "summary": "A Malaysian social-volleyball platform where organizers create sessions and players discover games, see who is playing, book places and take part in a community.",
       "stack": [
@@ -855,6 +872,7 @@
       "category": "data",
       "status": "active",
       "tier": "standard",
+      "resume": true,
       "order": 2,
       "summary": "A visual data workbench that makes the path from messy input to a reliable pipeline easier to see, work with and reproduce, while keeping engineering control.",
       "stack": [
@@ -911,6 +929,7 @@
       "category": "product",
       "status": "completed",
       "tier": "standard",
+      "resume": false,
       "order": 9,
       "summary": "A small booking system built for an office movie-night activity.",
       "stack": [],

@@ -33,7 +33,7 @@ export default function ContactPage() {
       {/* Hero + channels */}
       <Section surface="dark" grid className="!pt-16">
         <div className="page-grid gap-y-12">
-          <SectionHeader as="h1" size="xl" eyebrow="Contact" title={['Let us build', 'something useful.']} className="lg:col-span-9" />
+          <SectionHeader as="h1" size="xl" eyebrow="Contact" title={['Have something', 'worth building?']} className="lg:col-span-9" />
           <div className="col-span-full hidden items-end justify-end lg:col-span-3 lg:flex">
             <MiniRazeen pose="happy" height={190} />
           </div>

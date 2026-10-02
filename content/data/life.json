@@ -5,7 +5,7 @@
       "name": "Running",
       "type": "sport",
       "body": [
-        "The running page is built from my own Garmin and Strava data: personal bests, races, routes and every outdoor run."
+        "My running page is built from real Garmin and Strava activity data."
       ],
       "href": "/running",
       "relatedProject": "",

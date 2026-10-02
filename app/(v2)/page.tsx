@@ -34,7 +34,7 @@ export default function HomePage() {
       <AboutTeaser />
       <JournalTeaser />
       <RunningTeaser />
-      <ContactBlock index="05" surface="light" title={['Have an idea?', 'Let us build something.']} />
+      <ContactBlock index="05" surface="light" title={['Have something', 'worth building?']} />
     </>
   );
 }

@@ -52,7 +52,7 @@ export default function TrainerPage() {
       {/* 03 Approach */}
       <Section surface="light" id="approach">
         <div className="page-grid gap-y-10">
-          <SectionHeader index="03" eyebrow="Training approach" title={['How I teach.']} size="md" className="lg:col-span-5" />
+          <SectionHeader index="03" eyebrow="Training approach" title={['How I approach', 'training.']} size="md" className="lg:col-span-5" />
           <ol className="col-span-full grid border-t border-line sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {approach.map((a, i) => (
               <li key={a} className="flex items-baseline gap-4 border-b border-line py-5 sm:odd:pr-6">
@@ -67,10 +67,10 @@ export default function TrainerPage() {
       {/* 04 Contact path */}
       <Section surface="dark">
         <div className="page-grid items-end gap-y-8">
-          <SectionHeader index="04" eyebrow="Training or speaking" title={['Planning a session?']} size="md" className="lg:col-span-7" />
+          <SectionHeader index="04" eyebrow="Contact" title={['Training or speaking?']} size="md" className="lg:col-span-7" />
           <div className="col-span-full space-y-6 lg:col-span-5">
             <p className="max-w-prose text-muted">
-              For training or speaking on Data, Cloud or AI, the contact page lists the ways to reach me.
+              For training or speaking related to Data, Cloud, or AI, you can reach me through the contact page.
             </p>
             <ArrowLink href="/contact">Get in touch</ArrowLink>
           </div>

@@ -190,7 +190,8 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="mt-auto flex items-end justify-between pt-10">
+          {/* pb clears the fixed chat launcher (bottom-right, about 3.5rem tall), so Mini Razeen sits above it. */}
+          <div className="mt-auto flex items-end justify-between pb-20 pt-10">
             <div className="label space-y-1 text-muted">
               {profile.loops.system.map((s) => (
                 <p key={s}>{s}</p>

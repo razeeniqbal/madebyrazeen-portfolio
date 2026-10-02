@@ -1,5 +1,6 @@
 {
   "name": "Razeen Iqbal",
+  "legalName": "Mohamad Razeen Iqbal Roslan",
   "wordmark": "razeeniqbal",
   "umbrella": "Made by Razeen",
   "statement": [
@@ -49,6 +50,16 @@
     "Arabic (Educational)"
   ],
   "resume": "/Razeen_Iqbal_Resume.pdf",
+  "resumeDomains": [
+    "Data Engineering",
+    "AI Systems",
+    "Analytics"
+  ],
+  "resumeProfile": [
+    "AI Data Engineer with a background spanning Civil Engineering, Data Analytics, Data Engineering, and applied AI systems.",
+    "Experience includes data migration, analytics, automation, data-quality workflows, agentic AI, business intelligence, and application-oriented AI integration across energy and technology environments.",
+    "Also experienced in technical training and knowledge sharing across Data, Cloud, and AI topics."
+  ],
   "domains": {
     "umbrella": "madebyrazeen.com",
     "portfolio": "portfolio.madebyrazeen.com"

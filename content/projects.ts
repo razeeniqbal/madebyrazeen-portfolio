@@ -42,6 +42,8 @@ export interface Project {
   category: ProjectCategory;
   status: ProjectStatus;
   tier: ProjectTier;
+  /** Listed under "Selected projects" on the resume. */
+  resume: boolean;
   order: number;
   /** One line, used on cards and in metadata. */
   summary: string;
@@ -85,6 +87,7 @@ export const projects: Project[] = data.items.map((p) => ({
   ...p,
   year: p.year ?? 0,
   order: p.order ?? 0,
+  resume: Boolean(p.resume),
   category: p.category as ProjectCategory,
   status: p.status as ProjectStatus,
   tier: p.tier as ProjectTier,
@@ -162,6 +165,9 @@ export function getSecondaryProjectGroups(): ProjectGroup[] {
 /** Builds still being worked on (active or under construction). */
 export const getActiveBuilds = (): Project[] =>
   getProjectsByKind('primary-build').filter((p) => p.status === 'active' || p.status === 'under-construction');
+
+/** Projects flagged for the resume, in primary-build order. */
+export const getResumeProjects = (): Project[] => getProjects().filter((p) => p.resume).sort((a, b) => a.order - b.order);
 
 export function getProject(slug: string): Project | undefined {
   return getProjects().find((p) => p.slug === slug);

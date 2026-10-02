@@ -7,27 +7,45 @@
  * - `relationship: 'parallel'` marks work alongside the main career (IntelliLabs), so it never replaces
  *   the current primary role.
  * - `selectedWork` holds named pieces of work; `projectSlug` links one to a project instead of repeating it.
+ *   `tier` sets its weight on /experience (featured systems, supporting work, a small build).
+ * - Two kinds of text, on purpose: `narrative` is the editorial story told on /experience;
+ *   `responsibilities` are the factual lines the resume uses. Neither page repeats the other.
+ * - `stage` places a primary role on the career map (Site → Model → Data → Pipelines → AI systems).
  */
 import data from './data/experience.json';
 
 export type Relationship = 'primary' | 'parallel';
 export type Visibility = 'public' | 'private';
 export type WorkStatus = 'active' | 'under-construction' | 'proof-of-concept' | 'completed' | 'archived';
+export type WorkTier = 'featured' | 'supporting' | 'small';
+export type FlowStepType = 'SOURCE' | 'PROCESS' | 'DATABASE' | 'API' | 'MODEL' | 'AGENT' | 'USER' | 'OUTPUT' | 'MONITOR';
+
+/** One step of a technical flow (rendered with FlowDiagram). */
+export interface FlowStep {
+  label: string;
+  type: FlowStepType;
+}
 
 export interface SelectedWork {
   id: string;
   name: string;
+  tier: WorkTier;
+  /** Editorial heading for the work, when it needs one (AEM Movie Night). */
+  headline?: string;
   context: string;
   type: string;
   status?: WorkStatus;
   scale?: string;
+  /** Paragraphs separated by a blank line. The first sentence doubles as the resume line. */
   description: string;
+  /** Named aspects shown as a set (QualityPlus: validity, uniqueness, completeness, master data). */
+  facets: string[];
   /** Why it matters in the story (optional). */
   significance?: string;
   technologies: string[];
   aiUsed: boolean;
   /** Conceptual flow, step by step (e.g. MSSQL → Python → Existing API → NoSQL). */
-  flow: string[];
+  flow: FlowStep[];
   recognition?: string;
   projectSlug?: string;
   visibility: Visibility;
@@ -44,8 +62,16 @@ export interface Role {
   isCurrent: boolean;
   datesConfirmed: boolean;
   relationship: Relationship;
+  /** Career-map stage for a primary role: Site, Model, Data, Pipelines, AI systems. */
+  stage?: string;
+  /** The discipline at that stage: "Project engineering", "BIM", "AI data engineering" … */
+  discipline?: string;
   location?: string;
   summary?: string;
+  /** Editorial heading on /experience ("Where engineering became data."). */
+  headline?: string;
+  /** The story of the role on /experience, as paragraphs. */
+  narrative: string[];
   responsibilities: string[];
   technologies: string[];
   careerSignificance?: string;
@@ -63,7 +89,10 @@ export interface Role {
   highlights: string[];
 }
 
-type RawWork = Omit<SelectedWork, 'status' | 'scale' | 'significance' | 'recognition' | 'projectSlug' | 'visibility'> & {
+type RawWork = Omit<SelectedWork, 'tier' | 'headline' | 'flow' | 'status' | 'scale' | 'significance' | 'recognition' | 'projectSlug' | 'visibility'> & {
+  tier: string;
+  headline: string;
+  flow: { label: string; type: string }[];
   status: string | null;
   scale: string;
   significance: string;
@@ -71,7 +100,28 @@ type RawWork = Omit<SelectedWork, 'status' | 'scale' | 'significance' | 'recogni
   projectSlug: string;
   visibility: string;
 };
-type RawRole = Omit<Role, 'period' | 'start' | 'highlights' | 'selectedWork' | 'relationship' | 'visibility' | 'startDate' | 'endDate' | 'employmentType' | 'workMode' | 'location' | 'summary' | 'careerSignificance'> & {
+type RawRole = Omit<
+  Role,
+  | 'period'
+  | 'start'
+  | 'highlights'
+  | 'selectedWork'
+  | 'relationship'
+  | 'visibility'
+  | 'startDate'
+  | 'endDate'
+  | 'employmentType'
+  | 'workMode'
+  | 'location'
+  | 'summary'
+  | 'careerSignificance'
+  | 'stage'
+  | 'discipline'
+  | 'headline'
+> & {
+  stage: string;
+  discipline: string;
+  headline: string;
   relationship: string;
   visibility: string;
   startDate: string | null;
@@ -97,6 +147,9 @@ const workLine = (w: SelectedWork) => `${w.name}: ${w.type.toLowerCase()}${w.sca
 const roles: Role[] = (data.roles as RawRole[]).map((r) => {
   const selectedWork: SelectedWork[] = r.selectedWork.map((w) => ({
     ...w,
+    tier: (w.tier || 'supporting') as WorkTier,
+    headline: w.headline || undefined,
+    flow: w.flow.map((f) => ({ label: f.label, type: f.type as FlowStepType })),
     status: (w.status || undefined) as WorkStatus | undefined,
     scale: w.scale || undefined,
     significance: w.significance || undefined,
@@ -116,6 +169,9 @@ const roles: Role[] = (data.roles as RawRole[]).map((r) => {
     location: r.location || undefined,
     summary: r.summary || undefined,
     careerSignificance: r.careerSignificance || undefined,
+    stage: r.stage || undefined,
+    discipline: r.discipline || undefined,
+    headline: r.headline || undefined,
     selectedWork,
     period: period(r),
     start: r.datesConfirmed && r.startDate ? Number(r.startDate.slice(0, 4)) : 0,
@@ -148,6 +204,35 @@ export const getSelectedWork = (): (SelectedWork & { roleId: string; company: st
 /** The public role whose selected work links to this project (e.g. QualityPlus → AEM Energy Solutions). */
 export const getRoleForProject = (slug: string): Role | undefined =>
   getExperience().find((r) => r.selectedWork.some((w) => w.visibility === 'public' && w.projectSlug === slug));
+
+/** "Jun 2025 → Present" for /experience; the employment type ("Contract") when dates are unresolved. */
+export function roleSpan(r: Role): string {
+  if (!r.datesConfirmed || !r.startDate) return r.employmentType ? titleCase(r.employmentType) : '';
+  return `${month(r.startDate)} → ${r.isCurrent || !r.endDate ? 'Present' : month(r.endDate)}`;
+}
+
+/** "2020 → 2022" for the career map (undefined when unresolved). */
+export function yearSpan(r: Role): string | undefined {
+  if (!r.datesConfirmed || !r.startDate) return undefined;
+  const end = r.isCurrent || !r.endDate ? 'Present' : r.endDate.slice(0, 4);
+  return `${r.startDate.slice(0, 4)} → ${end}`;
+}
+
+/** Primary roles on the career map, oldest first: Site → Model → Data → Pipelines → AI systems. */
+export const getCareerStages = (): Role[] =>
+  getExperience()
+    .filter((r) => r.relationship === 'primary' && r.stage)
+    .reverse();
+
+/** Description paragraphs (separated by a blank line in the source). */
+export const paragraphs = (text: string): string[] => text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+
+/** The first sentence of a description: the factual one-line form used on the resume. */
+export const firstSentence = (text: string): string => {
+  const first = paragraphs(text)[0] ?? '';
+  const m = first.match(/^.*?[.!?](?=\s|$)/);
+  return m ? m[0] : first;
+};
 
 /** Company name without the legal suffix, for tight labels: "AEM Energy Solutions Sdn Bhd" → "AEM Energy Solutions". */
 export const shortCompany = (company: string) => company.replace(/\s+Sdn\.?\s+Bhd\.?$/i, '');

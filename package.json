@@ -13,6 +13,7 @@
     "check:content": "tsx scripts/check-keystatic.ts",
     "check:writing": "node scripts/check-writing.mjs",
     "check:links": "node scripts/check-links.mjs",
+    "resume:pdf": "node scripts/build-resume-pdf.mjs",
     "clean": "powershell -Command \"Remove-Item -Path .next -Recurse -Force -ErrorAction SilentlyContinue\""
   },
   "dependencies": {

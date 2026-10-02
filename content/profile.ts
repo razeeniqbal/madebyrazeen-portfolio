@@ -14,5 +14,5 @@ export const education = educationData;
 
 export const recognition = recognitionData;
 
-/** Long-form bio (used by the V1 archive and the assistant). */
+/** Short bio (used by the assistant). */
 export const bio = bioData;
