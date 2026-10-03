@@ -22,7 +22,7 @@ const yearNote: Record<string, string> = {
   '2022': 'Engineering registration',
   '2023': 'Into data',
   '2024': 'Cloud and AI foundations',
-  '2025': 'Data science, big data and applied AI',
+  '2025': 'Applied and generative AI',
   '2026': 'Data platforms and AI agents',
   Undated: 'Recorded without an issue date',
 };

@@ -66,7 +66,7 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Azure, Spark, Databricks…"
+            placeholder="Azure, Fabric, Databricks…"
             className="w-full min-w-0 bg-transparent py-1 outline-none placeholder:text-muted/70"
           />
         </label>
