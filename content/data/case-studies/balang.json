@@ -8,6 +8,10 @@
       "value": "Social experience → Game"
     },
     {
+      "label": "Inspired by",
+      "value": "Bag of Chips (board game)"
+    },
+    {
       "label": "Type",
       "value": "Multiplayer party game · web / PWA"
     },
@@ -74,7 +78,7 @@
               "Get 6 cards",
               "Shake and draw",
               "Discard",
-              "Lock 2 (KAW-KAW?)",
+              "Place 3: one negative (KAW-KAW?)",
               "Score"
             ]
           }
@@ -86,7 +90,7 @@
             "items": [
               {
                 "title": "Read the jar",
-                "detail": "25 tokens of five kuih: onde-onde ×7, kuih lapis ×6, muruku ×5, dodol ×4, karipap ×3. The counts are public; the order is secret."
+                "detail": "25 tokens of five kuih, chosen at random from a pool of ten each round. The counts are public; the order is secret."
               },
               {
                 "title": "Predict",
@@ -94,19 +98,19 @@
               },
               {
                 "title": "Draw",
-                "detail": "Players take turns to shake the jar. 15 tokens come out and 10 stay in."
+                "detail": "Players take turns to shake the jar. 14 tokens come out and 11 stay in."
               },
               {
                 "title": "Discard and lock",
-                "detail": "After draw 3 you drop one card, after draw 6 two more, and after draw 10 you lock your final two."
+                "detail": "After draw 5 you drop two cards and after draw 9 one more. After draw 12 all three remaining cards count: you place one on the negative side, where it costs you its value if it comes true."
               },
               {
                 "title": "KAW-KAW",
-                "detail": "When locking, you may go KAW-KAW on one card: double reward, double penalty."
+                "detail": "You may go KAW-KAW on one positive card: double its value if it comes true, lose its value if it does not."
               },
               {
                 "title": "Win",
-                "detail": "Correct cards score, wrong ones lose points. Three rounds; the highest total is JUARA."
+                "detail": "Positive cards that come true score their value; a negative card that comes true loses it. Three rounds; the highest total is JUARA."
               }
             ]
           }
@@ -146,11 +150,11 @@
               },
               {
                 "image": "balangPlay.kawKaw",
-                "caption": "Lock and KAW-KAW: double the reward and the penalty on one locked card, or play safe."
+                "caption": "KAW-KAW: double one positive card's value, at the risk of losing it, or play safe."
               },
               {
                 "image": "balangPlay.roundResult",
-                "caption": "Result: each locked prediction is checked against the fifteen tokens drawn."
+                "caption": "Result: each placed prediction is checked against the fourteen tokens drawn."
               }
             ]
           }
@@ -162,7 +166,7 @@
             "items": [
               {
                 "image": "balangPlay.lock",
-                "caption": "Locking the final two cards after ten draws."
+                "caption": "After twelve draws: one of the last three cards goes on the negative side."
               },
               {
                 "image": "balangPlay.tableMobile",
@@ -268,7 +272,7 @@
           "value": {
             "lead": false,
             "body": [
-              "A reward table that looks fair on paper can still be broken in play. Because the engine runs without the UI, near-optimal bots can play many matches and report which cards and strategies dominate. The reward tiers were tuned against that report rather than by feel."
+              "A reward table that looks fair on paper can still be broken in play. Because the engine runs without the UI, bots can play whole matches on their own and report how the rewards behave. The first report showed the game was too forgiving: about three in four locked cards came true, so the final choice carried little risk. That led to the final rules, borrowed from the board game Bag of Chips: every final card counts and one must go on the negative side. In the same bot matches, that negative card now costs its owner points in about a third of rounds."
             ]
           }
         }
@@ -286,7 +290,7 @@
             "items": [
               {
                 "title": "Put the rules in one place",
-                "detail": "A pure engine with tests made every UI change safe and made balancing possible."
+                "detail": "A pure engine with tests made every UI change safe and makes balance testing possible."
               },
               {
                 "title": "Trust boundaries matter even in games",
@@ -294,7 +298,7 @@
               },
               {
                 "title": "Numbers should feel honest",
-                "detail": "Pricing rewards from real probabilities made risky choices feel fair when they paid off and when they did not."
+                "detail": "Each card is priced from its real chance of coming true, so a risky prediction pays more because it is genuinely less likely."
               }
             ]
           }
