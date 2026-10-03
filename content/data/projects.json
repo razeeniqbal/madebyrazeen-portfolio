@@ -734,7 +734,7 @@
       "role": "Designer and developer",
       "problem": "Party games about probability are usually either pure luck or pure maths. I wanted one that is easy to learn in a round, social with friends, and still rewards reading the odds, without running a server.",
       "outcome": "A playable multiplayer game at balang.madebyrazeen.com: rooms by code, link or QR, three-round matches, bots that fill empty seats, and a shareable result card.",
-      "learning": "Keeping the engine as plain, tested TypeScript separate from the UI made balancing possible: near-optimal bots could play thousands of rounds while I tuned the rewards.",
+      "learning": "Keeping the engine as plain, tested TypeScript separate from the UI makes balance testing possible: bots can play whole matches with no UI and report how the rewards behave.",
       "stack": [
         "React",
         "TypeScript",
@@ -779,7 +779,7 @@
         "Rewards priced from each card’s probability at deal time using Monte Carlo simulation",
         "Peer-to-peer rooms over WebRTC (PeerJS): the host’s browser is the authority and guests only receive their own view",
         "Bots take over a player’s turns if they disconnect, until they reconnect",
-        "Discard and lock phases plus KAW-KAW (double reward, double penalty) for risk management"
+        "Discard phases, a final negative card and KAW-KAW (double the value or lose it) for risk management"
       ],
       "kind": "primary-build",
       "tagline": "Agak. Risiko. Menang.",
