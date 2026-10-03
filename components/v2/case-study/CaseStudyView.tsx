@@ -68,7 +68,7 @@ export function CaseStudyView({ project, study, next }: CaseStudyViewProps) {
             {study.facts.map((f) => (
               <div key={f.label}>
                 <dt className="label text-muted">{f.label}</dt>
-                <dd className="mt-1">{f.value}</dd>
+                <dd className="mt-1 [overflow-wrap:anywhere]">{f.value}</dd>
               </div>
             ))}
           </dl>
