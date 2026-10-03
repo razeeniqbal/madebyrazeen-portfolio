@@ -57,7 +57,7 @@
       "value": {
         "lead": false,
         "body": [
-          "The engine is plain TypeScript with tests, separate from the React UI. That separation makes balance testing possible: bots can play whole matches with no UI and report how the rewards behave. The first report says the game is too forgiving, so the reward tiers are the next thing to tune.",
+          "The engine is plain TypeScript with tests, separate from the React UI. That separation makes balance testing possible: bots can play whole matches with no UI and report how the rewards behave. The first report showed the game was too forgiving, which led to the final rules: one of your last three cards must go on the negative side.",
           "It is a small project, but it has the same shape as the bigger ones: a clear rule set, honest numbers, and a system that keeps working when something drops out."
         ]
       }
