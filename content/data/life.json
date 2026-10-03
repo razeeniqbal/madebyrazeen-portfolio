@@ -7,6 +7,7 @@
       "body": [
         "My running page is built from real Garmin and Strava activity data."
       ],
+      "story": [],
       "href": "/running",
       "relatedProject": "",
       "dataSource": "running",
@@ -19,6 +20,24 @@
       "body": [
         "Volleyball is one of the ways I spend time away from work.",
         "Organizing social sessions through messages felt unnecessarily difficult. Eventually, instead of only thinking about the problem, I started building VSB."
+      ],
+      "story": [
+        {
+          "label": "Play",
+          "text": "Volleyball is one of the ways I spend time away from work. It gives me somewhere to compete and connect."
+        },
+        {
+          "label": "People",
+          "text": "Social sessions put first-timers and regulars, every level and position, on the same court."
+        },
+        {
+          "label": "Coordination",
+          "text": "Organizing those sessions through messages and individual coordination felt unnecessarily difficult."
+        },
+        {
+          "label": "VSB",
+          "text": "Eventually, instead of only thinking about the problem, I started building VSB."
+        }
       ],
       "href": "/projects/vsb",
       "relatedProject": "vsb",
@@ -33,6 +52,24 @@
         "What interests me about Formula 1 is not only the racing.",
         "It is how much of the sport can be understood through data: timing, tyres, strategy, telemetry, track position, and the constant search for small improvements.",
         "That interest eventually became Sepang Vision Lab."
+      ],
+      "story": [
+        {
+          "label": "Interest",
+          "text": "I like how Formula 1 uses data to understand performance. What interests me is not only the racing."
+        },
+        {
+          "label": "Questions",
+          "text": "How much of the sport can be understood through data: timing, tyres, strategy, telemetry, track position, and the constant search for small improvements?"
+        },
+        {
+          "label": "Data",
+          "text": "A real race is a good place to test those questions. The 2017 Malaysian Grand Prix timing archive holds every recorded lap and pit stop."
+        },
+        {
+          "label": "Experiment",
+          "text": "That interest eventually became Sepang Vision Lab."
+        }
       ],
       "href": "/projects/sepang-vision-lab",
       "relatedProject": "sepang-vision-lab",

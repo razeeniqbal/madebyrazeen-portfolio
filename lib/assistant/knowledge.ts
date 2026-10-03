@@ -111,7 +111,7 @@ export function buildKnowledge(): string {
     `## Life (section page: ${SITE_URL}/life; the descriptions are in Razeen's own words)\n${getLifeInterests()
       .map((l) => {
         const project = l.relatedProject ? getProjects().find((p) => p.slug === l.relatedProject) : undefined;
-        return `- ${l.name} (${l.type}). ${l.body.join(' ')}${project ? ` This interest led to the project ${project.title}.` : ''} Page: ${SITE_URL}${l.href}`;
+        return `- ${l.name} (${l.type}). ${(l.story.length ? l.story.map((s) => s.text) : l.body).join(' ')}${project ? ` This interest led to the project ${project.title}.` : ''} Page: ${SITE_URL}${l.href}`;
       })
       .join('\n')}`,
   );

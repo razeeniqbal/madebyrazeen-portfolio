@@ -14,6 +14,8 @@ export interface LifeInterest {
   type: InterestType;
   /** A few short paragraphs for the Life page. */
   body: string[];
+  /** The interest told as steps (Play → People → Coordination → VSB); used instead of `body` when present. */
+  story: { label: string; text: string }[];
   /** Where the interest leads on the site (/running, /projects/vsb …). */
   href: string;
   relatedProject?: string;
