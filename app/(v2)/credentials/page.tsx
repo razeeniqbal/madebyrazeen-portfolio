@@ -28,7 +28,7 @@ const yearNote: Record<string, string> = {
 };
 
 // Credentials support the story; they are not the identity. Three levels: a small selected set that
-// follows Engineering → Data → AI, the learning path by year, then every verified record.
+// follows Engineering → Data → AI, the learning path by year, then every record.
 export default function CredentialsPage() {
   const path = learningPath();
   const dated = achievements.filter((a) => /\d{4}/.test(a.issuedDate)).length;

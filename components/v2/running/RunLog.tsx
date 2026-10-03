@@ -3,12 +3,13 @@ import { formatDate, formatDuration, formatPace, type Run } from '@/content/runn
 
 const VISIBLE = 12;
 
+// Phone: date across the top, then the route shape beside title/distance and time/pace.
 function Row({ r }: { r: Run }) {
   return (
     <li className="grid grid-cols-[2.25rem_1fr_auto] items-center gap-x-4 gap-y-1 border-t border-line py-3 md:grid-cols-[2.25rem_7rem_1fr_5.5rem_6rem_6rem_3rem]">
-      <RouteThumb route={r.route} className="row-span-2 text-muted md:row-span-1" />
-      <p className="label order-first col-span-2 text-muted md:order-none md:col-span-1">{formatDate(r.date)}</p>
-      <p className="min-w-0 truncate font-semibold">
+      <RouteThumb route={r.route} className="row-span-2 row-start-2 text-muted md:row-span-1 md:row-start-auto" />
+      <p className="label order-first col-span-3 text-muted md:order-none md:col-span-1">{formatDate(r.date)}</p>
+      <p className="min-w-0 font-semibold leading-snug [overflow-wrap:anywhere]">
         {r.title}
         {r.race && <span className="label ml-2 bg-lime px-1.5 py-0.5 align-middle text-carbon">Race</span>}
       </p>
