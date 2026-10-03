@@ -18,9 +18,6 @@ const GENERIC_URLS = new Set([
   'https://learn.microsoft.com/en-us/certifications/',
   'https://www.pythoninstitute.org/',
   'https://www.cloudskillsboost.google/',
-  // Individual links that no longer show the credential. Kept in the data as evidence, hidden as
-  // "Verify" until a working share link is supplied. Checked 4 Oct 2026: Learn says "Profile not found".
-  'https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874',
 ]);
 export const credentialVerifyUrl = (a: Achievement) => (a.credentialUrl && !GENERIC_URLS.has(a.credentialUrl) ? a.credentialUrl : undefined);
 
@@ -29,7 +26,6 @@ const issuerMark: Record<string, string> = {
   'Google Cloud': 'GC',
   Anthropic: 'AN',
   IBM: 'IBM',
-  'IBM SkillsBuild': 'IBM',
   'Python Institute': 'PI',
   Confluent: 'CF',
   Databricks: 'DB',
