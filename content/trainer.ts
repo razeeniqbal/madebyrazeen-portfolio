@@ -6,9 +6,23 @@
  */
 import data from './data/trainer.json';
 
+/** How the engagement shares knowledge; decides its weight on /trainer. */
+export type EngagementMode = 'structured-training' | 'technical-sharing' | 'internal-knowledge-sharing';
+
+export const modeLabel: Record<EngagementMode, string> = {
+  'structured-training': 'Structured training',
+  'technical-sharing': 'Technical sharing',
+  'internal-knowledge-sharing': 'Internal knowledge sharing',
+};
+
 export interface TrainerEngagement {
   slug: string;
   title: string;
+  mode: EngagementMode;
+  /** The shape of a structured programme, step by step (Audience → Concept → Hands-on → Application). */
+  journey: { label: string; detail: string }[];
+  /** The verified topics grouped into themes, so a long curriculum reads as a few ideas. */
+  topicGroups: { label: string; topics: string[] }[];
   role: string;
   organization: string;
   partners: string[];
@@ -24,7 +38,8 @@ export interface TrainerEngagement {
   visibility: 'public' | 'private';
 }
 
-type Raw = Omit<TrainerEngagement, 'dateStart' | 'dateEnd' | 'year' | 'format' | 'audience' | 'visibility'> & {
+type Raw = Omit<TrainerEngagement, 'mode' | 'dateStart' | 'dateEnd' | 'year' | 'format' | 'audience' | 'visibility'> & {
+  mode: string;
   dateStart: string | null;
   dateEnd: string | null;
   year: number | null;
@@ -35,6 +50,7 @@ type Raw = Omit<TrainerEngagement, 'dateStart' | 'dateEnd' | 'year' | 'format' |
 
 const engagements: TrainerEngagement[] = (data.engagements as Raw[]).map((e) => ({
   ...e,
+  mode: e.mode as EngagementMode,
   dateStart: e.dateStart ?? undefined,
   dateEnd: e.dateEnd ?? undefined,
   year: e.year ?? (e.dateStart ? Number(e.dateStart.slice(0, 4)) : undefined),

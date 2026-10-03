@@ -3,6 +3,7 @@
     {
       "slug": "aem-internal-training",
       "title": "AEM Internal Technical Training",
+      "mode": "internal-knowledge-sharing",
       "role": "Internal Technical Trainer / Knowledge Sharing",
       "organization": "AEM Energy Solutions Sdn Bhd",
       "partners": [],
@@ -11,7 +12,7 @@
       "year": null,
       "format": "Internal technical training / knowledge sharing",
       "audience": "Internal",
-      "summary": "Internal technical training and knowledge sharing.",
+      "summary": "Recurring internal sessions for colleagues, from Power BI and SQL to Python, Git and Google Cloud AI.",
       "topics": [
         "Power BI Fundamentals & Dashboard Development",
         "Power Query for Data Cleaning & Transformation",
@@ -20,6 +21,8 @@
         "Introduction to Google Cloud AI & Vertex AI",
         "Git & GitHub Fundamentals"
       ],
+      "topicGroups": [],
+      "journey": [],
       "evidence": [],
       "featured": true,
       "visibility": "public"
@@ -27,6 +30,7 @@
     {
       "slug": "google-ai-build-2025",
       "title": "Google AI Build 2025",
+      "mode": "technical-sharing",
       "role": "Speaker / Technical Sharing",
       "organization": "Universiti Putra Malaysia",
       "partners": [],
@@ -41,6 +45,8 @@
         "Vertex AI",
         "Practical AI use cases"
       ],
+      "topicGroups": [],
+      "journey": [],
       "evidence": [],
       "featured": true,
       "visibility": "public"
@@ -48,6 +54,7 @@
     {
       "slug": "cloud-essentials-suk-perak",
       "title": "Cloud Essentials untuk SUK Perak",
+      "mode": "structured-training",
       "role": "Trainer",
       "organization": "SUK Perak",
       "partners": [
@@ -79,6 +86,69 @@
         "Document AI",
         "AI innovation",
         "Capstone"
+      ],
+      "topicGroups": [
+        {
+          "label": "Foundations",
+          "topics": [
+            "Google Cloud ecosystem",
+            "Compute",
+            "Storage",
+            "Cloud SQL",
+            "VPC"
+          ]
+        },
+        {
+          "label": "Hybrid and resilience",
+          "topics": [
+            "Hybrid Cloud",
+            "Cloud VPN",
+            "High Availability",
+            "Disaster Recovery",
+            "Database migration"
+          ]
+        },
+        {
+          "label": "Governance and cost",
+          "topics": [
+            "Landing Zone",
+            "IAM",
+            "Governance",
+            "FinOps"
+          ]
+        },
+        {
+          "label": "AI",
+          "topics": [
+            "Vertex AI",
+            "Document AI",
+            "AI innovation"
+          ]
+        },
+        {
+          "label": "Capstone",
+          "topics": [
+            "Capstone"
+          ]
+        }
+      ],
+      "journey": [
+        {
+          "label": "Audience",
+          "detail": "Technical and management participants from relevant SUK Perak digital and related units."
+        },
+        {
+          "label": "Concept",
+          "detail": "Theory across the Google Cloud ecosystem, from compute, storage and networking to governance and AI services."
+        },
+        {
+          "label": "Hands-on",
+          "detail": "Hands-on work alongside the theory, across the two days."
+        },
+        {
+          "label": "Application",
+          "detail": "A capstone and a consultation session."
+        }
       ],
       "evidence": [],
       "featured": true,

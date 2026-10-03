@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { assistantCopy } from '@/content/assistant';
 import type { BotMood } from '@/lib/assets';
@@ -10,6 +11,12 @@ import { cn } from '@/lib/utils';
 type Msg = { role: 'user' | 'assistant'; content: string };
 
 const STORE_KEY = 'ask-razeen:v1';
+
+/**
+ * Content-first pages: project case studies (screenshots are evidence) and the content-heavy Trainer,
+ * Credentials, Life and Running pages. There the trigger stays compact until the visitor opens it.
+ */
+const isQuietRoute = (path: string) => /^\/projects\/[^/]+/.test(path) || /^\/(trainer|credentials|life|running)(\/|$)/.test(path);
 const SLEEP_AFTER_MS = 60_000;
 
 /** Turns relative site links (/projects/…) and URLs in plain-text answers into links. Old paths still redirect. */
@@ -37,6 +44,8 @@ function Linkified({ text }: { text: string }) {
 }
 
 export function AskWidget() {
+  const pathname = usePathname();
+  const quiet = isQuietRoute(pathname ?? '');
   const [open, setOpen] = useState(false);
   const [teaser, setTeaser] = useState(false);
   const [available, setAvailable] = useState<boolean | null>(null);
@@ -215,8 +224,9 @@ export function AskWidget() {
 
   // One friendly nudge per visit, only when the assistant is online, and only once the visitor has
   // scrolled past the first screen (so it never sits on top of hero content such as the credentials).
+  // Never on a content-first page (see isQuietRoute): there the trigger stays compact until opened.
   useEffect(() => {
-    if (open || !available) {
+    if (open || !available || quiet) {
       setTeaser(false);
       return;
     }
@@ -239,7 +249,7 @@ export function AskWidget() {
       window.removeEventListener('scroll', onScroll);
       if (hide) clearTimeout(hide);
     };
-  }, [open, available]);
+  }, [open, available, quiet]);
 
   const offline = available === false;
   const last = messages[messages.length - 1];

@@ -7,10 +7,12 @@
       "issuedDate": "September 2023",
       "description": "Expert in Power BI data visualization, modeling, and business intelligence solutions.",
       "category": "certification",
+      "area": "data",
       "image": "/achievements/microsoft-certified-associate.png",
       "credentialUrl": "https://learn.microsoft.com/en-us/users/razeeniqbal/credentials/DE6CEB296EC4D874",
       "credentialId": "DE6CEB296EC4D874",
-      "featured": true
+      "featured": true,
+      "selected": true
     },
     {
       "id": "2",
@@ -19,10 +21,12 @@
       "issuedDate": "December 2024",
       "description": "Foundational knowledge in ML, AI concepts, and Azure AI services.",
       "category": "certification",
-      "image": "/achievements/microsoft-ai.jpg",
+      "area": "ai",
+      "image": "/achievements/microsoft-azure-ai-fundamentals.webp",
       "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "3",
@@ -31,10 +35,12 @@
       "issuedDate": "October 2024",
       "description": "Cloud fundamentals including Azure services, security, compliance, and pricing.",
       "category": "certification",
-      "image": "/achievements/microsoft-azure.jpg",
+      "area": "cloud",
+      "image": "/achievements/microsoft-fundamentals.webp",
       "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "4",
@@ -43,10 +49,12 @@
       "issuedDate": "December 2024",
       "description": "Security, compliance, and identity fundamentals for Microsoft cloud services.",
       "category": "certification",
-      "image": "/achievements/microsoft-security.jpg",
+      "area": "cloud",
+      "image": "/achievements/microsoft-fundamentals.webp",
       "credentialUrl": "https://learn.microsoft.com/en-us/certifications/",
       "credentialId": "B563D7D85230C4E",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "5",
@@ -55,10 +63,12 @@
       "issuedDate": "September 2023",
       "description": "Certified in Python fundamentals, syntax, and programming techniques.",
       "category": "certification",
-      "image": "/achievements/python-pcep.jpg",
+      "area": "development",
+      "image": "/achievements/python-institute-pcep.webp",
       "credentialUrl": "https://www.pythoninstitute.org/",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "6",
@@ -67,10 +77,12 @@
       "issuedDate": "April 2025",
       "description": "Create ML models with BigQuery including regression and classification.",
       "category": "certification",
-      "image": "/achievements/google-bigquery.jpg",
+      "area": "ai",
+      "image": "/achievements/google-cloud-bigquery-ml-skill-badge.webp",
       "credentialUrl": "https://www.cloudskillsboost.google/",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": true
     },
     {
       "id": "7",
@@ -79,10 +91,12 @@
       "issuedDate": "March 2025",
       "description": "Proficient in designing effective prompts for large language models.",
       "category": "certification",
-      "image": "/achievements/google-vertex.jpg",
+      "area": "ai",
+      "image": "/achievements/google-cloud-prompt-design-vertex-ai-skill-badge.webp",
       "credentialUrl": "https://www.cloudskillsboost.google/",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "8",
@@ -91,10 +105,12 @@
       "issuedDate": "April 2025",
       "description": "Data analysis with Python including manipulation, visualization, and statistics.",
       "category": "certification",
-      "image": "/achievements/ibm-data-python.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "f69be515945f41848da758a3534cdab8",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "9",
@@ -103,10 +119,12 @@
       "issuedDate": "April 2025",
       "description": "Introduction to data science fundamentals, concepts, and methodologies.",
       "category": "certification",
-      "image": "/achievements/ibm-ds101.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "634f673197544ce38cb9aa2587fd0782",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "10",
@@ -115,10 +133,12 @@
       "issuedDate": "April 2025",
       "description": "Data science methodology from problem formulation to model deployment.",
       "category": "certification",
-      "image": "/achievements/ibm-methodology.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "e952973f82c443d98d0786eca34a0b00",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "11",
@@ -127,10 +147,12 @@
       "issuedDate": "April 2025",
       "description": "Data visualization with Matplotlib, Seaborn, and Plotly.",
       "category": "certification",
-      "image": "/achievements/ibm-visualization.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "9bc9df5cd4c1437abb293d2f716f13e4",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "12",
@@ -139,10 +161,12 @@
       "issuedDate": "April 2025",
       "description": "Python programming fundamentals for data science applications.",
       "category": "certification",
-      "image": "/achievements/ibm-python101.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "509f8539dbcd468ca020aa6b8f71cdda",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "13",
@@ -151,10 +175,12 @@
       "issuedDate": "April 2025",
       "description": "Essential data science tools: Jupyter, RStudio, and GitHub.",
       "category": "certification",
-      "image": "/achievements/ibm-tools.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "582b153478374211a18a550be919f0bd",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "14",
@@ -163,10 +189,12 @@
       "issuedDate": "April 2025",
       "description": "Hadoop ecosystem and distributed computing fundamentals.",
       "category": "certification",
-      "image": "/achievements/ibm-hadoop.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "af90efc4fdc44ccd98108ec86dcdba48",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "15",
@@ -175,10 +203,12 @@
       "issuedDate": "April 2025",
       "description": "Big data concepts, technologies, and applications.",
       "category": "certification",
-      "image": "/achievements/ibm-bigdata.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "8f38bc90d85f433dbe74495bb2b9e56f",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "16",
@@ -187,10 +217,12 @@
       "issuedDate": "April 2025",
       "description": "Apache Spark fundamentals for large-scale data processing.",
       "category": "certification",
-      "image": "/achievements/ibm-spark.jpg",
+      "area": "data",
+      "image": "",
       "credentialId": "d96c42857dbf40ec9c9a6b69f50fa285",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "17",
@@ -199,10 +231,12 @@
       "issuedDate": "April 2025",
       "description": "AI concepts, machine learning, and neural networks.",
       "category": "certification",
-      "image": "/achievements/ibm-ai-fundamentals.jpg",
+      "area": "ai",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "18",
@@ -211,10 +245,12 @@
       "issuedDate": "April 2025",
       "description": "Text embeddings, semantic search, and NLP techniques.",
       "category": "certification",
-      "image": "/achievements/deeplearning-embeddings.jpg",
+      "area": "ai",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "19",
@@ -223,10 +259,12 @@
       "issuedDate": "October 2024",
       "description": "Linear algebra foundations for machine learning.",
       "category": "course",
-      "image": "/achievements/linkedin-linear.jpg",
+      "area": "ai",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "20",
@@ -235,10 +273,12 @@
       "issuedDate": "October 2024",
       "description": "History, concepts, and future of AI and machine learning.",
       "category": "course",
-      "image": "/achievements/linkedin-ai.jpg",
+      "area": "ai",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "21",
@@ -247,10 +287,12 @@
       "issuedDate": "March 2025",
       "description": "Microsoft Copilot for enhanced productivity and AI workflows.",
       "category": "course",
-      "image": "/achievements/mereka-copilot.jpg",
+      "area": "ai",
+      "image": "",
       "credentialId": "fb6bb11d",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "22",
@@ -259,10 +301,12 @@
       "issuedDate": "March 2025",
       "description": "Generative AI technologies, applications, and best practices.",
       "category": "course",
-      "image": "/achievements/mereka-genai.jpg",
+      "area": "ai",
+      "image": "",
       "credentialId": "7f1306b8",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "23",
@@ -271,10 +315,12 @@
       "issuedDate": "March 2025",
       "description": "Ethical AI development, bias mitigation, and responsible practices.",
       "category": "course",
-      "image": "/achievements/mereka-responsible.jpg",
+      "area": "ai",
+      "image": "",
       "credentialId": "cd838cb5",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "24",
@@ -283,10 +329,12 @@
       "issuedDate": "March 2025",
       "description": "Microsoft Copilot features and practical applications.",
       "category": "course",
-      "image": "/achievements/mereka-getstarted.jpg",
+      "area": "ai",
+      "image": "",
       "credentialId": "75b5641c",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "25",
@@ -295,10 +343,12 @@
       "issuedDate": "March 2025",
       "description": "AI concepts and applications for diverse audiences.",
       "category": "course",
-      "image": "/achievements/mereka-aiforall.jpg",
+      "area": "ai",
+      "image": "",
       "credentialId": "d6179ae4",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "26",
@@ -307,10 +357,12 @@
       "issuedDate": "August 2023",
       "description": "Statistical methods, data visualization, and analytical techniques.",
       "category": "certification",
-      "image": "/achievements/apu-analyst.jpg",
+      "area": "data",
+      "image": "/achievements/apu-certified-data-analyst-associate.webp",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "27",
@@ -319,10 +371,12 @@
       "issuedDate": "October 2022",
       "description": "Graduate Engineer recognition by IEM.",
       "category": "certification",
-      "image": "/achievements/iem-graduate.jpg",
+      "area": "other",
+      "image": "",
       "credentialId": "119043",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "28",
@@ -331,10 +385,12 @@
       "issuedDate": "March 2022",
       "description": "Graduate Engineer registration with BEM.",
       "category": "certification",
-      "image": "/achievements/bem-graduate.jpg",
+      "area": "other",
+      "image": "",
       "credentialId": "G1207508A",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": true
     },
     {
       "id": "29",
@@ -343,10 +399,12 @@
       "issuedDate": "April 2025",
       "description": "AI, machine learning, deep learning, and neural networks.",
       "category": "certification",
-      "image": "/achievements/ibm-ai-foundations.jpg",
+      "area": "ai",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "30",
@@ -355,10 +413,12 @@
       "issuedDate": "April 2025",
       "description": "Agile methodologies, Scrum framework, and iterative development.",
       "category": "certification",
-      "image": "/achievements/ibm-agile.jpg",
+      "area": "development",
+      "image": "/achievements/ibm-agile-explorer.webp",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "31",
@@ -367,10 +427,12 @@
       "issuedDate": "April 2025",
       "description": "Data management, structures, and analysis principles.",
       "category": "certification",
-      "image": "/achievements/ibm-data-fundamentals.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "32",
@@ -379,10 +441,12 @@
       "issuedDate": "April 2025",
       "description": "Data science foundations: essential concepts and methodologies.",
       "category": "certification",
-      "image": "/achievements/ibm-ds-level1.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "33",
@@ -391,10 +455,12 @@
       "issuedDate": "April 2025",
       "description": "Advanced data science concepts with practical applications.",
       "category": "certification",
-      "image": "/achievements/ibm-ds-level2.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "34",
@@ -403,10 +469,12 @@
       "issuedDate": "April 2025",
       "description": "Data science methodologies and best practices.",
       "category": "certification",
-      "image": "/achievements/ibm-ds-methodologies.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "35",
@@ -415,10 +483,12 @@
       "issuedDate": "April 2025",
       "description": "Essential data science tools and platforms.",
       "category": "certification",
-      "image": "/achievements/ibm-ds-tools.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "36",
@@ -427,10 +497,12 @@
       "issuedDate": "April 2025",
       "description": "Advanced data analysis with Python and data science libraries.",
       "category": "certification",
-      "image": "/achievements/ibm-data-analysis-python.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "37",
@@ -439,10 +511,12 @@
       "issuedDate": "April 2025",
       "description": "Compelling data visualizations with Python libraries.",
       "category": "certification",
-      "image": "/achievements/ibm-data-viz-python.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "38",
@@ -451,10 +525,12 @@
       "issuedDate": "April 2025",
       "description": "Python programming for data science applications.",
       "category": "certification",
-      "image": "/achievements/ibm-python-ds.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "39",
@@ -463,10 +539,12 @@
       "issuedDate": "April 2025",
       "description": "Hadoop ecosystem and distributed data processing.",
       "category": "certification",
-      "image": "/achievements/ibm-hadoop-level1.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "40",
@@ -475,10 +553,12 @@
       "issuedDate": "April 2025",
       "description": "Apache Spark for big data processing and analytics.",
       "category": "certification",
-      "image": "/achievements/ibm-spark-level1.jpg",
+      "area": "data",
+      "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "41",
@@ -487,10 +567,12 @@
       "issuedDate": "March 2025",
       "description": "AI basics and real-world applications.",
       "category": "course",
-      "image": "/achievements/mereka-ai-basics.jpg",
+      "area": "ai",
+      "image": "",
       "credentialId": "e484d41b",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "42",
@@ -499,10 +581,12 @@
       "issuedDate": "March 2025",
       "description": "Advanced internet search and information retrieval techniques.",
       "category": "course",
-      "image": "/achievements/mereka-search.jpg",
+      "area": "other",
+      "image": "",
       "credentialId": "f9f3a231",
       "credentialUrl": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "43",
@@ -511,10 +595,12 @@
       "issuedDate": "",
       "description": "Designing and implementing Azure AI solutions.",
       "category": "certification",
+      "area": "ai",
       "image": "/achievements/microsoft-certified-associate.png",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": true
+      "featured": true,
+      "selected": true
     },
     {
       "id": "44",
@@ -523,10 +609,12 @@
       "issuedDate": "",
       "description": "Data engineering with Microsoft Fabric.",
       "category": "certification",
+      "area": "data",
       "image": "/achievements/microsoft-certified-associate.png",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": true
+      "featured": true,
+      "selected": true
     },
     {
       "id": "45",
@@ -535,10 +623,12 @@
       "issuedDate": "",
       "description": "Generative AI strategy and adoption on Google Cloud.",
       "category": "certification",
+      "area": "ai",
       "image": "/achievements/google-generative-ai-leader.png",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": true
+      "featured": true,
+      "selected": true
     },
     {
       "id": "46",
@@ -547,10 +637,12 @@
       "issuedDate": "",
       "description": "Working effectively with Claude.",
       "category": "certification",
+      "area": "ai",
       "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "47",
@@ -559,34 +651,40 @@
       "issuedDate": "",
       "description": "Agentic software development with Claude Code.",
       "category": "certification",
+      "area": "ai",
       "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "48",
       "title": "Data Streaming Engineer Foundations",
-      "organization": "Apache",
+      "organization": "Confluent",
       "issuedDate": "",
       "description": "Foundations of real-time data streaming.",
       "category": "certification",
-      "image": "",
+      "area": "data",
+      "image": "/achievements/confluent-data-streaming-engineer-foundations.webp",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "49",
       "title": "Data Streaming Engineer: Apache Flink",
-      "organization": "Apache",
+      "organization": "Confluent",
       "issuedDate": "",
       "description": "Stream processing with Apache Flink.",
       "category": "certification",
-      "image": "",
+      "area": "data",
+      "image": "/achievements/confluent-data-streaming-engineer-apache-flink.webp",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
     },
     {
       "id": "50",
@@ -595,10 +693,68 @@
       "issuedDate": "",
       "description": "Digital leadership programme; Innovation Challenge champion (Bootcamp 3).",
       "category": "certification",
+      "area": "other",
       "image": "",
       "credentialUrl": "",
       "credentialId": "",
-      "featured": false
+      "featured": false,
+      "selected": false
+    },
+    {
+      "id": "51",
+      "title": "Academy Accreditation - Databricks Fundamentals",
+      "organization": "Databricks",
+      "issuedDate": "May 2026",
+      "description": "",
+      "category": "certification",
+      "area": "data",
+      "image": "/achievements/databricks-fundamentals.webp",
+      "credentialUrl": "https://credentials.databricks.com/215c29c0-ebb7-4bc0-8023-8fc256b758de#acc.ZYfUQRpN",
+      "credentialId": "",
+      "featured": false,
+      "selected": false
+    },
+    {
+      "id": "52",
+      "title": "Academy Accreditation - Generative AI Fundamentals",
+      "organization": "Databricks",
+      "issuedDate": "May 2026",
+      "description": "",
+      "category": "certification",
+      "area": "ai",
+      "image": "/achievements/databricks-generative-ai-fundamentals.webp",
+      "credentialUrl": "https://credentials.databricks.com/9721446d-9892-4c46-8e01-e2ed59b62afb#acc.rXGkq5QL",
+      "credentialId": "",
+      "featured": false,
+      "selected": false
+    },
+    {
+      "id": "53",
+      "title": "Academy Accreditation - AI Agent Fundamentals",
+      "organization": "Databricks",
+      "issuedDate": "May 2026",
+      "description": "",
+      "category": "certification",
+      "area": "ai",
+      "image": "/achievements/databricks-ai-agent-fundamentals.webp",
+      "credentialUrl": "https://credentials.databricks.com/ddbfb974-e46d-4c99-b6a9-cc40f27a5bab",
+      "credentialId": "",
+      "featured": false,
+      "selected": false
+    },
+    {
+      "id": "54",
+      "title": "AWS AI & ML Scholars - 2026 Challenge Completion",
+      "organization": "Udacity",
+      "issuedDate": "",
+      "description": "",
+      "category": "course",
+      "area": "ai",
+      "image": "/achievements/aws-ai-ml-scholars-2026.webp",
+      "credentialUrl": "",
+      "credentialId": "",
+      "featured": false,
+      "selected": false
     }
   ]
 }

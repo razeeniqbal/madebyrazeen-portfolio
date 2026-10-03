@@ -1,109 +1,75 @@
 'use client';
 
+import Image from 'next/image';
 import { useMemo, useState } from 'react';
-import type { Achievement } from '@/content/achievements';
+import { credentialAreas, issuedTime, type Achievement, type CredentialArea } from '@/content/achievements';
 import { cn } from '@/lib/utils';
-import { credentialVerifyUrl } from '@/lib/credentials';
+import { credentialMark, credentialVerifyUrl } from '@/lib/credentials';
 
-const monthIndex = (d: string) => {
-  const t = Date.parse(`1 ${d}`);
-  return Number.isNaN(t) ? 0 : t;
-};
+/** A credential with its badge path resolved on the server (only when the file really ships). */
+export type ListedCredential = Achievement & { badge?: string };
 
-/** Issuer shown in the filter: sub-brands fold into their parent so the list stays short. */
-const issuerGroup = (org: string) => (/^IBM/i.test(org) ? 'IBM' : org);
-
-type Kind = 'all' | Achievement['category'];
-const KIND_LABEL: Record<string, string> = { all: 'All', certification: 'Certifications', course: 'Courses', award: 'Awards', achievement: 'Achievements' };
+type Filter = CredentialArea | 'all';
 
 /**
- * Every certification and course, filterable. Clean by design: one row of type tabs, one issuer
- * dropdown (issuers grouped, largest first), and search, instead of a chip per issuer.
+ * The full credential archive: one row of subject filters and a search box. Newest first; undated
+ * records last (they are shown as undated, never given a guessed date).
  */
-export function CredentialList({ items, initial }: { items: Achievement[]; initial?: number }) {
-  const kinds = useMemo(() => {
-    const m = new Map<Kind, number>([['all', items.length]]);
-    items.forEach((a) => m.set(a.category, (m.get(a.category) ?? 0) + 1));
-    return [...m.entries()];
+export function CredentialList({ items, initial }: { items: ListedCredential[]; initial?: number }) {
+  const counts = useMemo(() => {
+    const m = new Map<Filter, number>([['all', items.length]]);
+    items.forEach((a) => m.set(a.area, (m.get(a.area) ?? 0) + 1));
+    return m;
   }, [items]);
 
-  const issuers = useMemo(() => {
-    const m = new Map<string, number>();
-    items.forEach((a) => m.set(issuerGroup(a.organization), (m.get(issuerGroup(a.organization)) ?? 0) + 1));
-    return [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-  }, [items]);
-
-  const [kind, setKind] = useState<Kind>('all');
-  const [org, setOrg] = useState<string>('all');
+  const [area, setArea] = useState<Filter>('all');
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState(false);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return items
-      .filter(
-        (a) =>
-          (kind === 'all' || a.category === kind) &&
-          (org === 'all' || issuerGroup(a.organization) === org) &&
-          (!q || `${a.title} ${a.organization} ${a.description}`.toLowerCase().includes(q)),
-      )
-      // Featured credentials lead (several have no issue date), then newest first.
-      .sort((a, b) => Number(b.featured) - Number(a.featured) || monthIndex(b.issuedDate) - monthIndex(a.issuedDate));
-  }, [items, kind, org, query]);
+      .filter((a) => (area === 'all' || a.area === area) && (!q || `${a.title} ${a.organization}`.toLowerCase().includes(q)))
+      .sort((a, b) => (issuedTime(b.issuedDate) || -1) - (issuedTime(a.issuedDate) || -1) || a.title.localeCompare(b.title));
+  }, [items, area, query]);
 
-  const filtered = kind !== 'all' || org !== 'all' || Boolean(query);
+  const filtered = area !== 'all' || Boolean(query);
+  const shown = initial && !expanded && !filtered ? results.slice(0, initial) : results;
+  const filters: { value: Filter; label: string }[] = [{ value: 'all', label: 'All' }, ...credentialAreas.filter((c) => counts.has(c.value))];
 
   return (
     <div>
       <div className="flex flex-col gap-5 border-b border-line pb-5 lg:flex-row lg:items-end lg:justify-between">
-        <div role="group" aria-label="Filter by type" className="flex flex-wrap gap-x-6 gap-y-2">
-          {kinds.map(([k, count]) => {
-            const active = kind === k;
+        <div role="group" aria-label="Filter by area" className="flex flex-wrap gap-x-6 gap-y-2">
+          {filters.map((f) => {
+            const active = area === f.value;
             return (
               <button
-                key={k}
+                key={f.value}
                 type="button"
                 aria-pressed={active}
-                onClick={() => setKind(k)}
+                onClick={() => setArea(f.value)}
                 className={cn(
                   'label flex items-center gap-2 border-b-2 pb-1.5 transition-colors',
                   active ? 'border-lime text-ink' : 'border-transparent text-muted hover:text-ink',
                 )}
               >
-                {KIND_LABEL[k] ?? k}
-                <span className="opacity-60">{count}</span>
+                {f.label}
+                <span className="opacity-60">{counts.get(f.value) ?? 0}</span>
               </button>
             );
           })}
         </div>
-
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-          <label className="flex items-center gap-3 border-b border-ink pb-1">
-            <span className="label text-muted">Issuer</span>
-            <select
-              value={org}
-              onChange={(e) => setOrg(e.target.value)}
-              className="min-w-0 cursor-pointer bg-transparent py-1 pr-1 outline-none [&>option]:bg-surface [&>option]:text-ink"
-            >
-              <option value="all">All issuers</option>
-              {issuers.map(([name, count]) => (
-                <option key={name} value={name}>
-                  {name} ({count})
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex items-center gap-3 border-b border-ink pb-1 sm:w-64">
-            <span className="label text-muted">Search</span>
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Azure, Spark, Python…"
-              className="w-full bg-transparent py-1 outline-none placeholder:text-muted/70"
-            />
-          </label>
-        </div>
+        <label className="flex items-center gap-3 border-b border-ink pb-1 sm:w-64">
+          <span className="label text-muted">Search</span>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Azure, Spark, Databricks…"
+            className="w-full min-w-0 bg-transparent py-1 outline-none placeholder:text-muted/70"
+          />
+        </label>
       </div>
 
       <p className="label mt-4 text-muted" role="status" aria-live="polite">
@@ -111,40 +77,48 @@ export function CredentialList({ items, initial }: { items: Achievement[]; initi
       </p>
 
       <ol className="mt-2">
-        {(initial && !expanded && !filtered ? results.slice(0, initial) : results).map((a) => {
+        {shown.map((a) => {
           const verify = credentialVerifyUrl(a);
           return (
             <li
               key={a.id}
-              className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 border-t border-line py-4 md:grid-cols-[8rem_1fr_14rem_5rem]"
+              className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-x-4 gap-y-1 border-t border-line py-3.5 md:grid-cols-[2.5rem_1fr_13rem_7rem_4.5rem]"
             >
-              <span className="label order-3 text-muted md:order-none">{a.issuedDate}</span>
-              <span className="order-1 font-semibold md:order-none">{a.title}</span>
-              <span className="order-4 text-sm text-muted md:order-none">
+              {a.badge ? (
+                // Next to the visible title, so the badge is decorative for screen readers.
+                <Image src={a.badge} alt="" width={80} height={80} className="h-10 w-10 object-contain" />
+              ) : (
+                <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center border border-line font-mono text-[0.625rem] font-semibold leading-none tracking-tight text-muted">
+                  {credentialMark(a)}
+                </span>
+              )}
+              <span className="min-w-0">
+                <span className="block font-semibold leading-snug [overflow-wrap:anywhere]">{a.title}</span>
+                <span className="mt-0.5 block text-sm text-muted md:hidden">
+                  {a.organization} · {a.issuedDate || 'Undated'}
+                </span>
+              </span>
+              <span className="hidden text-sm text-muted md:block">
                 {a.organization}
                 {a.category === 'course' && <span className="label ml-2">· Course</span>}
               </span>
-              <span className="label order-2 text-right md:order-none">
+              <span className="label hidden text-muted md:block">{a.issuedDate || 'Undated'}</span>
+              <span className="label text-right">
                 {verify ? (
-                  <a href={verify} target="_blank" rel="noopener noreferrer" className="border-b border-current">
+                  <a href={verify} target="_blank" rel="noopener noreferrer" className="border-b border-current" aria-label={`Verify ${a.title} (opens the issuer page)`}>
                     Verify ↗
                   </a>
-                ) : a.credentialId ? (
-                  <span className="text-muted" title={`Credential ID ${a.credentialId}`}>
-                    ID ✓
-                  </span>
                 ) : null}
               </span>
             </li>
           );
         })}
       </ol>
-      {initial && !expanded && !filtered && results.length > initial && (
-        <div className="border-t border-line pt-6">
-          <button type="button" onClick={() => setExpanded(true)} className="label border-b border-current pb-1 hover:text-signal">
-            Show all {results.length} ↓
-          </button>
-        </div>
+
+      {initial && !filtered && results.length > initial && (
+        <button type="button" onClick={() => setExpanded((v) => !v)} className="label mt-6 border-b border-current pb-1" aria-expanded={expanded}>
+          {expanded ? 'Show fewer' : `Show all ${results.length}`}
+        </button>
       )}
     </div>
   );

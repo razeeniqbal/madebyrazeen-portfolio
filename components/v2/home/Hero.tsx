@@ -56,7 +56,7 @@ export function Hero() {
             <div className="mt-8">
               <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
                 <TechnicalLabel as="h2">Selected credentials</TechnicalLabel>
-                <Link href="/experience#credentials" className="label text-muted transition-colors hover:text-ink">
+                <Link href="/credentials" className="label text-muted transition-colors hover:text-ink">
                   View all →
                 </Link>
               </div>
@@ -70,7 +70,7 @@ export function Hero() {
                   return (
                     <li key={c.id} className="group relative">
                       <a
-                        href={url ?? '/experience#credentials'}
+                        href={url ?? '/credentials'}
                         aria-label={label}
                         className="block focus-visible:outline-offset-4"
                         {...(url && { target: '_blank', rel: 'noopener noreferrer' })}

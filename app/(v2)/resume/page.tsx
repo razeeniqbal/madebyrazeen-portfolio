@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/resume' },
 };
 
-// Curated credential list: featured first, then vendor certifications worth a CV line. Everything else: /experience#credentials.
-const CV_ISSUERS = ['Microsoft', 'Google Cloud', 'Anthropic', 'Apache', 'Axiata', 'Board of Engineers Malaysia', 'Python Institute'];
+// Curated credential list: featured first, then vendor certifications worth a CV line. Everything else: /credentials.
+const CV_ISSUERS = ['Microsoft', 'Google Cloud', 'Anthropic', 'Confluent', 'Axiata', 'Board of Engineers Malaysia', 'Python Institute'];
 const MAX_CERTS = 5;
 const MAX_LINES_PER_ROLE = 5;
 
@@ -278,7 +278,7 @@ export default function ResumePage() {
                   <Cert key={a.id} a={a} />
                 ))}
               </ul>
-              <a href={`${SITE_URL}/experience#credentials`} className="mt-3 inline-block text-sm text-muted hover:text-ink">
+              <a href={`${SITE_URL}/credentials`} className="mt-3 inline-block text-sm text-muted hover:text-ink">
                 All {achievements.length} credentials on the portfolio <span aria-hidden="true">→</span>
               </a>
             </Block>

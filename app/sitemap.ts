@@ -4,7 +4,7 @@ import { getProjects } from '@/content/projects';
 import { getPublishedNotes } from '@/content/notes';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ['', '/about', '/experience', '/trainer', '/projects', '/journal', '/life', '/running', '/resume', '/contact'];
+  const pages = ['', '/about', '/experience', '/trainer', '/projects', '/journal', '/life', '/credentials', '/running', '/resume', '/contact'];
   return [
     ...pages.map((p) => ({ url: `${SITE_URL}${p}`, changeFrequency: 'monthly' as const, priority: p === '' ? 1 : 0.7 })),
     ...getProjects().map((p) => ({

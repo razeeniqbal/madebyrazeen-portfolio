@@ -1,32 +1,15 @@
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import Image from 'next/image';
 import type { Achievement } from '@/content/achievements';
-import { credentialCode } from '@/lib/credentials';
+import { credentialMark } from '@/lib/credentials';
+import { badgeFor } from '@/content/credential-badges';
 import { cn } from '@/lib/utils';
-
-const issuerMark: Record<string, string> = {
-  Microsoft: 'MS',
-  'Google Cloud': 'GC',
-  Anthropic: 'AN',
-  'IBM SkillsBuild': 'IBM',
-  'Python Institute': 'PI',
-  Apache: 'ASF',
-  Axiata: 'AX',
-};
-
-/** Official artwork only if the file is really in /public (the V1 paths were never shipped). Server-only. */
-function artwork(a: Achievement) {
-  if (!a.image || !a.image.startsWith('/')) return undefined;
-  return existsSync(join(process.cwd(), 'public', a.image)) ? a.image : undefined;
-}
 
 /**
  * A credential's badge: the official artwork, uncoloured, when available; otherwise a neutral
  * typographic tile (exam code or issuer mark). Never a recoloured or invented logo.
  */
 export function CredentialBadge({ credential, size = 48, className }: { credential: Achievement; size?: number; className?: string }) {
-  const src = artwork(credential);
+  const src = badgeFor(credential);
   if (src) {
     return (
       <Image
@@ -39,7 +22,7 @@ export function CredentialBadge({ credential, size = 48, className }: { credenti
       />
     );
   }
-  const code = credentialCode(credential) ?? issuerMark[credential.organization] ?? credential.organization.slice(0, 2).toUpperCase();
+  const code = credentialMark(credential);
   return (
     <span
       aria-hidden="true"

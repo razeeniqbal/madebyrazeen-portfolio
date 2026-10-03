@@ -13,7 +13,7 @@ import { CredentialBadge } from '@/components/v2/credentials/CredentialBadge';
 import { statusLabel } from '@/components/v2/work/ProjectMeta';
 import { assets, type ImageAsset } from '@/lib/assets';
 import { profile } from '@/content/profile';
-import { featuredCredentials, achievements } from '@/content/achievements';
+import { selectedCredentials, achievements } from '@/content/achievements';
 import { credentialShortTitle } from '@/lib/credentials';
 import {
   aboutClosing,
@@ -297,8 +297,8 @@ export default function AboutPage() {
             <TechnicalLabel as="h2" marker={`${pad(11)} /`}>
               Selected credentials
             </TechnicalLabel>
-            <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-              {featuredCredentials.map((a) => (
+            <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+              {selectedCredentials.map((a) => (
                 <li key={a.id} className="flex items-center gap-4">
                   <CredentialBadge credential={a} size={44} />
                   <div className="min-w-0 text-sm">
@@ -309,7 +309,7 @@ export default function AboutPage() {
               ))}
             </ul>
             <div className="mt-8">
-              <ArrowLink href="/experience#credentials">View all {achievements.length} credentials</ArrowLink>
+              <ArrowLink href="/credentials">View all {achievements.length} credentials</ArrowLink>
             </div>
           </div>
         </div>
