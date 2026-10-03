@@ -276,40 +276,28 @@
   }
 }
 
-/* ── Resume grid (R03): named areas so one DOM order serves every layout ──
-   mobile: contact · main · skills · rest   |   tablet + print: main + rail   |   desktop: left · MAIN · right */
+/* ── Resume grid (Phase 5): a main column and a side column ──
+   Each section carries its reading order (style="order: n"). On narrow screens the two column wrappers
+   are display: contents, so every section joins one grid and follows the canonical order
+   (Profile · Experience · Selected professional work · Education · Training · Projects · Certifications · Skills).
+   From 1024px and in print the wrappers become real columns. */
 .resume-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: 'contact' 'main' 'skills' 'rest';
   row-gap: 2.5rem;
 }
-.resume-grid > [data-area='contact'] { grid-area: contact; }
-.resume-grid > [data-area='main'] { grid-area: main; }
-.resume-grid > [data-area='skills'] { grid-area: skills; }
-.resume-grid > [data-area='rest'] { grid-area: rest; }
-@media (min-width: 768px) {
-  .resume-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
-    grid-template-areas: 'main contact' 'main skills' 'main rest';
-    grid-template-rows: auto auto 1fr;
-    column-gap: 2.5rem;
-  }
-}
+.resume-grid > [data-col] { display: contents; }
 @media (min-width: 1024px) {
   .resume-grid {
-    grid-template-columns: minmax(0, 24fr) minmax(0, 49fr) minmax(0, 27fr);
-    grid-template-areas: 'contact main skills' 'rest main skills';
-    grid-template-rows: auto 1fr;
-    column-gap: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
+    column-gap: 3rem;
   }
-  .resume-grid > [data-area='contact'],
-  .resume-grid > [data-area='rest'] { padding-right: 2rem; }
-  .resume-grid > [data-area='main'] {
-    padding-inline: 2rem;
-    border-inline: 1px solid rgb(var(--line));
+  .resume-grid > [data-col] { display: block; }
+  .resume-grid > [data-col] > * + * { margin-top: 2.5rem; }
+  .resume-grid > [data-col='side'] {
+    border-left: 1px solid rgb(var(--line));
+    padding-left: 2.5rem;
   }
-  .resume-grid > [data-area='skills'] { padding-left: 2rem; }
 }
 
 /* ── Print (used by /resume "Print / Save as PDF") ── */
@@ -331,19 +319,16 @@
   [data-reveal] { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   a { text-decoration: none; }
-  /* Resume: Tailwind sizes are rem-based, so scale the root. Main + rail, then a full-width band of
-     certifications · education · achievements, which keeps the rail from outrunning the main column. */
-  html:has(.resume-print) { font-size: 11px; }
+  /* Resume: Tailwind sizes are rem-based, so scale the root. Two columns on every printed page:
+     the record (main) and the reference rail (side). */
+  html:has(.resume-print) { font-size: 10.5px; }
   .resume-print .resume-grid {
-    grid-template-columns: minmax(0, 1fr) 52mm;
-    grid-template-areas: 'main contact' 'main skills' 'rest rest';
-    grid-template-rows: auto 1fr auto;
-    column-gap: 8mm;
-    row-gap: 6mm;
+    grid-template-columns: minmax(0, 1fr) 54mm;
+    column-gap: 7mm;
   }
-  .resume-print .resume-grid > [data-area] { padding: 0; border: 0; }
-  .resume-print [data-area='rest'] { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 8mm; }
-  .resume-print [data-area='rest'] > * { margin-top: 0 !important; }
+  .resume-print .resume-grid > [data-col] { display: block; }
+  .resume-print .resume-grid > [data-col] > * + * { margin-top: 5mm; }
+  .resume-print .resume-grid > [data-col='side'] { border-left: 1px solid rgb(var(--line)); padding-left: 6mm; }
   .resume-print [data-keep] { break-inside: avoid; }
   .resume-print h2 { break-after: avoid; }
 }

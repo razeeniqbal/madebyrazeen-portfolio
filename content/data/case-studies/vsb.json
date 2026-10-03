@@ -1,0 +1,219 @@
+{
+  "project": "vsb",
+  "review": "approved",
+  "lede": "Organizing social volleyball through messages and individual coordination felt unnecessarily difficult. VSB started as an attempt to make that process easier.",
+  "facts": [
+    {
+      "label": "Origin",
+      "value": "Everyday problem → Real product"
+    },
+    {
+      "label": "Role",
+      "value": "Designer and developer"
+    },
+    {
+      "label": "Status",
+      "value": "Active · live"
+    },
+    {
+      "label": "Stack",
+      "value": "React · TypeScript · Vite · Tailwind CSS · Supabase"
+    }
+  ],
+  "disclaimer": "",
+  "sections": [
+    {
+      "id": "problem",
+      "headline": "Coordination lived in messages.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "Sessions were organized through WhatsApp and individual messages: asking who could play, tracking the replies and keeping a list up to date by hand."
+            ]
+          }
+        },
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "Manual coordination before VSB",
+            "steps": [
+              "WhatsApp / messages",
+              "Ask players",
+              "Track responses",
+              "Organize session"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "idea",
+      "headline": "One place for the whole session.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "VSB is a Malaysian social-volleyball platform where organizers can create sessions and players can discover games, see who is playing, book places, and participate in a broader volleyball community."
+            ]
+          }
+        },
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "The VSB flow",
+            "steps": [
+              "Create session",
+              "Discover",
+              "See players",
+              "Book",
+              "Play",
+              "Community"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "product",
+      "headline": "The real product.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "pair",
+            "items": [
+              {
+                "image": "vsb.landingDesktop",
+                "caption": "The signed-out home page: find a game, see who is playing, become part of VSB."
+              },
+              {
+                "image": "vsb.landingMobile",
+                "caption": "The same page on a phone."
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "sequence",
+            "items": [
+              {
+                "image": "vsb.sessionCards",
+                "caption": "Session cards: date, venue, level, who is playing and how many places are left. A full session switches to a waitlist."
+              },
+              {
+                "image": "vsb.sessionDetail",
+                "caption": "Session details: the facts, the price and booking in one panel, then Who is Playing on the court."
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Booking, payment and My VSB need an account. The session and profile screens here come from the app's own development preview, which renders the real pages with sample data, so no member's details are shown."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "headline": "A player card built from real sessions.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "Every member gets a VSB player card with their position, level and games played, shown on their profile, on session rosters and on bookings. One photo can become a personal VSB player in the house style, in a pose the member chooses."
+            ]
+          }
+        },
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "grid",
+            "items": [
+              {
+                "image": "vsb.playerIdentity",
+                "caption": "How the home page introduces the player card."
+              },
+              {
+                "image": "vsb.myVsb",
+                "caption": "My VSB for a sample profile with no games yet."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "headline": "What I built.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Sessions and Who is Playing",
+                "detail": "Fixtures grouped by week, session details with the roster on a court view, and the waiting list in queue order."
+              },
+              {
+                "title": "Booking",
+                "detail": "Book yourself and one friend, a typed-in guest or a registered member. Private sessions sit behind a passkey."
+              },
+              {
+                "title": "Payment and holds",
+                "detail": "DuitNow QR and receipt upload. Unpaid places are held for a limited time; a scheduled job releases expired holds and fills places from the waiting list."
+              },
+              {
+                "title": "Organizer console",
+                "detail": "Sessions, bookings, payments and players in a separate console. Organizers only see their own sessions, enforced in the database with row-level security, not only in the interface."
+              },
+              {
+                "title": "Player identity",
+                "detail": "Player cards, My VSB, My Games and a community roster where members can hide themselves."
+              },
+              {
+                "title": "Two languages",
+                "detail": "English and Bahasa Melayu throughout."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "headline": "Active and live.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "VSB is active and live at vsb.madebyrazeen.com, used by a Malaysian social-volleyball club."
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

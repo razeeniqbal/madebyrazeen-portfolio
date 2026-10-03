@@ -15,11 +15,6 @@ const assetOptions = [
     Object.entries(items as Record<string, ImageAsset>).map(([key, a]) => ({ label: `${group} / ${key} (${a.alt.slice(0, 40)})`, value: `${group}.${key}` })),
   ),
 ];
-const poseOptions = [
-  { label: 'None', value: 'none' },
-  ...Object.keys(assets.miniRazeen).map((k) => ({ label: k, value: k })),
-];
-
 const imageSelect = (label: string) => fields.select({ label, options: assetOptions, defaultValue: 'none' });
 
 const textList = (label: string, itemLabel = 'Item') =>
@@ -34,6 +29,24 @@ const NODE_TYPES = ['SOURCE', 'PROCESS', 'DATABASE', 'API', 'MODEL', 'AGENT', 'U
 const contentBlocks = (label: string) =>
   fields.blocks(
     {
+      gallery: {
+        label: 'Product evidence (screenshots)',
+        schema: fields.object({
+          layout: fields.select({
+            label: 'Layout',
+            options: [
+              { label: 'Sequence (numbered, one per row)', value: 'sequence' },
+              { label: 'Pair (desktop + phone)', value: 'pair' },
+              { label: 'Grid (two per row)', value: 'grid' },
+            ],
+            defaultValue: 'sequence',
+          }),
+          items: fields.array(fields.object({ image: imageSelect('Image'), caption: fields.text({ label: 'Caption (what the screen shows)' }) }), {
+            label: 'Screens',
+            itemLabel: (p) => p.fields.caption.value || p.fields.image.value,
+          }),
+        }),
+      },
       text: {
         label: 'Text',
         schema: fields.object({
@@ -128,6 +141,7 @@ export default config({
       format: json,
       schema: {
         name: fields.text({ label: 'Name' }),
+        legalName: fields.text({ label: 'Full legal name (resume header)' }),
         wordmark: fields.text({ label: 'Wordmark' }),
         umbrella: fields.text({ label: 'Umbrella brand' }),
         statement: textList('Hero statement lines', 'Line'),
@@ -150,6 +164,8 @@ export default config({
         status: fields.text({ label: 'Status line' }),
         languages: textList('Languages', 'Language'),
         resume: fields.text({ label: 'Resume PDF path', defaultValue: '/Razeen_Iqbal_Resume.pdf' }),
+        resumeDomains: textList('Resume: professional domains', 'Domain'),
+        resumeProfile: paragraphList('Resume: profile'),
         domains: fields.object(
           { umbrella: fields.text({ label: 'Umbrella domain' }), portfolio: fields.text({ label: 'Portfolio domain' }) },
           { label: 'Domains' },
@@ -200,45 +216,69 @@ export default config({
       path: 'content/data/story',
       format: json,
       schema: {
-        intro: fields.object(
+        hero: fields.object({ title: textList('Title lines', 'Line'), lede: paragraphList('Supporting copy') }, { label: 'Hero' }),
+        stages: fields.array(fields.object({ label: fields.text({ label: 'Stage' }), detail: fields.text({ label: 'Detail' }) }), {
+          label: 'The path (Engineering → Data → AI → Build)',
+          itemLabel: (p) => p.fields.label.value,
+        }),
+        moments: fields.array(
+          fields.object({
+            id: fields.text({ label: 'Anchor id' }),
+            eyebrow: fields.text({ label: 'Label' }),
+            title: textList('Heading lines', 'Line'),
+            body: paragraphList('Paragraphs before the questions'),
+            questions: textList('Questions (shown with emphasis)', 'Question'),
+            after: paragraphList('Paragraphs after the questions'),
+            linkLabel: fields.text({ label: 'Link label (optional)' }),
+            linkHref: fields.text({ label: 'Link target, e.g. /experience#gnp-geotechnic' }),
+          }),
+          { label: 'Narrative moments', itemLabel: (p) => p.fields.eyebrow.value },
+        ),
+        whyBuild: fields.object(
           {
-            file: fields.text({ label: 'File label (e.g. story.log)' }),
-            path: fields.text({ label: 'Path label' }),
-            title: textList('Title lines', 'Line'),
-            lede: fields.text({ label: 'Lede', multiline: true }),
-            body: paragraphList('Intro paragraphs (1–2)'),
-            note: fields.text({ label: 'Note', multiline: true }),
+            eyebrow: fields.text({ label: 'Label' }),
+            title: textList('Heading lines', 'Line'),
+            origins: fields.array(
+              fields.object({
+                lead: fields.text({ label: 'Lead line' }),
+                text: fields.text({ label: 'What happened', multiline: true }),
+                projectSlug: fields.text({ label: 'Project slug (title, origin and status come from Projects)' }),
+              }),
+              { label: 'Project origins', itemLabel: (p) => p.fields.projectSlug.value },
+            ),
+            after: paragraphList('Closing paragraphs'),
           },
-          { label: 'Intro' },
+          { label: 'Why I build' },
+        ),
+        howIWork: fields.object(
+          { eyebrow: fields.text({ label: 'Label' }), title: textList('Heading lines', 'Line'), body: paragraphList('Paragraphs') },
+          { label: 'How I work' },
+        ),
+        principles: fields.array(fields.object({ title: fields.text({ label: 'Step' }), detail: fields.text({ label: 'Detail', multiline: true }) }), {
+          label: 'How I work: the loop',
+          itemLabel: (p) => p.fields.title.value,
+        }),
+        learning: fields.object(
+          { eyebrow: fields.text({ label: 'Label' }), title: textList('Heading lines', 'Line'), body: paragraphList('Paragraphs') },
+          { label: 'Learning and sharing (the loop itself is Profile › Loops › System)' },
+        ),
+        currently: fields.object(
+          {
+            working: textList('Working on', 'Item'),
+            building: textList('Building (project slugs)', 'Slug'),
+            exploring: textList('Exploring', 'Item'),
+            sharing: textList('Sharing', 'Item'),
+          },
+          { label: 'Currently' },
         ),
         beyond: fields.object(
-          { title: textList('Title lines', 'Line'), body: paragraphList('Paragraphs') },
-          { label: 'Beyond the screen' },
+          { eyebrow: fields.text({ label: 'Label' }), title: textList('Heading lines', 'Line'), body: paragraphList('Paragraphs') },
+          { label: 'Away from the screen' },
         ),
-        chapters: fields.array(
-          fields.object({
-            stage: fields.text({ label: 'Stage (e.g. Civil engineering)' }),
-            period: fields.text({ label: 'Period (include “now” for the current chapter)' }),
-            title: fields.text({ label: 'Title' }),
-            body: paragraphList('Paragraphs'),
-            photo: imageSelect('Photo'),
-            photoCaption: fields.text({ label: 'Photo caption' }),
-            pose: fields.select({ label: 'Mini Razeen (use sparingly)', options: poseOptions, defaultValue: 'none' }),
-            credentialTitle: fields.text({ label: 'Credential title (optional)' }),
-            credentialIssuer: fields.text({ label: 'Credential issuer' }),
-            credentialDate: fields.text({ label: 'Credential date' }),
-            credentialUrl: fields.text({ label: 'Credential verify URL' }),
-          }),
-          { label: 'Path chapters (About)', itemLabel: (p) => `${p.fields.stage.value} · ${p.fields.period.value}` },
-        ),
-        outro: fields.text({ label: 'Closing line' }),
+        closing: fields.object({ title: textList('Heading lines', 'Line') }, { label: 'Closing' }),
         path: fields.array(fields.object({ label: fields.text({ label: 'Stage' }), year: fields.text({ label: 'Year' }) }), {
           label: 'Path steps (Home teaser)',
           itemLabel: (p) => `${p.fields.year.value} · ${p.fields.label.value}`,
-        }),
-        principles: fields.array(fields.object({ title: fields.text({ label: 'Step' }), detail: fields.text({ label: 'Detail', multiline: true }) }), {
-          label: 'How I work',
-          itemLabel: (p) => p.fields.title.value,
         }),
       },
     }),
@@ -338,6 +378,7 @@ export default config({
               ],
               defaultValue: 'standard',
             }),
+            resume: fields.checkbox({ label: 'List under Selected projects on the resume' }),
             order: fields.integer({ label: 'Order within tier (lower first)', defaultValue: 1 }),
             summary: fields.text({ label: 'Summary', multiline: true }),
             role: fields.text({ label: 'Role' }),
@@ -350,6 +391,8 @@ export default config({
             links: fields.object({ live: fields.text({ label: 'Live URL' }), source: fields.text({ label: 'Source URL' }) }, { label: 'Links' }),
             confidential: fields.checkbox({ label: 'Private repo / confidential' }),
             cover: imageSelect('Cover image'),
+            productImage: imageSelect('Product evidence (real capture) for /projects'),
+            productImageMobile: imageSelect('Phone capture beside the product evidence (optional)'),
             metrics: fields.array(
               fields.object({
                 label: fields.text({ label: 'Label' }),
@@ -397,9 +440,13 @@ export default config({
               options: [{ label: 'Primary career', value: 'primary' }, { label: 'Parallel (alongside the primary role)', value: 'parallel' }],
               defaultValue: 'primary',
             }),
+            stage: fields.text({ label: 'Career-map stage (Site, Model, Data, Pipelines, AI systems; empty for parallel roles)' }),
+            discipline: fields.text({ label: 'Discipline at that stage (e.g. BIM, AI data engineering)' }),
             location: fields.text({ label: 'Location' }),
             summary: fields.text({ label: 'Summary', multiline: true }),
-            responsibilities: textList('Responsibilities', 'Responsibility'),
+            headline: fields.text({ label: 'Experience page: editorial heading (optional)' }),
+            narrative: paragraphList('Experience page: the story of the role'),
+            responsibilities: textList('Resume: factual responsibilities', 'Responsibility'),
             technologies: textList('Technologies', 'Technology'),
             careerSignificance: fields.text({ label: 'Career significance', multiline: true }),
             progression: textList('Conceptual progression (step by step)', 'Step'),
@@ -407,15 +454,32 @@ export default config({
               fields.object({
                 id: fields.text({ label: 'ID' }),
                 name: fields.text({ label: 'Name' }),
+                tier: fields.select({
+                  label: 'Weight on the Experience page',
+                  options: [
+                    { label: 'Featured system', value: 'featured' },
+                    { label: 'Supporting work', value: 'supporting' },
+                    { label: 'Small build', value: 'small' },
+                  ],
+                  defaultValue: 'supporting',
+                }),
+                headline: fields.text({ label: 'Editorial heading (optional)' }),
                 context: fields.text({ label: 'Context (e.g. client or product)' }),
                 type: fields.text({ label: 'Type' }),
                 status: fields.select({ label: 'Status', options: [{ label: 'Not set', value: '' }, { label: 'Active', value: 'active' }, { label: 'Under construction', value: 'under-construction' }, { label: 'Proof of concept', value: 'proof-of-concept' }, { label: 'Completed', value: 'completed' }, { label: 'Archived', value: 'archived' }], defaultValue: '' }),
                 scale: fields.text({ label: 'Scale (e.g. Approximately 700,000 records)' }),
-                description: fields.text({ label: 'Description', multiline: true }),
+                description: fields.text({ label: 'Description (blank line between paragraphs; first sentence is the resume line)', multiline: true }),
+                facets: textList('Facets (e.g. quality dimensions)', 'Facet'),
                 significance: fields.text({ label: 'Significance (optional)', multiline: true }),
                 technologies: textList('Technologies', 'Technology'),
                 aiUsed: fields.checkbox({ label: 'AI used' }),
-                flow: textList('Flow (step by step)', 'Step'),
+                flow: fields.array(
+                  fields.object({
+                    label: fields.text({ label: 'Step' }),
+                    type: fields.select({ label: 'Node type', options: ['SOURCE', 'PROCESS', 'DATABASE', 'API', 'MODEL', 'AGENT', 'USER', 'OUTPUT', 'MONITOR'].map((v) => ({ label: v, value: v })), defaultValue: 'PROCESS' }),
+                  }),
+                  { label: 'Flow (step by step)', itemLabel: (p) => `${p.fields.type.value} · ${p.fields.label.value}` },
+                ),
                 recognition: fields.text({ label: 'Recognition' }),
                 projectSlug: fields.text({ label: 'Project slug (links to /projects/<slug>)' }),
                 visibility: fields.select({ label: 'Visibility', options: [{ label: 'Public', value: 'public' }, { label: 'Private (never shown)', value: 'private' }], defaultValue: 'public' }),
@@ -468,6 +532,7 @@ export default config({
             slug: fields.text({ label: 'Slug' }),
             name: fields.text({ label: 'Name' }),
             type: fields.select({ label: 'Type', options: [{ label: 'Sport', value: 'sport' }, { label: 'Interest', value: 'interest' }], defaultValue: 'interest' }),
+            body: paragraphList('Text on the Life page'),
             href: fields.text({ label: 'Links to (e.g. /running, /projects/vsb)' }),
             relatedProject: fields.text({ label: 'Related project slug' }),
             dataSource: fields.select({ label: 'Data source', options: [{ label: 'None', value: '' }, { label: 'Running pipeline (Garmin / Strava)', value: 'running' }], defaultValue: '' }),
@@ -545,7 +610,7 @@ export default config({
           fields.object({
             id: fields.select({
               label: 'Section',
-              options: ['overview', 'problem', 'idea', 'rules', 'architecture', 'data', 'build', 'balance', 'interface', 'outcome', 'learned'].map((v) => ({
+              options: ['overview', 'problem', 'idea', 'rules', 'loop', 'architecture', 'pipeline', 'data', 'build', 'balance', 'product', 'workspace', 'identity', 'verify', 'run', 'export', 'gameplay', 'evidence', 'interface', 'outcome', 'state', 'learned'].map((v) => ({
                 label: v,
                 value: v,
               })),

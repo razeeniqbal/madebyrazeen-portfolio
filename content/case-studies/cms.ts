@@ -58,6 +58,12 @@ export function fromCmsBlock(b: CmsBlock): Block | null {
       const image = resolveAsset(v.image);
       return image ? { kind: 'image', image, caption: v.caption ?? '' } : null;
     }
+    case 'gallery': {
+      const items = (v.items ?? [])
+        .map((i: { image: string; caption: string }) => ({ image: resolveAsset(i.image), caption: i.caption ?? '' }))
+        .filter((i: { image?: unknown }) => i.image);
+      return items.length ? { kind: 'gallery', layout: v.layout ?? 'sequence', items } : null;
+    }
     default:
       return null;
   }

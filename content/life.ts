@@ -12,6 +12,8 @@ export interface LifeInterest {
   slug: string;
   name: string;
   type: InterestType;
+  /** A few short paragraphs for the Life page. */
+  body: string[];
   /** Where the interest leads on the site (/running, /projects/vsb …). */
   href: string;
   relatedProject?: string;

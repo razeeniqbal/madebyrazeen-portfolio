@@ -43,11 +43,28 @@ const engagements: TrainerEngagement[] = (data.engagements as Raw[]).map((e) => 
   visibility: e.visibility as TrainerEngagement['visibility'],
 }));
 
-/** Public engagements, newest dated first; undated ongoing work (internal training) leads. */
+/** Public engagements, newest first. Undated ongoing work (AEM internal training) comes last. */
 export function getTrainerEngagements(): TrainerEngagement[] {
-  return engagements
-    .filter((e) => e.visibility === 'public')
-    .sort((a, b) => (a.year === undefined ? -1 : b.year === undefined ? 1 : (b.dateStart ?? String(b.year)).localeCompare(a.dateStart ?? String(a.year))));
+  const key = (e: TrainerEngagement) => e.dateStart ?? (e.year ? String(e.year) : '');
+  return engagements.filter((e) => e.visibility === 'public').sort((a, b) => key(b).localeCompare(key(a)));
+}
+
+const day = (iso: string, parts: Intl.DateTimeFormatOptions) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { ...parts, timeZone: 'UTC' });
+
+/**
+ * "5 to 6 Aug 2026", "12 Mar 2025", "2025", or undefined when nothing is known.
+ * Undefined means the date is omitted, never replaced with a placeholder.
+ */
+export function engagementWhen(e: TrainerEngagement): string | undefined {
+  if (e.dateStart) {
+    const full = day(e.dateStart, { day: 'numeric', month: 'short', year: 'numeric' });
+    if (!e.dateEnd || e.dateEnd === e.dateStart) return full;
+    const sameMonth = e.dateStart.slice(0, 7) === e.dateEnd.slice(0, 7);
+    const start = sameMonth ? day(e.dateStart, { day: 'numeric' }) : day(e.dateStart, { day: 'numeric', month: 'short' });
+    return `${start} to ${day(e.dateEnd, { day: 'numeric', month: 'short', year: 'numeric' })}`;
+  }
+  return e.year ? String(e.year) : undefined;
 }
 
 export const getFeaturedTrainerEngagements = (): TrainerEngagement[] => getTrainerEngagements().filter((e) => e.featured);

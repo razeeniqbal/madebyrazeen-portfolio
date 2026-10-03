@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import { Wordmark } from '@/components/v2/identity/Wordmark';
 import { Trajectory } from '@/components/v2/system/Trajectory';
-import { primaryNav } from '@/lib/site';
+import { primaryNav, utilityNav } from '@/lib/site';
 import { profile, contact } from '@/content/profile';
 
-const socials = [
+// Verified channels only (the same ones the Contact page lists).
+const elsewhere = [
   { label: 'Email', href: `mailto:${contact.email}` },
   { label: 'LinkedIn', href: contact.linkedin },
   { label: 'GitHub', href: contact.github },
 ];
 
+/** A compact index of the site, not a second copy of it: sections, utilities, channels. */
 export function SiteFooter() {
   return (
     <footer data-surface="dark" className="border-t border-line pb-10 pt-16">
@@ -18,13 +20,7 @@ export function SiteFooter() {
           <Wordmark withUmbrella className="text-3xl" />
         </div>
 
-        <ul className="label col-span-2 space-y-0.5 text-muted lg:col-span-2" aria-label="Operating loop">
-          {profile.loops.system.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-
-        <nav aria-label="Footer" className="col-span-2 lg:col-span-2">
+        <nav aria-label="Footer sections" className="col-span-2 lg:col-span-2 lg:col-start-7">
           <ul className="label space-y-0.5">
             {primaryNav.map((item) => (
               <li key={item.href}>
@@ -36,31 +32,30 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <ul className="label col-span-2 space-y-0.5 lg:col-span-2">
-          {socials.map((s) => (
+        <nav aria-label="Footer utilities" className="col-span-2 lg:col-span-2">
+          <ul className="label space-y-0.5">
+            {utilityNav.map((u) => (
+              <li key={u.href}>
+                <Link href={u.href} className="inline-block py-1.5 hover:text-lime">
+                  {u.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <ul aria-label="Elsewhere" className="label col-span-2 space-y-0.5 lg:col-span-2">
+          {elsewhere.map((s) => (
             <li key={s.label}>
               <a
                 href={s.href}
                 className="inline-block py-1.5 hover:text-lime"
                 {...(s.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
               >
-                {s.label} ↗
+                {s.label} <span aria-hidden="true">↗</span>
               </a>
             </li>
           ))}
-        </ul>
-
-        <ul className="label col-span-2 space-y-0.5 lg:col-span-2">
-          <li>
-            <Link href="/resume" className="inline-block py-1.5 hover:text-lime">
-              Resume
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className="inline-block py-1.5 hover:text-lime">
-              Contact
-            </Link>
-          </li>
         </ul>
 
         <div className="col-span-full flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">

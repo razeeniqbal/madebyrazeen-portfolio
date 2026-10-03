@@ -11,7 +11,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
   return (
     <EmptyState
       code="Error · Something broke"
-      title="It's not you. It's probably me."
+      title="It is not you. It is probably me."
       body="This part of the site hit an error. Trying again usually fixes it; if not, the rest of the site still works."
       pose="thinking"
       actions={[{ href: '/', label: 'Back home' }]}

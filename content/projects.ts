@@ -7,8 +7,9 @@
  *   featured  – large tile on the homepage + top of /projects
  *   standard  – listed on /projects
  *   archive   – listed on /projects under "Earlier work"
+ * `productImage` / `productImageMobile` are real product captures for /projects (classified in lib/assets.ts).
  * `kind` is the portfolio hierarchy (primary-build, professional-system, experiment, research, small-build);
- * `tier` + `order` decide presentation. `origin` is the "why it exists" line (e.g. "Personal interest → Real product").
+ * `tier` + `order` decide presentation. `origin` is the "why it exists" line (e.g. "Everyday problem → Real product").
  * `visibility: 'private'` keeps a record out of every public page.
  * `order` sorts within a tier (lower first). `draft: true` hides it everywhere
  * until the content is confirmed. A long-form case study lives in
@@ -42,6 +43,8 @@ export interface Project {
   category: ProjectCategory;
   status: ProjectStatus;
   tier: ProjectTier;
+  /** Listed under "Selected projects" on the resume. */
+  resume: boolean;
   order: number;
   /** One line, used on cards and in metadata. */
   summary: string;
@@ -57,6 +60,10 @@ export interface Project {
   /** Private repo or client work: no source link is shown. */
   confidential?: boolean;
   cover?: ImageAsset;
+  /** The project's main product evidence (a real capture), used on /projects. Home keeps `cover`. */
+  productImage?: ImageAsset;
+  /** A phone capture shown beside the main evidence, when the product has one. */
+  productImageMobile?: ImageAsset;
   metrics?: ProjectMetric[];
   caseStudy?: boolean;
   draft?: boolean;
@@ -85,6 +92,7 @@ export const projects: Project[] = data.items.map((p) => ({
   ...p,
   year: p.year ?? 0,
   order: p.order ?? 0,
+  resume: Boolean(p.resume),
   category: p.category as ProjectCategory,
   status: p.status as ProjectStatus,
   tier: p.tier as ProjectTier,
@@ -101,6 +109,8 @@ export const projects: Project[] = data.items.map((p) => ({
   visibility: (p.visibility || 'public') as 'public' | 'private',
   links: { live: p.links.live || undefined, source: p.links.source || undefined },
   cover: resolveAsset(p.cover),
+  productImage: resolveAsset(p.productImage),
+  productImageMobile: resolveAsset(p.productImageMobile),
   metrics: p.metrics.length ? p.metrics.map((m) => ({ ...m, illustrative: m.illustrative || undefined })) : undefined,
 }));
 
@@ -127,9 +137,44 @@ export function getHomeProjects(count = 3): Project[] {
 /** Projects of one kind (e.g. the primary builds: VSB, FORMA, Sepang Vision Lab, BALANG), in presentation order. */
 export const getProjectsByKind = (...kinds: ProjectKind[]): Project[] => getProjects().filter((p) => kinds.includes(p.kind));
 
+/** The four primary builds in their fixed order (VSB, FORMA, Sepang Vision Lab, BALANG), set by `order`. */
+export const getPrimaryBuilds = (): Project[] => getProjectsByKind('primary-build').sort((a, b) => a.order - b.order);
+
+export interface ProjectGroup {
+  id: string;
+  label: string;
+  projects: Project[];
+}
+
+/**
+ * Everything below the primary builds, grouped by kind. Older experiments (tier `archive`) are their own
+ * group so the main list stays current. Empty groups are dropped.
+ */
+export function getSecondaryProjectGroups(): ProjectGroup[] {
+  const rest = getProjects().filter((p) => p.kind !== 'primary-build');
+  const groups: ProjectGroup[] = [
+    { id: 'professional', label: 'Professional systems', projects: rest.filter((p) => p.kind === 'professional-system') },
+    { id: 'research', label: 'Research', projects: rest.filter((p) => p.kind === 'research') },
+    {
+      id: 'experiments',
+      label: 'Experiments and small builds',
+      projects: rest.filter((p) => (p.kind === 'experiment' || p.kind === 'small-build') && p.tier !== 'archive'),
+    },
+    {
+      id: 'earlier',
+      label: 'Earlier work',
+      projects: rest.filter((p) => (p.kind === 'experiment' || p.kind === 'small-build') && p.tier === 'archive'),
+    },
+  ];
+  return groups.filter((g) => g.projects.length > 0);
+}
+
 /** Builds still being worked on (active or under construction). */
 export const getActiveBuilds = (): Project[] =>
   getProjectsByKind('primary-build').filter((p) => p.status === 'active' || p.status === 'under-construction');
+
+/** Projects flagged for the resume, in primary-build order. */
+export const getResumeProjects = (): Project[] => getProjects().filter((p) => p.resume).sort((a, b) => a.order - b.order);
 
 export function getProject(slug: string): Project | undefined {
   return getProjects().find((p) => p.slug === slug);

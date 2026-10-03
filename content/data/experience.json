@@ -13,7 +13,18 @@
       "relationship": "primary",
       "location": "Kuala Lumpur, Malaysia",
       "summary": "Data engineering, data migration, automation, data quality, AI systems and agentic workflows.",
-      "responsibilities": [],
+      "headline": "",
+      "narrative": [
+        "My current work brings Data Engineering and AI into the same environment.",
+        "I work across data migration, automation, data quality, and AI-assisted workflows. Some problems require Python and careful data handling. Others involve designing agentic workflows that turn existing information into recommendations that can be reviewed and used inside a larger application.",
+        "The objective is not to add AI to every problem. It is to understand what the system needs and use the appropriate approach."
+      ],
+      "responsibilities": [
+        "Data migration workflows in Python, including API-based migration into NoSQL targets",
+        "Excel and VBA automation for recurring data preparation",
+        "Data-quality assessment and remediation workflows",
+        "Agentic AI workflows with n8n and Ollama Cloud, shaped into structured application output"
+      ],
       "technologies": [
         "Python",
         "MSSQL",
@@ -28,23 +39,38 @@
         {
           "id": "udps-migration",
           "name": "UDPs Migration",
+          "tier": "featured",
+          "headline": "",
           "context": "PETRONAS",
           "type": "Data migration",
           "status": "",
-          "scale": "Approximately 700,000 records",
-          "description": "Developed a Python-based migration workflow to move approximately 700,000 records from an MSSQL source into a NoSQL target through an existing API. A significant part of the work involved understanding the API behaviour, interpreting responses, and building error handling around migration failures.",
+          "scale": "~700K records",
+          "description": "Developed a Python-based migration workflow to move approximately 700,000 records from an MSSQL source into a NoSQL target through an existing API.\n\nA significant part of the work involved understanding how the API behaved, interpreting its responses, and building error handling around cases that could fail during migration.",
+          "facets": [],
           "significance": "",
           "technologies": [
             "Python",
             "MSSQL",
-            "Existing API"
+            "API"
           ],
           "aiUsed": false,
           "flow": [
-            "MSSQL",
-            "Python",
-            "Existing API",
-            "NoSQL"
+            {
+              "label": "MSSQL",
+              "type": "DATABASE"
+            },
+            {
+              "label": "Python",
+              "type": "PROCESS"
+            },
+            {
+              "label": "Existing API",
+              "type": "API"
+            },
+            {
+              "label": "NoSQL",
+              "type": "DATABASE"
+            }
           ],
           "recognition": "",
           "projectSlug": "",
@@ -53,11 +79,14 @@
         {
           "id": "wellsight-toolstring-recommendation",
           "name": "Wellsight Toolstring Recommendation",
-          "context": "AEM product / proof of concept",
+          "tier": "featured",
+          "headline": "",
+          "context": "AEM product",
           "type": "Agentic AI",
           "status": "proof-of-concept",
-          "scale": "Approximately 200,000 records",
-          "description": "Built a proof of concept for an agentic workflow that recommends suitable toolstrings based on available data and the activity being performed. The workflow processes context, produces a recommendation, and explains the reasoning behind it. Part of the challenge involved shaping the final response into a structured output that could be consumed reliably by the frontend application.",
+          "scale": "~200K records",
+          "description": "Built a proof of concept for an agentic workflow that recommends suitable toolstrings based on available data and the activity being performed.\n\nThe workflow processes context, produces a recommendation, and explains the reasoning behind it.\n\nPart of the challenge was not only generating an answer, but shaping the final output so that it could be consumed reliably by the frontend application.",
+          "facets": [],
           "significance": "",
           "technologies": [
             "n8n",
@@ -66,12 +95,26 @@
           ],
           "aiUsed": true,
           "flow": [
-            "Database / activity context",
-            "n8n agentic workflow",
-            "Ollama Cloud",
-            "Toolstring recommendation",
-            "Reasoning",
-            "Structured application output"
+            {
+              "label": "Database / activity context",
+              "type": "SOURCE"
+            },
+            {
+              "label": "n8n agentic workflow",
+              "type": "AGENT"
+            },
+            {
+              "label": "Ollama Cloud",
+              "type": "MODEL"
+            },
+            {
+              "label": "Recommendation + reasoning",
+              "type": "OUTPUT"
+            },
+            {
+              "label": "Structured application output",
+              "type": "OUTPUT"
+            }
           ],
           "recognition": "",
           "projectSlug": "",
@@ -80,44 +123,77 @@
         {
           "id": "qualityplus",
           "name": "QualityPlus",
+          "tier": "featured",
+          "headline": "",
           "context": "AEM Energy Solutions",
           "type": "Data quality + agentic AI",
           "status": "proof-of-concept",
           "scale": "",
-          "description": "A data-quality proof of concept. A structured quality assessment checks validity, uniqueness, completeness and comparison against master data. AI assistance then recommends what to investigate, summarizes findings, explains results and suggests possible remediation approaches. People review the findings, evaluate the recommendations and approve the appropriate action.",
+          "description": "Built a proof of concept that combines structured data-quality assessment with an agentic AI workflow.\n\nQualityPlus evaluates areas such as validity, uniqueness, completeness, and comparison against master data. The AI layer supports the workflow by recommending what to investigate, summarizing findings, and suggesting possible approaches to remediation.\n\nThe user remains part of the process by reviewing findings, evaluating recommendations, approving the appropriate action, and working with the resulting output.",
+          "facets": [
+            "Validity",
+            "Uniqueness",
+            "Completeness",
+            "Master data"
+          ],
           "significance": "",
           "technologies": [
             "n8n",
             "Ollama Cloud",
-            "Agentic AI",
-            "Data-quality workflows"
+            "Data Quality",
+            "Agentic AI"
           ],
           "aiUsed": true,
           "flow": [
-            "Data",
-            "Quality assessment",
-            "Findings",
-            "AI assistance",
-            "Human review",
-            "Approved action",
-            "Result"
+            {
+              "label": "Data",
+              "type": "SOURCE"
+            },
+            {
+              "label": "Quality assessment",
+              "type": "PROCESS"
+            },
+            {
+              "label": "Findings",
+              "type": "OUTPUT"
+            },
+            {
+              "label": "AI assistance",
+              "type": "AGENT"
+            },
+            {
+              "label": "Human review",
+              "type": "USER"
+            },
+            {
+              "label": "Approved action",
+              "type": "USER"
+            },
+            {
+              "label": "Result",
+              "type": "OUTPUT"
+            }
           ],
-          "recognition": "Demonstrated at SPE AI Summit",
+          "recognition": "Demonstrated at the SPE AI Summit",
           "projectSlug": "qualityplus",
           "visibility": "public"
         },
         {
           "id": "petronas-data-migration-excel-automation",
           "name": "PETRONAS Data Migration & Excel Automation",
+          "tier": "supporting",
+          "headline": "",
           "context": "PETRONAS",
           "type": "Data migration + automation",
           "status": "",
           "scale": "",
-          "description": "Supported PETRONAS data migration workflows through structured Excel templates and VBA automation. The work focused on reducing repetitive manual preparation by automating parts of the Excel-based workflow.",
+          "description": "Supported PETRONAS data migration workflows through structured Excel templates and VBA automation.\n\nThe work focused on reducing repetitive manual preparation by automating parts of the Excel-based workflow and making recurring data tasks easier to execute consistently.",
+          "facets": [],
           "significance": "",
           "technologies": [
             "Excel",
-            "VBA"
+            "VBA",
+            "Data Migration"
           ],
           "aiUsed": false,
           "flow": [],
@@ -128,12 +204,15 @@
         {
           "id": "aem-movie-night",
           "name": "AEM Movie Night",
+          "tier": "small",
+          "headline": "Not every problem needs to be enterprise-sized.",
           "context": "AEM internal",
           "type": "Internal build",
           "status": "",
           "scale": "",
-          "description": "A small booking system built for an office movie-night activity.",
-          "significance": "Turning a small manual coordination problem into a usable system.",
+          "description": "I also built a small booking system for an office movie night.\n\nSometimes building something useful is reason enough to build it.",
+          "facets": [],
+          "significance": "",
           "technologies": [],
           "aiUsed": false,
           "flow": [],
@@ -143,7 +222,9 @@
         }
       ],
       "confidential": false,
-      "visibility": "public"
+      "visibility": "public",
+      "stage": "AI systems",
+      "discipline": "AI data engineering"
     },
     {
       "id": "intellilabs-ai",
@@ -158,19 +239,25 @@
       "relationship": "parallel",
       "location": "",
       "summary": "End-to-end development of AI-enabled web applications.",
+      "headline": "",
+      "narrative": [
+        "Worked across end-to-end development of AI-enabled web applications, covering frontend and backend implementation, AI feature integration, application delivery, and deployment.",
+        "The role expanded my experience beyond Data Engineering into building complete software products around AI capabilities.",
+        "Selected implementation and client details remain confidential."
+      ],
       "responsibilities": [
-        "Frontend implementation",
-        "Backend implementation",
+        "Frontend and backend implementation of AI-enabled web applications",
         "AI feature integration",
-        "Application delivery",
-        "Deployment"
+        "Application delivery and deployment"
       ],
       "technologies": [],
       "careerSignificance": "Expanded the ability to turn data and AI ideas into complete software products.",
       "progression": [],
       "selectedWork": [],
       "confidential": true,
-      "visibility": "public"
+      "visibility": "public",
+      "stage": "",
+      "discipline": "Full-stack AI applications"
     },
     {
       "id": "eismartwork",
@@ -185,12 +272,16 @@
       "relationship": "primary",
       "location": "Kuala Lumpur, Malaysia",
       "summary": "",
+      "headline": "This is where data became the job.",
+      "narrative": [
+        "This was the point where data became my full-time profession.",
+        "I worked with Power BI and MSSQL across reporting, dashboard maintenance, and data transformation. Working below the visualization layer gradually became as interesting as the dashboard itself.",
+        "That interest in how data is prepared, transformed, and delivered became the foundation for moving further into Data Engineering."
+      ],
       "responsibilities": [
-        "Dashboard development and maintenance",
-        "Data transformation",
-        "Data preparation",
-        "Reporting",
-        "Work below the visualization layer"
+        "Power BI dashboard development and maintenance",
+        "Data transformation and preparation with MSSQL",
+        "Reporting on datasets containing millions of records"
       ],
       "technologies": [
         "Power BI",
@@ -208,11 +299,14 @@
         {
           "id": "pcms",
           "name": "PCMS",
+          "tier": "supporting",
+          "headline": "",
           "context": "PETRONAS",
           "type": "Dashboards",
           "status": "",
           "scale": "Millions of records",
-          "description": "PETRONAS resource-monitoring dashboards built with Power BI and MSSQL on datasets containing millions of records.",
+          "description": "Worked on Power BI dashboards used to monitor PETRONAS resources, with MSSQL supporting the underlying data.\n\nThe work included dashboard development, data preparation, transformation, and handling reporting datasets containing millions of records.",
+          "facets": [],
           "significance": "",
           "technologies": [
             "Power BI",
@@ -227,11 +321,14 @@
         {
           "id": "irms",
           "name": "IRMS",
+          "tier": "supporting",
+          "headline": "",
           "context": "PETRONAS",
           "type": "Systems operations",
           "status": "",
           "scale": "",
-          "description": "Worked closer to the operational and system side of an existing PETRONAS resource-management environment: command-line activities in a virtual-machine and network-related environment, and system updates with attention to minimizing disruption.",
+          "description": "Worked closer to the system and operational side of an existing PETRONAS resource-management environment.\n\nThe work included command-line activities, virtual-machine and network-related environments, and supporting system updates while minimizing disruption to the running system.",
+          "facets": [],
           "significance": "",
           "technologies": [],
           "aiUsed": false,
@@ -242,7 +339,9 @@
         }
       ],
       "confidential": false,
-      "visibility": "public"
+      "visibility": "public",
+      "stage": "Pipelines",
+      "discipline": "Data analytics and engineering"
     },
     {
       "id": "gnp-geotechnic",
@@ -257,17 +356,19 @@
       "relationship": "primary",
       "location": "Kuala Lumpur, Malaysia",
       "summary": "",
+      "headline": "Where engineering became data.",
+      "narrative": [
+        "My work still centred on geotechnical calculations, technical reporting, and field activities, but I increasingly found myself working with large time-series datasets produced by engineering equipment.",
+        "Some datasets contained millions of readings.",
+        "I used visualization to understand the data, investigated abnormal readings, explored historical patterns, and sometimes worked with future-reading prediction.",
+        "Repetitive engineering work also gave me a reason to start automating. I used VBA to simplify Excel calculations and Python to automate parts of engineering and data workflows.",
+        "The more I worked this way, the clearer my next direction became."
+      ],
       "responsibilities": [
-        "Geotechnical engineering calculations",
-        "Technical reporting",
-        "Field and site activities",
-        "Large time-series equipment datasets",
-        "Data visualization",
-        "Abnormal-reading investigation",
-        "Historical pattern analysis",
-        "Future-reading prediction where applicable",
-        "Python automation",
-        "Excel and VBA automation"
+        "Geotechnical engineering calculations, technical reporting and field activities",
+        "Analysis of large time-series datasets from engineering equipment, including abnormal readings and historical patterns",
+        "Data visualization and future-reading prediction where applicable",
+        "Automation of engineering and data workflows with Python, Excel and VBA"
       ],
       "technologies": [
         "Python",
@@ -286,7 +387,9 @@
       ],
       "selectedWork": [],
       "confidential": false,
-      "visibility": "public"
+      "visibility": "public",
+      "stage": "Data",
+      "discipline": "Geotechnical engineering and data"
     },
     {
       "id": "3dtech-solutions",
@@ -301,6 +404,11 @@
       "relationship": "primary",
       "location": "",
       "summary": "",
+      "headline": "",
+      "narrative": [
+        "Converted 2D construction drawings into coordinated 3D BIM models, reviewed models for conflicts between building elements, and conducted site inspections to compare the digital model with actual construction conditions.",
+        "BIM introduced another way of thinking about engineering: representing a physical system digitally before it exists on site."
+      ],
       "responsibilities": [
         "Converted 2D construction drawings into coordinated 3D BIM models.",
         "Reviewed and coordinated models to identify conflicts between building elements.",
@@ -317,7 +425,9 @@
       ],
       "selectedWork": [],
       "confidential": false,
-      "visibility": "public"
+      "visibility": "public",
+      "stage": "Model",
+      "discipline": "BIM"
     },
     {
       "id": "zafa-bina-ptt-construction",
@@ -332,20 +442,25 @@
       "relationship": "primary",
       "location": "",
       "summary": "",
+      "headline": "",
+      "narrative": [
+        "Started my career on construction sites, coordinating workers, reviewing drawings, planning site activities, checking measurements, and monitoring work against the intended design.",
+        "It taught me to work with constraints that were physical, immediate, and difficult to undo once built."
+      ],
       "responsibilities": [
-        "Site coordination",
-        "Worker coordination",
-        "Construction drawing review",
-        "Site planning",
+        "Site and worker coordination",
+        "Construction drawing review and site planning",
         "Measurement and calculation checking",
-        "Construction monitoring"
+        "Construction monitoring against the intended design"
       ],
       "technologies": [],
       "careerSignificance": "The beginning of the professional story: working with physical systems, drawings, constraints, coordination and execution.",
       "progression": [],
       "selectedWork": [],
       "confidential": false,
-      "visibility": "public"
+      "visibility": "public",
+      "stage": "Site",
+      "discipline": "Project engineering"
     }
   ]
 }

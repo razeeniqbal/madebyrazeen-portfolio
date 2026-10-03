@@ -18,6 +18,17 @@ export type SectionId =
   | 'balance'
   | 'interface'
   | 'outcome'
+  | 'product'
+  | 'identity'
+  | 'loop'
+  | 'pipeline'
+  | 'workspace'
+  | 'verify'
+  | 'run'
+  | 'export'
+  | 'gameplay'
+  | 'evidence'
+  | 'state'
   | 'learned';
 
 export const sectionTitles: Record<SectionId, string> = {
@@ -31,6 +42,17 @@ export const sectionTitles: Record<SectionId, string> = {
   balance: 'Balance',
   interface: 'Interface',
   outcome: 'Outcome',
+  product: 'The product',
+  identity: 'Player identity',
+  loop: 'Core loop',
+  pipeline: 'From messy input to pipeline',
+  workspace: 'The workspace',
+  verify: 'Verify before run',
+  run: 'Run and review',
+  export: 'Export',
+  gameplay: 'Gameplay',
+  evidence: 'Current build',
+  state: 'Current state',
   learned: 'What I learned',
 };
 
@@ -41,6 +63,11 @@ export type Block =
   | { kind: 'metrics'; items: { label: string; value: string; note?: string; illustrative?: boolean }[] }
   | { kind: 'table'; caption: string; columns: string[]; rows: string[][]; note?: string; highlightRow?: number }
   | { kind: 'image'; image: ImageAsset; caption: string }
+  /**
+   * Curated product evidence. `pair` sets a desktop capture beside a phone capture; `sequence` shows
+   * numbered screens one after another; `grid` shows two per row. Every image opens at full size.
+   */
+  | { kind: 'gallery'; layout: 'pair' | 'sequence' | 'grid'; items: { image: ImageAsset; caption: string }[] }
   | { kind: 'steps'; label: string; steps: string[] };
 
 export interface CaseSection {

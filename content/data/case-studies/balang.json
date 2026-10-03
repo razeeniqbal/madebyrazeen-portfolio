@@ -4,6 +4,14 @@
   "lede": "A Malaysian probability party game. Everyone can see what is in the jar; nobody knows the order it comes out in. Read the odds, bet on secret predictions, and play friends in rooms that need no server.",
   "facts": [
     {
+      "label": "Origin",
+      "value": "Social experience → Game"
+    },
+    {
+      "label": "Inspired by",
+      "value": "Bag of Chips (board game)"
+    },
+    {
       "label": "Type",
       "value": "Multiplayer party game · web / PWA"
     },
@@ -31,6 +39,15 @@
           "discriminant": "text",
           "value": {
             "lead": true,
+            "body": [
+              "A simple social game enjoyed with friends became the starting point for designing a Malaysian digital probability and prediction game."
+            ]
+          }
+        },
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
             "body": [
               "Balang is built around one shared jar of familiar Malaysian kuih. Players know exactly what goes in. As tokens are drawn, they keep reassessing the odds, drop predictions that are becoming unlikely, lock their final choices, and decide whether to risk KAW-KAW."
             ]
@@ -94,6 +111,66 @@
               {
                 "title": "Win",
                 "detail": "Positive cards that come true score their value; a negative card that comes true loses it. Three rounds; the highest total is JUARA."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "gameplay",
+      "headline": "A real round, start to finish.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Captured from a real game on a local build, played against the built-in computer players."
+            ]
+          }
+        },
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "sequence",
+            "items": [
+              {
+                "image": "balangPlay.observe",
+                "caption": "Observe: everyone sees what is in the jar; each player gets six secret prediction cards."
+              },
+              {
+                "image": "balangPlay.table",
+                "caption": "The table: players take turns to draw, and the jar count updates after every token."
+              },
+              {
+                "image": "balangPlay.discard",
+                "caption": "Reassess and discard: predictions that are becoming unlikely are dropped."
+              },
+              {
+                "image": "balangPlay.kawKaw",
+                "caption": "KAW-KAW: double one positive card's value, at the risk of losing it, or play safe."
+              },
+              {
+                "image": "balangPlay.roundResult",
+                "caption": "Result: each placed prediction is checked against the fourteen tokens drawn."
+              }
+            ]
+          }
+        },
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "pair",
+            "items": [
+              {
+                "image": "balangPlay.lock",
+                "caption": "After twelve draws: one of the last three cards goes on the negative side."
+              },
+              {
+                "image": "balangPlay.tableMobile",
+                "caption": "The same table on a phone."
               }
             ]
           }

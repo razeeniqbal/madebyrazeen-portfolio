@@ -4,6 +4,9 @@
       "slug": "running",
       "name": "Running",
       "type": "sport",
+      "body": [
+        "My running page is built from real Garmin and Strava activity data."
+      ],
       "href": "/running",
       "relatedProject": "",
       "dataSource": "running",
@@ -13,6 +16,10 @@
       "slug": "volleyball",
       "name": "Volleyball",
       "type": "sport",
+      "body": [
+        "Volleyball is one of the ways I spend time away from work.",
+        "Organizing social sessions through messages felt unnecessarily difficult. Eventually, instead of only thinking about the problem, I started building VSB."
+      ],
       "href": "/projects/vsb",
       "relatedProject": "vsb",
       "dataSource": "",
@@ -22,6 +29,11 @@
       "slug": "formula-1",
       "name": "Formula 1",
       "type": "interest",
+      "body": [
+        "What interests me about Formula 1 is not only the racing.",
+        "It is how much of the sport can be understood through data: timing, tyres, strategy, telemetry, track position, and the constant search for small improvements.",
+        "That interest eventually became Sepang Vision Lab."
+      ],
       "href": "/projects/sepang-vision-lab",
       "relatedProject": "sepang-vision-lab",
       "dataSource": "",

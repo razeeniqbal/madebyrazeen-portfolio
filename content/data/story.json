@@ -1,95 +1,231 @@
 {
-  "intro": {
-    "file": "story.log",
-    "path": "civil engineering → data → AI",
+  "hero": {
     "title": [
-      "The long way from",
-      "concrete to code."
+      "I follow curiosity.",
+      "Then I build."
     ],
-    "lede": "I am Razeen, a data engineer and AI solutions engineer in Malaysia who started out as a civil engineer. I build systems, test ideas in public repos, and run long distances to keep my head straight.",
-    "note": "Told step by step and kept as a journal, so it grows as I do.",
-    "body": [
-      "This page is the longer version of that sentence: how a civil engineer ended up building data platforms and AI tools, the loop I use for all of it, and what happens away from the screen."
+    "lede": [
+      "I started in Civil Engineering, moved into Data, and found my way into AI.",
+      "Along the way, I learned that the work I enjoy most usually starts with a question: can this be understood better, made simpler, or built differently?",
+      "So I explore it. Then I try to build it."
     ]
   },
-  "chapters": [
+  "stages": [
     {
-      "stage": "Civil engineering",
-      "period": "2017 – 2022",
-      "title": "Engineer by training",
-      "body": [
-        "Civil Engineering at Universiti Putra Malaysia: four years of structures, soils and calculations that had to be right the first time. I registered as a Graduate Engineer with the Board of Engineers Malaysia and the Institution of Engineers Malaysia, and joined G&P Geotechnic. The engineering was real. So was the pile of repetitive work around it."
-      ],
-      "photo": "none",
-      "photoCaption": "",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "none"
+      "label": "Engineering",
+      "detail": "Structures and systems"
     },
     {
-      "stage": "Data analytics",
-      "period": "2022 – 2025",
-      "title": "Automating the boring parts",
-      "body": [
-        "I taught myself Python and VBA to do the repetitive parts of geotechnical analysis, and realised I cared more about the data than the drawings. I studied at night for the Certified Data Analyst Associate, PCEP and Power BI certifications, then left engineering for a Data Analyst role at EISmartwork, building models on more than ten million records and dashboards people actually used."
-      ],
-      "photo": "none",
-      "photoCaption": "",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "none"
+      "label": "Data",
+      "detail": "Understand information"
     },
     {
-      "stage": "Artificial intelligence",
-      "period": "2024 – 2025",
-      "title": "Going deeper",
-      "body": [
-        "Analytics made me want to understand the models, not just use them, so I started a Master’s in Artificial Intelligence at UMPSA while working. I finished with a CGPA of 3.76 and a thesis on efficient duplicate-question detection, spoke as a Google Speaker at AI Build 2025 and made the Top 20 of AWS National 2025 for training large language models."
-      ],
-      "photo": "identity.graduation",
-      "photoCaption": "Master’s in AI",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "none"
+      "label": "AI",
+      "detail": "Extend capability"
     },
     {
-      "stage": "Data engineering",
-      "period": "Jun 2025 – now",
-      "title": "Building the foundations",
-      "body": [
-        "At AEM Energy Solutions the models only work if the data underneath them does, so I build the pipelines, the platforms and the AI tooling for the energy sector. The problems there led to QualityPlus: a tool that scores data quality and turns the failures into a review workflow instead of a spreadsheet."
-      ],
-      "photo": "career.briefing2",
-      "photoCaption": "Walking through a demo",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "none"
-    },
-    {
-      "stage": "Building systems",
-      "period": "Now",
-      "title": "Same curiosity, different tracks",
-      "body": [
-        "Outside the day job I build to find out: LeadSightz in a weekend at the Cursor × Anthropic hackathon, Balang as a party game about probability, and Sepang Vision Lab, a digital twin that started as a question about how far public race data can go. Some ship, some do not. Each one teaches me something the next one needs."
-      ],
-      "photo": "career.cursorAnthropic",
-      "photoCaption": "Cursor × Anthropic hackathon",
-      "credentialTitle": "",
-      "credentialIssuer": "",
-      "credentialDate": "",
-      "credentialUrl": "",
-      "pose": "none"
+      "label": "Build",
+      "detail": "Turn ideas into systems"
     }
   ],
-  "outro": "Input → process → iterate → progress. Still iterating.",
+  "moments": [
+    {
+      "id": "where-it-started",
+      "eyebrow": "Where it started",
+      "title": [
+        "I did not start",
+        "in tech."
+      ],
+      "body": [
+        "Civil Engineering was the path I started with. It made sense at the time. It connected with my family's direction, and mathematics had always been one of my strengths.",
+        "I worked across construction, BIM, and geotechnical engineering. Each role showed me a different side of engineering, from coordinating work on site to translating drawings into 3D models and working with technical calculations.",
+        "Then I started working with much larger datasets."
+      ],
+      "questions": [],
+      "after": [],
+      "linkLabel": "See the experience",
+      "linkHref": "/experience#foundations"
+    },
+    {
+      "id": "data-turning-point",
+      "eyebrow": "The data turning point",
+      "title": [
+        "The questions",
+        "changed."
+      ],
+      "body": [
+        "At G&P, some of my work involved millions of time-series equipment readings.",
+        "I needed to visualize them, identify abnormal readings, understand patterns, and sometimes look at how those readings might develop over time.",
+        "The repetitive parts made me curious."
+      ],
+      "questions": [
+        "Could I automate this calculation?",
+        "Could I process this with Python?",
+        "Could I make this Excel workflow easier with VBA?"
+      ],
+      "after": [
+        "Those questions gradually became more interesting to me than the engineering problem itself.",
+        "That was my way into Data."
+      ],
+      "linkLabel": "G&P in Experience",
+      "linkHref": "/experience#gnp-geotechnic"
+    },
+    {
+      "id": "into-data",
+      "eyebrow": "Moving into data",
+      "title": [
+        "From using data",
+        "to building around it."
+      ],
+      "body": [
+        "Moving into a Data Analyst role gave me the opportunity to make Data my actual work.",
+        "I started with reporting and Power BI, working with dashboards, transforming data, and preparing information so it could be used properly for analysis.",
+        "But I kept becoming interested in what happened before the dashboard."
+      ],
+      "questions": [
+        "Where did the data come from?",
+        "How should it be transformed?",
+        "How do we move it reliably?",
+        "What happens when the volume grows?",
+        "What should happen when something fails?"
+      ],
+      "after": [
+        "That curiosity pulled me further into Data Engineering.",
+        "Today, my work sits across Data Engineering and AI. I work on migration, automation, data quality, and AI-assisted systems, including agentic workflows that turn data into recommendations and usable application outputs."
+      ],
+      "linkLabel": "The current chapter in Experience",
+      "linkHref": "/experience#aem-energy-solutions"
+    },
+    {
+      "id": "data-to-ai",
+      "eyebrow": "Data to AI",
+      "title": [
+        "Data led me",
+        "to AI."
+      ],
+      "body": [
+        "I have been fascinated by the idea of intelligent technology for a long time. What changed as I worked more deeply with Data was that AI stopped feeling like an abstract idea.",
+        "It became something I could actually build with.",
+        "Machine Learning gave me another way to understand patterns in data. Generative AI opened different ways for people to interact with information. Agentic workflows introduced new questions about how AI could reason over data, recommend actions, and work alongside existing systems.",
+        "I am still exploring those questions.",
+        "That is part of what keeps the field interesting to me."
+      ],
+      "questions": [],
+      "after": [],
+      "linkLabel": "",
+      "linkHref": ""
+    }
+  ],
+  "whyBuild": {
+    "eyebrow": "Why I build",
+    "title": [
+      "Most of my projects start",
+      "with something bothering me."
+    ],
+    "origins": [
+      {
+        "lead": "Sometimes it comes from work.",
+        "text": "Writing repetitive ETL logic made me wonder whether working with messy data could be more direct.",
+        "projectSlug": "forma"
+      },
+      {
+        "lead": "Sometimes it comes from everyday life.",
+        "text": "Organizing volleyball sessions through messages and individual coordination felt unnecessarily difficult.",
+        "projectSlug": "vsb"
+      },
+      {
+        "lead": "Sometimes it is simply curiosity.",
+        "text": "I like how Formula 1 uses data to understand performance, so I started experimenting with what a 3D racing experience built around real data could look like.",
+        "projectSlug": "sepang-vision-lab"
+      }
+    ],
+    "after": [
+      "I do not always know whether an idea will work when I start.",
+      "For me, building is how I find out."
+    ]
+  },
+  "howIWork": {
+    "eyebrow": "How I work",
+    "title": [
+      "Progress usually",
+      "comes from iteration."
+    ],
+    "body": [
+      "I like understanding a problem by working through it.",
+      "Start with what is available. Build something tangible. Test it. Find what does not work. Change it. Repeat.",
+      "The first version rarely needs to be perfect. It needs to teach me enough to make the next version better."
+    ]
+  },
+  "principles": [
+    {
+      "title": "Input",
+      "detail": "Understand what exists"
+    },
+    {
+      "title": "Process",
+      "detail": "Make it tangible"
+    },
+    {
+      "title": "Iterate",
+      "detail": "Test what works"
+    },
+    {
+      "title": "Progress",
+      "detail": "Keep moving forward"
+    }
+  ],
+  "learning": {
+    "eyebrow": "Learning and sharing",
+    "title": [
+      "Learning is better",
+      "when I can pass it on."
+    ],
+    "body": [
+      "My long-term goal is not only to work in Data and AI, but to understand the field deeply enough to make it useful to other people.",
+      "That has gradually taken me from learning and building to sharing and teaching.",
+      "I have conducted internal technical sessions for colleagues, spoken to students about what they can explore with Google's Data and AI technologies, and delivered structured Cloud and AI training for public-sector professionals.",
+      "Teaching has also changed how I learn.",
+      "If I cannot explain something clearly, I probably need to understand it better."
+    ]
+  },
+  "currently": {
+    "working": [
+      "Data Engineering",
+      "AI Systems",
+      "Agentic Workflows"
+    ],
+    "building": [
+      "forma",
+      "vsb",
+      "sepang-vision-lab"
+    ],
+    "exploring": [
+      "Data + AI Products",
+      "3D Data Experiences",
+      "Better Developer Tools"
+    ],
+    "sharing": [
+      "Data",
+      "Cloud",
+      "AI"
+    ]
+  },
+  "beyond": {
+    "eyebrow": "Away from the screen",
+    "title": [
+      "Away from the screen."
+    ],
+    "body": [
+      "When I am not working or building something, there is a good chance I am running, playing volleyball, following Formula 1, or finding another interest that eventually turns into a project.",
+      "Apparently, leaving hobbies as hobbies is something I am still working on."
+    ]
+  },
+  "closing": {
+    "title": [
+      "Curious what all of this",
+      "turned into?"
+    ]
+  },
   "path": [
     {
       "label": "Civil engineering",
@@ -111,33 +247,5 @@
       "label": "Building systems",
       "year": "Now"
     }
-  ],
-  "principles": [
-    {
-      "title": "Input",
-      "detail": "Start from the real question and the data that actually exists, not the data I wish existed."
-    },
-    {
-      "title": "Process",
-      "detail": "Build the smallest system that answers it end to end, then make each layer solid before adding the next."
-    },
-    {
-      "title": "Iterate",
-      "detail": "Measure against a baseline. If the clever version does not beat the simple one, say so and try again."
-    },
-    {
-      "title": "Progress",
-      "detail": "Ship, write down what I learned, and carry it into the next project. Or the next run."
-    }
-  ],
-  "beyond": {
-    "title": [
-      "The work matters.",
-      "So does everything around it."
-    ],
-    "body": [
-      "Outside work I run road races. It is the same loop as engineering: show up, measure, adjust, repeat. Progress you only notice over months.",
-      "The rest happens around people: hackathons, industry demos, conferences, and the odd stage."
-    ]
-  }
+  ]
 }
