@@ -12,7 +12,7 @@ import { getProjects, getPrimaryBuilds } from '@/content/projects';
 import { getCaseStudy, type Block } from '@/content/case-studies';
 import { achievements } from '@/content/achievements';
 import { capabilities } from '@/content/capabilities';
-import { chapters } from '@/content/story';
+import { aboutHero, aboutStages, moments, whyBuild, howIWork, principles, learning, currently, beyond } from '@/content/story';
 import { availability, helpWith } from '@/content/contact';
 import { getPublishedJournalEntries } from '@/content/notes';
 import { isSampleData, getTotals, getPersonalBests, getRaces, formatDuration } from '@/content/running';
@@ -54,7 +54,22 @@ export function buildKnowledge(): string {
       .join('\n')}\nUtilities: ${utilityNav.map((u) => `${u.label} ${SITE_URL}${u.href}`).join(', ')}.`,
   );
 
-  out.push(`## Story (About page)\n${chapters.map((c) => `### ${c.period}: ${c.title}\n${c.body.join('\n')}`).join('\n')}`);
+  // About: why the path happened, in Razeen's own words (content/data/story.json). Dates and roles are in Experience.
+  out.push(
+    [
+      `## About: why the path happened (${SITE_URL}/about; written in Razeen's own words)`,
+      `${aboutHero.title.join(' ')} ${aboutHero.lede.join(' ')}`,
+      `The path: ${aboutStages.map((s) => `${s.label} (${s.detail})`).join(' → ')}.`,
+      ...moments.map((m) => `### ${m.eyebrow}\n${[...m.body, ...m.questions, ...m.after].join(' ')}`),
+      `### ${whyBuild.eyebrow}: ${whyBuild.title.join(' ')}\n${whyBuild.origins
+        .map((o) => `${o.lead} ${o.text} That became ${o.project.title} (${o.label}; ${SITE_URL}/projects/${o.project.slug}).`)
+        .join('\n')}\n${whyBuild.after.join(' ')}`,
+      `### ${howIWork.eyebrow}: ${howIWork.title.join(' ')}\n${howIWork.body.join(' ')} The loop: ${principles.map((p) => `${p.title} (${p.detail})`).join(' → ')}.`,
+      `### ${learning.eyebrow}: ${learning.title.join(' ')}\n${learning.body.join(' ')} Growth loop: ${profile.loops.system.join(' → ')}. Details of the sessions: ${SITE_URL}/trainer.`,
+      `### Currently\nWorking on: ${currently.working.join(', ')}. Building: ${currently.building.map((p) => p.title).join(', ')}. Exploring: ${currently.exploring.join(', ')}. Sharing: ${currently.sharing.join(', ')}.`,
+      `### ${beyond.eyebrow}\n${beyond.body.join(' ')}`,
+    ].join('\n'),
+  );
 
   // Career from the canonical record. Unconfirmed dates are said to be unconfirmed, never guessed;
   // confidential roles stay high-level (no client or project detail is stored for them).

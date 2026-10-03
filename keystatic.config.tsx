@@ -15,11 +15,6 @@ const assetOptions = [
     Object.entries(items as Record<string, ImageAsset>).map(([key, a]) => ({ label: `${group} / ${key} (${a.alt.slice(0, 40)})`, value: `${group}.${key}` })),
   ),
 ];
-const poseOptions = [
-  { label: 'None', value: 'none' },
-  ...Object.keys(assets.miniRazeen).map((k) => ({ label: k, value: k })),
-];
-
 const imageSelect = (label: string) => fields.select({ label, options: assetOptions, defaultValue: 'none' });
 
 const textList = (label: string, itemLabel = 'Item') =>
@@ -203,45 +198,70 @@ export default config({
       path: 'content/data/story',
       format: json,
       schema: {
-        intro: fields.object(
+        hero: fields.object({ title: textList('Title lines', 'Line'), lede: paragraphList('Supporting copy') }, { label: 'Hero' }),
+        stages: fields.array(fields.object({ label: fields.text({ label: 'Stage' }), detail: fields.text({ label: 'Detail' }) }), {
+          label: 'The path (Engineering → Data → AI → Build)',
+          itemLabel: (p) => p.fields.label.value,
+        }),
+        moments: fields.array(
+          fields.object({
+            id: fields.text({ label: 'Anchor id' }),
+            eyebrow: fields.text({ label: 'Label' }),
+            title: textList('Heading lines', 'Line'),
+            body: paragraphList('Paragraphs before the questions'),
+            questions: textList('Questions (shown with emphasis)', 'Question'),
+            after: paragraphList('Paragraphs after the questions'),
+            linkLabel: fields.text({ label: 'Link label (optional)' }),
+            linkHref: fields.text({ label: 'Link target, e.g. /experience#gnp-geotechnic' }),
+          }),
+          { label: 'Narrative moments', itemLabel: (p) => p.fields.eyebrow.value },
+        ),
+        whyBuild: fields.object(
           {
-            file: fields.text({ label: 'File label (e.g. story.log)' }),
-            path: fields.text({ label: 'Path label' }),
-            title: textList('Title lines', 'Line'),
-            lede: fields.text({ label: 'Lede', multiline: true }),
-            body: paragraphList('Intro paragraphs (1–2)'),
-            note: fields.text({ label: 'Note', multiline: true }),
+            eyebrow: fields.text({ label: 'Label' }),
+            title: textList('Heading lines', 'Line'),
+            origins: fields.array(
+              fields.object({
+                lead: fields.text({ label: 'Lead line' }),
+                text: fields.text({ label: 'What happened', multiline: true }),
+                projectSlug: fields.text({ label: 'Project slug (title and status come from Projects)' }),
+                label: fields.text({ label: 'Relation, e.g. Work problem → Engineering tool' }),
+              }),
+              { label: 'Project origins', itemLabel: (p) => p.fields.projectSlug.value },
+            ),
+            after: paragraphList('Closing paragraphs'),
           },
-          { label: 'Intro' },
+          { label: 'Why I build' },
+        ),
+        howIWork: fields.object(
+          { eyebrow: fields.text({ label: 'Label' }), title: textList('Heading lines', 'Line'), body: paragraphList('Paragraphs') },
+          { label: 'How I work' },
+        ),
+        principles: fields.array(fields.object({ title: fields.text({ label: 'Step' }), detail: fields.text({ label: 'Detail', multiline: true }) }), {
+          label: 'How I work: the loop',
+          itemLabel: (p) => p.fields.title.value,
+        }),
+        learning: fields.object(
+          { eyebrow: fields.text({ label: 'Label' }), title: textList('Heading lines', 'Line'), body: paragraphList('Paragraphs') },
+          { label: 'Learning and sharing (the loop itself is Profile › Loops › System)' },
+        ),
+        currently: fields.object(
+          {
+            working: textList('Working on', 'Item'),
+            building: textList('Building (project slugs)', 'Slug'),
+            exploring: textList('Exploring', 'Item'),
+            sharing: textList('Sharing', 'Item'),
+          },
+          { label: 'Currently' },
         ),
         beyond: fields.object(
-          { title: textList('Title lines', 'Line'), body: paragraphList('Paragraphs') },
-          { label: 'Beyond the screen' },
+          { eyebrow: fields.text({ label: 'Label' }), title: textList('Heading lines', 'Line'), body: paragraphList('Paragraphs') },
+          { label: 'Away from the screen' },
         ),
-        chapters: fields.array(
-          fields.object({
-            stage: fields.text({ label: 'Stage (e.g. Civil engineering)' }),
-            period: fields.text({ label: 'Period (include “now” for the current chapter)' }),
-            title: fields.text({ label: 'Title' }),
-            body: paragraphList('Paragraphs'),
-            photo: imageSelect('Photo'),
-            photoCaption: fields.text({ label: 'Photo caption' }),
-            pose: fields.select({ label: 'Mini Razeen (use sparingly)', options: poseOptions, defaultValue: 'none' }),
-            credentialTitle: fields.text({ label: 'Credential title (optional)' }),
-            credentialIssuer: fields.text({ label: 'Credential issuer' }),
-            credentialDate: fields.text({ label: 'Credential date' }),
-            credentialUrl: fields.text({ label: 'Credential verify URL' }),
-          }),
-          { label: 'Path chapters (About)', itemLabel: (p) => `${p.fields.stage.value} · ${p.fields.period.value}` },
-        ),
-        outro: fields.text({ label: 'Closing line' }),
+        closing: fields.object({ title: textList('Heading lines', 'Line') }, { label: 'Closing' }),
         path: fields.array(fields.object({ label: fields.text({ label: 'Stage' }), year: fields.text({ label: 'Year' }) }), {
           label: 'Path steps (Home teaser)',
           itemLabel: (p) => `${p.fields.year.value} · ${p.fields.label.value}`,
-        }),
-        principles: fields.array(fields.object({ title: fields.text({ label: 'Step' }), detail: fields.text({ label: 'Detail', multiline: true }) }), {
-          label: 'How I work',
-          itemLabel: (p) => p.fields.title.value,
         }),
       },
     }),

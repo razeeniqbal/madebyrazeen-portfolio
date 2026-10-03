@@ -2,7 +2,7 @@ import type { Project } from '@/content/projects';
 import { projectCategories } from '@/content/projects';
 import { cn } from '@/lib/utils';
 
-const statusLabel: Record<Project['status'], string> = {
+export const statusLabel: Record<Project['status'], string> = {
   active: 'Active',
   'under-construction': 'Under construction',
   'proof-of-concept': 'Proof of concept',

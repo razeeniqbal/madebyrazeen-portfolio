@@ -1,47 +1,71 @@
 /**
- * About page story: five path stages, told as a narrative. Edit: admin → About · story, or content/data/story.json.
- * DRAFT WORDING: facts come from the site's own data; the first-person voice is a draft to rewrite.
+ * About: why the path happened. Edit in the admin (About · story) or content/data/story.json.
+ *
+ * About explains motives and decisions; it links to /experience for what happened (dates, roles, work)
+ * instead of restating it. Project origins point at canonical projects by `projectSlug`: the title and
+ * status come from content/data/projects.json, never from here.
  */
-import { assets, resolveAsset, type ImageAsset, type MiniRazeenPose } from '@/lib/assets';
+import { getProject, type Project } from '@/content/projects';
 import data from './data/story.json';
 
-export interface StoryChapter {
-  /** The path stage this chapter tells, e.g. "Civil engineering". */
-  stage: string;
-  period: string;
-  title: string;
+export interface Moment {
+  id: string;
+  eyebrow: string;
+  title: string[];
+  /** Paragraphs before the questions. */
   body: string[];
-  photo?: { image: ImageAsset; caption: string };
-  credential?: { title: string; issuer: string; date: string; url?: string };
-  pose?: MiniRazeenPose;
+  /** Short questions given visual emphasis. */
+  questions: string[];
+  /** Paragraphs after the questions. */
+  after: string[];
+  link?: { label: string; href: string };
 }
 
-const isPose = (p: string): p is MiniRazeenPose => p in assets.miniRazeen;
+export interface ProjectOrigin {
+  lead: string;
+  text: string;
+  /** Short relation shown on About, e.g. "Work problem → Engineering tool". */
+  label: string;
+  project: Project;
+}
 
-export const storyIntro = data.intro;
+export const aboutHero = data.hero;
 
-export const chapters: StoryChapter[] = data.chapters.map((c) => {
-  const image = resolveAsset(c.photo);
-  return {
-    stage: c.stage,
-    period: c.period,
-    title: c.title,
-    body: c.body,
-    photo: image ? { image, caption: c.photoCaption } : undefined,
-    credential: c.credentialTitle
-      ? { title: c.credentialTitle, issuer: c.credentialIssuer, date: c.credentialDate, url: c.credentialUrl || undefined }
-      : undefined,
-    pose: isPose(c.pose) ? c.pose : undefined,
-  };
-});
+/** Engineering → Data → AI → Build: the conceptual path (Experience owns the detailed career map). */
+export const aboutStages = data.stages;
 
-/** Path steps (Home About teaser), same stages as the chapters. */
-export const storyPath = data.path;
+export const moments: Moment[] = data.moments.map((m) => ({
+  ...m,
+  link: m.linkHref ? { label: m.linkLabel, href: m.linkHref } : undefined,
+}));
 
-/** "How I work" loop. DRAFT WORDING. */
+export const whyBuild = {
+  ...data.whyBuild,
+  origins: data.whyBuild.origins.flatMap((o): ProjectOrigin[] => {
+    const project = getProject(o.projectSlug);
+    return project ? [{ lead: o.lead, text: o.text, label: o.label, project }] : [];
+  }),
+};
+
+export const howIWork = data.howIWork;
+
+/** Input → Process → Iterate → Progress. Step names match profile.loops.philosophy. */
 export const principles = data.principles;
 
-export const storyOutro = data.outro;
+export const learning = data.learning;
 
-/** About › Beyond the screen. */
+/** Currently: plain lists, plus the projects being built (resolved from canonical project data). */
+export const currently = {
+  working: data.currently.working,
+  building: data.currently.building.map((slug) => getProject(slug)).filter((p): p is Project => Boolean(p)),
+  exploring: data.currently.exploring,
+  sharing: data.currently.sharing,
+};
+
+/** About › Away from the screen. */
 export const beyond = data.beyond;
+
+export const aboutClosing = data.closing;
+
+/** Path steps (Home About teaser). */
+export const storyPath = data.path;
