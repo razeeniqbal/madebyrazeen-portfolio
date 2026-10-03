@@ -86,7 +86,7 @@ export function Hero() {
                       </a>
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 hidden w-max max-w-[14rem] border border-line bg-carbon px-2.5 py-1.5 text-xs leading-snug text-warm opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 lg:block"
+                        className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 hidden w-max max-w-[14rem] group-[:last-child]:left-auto group-[:last-child]:right-0 border border-line bg-carbon px-2.5 py-1.5 text-xs leading-snug text-warm opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 lg:block"
                       >
                         <span className="block font-medium">{credentialShortTitle(c)}</span>
                         <span className="block text-muted">{meta}</span>

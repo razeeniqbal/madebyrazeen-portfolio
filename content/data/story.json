@@ -50,8 +50,8 @@
       "id": "data-turning-point",
       "eyebrow": "The data turning point",
       "title": [
-        "The data",
-        "turning point."
+        "The questions",
+        "changed."
       ],
       "body": [
         "At G&P, some of my work involved millions of time-series equipment readings.",
@@ -126,20 +126,17 @@
       {
         "lead": "Sometimes it comes from work.",
         "text": "Writing repetitive ETL logic made me wonder whether working with messy data could be more direct.",
-        "projectSlug": "forma",
-        "label": "Work problem → Engineering tool"
+        "projectSlug": "forma"
       },
       {
         "lead": "Sometimes it comes from everyday life.",
         "text": "Organizing volleyball sessions through messages and individual coordination felt unnecessarily difficult.",
-        "projectSlug": "vsb",
-        "label": "Everyday problem → Real product"
+        "projectSlug": "vsb"
       },
       {
         "lead": "Sometimes it is simply curiosity.",
         "text": "I like how Formula 1 uses data to understand performance, so I started experimenting with what a 3D racing experience built around real data could look like.",
-        "projectSlug": "sepang-vision-lab",
-        "label": "Curiosity → Experiment"
+        "projectSlug": "sepang-vision-lab"
       }
     ],
     "after": [

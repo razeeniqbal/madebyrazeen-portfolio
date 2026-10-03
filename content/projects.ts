@@ -7,8 +7,9 @@
  *   featured  – large tile on the homepage + top of /projects
  *   standard  – listed on /projects
  *   archive   – listed on /projects under "Earlier work"
+ * `productImage` / `productImageMobile` are real product captures for /projects (classified in lib/assets.ts).
  * `kind` is the portfolio hierarchy (primary-build, professional-system, experiment, research, small-build);
- * `tier` + `order` decide presentation. `origin` is the "why it exists" line (e.g. "Personal interest → Real product").
+ * `tier` + `order` decide presentation. `origin` is the "why it exists" line (e.g. "Everyday problem → Real product").
  * `visibility: 'private'` keeps a record out of every public page.
  * `order` sorts within a tier (lower first). `draft: true` hides it everywhere
  * until the content is confirmed. A long-form case study lives in
@@ -59,6 +60,10 @@ export interface Project {
   /** Private repo or client work: no source link is shown. */
   confidential?: boolean;
   cover?: ImageAsset;
+  /** The project's main product evidence (a real capture), used on /projects. Home keeps `cover`. */
+  productImage?: ImageAsset;
+  /** A phone capture shown beside the main evidence, when the product has one. */
+  productImageMobile?: ImageAsset;
   metrics?: ProjectMetric[];
   caseStudy?: boolean;
   draft?: boolean;
@@ -104,6 +109,8 @@ export const projects: Project[] = data.items.map((p) => ({
   visibility: (p.visibility || 'public') as 'public' | 'private',
   links: { live: p.links.live || undefined, source: p.links.source || undefined },
   cover: resolveAsset(p.cover),
+  productImage: resolveAsset(p.productImage),
+  productImageMobile: resolveAsset(p.productImageMobile),
   metrics: p.metrics.length ? p.metrics.map((m) => ({ ...m, illustrative: m.illustrative || undefined })) : undefined,
 }));
 

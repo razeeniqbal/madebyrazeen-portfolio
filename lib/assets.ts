@@ -13,6 +13,32 @@ export interface ImageAsset {
   alt: string;
   /** Cover art only: 'real' when every number painted on it is a true figure (no "illustrative" label). */
   figures?: 'illustrative' | 'real';
+  /**
+   * What the image is evidence of, so concept art is never mistaken for working software:
+   * real-product (a capture of the shipped or running product), current-build (a capture of work in
+   * progress), concept (artwork, not an interface), brand-asset (logo or approved identity art).
+   */
+  evidence?: Evidence;
+  /** Context that must travel with a capture, e.g. "Development preview with sample data". */
+  note?: string;
+}
+
+export type Evidence = 'real-product' | 'current-build' | 'concept' | 'brand-asset';
+
+export const evidenceLabel: Record<Evidence, string> = {
+  'real-product': 'Real product',
+  'current-build': 'Current build',
+  concept: 'Concept artwork',
+  'brand-asset': 'Brand asset',
+};
+
+/** "Real product · Development preview with sample data", "Concept artwork · figures illustrative". */
+export function evidenceCaption(a: ImageAsset): string | undefined {
+  if (!a.evidence) return a.figures ? (a.figures === 'real' ? 'Cover art' : 'Cover art · figures illustrative') : undefined;
+  const parts: string[] = [evidenceLabel[a.evidence]];
+  if (a.evidence === 'concept' && a.figures === 'illustrative') parts.push('figures illustrative');
+  if (a.note) parts.push(a.note);
+  return parts.join(' · ');
 }
 
 const img = (src: AssetPath, width: number, height: number, alt: string, figures?: ImageAsset['figures']): ImageAsset => ({
@@ -22,6 +48,21 @@ const img = (src: AssetPath, width: number, height: number, alt: string, figures
   alt,
   ...(figures && { figures }),
 });
+
+/** A product capture with its evidence class (and note, when the data shown needs context). */
+const shot = (src: AssetPath, width: number, height: number, alt: string, evidence: Evidence, note?: string): ImageAsset => ({
+  src,
+  width,
+  height,
+  alt,
+  evidence,
+  ...(note && { note }),
+});
+
+const LIVE = 'vsb.madebyrazeen.com';
+const VSB_PREVIEW = 'Development preview with sample data';
+const FORMA_EXAMPLE = 'Built-in example project and sample data';
+const SVL_SESSION = '2017 Malaysian GP timing, reconstructed movement';
 
 export const assets = {
   identity: {
@@ -41,16 +82,57 @@ export const assets = {
   },
   /** Project cover art. Numbers painted into these boards are illustrative. */
   projects: {
-    sepang: img('/assets/v2/projects/sepang-vision-lab/cover.webp', 1672, 941, 'Sepang Vision Lab cover: a race car on track beside the Sepang circuit map and telemetry charts'),
-    qualityplus: img('/assets/v2/projects/qualityplus/cover.webp', 1672, 941, 'QualityPlus cover: raw data flowing through completeness, uniqueness, validity, consistency and AI rule-check stages into clean data'),
-    nlp: img('/assets/v2/projects/nlp-research/cover.webp', 1672, 941, 'AI / NLP research cover: two questions tokenised, embedded and compared in a semantic space'),
-    balang: img(
-      '/assets/v2/projects/balang/cover.webp',
-      1672,
-      941,
-      'Balang cover: a glass kuih jar with a red lid on a green game table, kuih tokens drawn one by one, prediction cards and phones joining a room',
-      'real',
-    ),
+    sepang: { ...img('/assets/v2/projects/sepang-vision-lab/cover.webp', 1672, 941, 'Sepang Vision Lab cover: a race car on track beside the Sepang circuit map and telemetry charts', 'illustrative'), evidence: 'concept' },
+    qualityplus: { ...img('/assets/v2/projects/qualityplus/cover.webp', 1672, 941, 'QualityPlus cover: raw data flowing through completeness, uniqueness, validity, consistency and AI rule-check stages into clean data', 'illustrative'), evidence: 'concept' },
+    nlp: { ...img('/assets/v2/projects/nlp-research/cover.webp', 1672, 941, 'AI / NLP research cover: two questions tokenised, embedded and compared in a semantic space', 'illustrative'), evidence: 'concept' },
+    balang: {
+      ...img(
+        '/assets/v2/projects/balang/cover.webp',
+        1672,
+        941,
+        'Balang cover: a glass kuih jar with a red lid on a green game table, kuih tokens drawn one by one, prediction cards and phones joining a room',
+        'real',
+      ),
+      evidence: 'concept',
+    },
+  },
+  /** VSB captures. Live pages are signed out; session and profile screens use the app's own dev preview with sample data. */
+  vsb: {
+    landingDesktop: shot('/assets/v2/projects/vsb/product/vsb-landing-desktop.webp', 2400, 1500, 'VSB home page on desktop: the headline Same court, more people, better games beside illustrated VSB players, with Find a game and See who is playing buttons', 'real-product', LIVE),
+    landingMobile: shot('/assets/v2/projects/vsb/product/vsb-landing-mobile.webp', 1170, 2532, 'VSB home page on a phone: the headline, Find a game and See who is playing buttons stacked above the illustrated players', 'real-product', LIVE),
+    howItWorks: shot('/assets/v2/projects/vsb/product/vsb-how-it-works.webp', 2400, 892, 'VSB home page section How VSB works: Find, Book and Play, with frequently asked questions below', 'real-product', LIVE),
+    playerIdentity: shot('/assets/v2/projects/vsb/product/vsb-player-identity.webp', 2400, 1050, 'VSB home page section Your player, your VSB identity: an example player card beside a list of what the card shows', 'real-product', LIVE),
+    sessionCards: shot('/assets/v2/projects/vsb/product/vsb-session-cards.webp', 2400, 1658, 'VSB session cards: four sessions with date, venue, level, who is playing, filled places and price, one fully booked with a waitlist', 'real-product', VSB_PREVIEW),
+    sessionDetail: shot('/assets/v2/projects/vsb/product/vsb-session-detail.webp', 2400, 2850, 'VSB session details: date, venue, court, price and a Book my spot button, then Who is playing shown as players placed on a volleyball court with open slots', 'real-product', VSB_PREVIEW),
+    sessionMobile: shot('/assets/v2/projects/vsb/product/vsb-session-mobile.webp', 1170, 2532, 'VSB session details on a phone: the court header, session name, level and the date, time, venue and court facts', 'real-product', VSB_PREVIEW),
+    myVsb: shot('/assets/v2/projects/vsb/product/vsb-my-vsb.webp', 2400, 1500, 'My VSB for a sample profile: a player card with position and level beside games, venues and upcoming counts', 'real-product', 'Development preview, sample profile'),
+  },
+  /** FORMA captures, all from the running app on its example project. */
+  forma: {
+    sourceViewer: shot('/assets/v2/projects/forma/product/forma-source-viewer.webp', 2400, 1500, 'FORMA Sources page: an Excel workbook with three sheets listed by row and column count, and the pipeline that uses it', 'real-product', FORMA_EXAMPLE),
+    analystWorkbench: shot('/assets/v2/projects/forma/product/forma-analyst-workbench.webp', 2400, 1500, 'FORMA analyst workbench: pipeline steps, a data preview of invoice rows, a before and after comparison, the step inspector and a data profile', 'real-product', FORMA_EXAMPLE),
+    extraction: shot('/assets/v2/projects/forma/product/forma-extraction.webp', 2400, 1500, 'FORMA extraction view: the raw spreadsheet in the source viewer, failed rows grouped by issue type with Fix, Ignore and Exclude actions, and the generated Python for the validation step', 'real-product', FORMA_EXAMPLE),
+    pipelineRun: shot('/assets/v2/projects/forma/product/forma-pipeline-run.webp', 2400, 1500, 'FORMA pipeline canvas after a run: eleven steps from source to destination with row counts and timings, summarised as 1,001 input, 985 ready and 16 to review', 'real-product', FORMA_EXAMPLE),
+    runMonitor: shot('/assets/v2/projects/forma/product/forma-run-monitor.webp', 2400, 1500, 'FORMA monitor view: run history, validation health with completeness, validity, uniqueness and consistency, run logs per step and the failed rows', 'real-product', FORMA_EXAMPLE),
+    reviewQueue: shot('/assets/v2/projects/forma/product/forma-review-queue.webp', 2400, 1500, 'FORMA review queue: sixteen rows held back with their issue, and a panel to correct the value, keep the original, exclude the row or ignore the warning', 'real-product', FORMA_EXAMPLE),
+    export: shot('/assets/v2/projects/forma/product/forma-export.webp', 2400, 1500, 'FORMA export: options for a Python script, a Python project, Airflow or Prefect, beside the generated pandas code', 'real-product', FORMA_EXAMPLE),
+  },
+  /** Sepang Vision Lab: captures of the current local build. */
+  sepang: {
+    circuitReplay: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-circuit-replay.webp', 2400, 1396, 'Sepang Vision Lab historical workspace: driver list, the 3D Sepang circuit with car markers at lap 35, the selected driver inspector and the replay controls', 'current-build', SVL_SESSION),
+    stintAnalysis: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-stint-analysis.webp', 2400, 1058, 'Sepang Vision Lab tyre and stint analysis: lap times for one stint with a fitted pace trend and the limits of what can be inferred', 'current-build', SVL_SESSION),
+    lapTimeMl: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-lap-time-ml.webp', 2400, 1142, 'Sepang Vision Lab lap-time ML panel: a model comparison table where the previous-lap baseline has the lowest test error, with a note that the selected model did not beat it', 'current-build', SVL_SESSION),
+  },
+  /** BALANG captures from a real local game against the built-in computer players. */
+  balangPlay: {
+    landing: shot('/assets/v2/projects/balang/product/balang-landing.webp', 2400, 1500, 'BALANG landing page: Agak. Risiko. Menang. beside the kuih jar and prediction cards, with a four-step summary of a round', 'real-product'),
+    observe: shot('/assets/v2/projects/balang/product/balang-observe.webp', 2400, 1500, 'BALANG round start: the jar contents counted by kuih type and the six secret prediction cards dealt to the player', 'real-product'),
+    table: shot('/assets/v2/projects/balang/product/balang-table.webp', 2400, 1500, 'BALANG game table: players and scores, the jar, the draw track, the live jar count and the player prediction cards', 'real-product'),
+    discard: shot('/assets/v2/projects/balang/product/balang-discard.webp', 2400, 1500, 'BALANG discard step: two prediction cards marked for discarding after three draws', 'real-product'),
+    lock: shot('/assets/v2/projects/balang/product/balang-lock.webp', 2400, 1500, 'BALANG lock step: two final prediction cards selected to lock with ten tokens drawn', 'real-product'),
+    kawKaw: shot('/assets/v2/projects/balang/product/balang-kaw-kaw.webp', 2400, 1500, 'BALANG KAW-KAW choice: double the reward and the penalty on one locked card, or play safe', 'real-product'),
+    roundResult: shot('/assets/v2/projects/balang/product/balang-round-result.webp', 2400, 1500, 'BALANG round result: one prediction wrong and one KAW-KAW prediction right, the fifteen drawn tokens and the scores', 'real-product'),
+    tableMobile: shot('/assets/v2/projects/balang/product/balang-table-mobile.webp', 1170, 2532, 'BALANG game table on a phone: the jar, token counts, draw track and swipeable prediction cards', 'real-product'),
   },
   running: {
     action: img('/assets/v2/running/run-action.webp', 1605, 2400, 'Razeen running toward the camera, arms raised, during a road race'),

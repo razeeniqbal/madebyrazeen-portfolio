@@ -20,10 +20,22 @@ const defaultSurface: Record<SectionId, 'dark' | 'light'> = {
   balance: 'dark',
   interface: 'dark',
   outcome: 'light',
+  product: 'dark',
+  identity: 'dark',
+  loop: 'light',
+  pipeline: 'dark',
+  workspace: 'dark',
+  verify: 'light',
+  run: 'dark',
+  export: 'light',
+  gameplay: 'dark',
+  evidence: 'dark',
+  state: 'light',
   learned: 'light',
 };
 
-const wideBlocks = new Set(['flow']);
+// Diagrams and product evidence take the full width; prose stays in the reading column.
+const wideBlocks = new Set(['flow', 'image', 'gallery']);
 
 interface CaseStudyViewProps {
   project: Project;
@@ -64,7 +76,7 @@ export function CaseStudyView({ project, study, next }: CaseStudyViewProps) {
             <div className="col-span-full flex flex-wrap gap-6">
               {project.links.live && (
                 <ArrowLink href={project.links.live} variant="primary">
-                  Live site
+                  View live product
                 </ArrowLink>
               )}
               {project.links.source && <ArrowLink href={project.links.source}>Source on GitHub</ArrowLink>}

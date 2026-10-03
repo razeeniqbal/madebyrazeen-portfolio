@@ -34,6 +34,8 @@ function blockText(b: Block): string {
       return [b.caption, b.columns.join(' | '), ...b.rows.map((r) => r.join(' | ')), b.note ?? ''].join('\n');
     case 'image':
       return '';
+    case 'gallery':
+      return `Screens: ${b.items.map((i) => i.caption).filter(Boolean).join('; ')}`;
   }
 }
 

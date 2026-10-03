@@ -24,7 +24,7 @@ export interface Moment {
 export interface ProjectOrigin {
   lead: string;
   text: string;
-  /** Short relation shown on About, e.g. "Work problem → Engineering tool". */
+  /** The project's canonical origin, e.g. "Work problem → Engineering tool". */
   label: string;
   project: Project;
 }
@@ -43,7 +43,7 @@ export const whyBuild = {
   ...data.whyBuild,
   origins: data.whyBuild.origins.flatMap((o): ProjectOrigin[] => {
     const project = getProject(o.projectSlug);
-    return project ? [{ lead: o.lead, text: o.text, label: o.label, project }] : [];
+    return project ? [{ lead: o.lead, text: o.text, label: project.origin ?? '', project }] : [];
   }),
 };
 

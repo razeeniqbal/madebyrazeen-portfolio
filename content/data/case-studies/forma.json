@@ -1,0 +1,268 @@
+{
+  "project": "forma",
+  "review": "approved",
+  "lede": "Repeatedly writing and debugging ETL logic made me wonder whether working with messy data could be more direct without removing engineering control. FORMA explores that idea as a visual data workbench.",
+  "facts": [
+    {
+      "label": "Origin",
+      "value": "Work problem → Engineering tool"
+    },
+    {
+      "label": "Role",
+      "value": "Designer and developer"
+    },
+    {
+      "label": "Status",
+      "value": "Active"
+    },
+    {
+      "label": "Stack",
+      "value": "TypeScript · React · React Flow · Python (pandas)"
+    }
+  ],
+  "disclaimer": "",
+  "sections": [
+    {
+      "id": "problem",
+      "headline": "Messy data, scattered tools.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "Data engineering repeatedly requires inspecting, selecting, cleaning, transforming, validating, running and reviewing data through workflows that are often fragmented across code and tools."
+            ]
+          }
+        },
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": true,
+            "items": [
+              {
+                "title": "Work with the data directly",
+                "detail": "See the source, select what matters and shape it, with a preview before every change."
+              },
+              {
+                "title": "Build a reproducible pipeline",
+                "detail": "Every change becomes a step in a pipeline that runs the same way each time."
+              },
+              {
+                "title": "Keep engineering control",
+                "detail": "The pipeline exports as readable Python that produces the same output, so the work is never locked inside the tool."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "loop",
+      "headline": "See, select, transform, verify, run, export.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "The core loop is the experience of using FORMA: what a person does, in order, with a dataset in front of them."
+            ]
+          }
+        },
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "FORMA core loop",
+            "steps": [
+              "See",
+              "Select",
+              "Transform",
+              "Verify",
+              "Run",
+              "Export"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "pipeline",
+      "headline": "One specification, two engines.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "The pipeline is the engineering process underneath. The interface, the in-browser engine and the Python generator all work from the same pipeline specification, and a parity suite checks that both engines agree cell for cell."
+            ]
+          }
+        },
+        {
+          "discriminant": "steps",
+          "value": {
+            "label": "FORMA pipeline stages",
+            "steps": [
+              "Source",
+              "Select",
+              "Extract",
+              "Clean",
+              "Transform",
+              "Validate",
+              "Load"
+            ]
+          }
+        },
+        {
+          "discriminant": "image",
+          "value": {
+            "image": "forma.sourceViewer",
+            "caption": "Sources are stored once and referenced by pipelines. Every sheet of a workbook is its own source."
+          }
+        }
+      ]
+    },
+    {
+      "id": "workspace",
+      "headline": "Shape the data where you can see it.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Pipelines open on a canvas. For deeper work, panel workbenches put the source, the data preview, the step inspector, a before and after comparison and the data profile side by side. Selecting a column shows its profile, detected patterns and suggested actions."
+            ]
+          }
+        },
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "sequence",
+            "items": [
+              {
+                "image": "forma.analystWorkbench",
+                "caption": "Analyst view: steps, the data preview, before and after for the selected step, and the data profile."
+              },
+              {
+                "image": "forma.extraction",
+                "caption": "Extraction view: the raw spreadsheet, rows that failed with a reason and an action, and the generated Python for the step."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "verify",
+      "headline": "Verify before it runs.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "Validation is explicit: rules such as not blank, pattern, valid date, numeric bounds, allowed set and unique. Validation health is reported with the quality dimensions behind it, never as an unexplained score. Rows that cannot be transformed or validated confidently are held back instead of being loaded silently."
+            ]
+          }
+        },
+        {
+          "discriminant": "image",
+          "value": {
+            "image": "forma.runMonitor",
+            "caption": "Monitor view: run history, validation health by dimension, step-by-step run logs and the failed rows."
+          }
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "headline": "Runs are visible events.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "A run reports the source load and each completed step with real row counts and timings. Held-back rows go to a review queue, where each one can be corrected, kept, excluded or ignored. Decisions apply on the next run."
+            ]
+          }
+        },
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "sequence",
+            "items": [
+              {
+                "image": "forma.pipelineRun",
+                "caption": "After a run on the example project: 1,001 rows in, 985 ready and 16 held back for review."
+              },
+              {
+                "image": "forma.reviewQueue",
+                "caption": "The review queue for those 16 rows, with the original value and the reason for each."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "headline": "Keep the code.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": false,
+            "body": [
+              "A pipeline exports as a single pipeline.py or a full project with requirements, configuration, a README and the pipeline specification, plus an Airflow DAG or a Prefect flow. The code has one function per step, and its comments match the visual pipeline."
+            ]
+          }
+        },
+        {
+          "discriminant": "image",
+          "value": {
+            "image": "forma.export",
+            "caption": "Export: the project options beside the generated pandas code."
+          }
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "headline": "Active, with a clear edge.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "FORMA is active. Every screen on this page is a capture of the running app on its built-in example project. The loop from source to export works end to end."
+            ]
+          }
+        },
+        {
+          "discriminant": "list",
+          "value": {
+            "numbered": false,
+            "items": [
+              {
+                "title": "Not in this build yet",
+                "detail": "Collaboration, comments and approvals; SQL and Polars code targets; branching pipelines; an in-browser Python parity check; lineage and Git integration."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

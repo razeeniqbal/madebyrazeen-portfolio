@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
-import { ProjectFeature } from '@/components/v2/work/ProjectFeature';
+import { PrimaryBuild } from '@/components/v2/work/PrimaryBuild';
 import { ProjectRow } from '@/components/v2/work/ProjectRow';
 import { getPrimaryBuilds, getProjects, getSecondaryProjectGroups } from '@/content/projects';
 import { getRoleForProject, shortCompany } from '@/content/experience';
@@ -33,6 +33,7 @@ export default function ProjectsPage() {
         <PageHeader
           href="/projects"
           title={['Built through', 'curiosity.']}
+          lede={['Something catches my attention. I understand the problem. I learn what I need. Then I try to build it.']}
           meta={[
             { label: 'Primary builds', value: primary.length },
             { label: 'Projects', value: getProjects().length },
@@ -40,19 +41,13 @@ export default function ProjectsPage() {
         />
 
         {/* 01 Primary builds: same surface as the heading, so the hierarchy reads as one block. */}
-        <div id="primary" className="page-grid mt-24 scroll-mt-20 gap-y-16">
+        <div id="primary" className="page-grid mt-24 scroll-mt-20 gap-y-12">
           <SectionHeader index="01" eyebrow={`Primary builds · ${primary.length}`} title={['Four builds,', 'four origins.']} size="md" />
-          {primary.map((p, i) => (
-            <ProjectFeature
-              key={p.slug}
-              project={p}
-              size="large"
-              index={String(i + 1).padStart(2, '0')}
-              showOrigin
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="col-span-full md:col-span-4 lg:col-span-6"
-            />
-          ))}
+          <div className="col-span-full space-y-20">
+            {primary.map((p, i) => (
+              <PrimaryBuild key={p.slug} project={p} index={String(i + 1).padStart(2, '0')} side={i % 2 === 0 ? 'left' : 'right'} />
+            ))}
+          </div>
         </div>
       </Section>
 
@@ -70,7 +65,13 @@ export default function ProjectsPage() {
                 </TechnicalLabel>
                 <ol>
                   {g.projects.map((p) => (
-                    <ProjectRow key={p.slug} project={p} note={roleNote(p.slug)} />
+                    <ProjectRow
+                      key={p.slug}
+                      project={p}
+                      note={roleNote(p.slug)}
+                      showSummary={g.id === 'professional'}
+                      quiet={g.id === 'earlier'}
+                    />
                   ))}
                 </ol>
                 {roles.length > 0 && (

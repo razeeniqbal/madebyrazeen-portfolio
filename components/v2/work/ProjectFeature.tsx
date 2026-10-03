@@ -4,22 +4,19 @@ import type { Project } from '@/content/projects';
 import { ProjectMeta } from './ProjectMeta';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { cn } from '@/lib/utils';
+import { evidenceCaption } from '@/lib/assets';
 
 interface ProjectFeatureProps {
   project: Project;
   size: 'flagship' | 'large' | 'medium';
   sizes: string;
-  /** Position in a ranked set, e.g. the primary builds 01 to 04. */
-  index?: string;
-  /** Show the origin line (PERSONAL INTEREST → REAL PRODUCT) when the project has one. */
-  showOrigin?: boolean;
   className?: string;
 }
 
 const titleSize = { flagship: 'text-display-md', large: 'text-display-md', medium: 'text-display-sm' };
 
 /** Image-led project block. Size carries the hierarchy (PRD §18: not identical cards). */
-export function ProjectFeature({ project, size, sizes, index, showOrigin, className }: ProjectFeatureProps) {
+export function ProjectFeature({ project, size, sizes, className }: ProjectFeatureProps) {
   const flagship = size === 'flagship';
   return (
     <article data-reveal className={cn('group', className)}>
@@ -48,7 +45,7 @@ export function ProjectFeature({ project, size, sizes, index, showOrigin, classN
               className="w-full transition-transform duration-700 ease-out group-hover:scale-[1.015] motion-reduce:transition-none"
             />
             <span className="label absolute bottom-0 right-0 bg-carbon/85 px-2 py-1 text-[0.625rem] text-warm/80">
-              {project.cover.figures === 'real' ? 'Cover art' : 'Cover art · figures illustrative'}
+              {evidenceCaption(project.cover)}
             </span>
           </div>
         )}
@@ -57,10 +54,8 @@ export function ProjectFeature({ project, size, sizes, index, showOrigin, classN
           <div>
             <ProjectMeta project={project} />
             <h3 className={cn('mt-3 transition-colors group-hover:text-signal', titleSize[size])}>
-              {index && <span className="label mr-3 align-middle text-muted">{index}</span>}
               {project.title}
             </h3>
-            {showOrigin && project.origin && <TechnicalLabel as="p" className="mt-2 text-ink">{project.origin}</TechnicalLabel>}
           </div>
           <div className={cn(flagship ? 'mt-4' : 'mt-3')}>
             <p className={cn('max-w-prose text-muted', flagship && 'text-lead')}>{project.summary}</p>

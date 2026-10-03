@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { Fragment } from 'react';
 import { FlowDiagram } from '@/components/v2/diagram/FlowDiagram';
+import { EvidenceGallery, EvidenceImage } from '@/components/v2/work/EvidenceImage';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import type { Block } from '@/content/case-studies';
 import { cn } from '@/lib/utils';
@@ -130,20 +130,9 @@ export function CaseStudyBlock({ block }: { block: Block }) {
       );
 
     case 'image':
-      return (
-        <figure>
-          <Image
-            src={block.image.src}
-            width={block.image.width}
-            height={block.image.height}
-            alt={block.image.alt}
-            sizes="(min-width: 1024px) 75vw, 100vw"
-            className="w-full border border-line"
-          />
-          <figcaption className="mt-2">
-            <TechnicalLabel>{block.caption}</TechnicalLabel>
-          </figcaption>
-        </figure>
-      );
+      return <EvidenceImage image={block.image} caption={block.caption} sizes="(min-width: 1024px) 90vw, 100vw" />;
+
+    case 'gallery':
+      return <EvidenceGallery layout={block.layout} items={block.items} />;
   }
 }

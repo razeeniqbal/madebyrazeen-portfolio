@@ -29,6 +29,24 @@ const NODE_TYPES = ['SOURCE', 'PROCESS', 'DATABASE', 'API', 'MODEL', 'AGENT', 'U
 const contentBlocks = (label: string) =>
   fields.blocks(
     {
+      gallery: {
+        label: 'Product evidence (screenshots)',
+        schema: fields.object({
+          layout: fields.select({
+            label: 'Layout',
+            options: [
+              { label: 'Sequence (numbered, one per row)', value: 'sequence' },
+              { label: 'Pair (desktop + phone)', value: 'pair' },
+              { label: 'Grid (two per row)', value: 'grid' },
+            ],
+            defaultValue: 'sequence',
+          }),
+          items: fields.array(fields.object({ image: imageSelect('Image'), caption: fields.text({ label: 'Caption (what the screen shows)' }) }), {
+            label: 'Screens',
+            itemLabel: (p) => p.fields.caption.value || p.fields.image.value,
+          }),
+        }),
+      },
       text: {
         label: 'Text',
         schema: fields.object({
@@ -224,8 +242,7 @@ export default config({
               fields.object({
                 lead: fields.text({ label: 'Lead line' }),
                 text: fields.text({ label: 'What happened', multiline: true }),
-                projectSlug: fields.text({ label: 'Project slug (title and status come from Projects)' }),
-                label: fields.text({ label: 'Relation, e.g. Work problem → Engineering tool' }),
+                projectSlug: fields.text({ label: 'Project slug (title, origin and status come from Projects)' }),
               }),
               { label: 'Project origins', itemLabel: (p) => p.fields.projectSlug.value },
             ),
@@ -374,6 +391,8 @@ export default config({
             links: fields.object({ live: fields.text({ label: 'Live URL' }), source: fields.text({ label: 'Source URL' }) }, { label: 'Links' }),
             confidential: fields.checkbox({ label: 'Private repo / confidential' }),
             cover: imageSelect('Cover image'),
+            productImage: imageSelect('Product evidence (real capture) for /projects'),
+            productImageMobile: imageSelect('Phone capture beside the product evidence (optional)'),
             metrics: fields.array(
               fields.object({
                 label: fields.text({ label: 'Label' }),
@@ -591,7 +610,7 @@ export default config({
           fields.object({
             id: fields.select({
               label: 'Section',
-              options: ['overview', 'problem', 'idea', 'rules', 'architecture', 'data', 'build', 'balance', 'interface', 'outcome', 'learned'].map((v) => ({
+              options: ['overview', 'problem', 'idea', 'rules', 'loop', 'architecture', 'pipeline', 'data', 'build', 'balance', 'product', 'workspace', 'identity', 'verify', 'run', 'export', 'gameplay', 'evidence', 'interface', 'outcome', 'state', 'learned'].map((v) => ({
                 label: v,
                 value: v,
               })),

@@ -11,6 +11,7 @@ import { getCaseStudy } from '@/content/case-studies';
 import { CaseStudyView } from '@/components/v2/case-study/CaseStudyView';
 import { JsonLd } from '@/components/v2/seo/JsonLd';
 import { SITE_URL } from '@/lib/site';
+import { evidenceCaption } from '@/lib/assets';
 import type { Project } from '@/content/projects';
 
 const projectLd = (p: Project) => ({
@@ -107,7 +108,7 @@ export default async function ProjectPage({ params }: Params) {
                 className="w-full border border-line"
               />
               <figcaption className="mt-2">
-                <TechnicalLabel>{project.cover.figures === 'real' ? 'Cover art' : 'Cover art · figures illustrative'}</TechnicalLabel>
+                <TechnicalLabel>{evidenceCaption(project.cover)}</TechnicalLabel>
               </figcaption>
             </figure>
           )}

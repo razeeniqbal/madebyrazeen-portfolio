@@ -4,6 +4,10 @@
   "lede": "A motorsport digital twin and race-strategy research platform built around Sepang International Circuit. You do not drive the car. You act as the race engineer.",
   "facts": [
     {
+      "label": "Status",
+      "value": "Under construction"
+    },
+    {
       "label": "Role",
       "value": "Solo: product, engineering, data, ML"
     },
@@ -70,6 +74,17 @@
       "surface": "default",
       "blocks": [
         {
+          "discriminant": "steps",
+          "value": {
+            "label": "Concept loop",
+            "steps": [
+              "Observe",
+              "Predict",
+              "Simulate"
+            ]
+          }
+        },
+        {
           "discriminant": "text",
           "value": {
             "lead": false,
@@ -94,6 +109,42 @@
               "Weather",
               "Computer vision",
               "AI race engineer"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "headline": "What runs today.",
+      "surface": "default",
+      "blocks": [
+        {
+          "discriminant": "text",
+          "value": {
+            "lead": true,
+            "body": [
+              "Sepang Vision Lab is under construction. These are captures of the current local build on the 2017 Malaysian Grand Prix timing archive. Movement is interpolated between timing lines, not GPS, and the screens say so."
+            ]
+          }
+        },
+        {
+          "discriminant": "gallery",
+          "value": {
+            "layout": "sequence",
+            "items": [
+              {
+                "image": "sepang.circuitReplay",
+                "caption": "Historical workspace at lap 35: the 3D circuit, every car with timing coverage, the selected driver and the replay controls."
+              },
+              {
+                "image": "sepang.stintAnalysis",
+                "caption": "Tyre and stint analysis: an observed pace trend with its limits stated beside it."
+              },
+              {
+                "image": "sepang.lapTimeMl",
+                "caption": "Lap-time ML: the previous-lap baseline beats every trained model on test error, and the panel says so."
+              }
             ]
           }
         }
@@ -255,7 +306,7 @@
           "discriminant": "image",
           "value": {
             "image": "projects.sepang",
-            "caption": "Cover art · figures illustrative"
+            "caption": "Project cover. Concept artwork, not an interface capture."
           }
         }
       ]
