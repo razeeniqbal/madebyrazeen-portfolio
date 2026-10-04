@@ -1,6 +1,6 @@
 {
-  "title": "Building my first agentic data quality workflow",
-  "summary": "The obvious design was to let a model judge the data. QualityPlus ended up doing the opposite: deterministic checks produce the score, AI assists with the findings, and a person makes the final call.",
+  "title": "Where AI Belongs in a Data Quality Workflow",
+  "summary": "Letting a model judge the data is the obvious approach. QualityPlus keeps it away from the score: deterministic checks produce the score, AI assists with the findings, and a person makes the final call.",
   "category": "building",
   "status": "published",
   "featured": false,
@@ -42,8 +42,8 @@
         "lead": false,
         "body": [
           "QualityPlus started from a familiar problem. Operational datasets arrive incomplete, duplicated or inconsistent, and the fixes tend to happen by hand in a copy of a spreadsheet, with no record of what changed, who agreed to it or which rules were applied.",
-          "When I began designing it, the obvious shortcut was to hand the whole problem to a model. Upload a dataset, ask an agent whether the data is good, and let it fix what it finds. It would have made a convincing demo.",
-          "The trouble appeared as soon as I thought about the second run. Would the same dataset get the same score tomorrow? Could anyone explain why a particular row failed? If a value changed, who changed it, the model or a person? For a quality check, those questions are the whole point. A score that cannot answer them is an opinion."
+          "One obvious approach would have been to hand the whole problem to a model: upload a dataset, ask an agent whether the data is good, and let it fix what it finds. It would make a convincing demo.",
+          "The trouble appears as soon as you think about the second run. Would the same dataset get the same score tomorrow? Could anyone explain why a particular row failed? If a value changed, who changed it, the model or a person? For a quality check, those questions are the whole point. A score that cannot answer them is an opinion."
         ]
       }
     },
@@ -59,7 +59,7 @@
       "value": {
         "lead": false,
         "body": [
-          "So the first design decision was a boundary. Anything that produces the score stays deterministic: written as explicit rules, run the same way every time, and explainable row by row.",
+          "So QualityPlus is built around a boundary. Anything that produces the score stays deterministic: written as explicit rules, run the same way every time, and explainable row by row.",
           "QualityPlus scores a dataset across four dimensions, and each one answers a different question."
         ]
       }
@@ -81,8 +81,8 @@
       "value": {
         "lead": false,
         "body": [
-          "The quality engine is plain TypeScript and runs in the browser, so scoring does not depend on a model at all. None of these checks needs one. A missing value, a duplicate key or a date outside its range is a fact about the data, and a rule finds it more cheaply, more quickly and more predictably than a model would.",
-          "The second decision was to keep the failures. A percentage on its own throws away the most useful thing a check finds, which is the exact rows and cells that failed. In QualityPlus those cells become the work, and the score becomes the start of a workflow instead of the end of a report."
+          "The quality engine is plain TypeScript and runs in the browser, so scoring does not depend on a model at all. None of these checks needs one. A missing value, a duplicate key or a value outside a defined range can be evaluated directly against explicit rules, and a rule does that more cheaply, more quickly and more predictably than a model would.",
+          "The second part of the design is keeping the failures. A percentage on its own throws away the most useful thing a check finds, which is the exact rows and cells that failed. In QualityPlus those cells become the work, and the score becomes the start of a workflow instead of the end of a report."
         ]
       }
     },
@@ -106,7 +106,7 @@
         "lead": false,
         "body": [
           "With scoring kept away from the model, the question changed. Where could a model save someone time without being trusted with the result?",
-          "There are three places in QualityPlus, each an n8n workflow calling models served through Ollama Cloud."
+          "There are three places in QualityPlus, each a separate n8n workflow that calls a model through Ollama."
         ]
       }
     },
@@ -117,7 +117,7 @@
         "items": [
           "**Rule suggestions.** The model reads column names against an oil and gas domain knowledge base, suggests validity rules, and flags columns that look like they need a consistency check instead.",
           "**Summaries.** It writes a plain-language summary of a saved score, with the key issues, links to the failing rows and recommendations.",
-          "**Fix suggestions.** For each failed cell it proposes a replacement with a reason and a confidence, using passing values from the same column as examples of the expected style."
+          "**Fix suggestions.** It proposes replacements for failed cells, each with a reason and a confidence, using passing values from the same column as examples. Cells it cannot fix with confidence are left out rather than guessed."
         ]
       }
     },
@@ -144,7 +144,7 @@
         "lead": false,
         "body": [
           "Every correction records how it was made: entered manually, accepted from an AI suggestion, or accepted and then modified. Both the AI’s value and the final value are kept.",
-          "Roles make the decision explicit. Editors submit corrections. Owners and co-owners approve or reject them, and a rejection needs a reason. The same idea applies to the rules themselves. A check configuration can become a template, and a template is reviewed and approved before other projects can reuse it.",
+          "Roles make the decision explicit. Owners, co-owners and editors can submit corrections. Only owners and co-owners approve or reject them, and a rejection needs a reason. The same idea applies to the rules themselves. A check configuration can become a template, and a template is reviewed and approved before other projects can reuse it.",
           "Keeping the AI’s answer beside the human’s made the system auditable. It also makes the AI measurable. Each accepted, modified or replaced suggestion is a small piece of evidence about whether the model is actually helping, which is a better test than how convincing its suggestions sound."
         ]
       }

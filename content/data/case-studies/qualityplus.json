@@ -89,7 +89,7 @@
     },
     {
       "id": "architecture",
-      "headline": "Scoring runs in the browser. AI runs in-house.",
+      "headline": "Scoring runs in the browser. AI stays optional.",
       "surface": "default",
       "blocks": [
         {
@@ -124,8 +124,8 @@
               },
               {
                 "type": "MODEL",
-                "title": "Ollama Cloud",
-                "detail": "Models served through Ollama Cloud, called from n8n agentic workflows.",
+                "title": "Ollama",
+                "detail": "An open model served through Ollama, called from the n8n workflows.",
                 "active": false
               },
               {
@@ -301,8 +301,8 @@
                 "detail": "Storing the AI’s value next to the human’s made the system auditable, and made the AI easier to evaluate."
               },
               {
-                "title": "Self-hosting changes the conversation",
-                "detail": "Running the model in-house removed the question of sending operational data to a third party."
+                "title": "Keep the model swappable",
+                "detail": "The app only talks to n8n webhooks, so where the model runs is a configuration choice in n8n, not a change to the app."
               },
               {
                 "title": "Governance is a feature",

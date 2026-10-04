@@ -46,7 +46,7 @@
         "lead": false,
         "body": [
           "I studied Civil Engineering at Universiti Putra Malaysia from 2017 to 2021. At the time it made sense. Mathematics had always been one of my stronger subjects, and engineering connected with the direction my family knew.",
-          "My first roles were on construction sites. I coordinated workers, reviewed drawings, planned site activities, checked measurements and monitored work against the design. Site work has a particular kind of constraint. Once something is built, a mistake is expensive to undo, so the checking has to happen before the work, not after it.",
+          "My first roles were on construction sites. I coordinated workers, reviewed drawings, planned site activities, checked measurements and monitored work against the design. Site work has a particular kind of constraint. Once something is built, a mistake is expensive to undo. Checking carries on throughout a project, but the checks made before the work carry a lot of weight.",
           "After that I worked as a BIM engineer, turning 2D construction drawings into coordinated 3D models and looking for clashes between building elements before they reached site. It was my first experience of representing a physical system digitally before it existed. In 2022 I moved into geotechnical engineering at G&P Geotechnic, working on calculations, technical reports and field activities.",
           "I liked the work. Calculations had to be right, reports had to stand up to review, and engineering judgement mattered whenever the numbers alone did not settle a question. Nothing about those years felt like a detour, and I still think of myself as an engineer."
         ]
@@ -85,7 +85,7 @@
           "The repetitive parts came first. The same calculation set up again for new inputs. The same charts rebuilt for a new batch of readings. The same steps repeated each time a report came round.",
           "The questions I started asking were small ones. Could I automate this calculation? Could I process this with Python? Could I make this Excel workflow easier with VBA?",
           "VBA came first, because Excel was where the work already lived. I used it to simplify calculations that were otherwise set up by hand. Python came in where a spreadsheet stopped being comfortable, for processing larger sets of readings and automating parts of the engineering and data workflows.",
-          "None of it was planned as a skill path. Each tool arrived the same way: a specific annoyance, a small experiment to see whether it could be done differently, and something I could reuse next time. That pattern turned out to be more durable than any of the tools.",
+          "None of it was planned as a skill path. Each tool arrived the same way: a specific annoyance, a small experiment to see whether it could be done differently, and something I could reuse next time. The tools changed. That way of learning stayed.",
           "In 2023, still working as a geotechnical engineer, I took four data credentials: Microsoft’s Azure Data Fundamentals, the Certified Data Analyst Associate at APU, the PCEP Python certification and Microsoft’s Power BI Data Analyst certification. I did not take them as an exit plan. The data side of the work had become the part I most wanted to do properly.",
           "I also practised in public, on datasets that were safe to share, such as [cleaning the London bike-sharing data in Python](https://github.com/razeeniqbal/python-london-bike) and [cleaning a raw bike sales dataset in Excel](https://github.com/razeeniqbal/excel-bike-sales). They are small projects. Looking back, both are about the same thing: what has to happen to data before anyone can trust a chart made from it."
         ]
@@ -140,7 +140,7 @@
         "body": [
           "Since June 2025 I have worked as an AI Data Engineer at AEM Energy Solutions. Most of the work sits further upstream than dashboards: data migration, automation, data quality and the pipelines between systems.",
           "One example is a Python migration of around 700,000 records from an MSSQL source into a NoSQL target through an existing API. Moving the records was the simple part. Most of the effort went into understanding how the API behaved, reading its responses carefully and handling the cases that could fail partway through.",
-          "That kind of problem felt familiar in a way I did not expect. Engineering design assumes the real conditions will differ from the drawings, and plans for the difference. A migration is the same. The source will contain something the specification did not mention, and the pipeline needs to know what to do when it meets it.",
+          "That kind of problem felt familiar in a way I did not expect. In engineering, the conditions on the ground are not always as clean as the drawings suggest. Data migrations have their own version of that problem: sooner or later the source contains cases the specification did not describe, and the pipeline needs to know what to do when it meets them.",
           "Data quality became part of the work too, along with structured Excel templates and VBA for recurring data preparation. The tools from the engineering years did not go away. They found a new place.",
           "This is where data engineering stopped feeling like a career choice and started feeling like the natural place for the way I already worked: check the inputs, design for failure, and make sure the next step can rely on the last one."
         ]
@@ -223,7 +223,7 @@
         "lead": false,
         "body": [
           "Looking at the whole path, the medium changed more than the method. Structures became data, data became pipelines, and pipelines became systems that sometimes include AI.",
-          "Engineering taught me to start with the inputs and to be careful with them, because a site investigation and a source table are both partial pictures that have to be designed around. It taught me to respect constraints that are real, to think about the whole system rather than one part of it, to ask how something fails before asking how well it performs, and to treat the first design as something to check and revise.",
+          "Engineering taught me to be careful with inputs, because they do not tell you everything on their own. It taught me to respect constraints that are real, to think about the whole system rather than one part of it, to ask how something fails before asking how well it performs, and to treat the first design as something to test and revise.",
           "That is still how I approach a pipeline, an agentic workflow or a side project. Understand what exists, make something tangible, test what works, and keep moving. On this site I call it input, process, iterate, progress. I was working that way long before I wrote it down."
         ]
       }

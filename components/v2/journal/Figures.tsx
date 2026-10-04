@@ -295,7 +295,7 @@ const boundary: { zone: keyof typeof zoneLabel; nodes: BoundaryNode[] }[] = [
   {
     zone: 'human',
     nodes: [
-      { title: 'Human review', detail: 'Accept, modify or reject each suggestion. Owners approve with a reason.' },
+      { title: 'Human review', detail: 'Accept, modify or reject each suggestion. Owners decide, and a rejection needs a reason.' },
       { title: 'Approved result', detail: 'A corrected version, with a record of how every value changed.' },
     ],
   },
