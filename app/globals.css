@@ -194,8 +194,14 @@
     inset: -4px 0;
   }
 
-  /* Justified long-form copy (tablet and up). Phones stay left-aligned to avoid wide word gaps. */
+  /* Justified running text across the site (tablet and up). Phones stay left-aligned to avoid wide
+     word gaps. Running paragraphs and Journal prose lists only: headings, titles, mono labels, small
+     card text, list cards, figures and diagram nodes keep left alignment, because justifying short
+     lines in narrow columns opens wide gaps. Header, footer and chat sit outside <main>. */
   @media (min-width: 768px) {
+    main p:not(.label):not([class*='text-center']):not([class*='text-right']):not([class*='font-semibold']):not([class*='font-bold']):not([class*='text-display']):not([class*='text-sm']):not([class*='text-xs']):not(li p):not(figure p):not(.flow-node p),
+    .journal-prose > ul > li,
+    .journal-prose > ol > li,
     .justify-copy,
     .justify-copy p {
       text-align: justify;
