@@ -99,7 +99,7 @@ export default async function JournalEntryPage({ params }: Params) {
           <nav aria-label="Contents" className="col-span-full lg:col-span-3">
             {/* Phones and tablets: a native disclosure above the text. Desktop: a quiet sticky list. */}
             <details className="border-b border-line pb-3 lg:hidden">
-              <summary className="label cursor-pointer">Contents</summary>
+              <summary className="label cursor-pointer py-1.5">Contents</summary>
               <TocList toc={toc} />
             </details>
             <div className="sticky top-[calc(var(--header-h)+2rem)] hidden lg:block">
@@ -160,7 +160,7 @@ function TocList({ toc }: { toc: { id: string; text: string }[] }) {
       {toc.map((h, i) => (
         <li key={h.id} className="flex gap-3">
           <span className="label pt-0.5 text-muted">{String(i + 1).padStart(2, '0')}</span>
-          <a href={`#${h.id}`} className="text-muted transition-colors hover:text-ink">
+          <a href={`#${h.id}`} className="hit text-muted transition-colors hover:text-ink">
             {h.text}
           </a>
         </li>

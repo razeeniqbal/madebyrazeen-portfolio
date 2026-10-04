@@ -12,7 +12,9 @@ import { contact, education, profile } from '@/content/profile';
 import { getCurrentRole } from '@/content/experience';
 import type { Metadata } from 'next';
 
+// Home: name and role, the same pairing as the hero label.
 export const metadata: Metadata = {
+  title: { absolute: 'Razeen Iqbal · Data Engineer & AI Solutions Engineer' },
   alternates: { canonical: '/' },
   description:
     'Razeen Iqbal, Data Engineer and AI Solutions Engineer. Civil engineering, then data, then AI: the products he builds, his professional data and AI work, training, writing and life away from the screen.',

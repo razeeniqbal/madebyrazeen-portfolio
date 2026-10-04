@@ -18,7 +18,7 @@ export function ArrowLink({ href, children, variant = 'plain', arrow: glyph = 'â
     'label group inline-flex items-center gap-3 transition-colors',
     variant === 'primary'
       ? 'bg-lime px-5 py-3.5 text-carbon hover:bg-ink hover:text-surface'
-      : 'border-b border-current pb-1 hover:text-signal',
+      : 'hit border-b border-current pb-1 hover:text-signal',
     className,
   );
   const arrow = (

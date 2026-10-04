@@ -32,7 +32,7 @@ export function JournalIndex({ entries, categories }: { entries: EntrySummary[];
               aria-pressed={active}
               onClick={() => setFilter(o.value)}
               className={cn(
-                'label flex items-center gap-2 border-b-2 pb-1.5 transition-colors',
+                'hit label flex items-center gap-2 border-b-2 pb-1.5 transition-colors',
                 active ? 'border-ink text-ink' : 'border-transparent text-muted hover:text-ink',
               )}
             >

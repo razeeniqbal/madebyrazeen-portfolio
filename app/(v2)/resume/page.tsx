@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Section } from '@/components/v2/system/Section';
 import { PrintButton } from '@/components/v2/resume/PrintButton';
 import { CredentialBadge } from '@/components/v2/credentials/CredentialBadge';
@@ -213,9 +212,10 @@ export default function ResumePage() {
                   <li key={p.slug} data-keep className="text-sm">
                     <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                       <p>
-                        <Link href={`/projects/${p.slug}`} className="font-bold hover:underline">
+                        {/* Absolute, so the printed PDF links to the live site, not the machine it was printed on. */}
+                        <a href={`${SITE_URL}/projects/${p.slug}`} className="font-bold hover:underline">
                           {p.title}
-                        </Link>
+                        </a>
                         {p.fullName && <span className="text-muted"> ({p.fullName})</span>}
                       </p>
                       <p className="label text-muted">

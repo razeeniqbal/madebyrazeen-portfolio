@@ -40,7 +40,7 @@ export function LifeTeaser() {
           <div className="mt-10">
             <div className="flex flex-wrap items-baseline justify-between gap-2 border-t border-line pt-4">
               <h3 className="font-semibold">
-                <Link href="/running" className="hover:underline">
+                <Link href="/running" className="hit hover:underline">
                   Running
                 </Link>
               </h3>
@@ -76,7 +76,7 @@ export function LifeTeaser() {
             return (
               <div key={t.slug} className="mt-6 border-t border-line pt-4">
                 <h3 className="font-semibold">
-                  <Link href={`/life#${t.slug}`} className="hover:underline">
+                  <Link href={`/life#${t.slug}`} className="hit hover:underline">
                     {t.name}
                   </Link>
                 </h3>
@@ -84,7 +84,7 @@ export function LifeTeaser() {
                   {steps.map((label, i) => (
                     <li key={label} className="flex items-center gap-3">
                       {project && label === project.title ? (
-                        <Link href={`/projects/${project.slug}`} className="text-ink underline underline-offset-4">
+                        <Link href={`/projects/${project.slug}`} className="hit text-ink underline underline-offset-4">
                           {label}
                         </Link>
                       ) : (

@@ -10,7 +10,7 @@ export function Currently() {
     {
       label: 'Building',
       items: currently.building.map((p) => (
-        <Link key={p.slug} href={`/projects/${p.slug}`} className="underline-offset-4 hover:underline">
+        <Link key={p.slug} href={`/projects/${p.slug}`} className="hit underline-offset-4 hover:underline">
           {p.title}
         </Link>
       )),

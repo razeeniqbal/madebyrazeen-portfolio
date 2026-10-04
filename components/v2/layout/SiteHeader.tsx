@@ -26,11 +26,14 @@ export function SiteHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
-  // While the menu is open: lock scroll, move focus into it, close on Escape (focus returns to the toggle).
+  // While the menu is open: lock scroll, move focus into it, make the page behind it inert (Tab stays in
+  // the header and menu), close on Escape (focus returns to the toggle).
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const behind = [...document.querySelectorAll<HTMLElement>('#main, footer, [data-ask-widget]')];
+    behind.forEach((el) => el.setAttribute('inert', ''));
     firstLinkRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -41,6 +44,7 @@ export function SiteHeader() {
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prev;
+      behind.forEach((el) => el.removeAttribute('inert'));
       window.removeEventListener('keydown', onKey);
     };
   }, [open]);

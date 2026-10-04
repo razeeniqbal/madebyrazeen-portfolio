@@ -8,7 +8,7 @@ import { getTrainerEngagements, trainerApproach } from '@/content/trainer';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/trainer' },
-  title: { absolute: 'Training & Speaking | Razeen Iqbal' },
+  title: 'Training & Speaking',
   description:
     'Training and speaking by Razeen Iqbal across Data, Cloud and AI, including technical knowledge sharing, student sessions and structured professional training.',
 };

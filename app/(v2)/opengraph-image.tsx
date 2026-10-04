@@ -1,5 +1,6 @@
 import { renderOg, ogSize, ogContentType } from '@/lib/og/template';
 import { profile } from '@/content/profile';
+import { home } from '@/content/home';
 
 export const size = ogSize;
 export const contentType = ogContentType;
@@ -9,9 +10,11 @@ export const alt = 'Razeen Iqbal · Portfolio';
 export default function Image() {
   return renderOg({
     kind: 'Portfolio',
+    index: profile.role,
     title: profile.statement.join(' '),
     subtitle: 'Data engineering · AI systems · Product building',
-    meta: 'Ideas → Systems → Impact',
+    // Same arc as the Home hero.
+    meta: home.hero.arc.join(' → '),
     pose: 'front',
   });
 }

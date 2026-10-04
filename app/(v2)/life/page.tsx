@@ -14,7 +14,7 @@ import { assets } from '@/lib/assets';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/life' },
-  title: { absolute: 'Life | Razeen Iqbal' },
+  title: 'Life',
   description: 'Running, volleyball, Formula 1 and the interests that sometimes become projects by Razeen Iqbal.',
 };
 
