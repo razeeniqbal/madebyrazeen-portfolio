@@ -2,9 +2,10 @@ import { CaseStudyBlock } from '@/components/v2/case-study/CaseStudyBlocks';
 import { EvidenceImage } from '@/components/v2/work/EvidenceImage';
 import type { ArticleBlock } from '@/content/notes';
 import { Inline } from './Inline';
+import { JournalFigureBlock } from './Figures';
 
 /** One journal block. Prose stays in the reading measure; figures, tables and code run wider. */
-function Block({ block }: { block: ArticleBlock }) {
+function Block({ block, figureIndex }: { block: ArticleBlock; figureIndex: number }) {
   switch (block.kind) {
     case 'text':
       return (
@@ -67,6 +68,8 @@ function Block({ block }: { block: ArticleBlock }) {
       );
     case 'divider':
       return <hr />;
+    case 'figure':
+      return <JournalFigureBlock figure={block.figure} caption={block.caption} index={figureIndex} />;
     case 'image':
       return (
         <EvidenceImage
@@ -106,7 +109,7 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
   return (
     <div className="journal-prose">
       {blocks.map((block, i) => (
-        <Block key={i} block={block} />
+        <Block key={i} block={block} figureIndex={blocks.slice(0, i + 1).filter((b) => b.kind === 'figure').length} />
       ))}
     </div>
   );

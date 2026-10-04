@@ -163,6 +163,10 @@
     border-top: 1px solid rgb(var(--line));
   }
   .journal-prose > .journal-wide { margin-block: 2.5em; }
+  /* Editorial figures: their lists are diagrams, not prose lists. */
+  .journal-prose .journal-figure ol { list-style: none; padding-left: 0; }
+  .journal-prose .journal-figure li + li { margin-top: 0; }
+  .journal-prose .journal-figure { line-height: 1.5; font-size: 1rem; }
   .prose-link {
     text-decoration: underline;
     text-decoration-thickness: 1px;

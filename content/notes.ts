@@ -17,7 +17,7 @@
 import type { Block } from './case-studies/types';
 import { resolveAsset, type ImageAsset } from '@/lib/assets';
 import { fromCmsBlock, readCollection, type CmsBlock } from './case-studies/cms';
-import { headingId, type JournalCategory } from '@/lib/journal';
+import { headingId, journalCovers, journalFigures, type JournalCategory, type JournalCover, type JournalFigure } from '@/lib/journal';
 import { getProject } from './projects';
 
 export { journalCategories, categoryLabel, formatJournalDate, type JournalCategory } from '@/lib/journal';
@@ -29,7 +29,9 @@ export type ArticleBlock =
   | { kind: 'bullets'; items: string[]; numbered?: boolean }
   | { kind: 'quote'; text: string; cite?: string }
   | { kind: 'code'; code: string; language?: string; caption?: string }
-  | { kind: 'divider' };
+  | { kind: 'divider' }
+  /** An editorial diagram drawn in code (see journalFigures). The caption carries its point in words. */
+  | { kind: 'figure'; figure: JournalFigure; caption: string };
 
 export interface Note {
   slug: string;
@@ -47,6 +49,10 @@ export interface Note {
   relatedProject?: string;
   tags: string[];
   photo?: { image: ImageAsset; caption: string; alt: string };
+  /** An editorial cover drawn in code, shown in place of a photo (see journalCovers). */
+  cover?: JournalCover;
+  /** Hand-picked links for the end of the entry ("Related"), never computed. */
+  related: { label: string; href: string }[];
   seoTitle?: string;
   seoDescription?: string;
   body: ArticleBlock[];
@@ -68,6 +74,8 @@ type CmsNote = {
   photo?: string;
   photoCaption?: string;
   photoAlt?: string;
+  cover?: string;
+  related?: { label: string; href: string }[];
   seoTitle?: string;
   seoDescription?: string;
   body?: CmsBlock[];
@@ -89,6 +97,8 @@ function toArticleBlock(b: CmsBlock): ArticleBlock | null {
       return v.code ? { kind: 'code', code: String(v.code).replace(/\s+$/, ''), language: v.language || undefined, caption: v.caption || undefined } : null;
     case 'divider':
       return { kind: 'divider' };
+    case 'figure':
+      return v.figure in journalFigures ? { kind: 'figure', figure: v.figure as JournalFigure, caption: String(v.caption ?? '') } : null;
     default:
       return fromCmsBlock(b);
   }
@@ -109,6 +119,7 @@ function blockWords(b: ArticleBlock): string {
     case 'code':
       return b.code;
     case 'image':
+    case 'figure':
       return b.caption;
     case 'steps':
       return b.steps.join(' ');
@@ -139,6 +150,8 @@ export const notes: Note[] = readCollection<CmsNote>('notes')
       relatedProject: data.relatedProject && data.relatedProject !== 'none' ? data.relatedProject : undefined,
       tags: data.tags ?? [],
       photo: image ? { image, caption: data.photoCaption ?? '', alt: data.photoAlt || image.alt } : undefined,
+      cover: data.cover && data.cover in journalCovers ? (data.cover as JournalCover) : undefined,
+      related: (data.related ?? []).filter((r) => r.label && r.href),
       seoTitle: data.seoTitle || undefined,
       seoDescription: data.seoDescription || undefined,
       body,

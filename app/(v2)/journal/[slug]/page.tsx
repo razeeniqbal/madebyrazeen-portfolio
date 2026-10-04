@@ -8,6 +8,7 @@ import { EvidenceImage } from '@/components/v2/work/EvidenceImage';
 import { JsonLd } from '@/components/v2/seo/JsonLd';
 import { ArticleBody } from '@/components/v2/journal/ArticleBody';
 import { EntryMeta } from '@/components/v2/journal/EntryMeta';
+import { JournalCoverFigure } from '@/components/v2/journal/Figures';
 import { getNote, getPublishedJournalEntries, tableOfContents, toSummary } from '@/content/notes';
 import { getProject } from '@/content/projects';
 import { SITE_URL } from '@/lib/site';
@@ -39,6 +40,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       ...(note.updated && { modifiedTime: note.updated }),
       authors: ['Razeen Iqbal'],
     },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
@@ -54,6 +56,7 @@ export default async function JournalEntryPage({ params }: Params) {
   const at = all.findIndex((n) => n.slug === note.slug);
   const newer = at > 0 ? all[at - 1] : undefined;
   const older = at >= 0 && at < all.length - 1 ? all[at + 1] : undefined;
+  // Hand-picked links win; otherwise other entries in the same category or about the same build.
   const related = all.filter((n) => n.slug !== note.slug && (n.category === note.category || (note.relatedProject && n.relatedProject === note.relatedProject))).slice(0, 3);
 
   return (
@@ -110,13 +113,27 @@ export default async function JournalEntryPage({ params }: Params) {
         )}
 
         <div className="col-span-full min-w-0 lg:col-span-9 lg:col-start-4">
+          {note.cover && !note.photo && <JournalCoverFigure cover={note.cover} className="mb-12 max-w-[56rem]" />}
           {note.photo && (
             <EvidenceImage image={{ ...note.photo.image, alt: note.photo.alt }} caption={note.photo.caption} sizes="(min-width: 1024px) 56rem, 100vw" priority className="mb-12 max-w-[56rem]" />
           )}
           <ArticleBody blocks={note.body} />
 
           <footer className="mt-20 max-w-[40rem] space-y-10 border-t border-line pt-8">
-            {related.length > 0 && (
+            {note.related.length > 0 ? (
+              <div>
+                <TechnicalLabel as="h2">Related</TechnicalLabel>
+                <ul className="mt-3 space-y-2">
+                  {note.related.map((r) => (
+                    <li key={r.href}>
+                      <Link href={r.href} className="prose-link">
+                        {r.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : related.length > 0 && (
               <div>
                 <TechnicalLabel as="h2">Related writing</TechnicalLabel>
                 <ul className="mt-3 space-y-2">

@@ -17,11 +17,15 @@ interface OgOptions {
   meta?: string; // bottom-left line
   surface?: 'dark' | 'light';
   pose?: MiniRazeenPose;
+  /** A short sequence drawn under the subtitle, e.g. a journal cover's stages. */
+  motif?: readonly string[];
+  /** Index of the motif stage to mark (defaults to the last). */
+  motifMark?: number;
 }
 
 const fontFile = (name: string) => readFile(join(process.cwd(), 'lib/og/fonts', name));
 
-export async function renderOg({ kind, index, title, subtitle, meta, surface = 'dark', pose }: OgOptions) {
+export async function renderOg({ kind, index, title, subtitle, meta, surface = 'dark', pose, motif, motifMark }: OgOptions) {
   const [interBold, interRegular, mono] = await Promise.all([
     fontFile('inter-latin-800-normal.woff'),
     fontFile('inter-latin-400-normal.woff'),
@@ -66,6 +70,19 @@ export async function renderOg({ kind, index, title, subtitle, meta, surface = '
             <div style={{ display: 'flex', fontWeight: 800, fontSize: titleSize, lineHeight: 0.98, letterSpacing: -3 }}>{title}</div>
             {subtitle && (
               <div style={{ display: 'flex', marginTop: 26, fontSize: 30, lineHeight: 1.35, color: muted, fontWeight: 400 }}>{subtitle}</div>
+            )}
+            {motif && motif.length > 0 && (
+              <div style={{ ...label, display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: 30, fontSize: 16, color: fg }}>
+                {motif.map((m, i) => (
+                  <div key={m} style={{ display: 'flex', alignItems: 'center' }}>
+                    {i === (motifMark ?? motif.length - 1) && (
+                      <div style={{ width: 12, height: 12, borderRadius: 12, background: C.lime, border: `1px solid ${fg}`, marginRight: 10, display: 'flex' }} />
+                    )}
+                    {m}
+                    {i < motif.length - 1 && <div style={{ display: 'flex', margin: '0 12px', color: muted }}>→</div>}
+                  </div>
+                ))}
+              </div>
             )}
           </div>
           {character && <img src={character} height={260} style={{ objectFit: 'contain' }} alt="" />}
