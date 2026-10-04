@@ -115,6 +115,71 @@
     text-transform: uppercase;
   }
 
+  /* Journal reading column: larger type, a ~68ch measure, sentence case in prose. */
+  .journal-prose {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  /* Prose keeps the reading measure; figures may run wider, up to the article column. */
+  .journal-prose > * { max-width: 40rem; }
+  .journal-prose > .journal-wide { max-width: 56rem; }
+  @media (min-width: 768px) {
+    .journal-prose { font-size: 1.125rem; }
+  }
+  .journal-prose > * + * { margin-top: 1.4em; }
+  .journal-prose > :first-child { margin-top: 0; }
+  .journal-prose h2 {
+    margin-top: 2.6em;
+    font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+  .journal-prose h3 {
+    margin-top: 2em;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 600;
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+  .journal-prose h2 + *,
+  .journal-prose h3 + * { margin-top: 0.75em; }
+  .journal-prose ul,
+  .journal-prose ol { padding-left: 1.4em; }
+  .journal-prose ul { list-style: square; }
+  .journal-prose ol { list-style: decimal; }
+  .journal-prose li + li { margin-top: 0.4em; }
+  .journal-prose li::marker { color: rgb(var(--muted)); }
+  .journal-prose blockquote {
+    border-left: 3px solid rgb(var(--lime));
+    padding-left: 1.25em;
+    font-size: 1.15em;
+    line-height: 1.55;
+  }
+  .journal-prose hr {
+    margin-block: 3em;
+    border: 0;
+    border-top: 1px solid rgb(var(--line));
+  }
+  .journal-prose > .journal-wide { margin-block: 2.5em; }
+  .prose-link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: rgb(var(--fg) / 0.45);
+    transition: text-decoration-color 150ms;
+  }
+  .prose-link:hover { text-decoration-color: rgb(var(--fg)); }
+  .prose-code {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.86em;
+    padding: 0.1em 0.35em;
+    background: rgb(var(--bg-raised));
+    border: 1px solid rgb(var(--line));
+    overflow-wrap: anywhere;
+  }
+
   /* Justified long-form copy (tablet and up). Phones stay left-aligned to avoid wide word gaps. */
   @media (min-width: 768px) {
     .justify-copy,

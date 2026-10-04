@@ -140,8 +140,22 @@ export function buildKnowledge(): string {
 
   // Only published entries; drafts and archived entries are never shared.
   const published = getPublishedJournalEntries();
+  // Journal entries are Razeen's first-person reflections. They explain why and how he thinks about
+  // something; the project sections above remain the source of truth for what a project is and does.
   out.push(
-    `## Journal (writing, at /journal)\n${published.length ? published.map((n) => `- ${n.title} (${n.date}): ${n.summary}`).join('\n') : 'No journal entries are published yet.'}`,
+    `## Journal (Razeen's reflections, at ${SITE_URL}/journal)\nThese are opinions and reasoning in Razeen's own voice, not product facts. When a journal entry and a project section above differ on what a project does or contains, the project section is correct.\n${
+      published.length
+        ? published
+            .map(
+              (n) =>
+                `### ${n.title} (${n.category}, published ${n.date}${n.relatedProject ? `, about the ${n.relatedProject} project` : ''})\n${n.description}\nPage: ${SITE_URL}/journal/${n.slug}\n${n.body
+                  .map((b) => (b.kind === 'heading' ? `#### ${b.text}` : b.kind === 'text' ? b.body.join('\n') : b.kind === 'bullets' ? b.items.map((i) => `- ${i}`).join('\n') : ''))
+                  .filter(Boolean)
+                  .join('\n')}`,
+            )
+            .join('\n\n')
+        : 'No journal entries are published yet.'
+    }`,
   );
 
   if (isSampleData()) {

@@ -1,11 +1,8 @@
 {
   "title": "A party game with no backend",
-  "number": "007",
   "summary": "Building Balang: probability, kuih and peer-to-peer rooms that run entirely in the browser.",
-  "topic": "Product",
   "status": "archived",
   "date": null,
-  "readingMinutes": 5,
   "photo": "projects.balang",
   "photoCaption": "Balang",
   "category": "building",
