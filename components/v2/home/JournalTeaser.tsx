@@ -16,9 +16,9 @@ export function JournalTeaser() {
       <div className="page-container">
         <div className="border-t border-line" />
       </div>
-      <div className="page-grid gap-y-12 pt-[clamp(4.5rem,9vw,8rem)]">
-        <SectionHeader index="05" eyebrow="Journal" title={home.journal.title} size="md" className="lg:col-span-5" />
-        <div className="col-span-full lg:col-span-6 lg:col-start-7">
+      <div className="page-grid gap-y-12 pt-[clamp(3.5rem,6vw,5rem)]">
+        <SectionHeader index="05" eyebrow="Journal" title={home.journal.title} size="md" className="lg:col-span-7" />
+        <div className="col-span-full lg:col-span-5 lg:col-start-8">
           <NoteList notes={latest} />
           <div className="border-t border-line pt-8">
             <ArrowLink href="/journal">All entries</ArrowLink>

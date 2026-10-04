@@ -43,6 +43,28 @@ function Linkified({ text }: { text: string }) {
   );
 }
 
+/**
+ * True when a point sits on real content: actual text (not the empty end of a line), an image, or a
+ * control. The launcher is made click-through for the test so it never detects itself.
+ */
+function contentAt(x: number, y: number): boolean {
+  for (const el of document.elementsFromPoint(x, y)) {
+    if (el.closest('[data-ask-widget]')) continue;
+    if (el.matches('img, video, svg, canvas, input, select, textarea')) return true;
+    break;
+  }
+  const doc = document as Document & { caretRangeFromPoint?: (x: number, y: number) => Range | null };
+  const range = doc.caretRangeFromPoint?.(x, y);
+  const node = range?.startContainer;
+  if (!range || !node || node.nodeType !== Node.TEXT_NODE || !node.textContent?.trim()) return false;
+  const at = Math.min(range.startOffset, node.textContent.length - 1);
+  const ch = document.createRange();
+  ch.setStart(node, Math.max(0, at));
+  ch.setEnd(node, Math.max(0, at) + 1);
+  const b = ch.getBoundingClientRect();
+  return x >= b.left - 12 && x <= b.right + 12 && y >= b.top - 6 && y <= b.bottom + 6;
+}
+
 export function AskWidget() {
   const pathname = usePathname();
   const quiet = isQuietRoute(pathname ?? '');
@@ -64,6 +86,8 @@ export function AskWidget() {
   const [celebrate, setCelebrate] = useState(false);
   const [trouble, setTrouble] = useState(false);
   const [asleep, setAsleep] = useState(false);
+  // Home only: slid into the right gutter while the launcher would sit on text, links or images.
+  const [tucked, setTucked] = useState(false);
   const flash = (set: (v: boolean) => void, ms: number) => {
     set(true);
     setTimeout(() => set(false), ms);
@@ -251,6 +275,53 @@ export function AskWidget() {
     };
   }, [open, available, quiet]);
 
+  // Collision pass (Home): sample the launcher's footprint, including the head above the pill. When it
+  // would cover content, slide it into the right gutter so only a sliver shows; it returns as soon as
+  // the area is clear, on hover, or on keyboard focus. Other pages keep the plain fixed launcher.
+  useEffect(() => {
+    if (pathname !== '/' || open) {
+      setTucked(false);
+      return;
+    }
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const btn = launcherRef.current;
+      if (!btn) return;
+      // Measure the resting position: the transform is ignored by offsetWidth/offsetHeight.
+      const right = window.innerWidth >= 768 ? 24 : 16;
+      const w = btn.offsetWidth;
+      const h = btn.offsetHeight + 28;
+      const x0 = window.innerWidth - right - w;
+      const y1 = window.innerHeight - 16;
+      const y0 = y1 - h;
+      btn.style.pointerEvents = 'none';
+      let hit = false;
+      for (const fx of [0.1, 0.5, 0.9]) {
+        for (const fy of [0.1, 0.5, 0.9]) {
+          if (contentAt(x0 + w * fx, y0 + h * fy)) {
+            hit = true;
+            break;
+          }
+        }
+        if (hit) break;
+      }
+      btn.style.pointerEvents = '';
+      setTucked(hit);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+    schedule();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [pathname, open]);
+
   const offline = available === false;
   const last = messages[messages.length - 1];
   const streaming = pending && last?.role === 'assistant' && last.content.length > 0;
@@ -272,7 +343,7 @@ export function AskWidget() {
   const showSuggestions = !messages.some((m) => m.role === 'user');
 
   return (
-    <div data-print-hide data-surface="dark" className="!bg-transparent">
+    <div data-print-hide data-ask-widget data-surface="dark" className="!bg-transparent">
       {/* Speech bubble nudge */}
       {teaser && !open && (
         <div
@@ -314,8 +385,10 @@ export function AskWidget() {
         aria-label="Ask about me"
         className={cn(
           // Collapsed by default (R03: must not cover hero content); the label slides out on hover/focus or while open.
-          'group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center rounded-full border border-line bg-carbon py-1.5 pr-3 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform hover:-translate-y-0.5 md:right-6',
+          'group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center rounded-full border border-line bg-carbon py-1.5 pr-3 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none md:right-6',
           'pl-[3.75rem]',
+          // Tucked: only a sliver stays in the page gutter (10px on phones, 14px from tablet up).
+          tucked && !hover && 'translate-x-[calc(100%+6px)] md:translate-x-[calc(100%+10px)]',
           open && 'hidden', // the panel header has its own Close; one control, one Mini Razeen
         )}
       >

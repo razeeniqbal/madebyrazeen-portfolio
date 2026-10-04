@@ -29,11 +29,15 @@ export function FeaturedWork() {
   const firstUser = work.flow.findIndex((s) => s.type === 'USER');
 
   return (
-    <Section surface="dark" className="border-t border-line !pt-[clamp(4.5rem,9vw,8rem)]">
-      <div className="page-grid gap-y-10">
+    // A raised black surface and a rule mark the turn from the career story (Path) to applied work,
+    // without switching to light just to alternate.
+    <Section surface="dark" className="border-t border-line !bg-raised !pt-[clamp(4.5rem,9vw,8rem)]">
+      <div className="page-grid gap-y-8 lg:gap-y-10">
         <SectionHeader index="03" eyebrow="Featured work" title={home.featuredWork.title} size="md" className="lg:col-span-8" />
 
-        <div className="col-span-full space-y-6 lg:col-span-5">
+        {/* Phones read: context and one paragraph, the artwork, then recognition and the link.
+            Desktop: copy and link on the left, artwork on the right. */}
+        <div className="col-span-full space-y-5 lg:col-span-5 lg:row-start-2">
           <p className="label flex flex-wrap gap-x-2 gap-y-1 text-muted">
             <span className="text-ink">{project.title}</span>
             <span aria-hidden="true">·</span>
@@ -50,12 +54,10 @@ export function FeaturedWork() {
               {p}
             </p>
           ))}
-          {work.recognition && <TechnicalLabel as="p">{work.recognition}</TechnicalLabel>}
-          <ArrowLink href={`/projects/${project.slug}`}>Read the case study</ArrowLink>
         </div>
 
         {project.cover && (
-          <figure data-reveal className="col-span-full lg:col-span-7">
+          <figure data-reveal className="col-span-full lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-2">
             <div className="relative overflow-hidden border border-line bg-raised">
               <Image
                 src={project.cover.src}
@@ -69,6 +71,11 @@ export function FeaturedWork() {
             <figcaption className="label mt-3 text-muted">{evidenceCaption(project.cover)}</figcaption>
           </figure>
         )}
+
+        <div className="col-span-full space-y-5 lg:col-span-5 lg:row-start-3 lg:self-end lg:pb-8">
+          {work.recognition && <TechnicalLabel as="p">{work.recognition}</TechnicalLabel>}
+          <ArrowLink href={`/projects/${project.slug}`}>Read the case study</ArrowLink>
+        </div>
 
         {/* Phones: one compact row per step. Desktop: the seven steps side by side. */}
         <ol aria-label={`${project.title} workflow`} className="col-span-full border-t border-line lg:grid lg:grid-cols-7 lg:gap-px lg:border lg:bg-line">

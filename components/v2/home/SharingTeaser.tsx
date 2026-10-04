@@ -15,7 +15,7 @@ export function SharingTeaser() {
   const engagements = getTrainerEngagements();
 
   return (
-    <Section surface="light" className="!py-[clamp(4.5rem,9vw,8rem)]">
+    <Section surface="light" className="!pb-[clamp(3.5rem,6vw,5rem)] !pt-[clamp(4.5rem,9vw,8rem)]">
       <div className="page-grid gap-y-10">
         <SectionHeader index="04" eyebrow="Sharing" title={learning.title} size="md" className="lg:col-span-7" />
 
