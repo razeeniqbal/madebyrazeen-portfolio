@@ -10,7 +10,7 @@ import { getTrainerEngagements } from '@/content/trainer';
 import { getLifeInterests } from '@/content/life';
 import { getProjects, getPrimaryBuilds } from '@/content/projects';
 import { getCaseStudy, type Block } from '@/content/case-studies';
-import { achievements } from '@/content/achievements';
+import { achievements, credentialTypeLabel } from '@/content/achievements';
 import { capabilities } from '@/content/capabilities';
 import { aboutHero, aboutStages, moments, whyBuild, howIWork, principles, learning, currently, beyond } from '@/content/story';
 import { availability, helpWith } from '@/content/contact';
@@ -177,9 +177,9 @@ export function buildKnowledge(): string {
   }
 
   const byIssuer = new Map<string, string[]>();
-  achievements.forEach((a) => byIssuer.set(a.organization, [...(byIssuer.get(a.organization) ?? []), `${a.title} (${a.issuedDate})`]));
+  achievements.forEach((a) => byIssuer.set(a.organization, [...(byIssuer.get(a.organization) ?? []), `${a.title} (${credentialTypeLabel[a.type].toLowerCase()}${a.issuedDate ? `, ${a.issuedDate}` : ''})`]));
   out.push(
-    `## Certifications & courses (${achievements.length})\n${[...byIssuer.entries()].map(([org, list]) => `- ${org}: ${list.join('; ')}`).join('\n')}`,
+    `## Credentials (${achievements.length}: certifications, accreditations, skill badges, courses, programmes and registrations; each line names its type)\n${[...byIssuer.entries()].map(([org, list]) => `- ${org}: ${list.join('; ')}`).join('\n')}`,
   );
 
   return out.join('\n\n');

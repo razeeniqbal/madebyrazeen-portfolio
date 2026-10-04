@@ -11,17 +11,47 @@ import data from './data/achievements.json';
 
 export type CredentialArea = 'ai' | 'data' | 'cloud' | 'development' | 'other';
 
+/** What a record actually is, so the archive never presents a course as a certification. */
+export type CredentialType = 'certification' | 'accreditation' | 'skill-badge' | 'course' | 'programme-completion' | 'professional-registration';
+
+export const credentialTypeLabel: Record<CredentialType, string> = {
+  certification: 'Certification',
+  accreditation: 'Accreditation',
+  'skill-badge': 'Skill badge',
+  course: 'Course',
+  'programme-completion': 'Programme',
+  'professional-registration': 'Registration',
+};
+
 export interface Achievement {
   id: string;
   title: string;
   organization: string;
+  type: CredentialType;
+  /** Exam / credential code when it is not part of the title (PCEP-30-02). */
+  code?: string;
   issuedDate: string;
+  /** Exact ISO dates, when supplied; the display uses the month form. */
+  issuedOn?: string;
+  expiresOn?: string;
+  /** "July 2027"; empty when the credential does not expire or the date is unknown. */
+  expiresDate?: string;
   description: string;
   category: 'certification' | 'award' | 'course' | 'achievement';
   area: CredentialArea;
   image: string;
+  /** Personal verification page only (shown as Verify). */
   credentialUrl?: string;
+  /** Generic issuer page: kept for reference, never shown as Verify. */
+  issuerUrl?: string;
+  evidenceUrl?: string;
   credentialId?: string;
+  certificationNumber?: string;
+  /** personal = a working personal verification page; broken = data kept, link needs updating. */
+  verification: 'personal' | 'none' | 'broken';
+  provenance: string[];
+  /** Provenance of the record (audit trail). */
+  source?: string;
   /** Shown in the Home hero strip and first on the Resume. */
   featured: boolean;
   /** Part of the small narrative set on /credentials and About. */
@@ -43,8 +73,19 @@ export const achievements: Achievement[] = data.items.map((a) => ({
   ...a,
   category: a.category as Achievement['category'],
   area: a.area as CredentialArea,
+  type: (a.type || 'certification') as CredentialType,
+  code: a.code || undefined,
+  issuedOn: a.issuedOn || undefined,
+  expiresOn: a.expiresOn || undefined,
+  verification: (a.verification || 'none') as Achievement['verification'],
+  provenance: a.provenance ?? [],
+  expiresDate: a.expiresDate || undefined,
   credentialUrl: a.credentialUrl || undefined,
+  issuerUrl: a.issuerUrl || undefined,
+  evidenceUrl: a.evidenceUrl || undefined,
   credentialId: a.credentialId || undefined,
+  certificationNumber: a.certificationNumber || undefined,
+  source: a.source || undefined,
   featured: Boolean(a.featured),
   selected: Boolean(a.selected),
 }));
