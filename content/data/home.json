@@ -1,9 +1,45 @@
 {
-  "aboutTeaser": {
+  "hero": {
+    "arc": [
+      "Civil engineering",
+      "Data",
+      "AI",
+      "Building products"
+    ]
+  },
+  "builds": {
     "title": [
-      "Same curiosity.",
-      "Different tracks."
+      "Four builds.",
+      "Four starting points."
+    ],
+    "projects": [
+      "vsb",
+      "forma",
+      "sepang-vision-lab",
+      "balang"
+    ]
+  },
+  "path": {
+    "title": [
+      "The path changed.",
+      "The way I think did not."
     ],
     "body": "Civil engineering taught me to respect systems. Data taught me to question them. I still work the same way: input, process, iterate, progress, whether it is a pipeline, a model or a long run."
+  },
+  "featuredWork": {
+    "project": "qualityplus",
+    "title": [
+      "Turning data quality checks",
+      "into a reviewable workflow."
+    ],
+    "body": [
+      "Deterministic checks score a dataset for completeness, uniqueness, validity and consistency against reference data. AI works around those checks, suggesting rules, summarising findings and proposing fixes. Every correction is reviewed before the trusted version is approved and published."
+    ]
+  },
+  "journal": {
+    "title": [
+      "Notes from building",
+      "and learning."
+    ]
   }
 }

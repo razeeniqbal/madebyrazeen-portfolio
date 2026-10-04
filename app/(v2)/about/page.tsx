@@ -276,7 +276,7 @@ export default function AboutPage() {
                 k: 'Building',
                 v: currently.building.map((p) => (
                   <p key={p.slug}>
-                    <Link href={`/projects/${p.slug}`} className="font-semibold hover:underline">
+                    <Link href={`/projects/${p.slug}`} className="hit font-semibold hover:underline">
                       {p.title}
                     </Link>
                     <span className="label ml-2 text-muted">{statusLabel[p.status]}</span>

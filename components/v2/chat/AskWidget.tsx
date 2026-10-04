@@ -43,6 +43,33 @@ function Linkified({ text }: { text: string }) {
   );
 }
 
+// Elements whose whole box counts as content when the launcher would sit on it.
+const SOLID = 'img, video, svg, canvas, picture, input, select, textarea, button, table, iframe';
+
+/**
+ * True when a point sits on real content: the box of an image, control or table, or the actual glyph
+ * boxes of text (never the empty end of a line). Pure DOM geometry (elementsFromPoint + Range rects),
+ * so it behaves the same in Chromium, Firefox and WebKit. The launcher is made click-through first.
+ */
+function contentAt(x: number, y: number): boolean {
+  const pad = 6;
+  for (const el of document.elementsFromPoint(x, y)) {
+    if (el.closest('[data-ask-widget]')) continue;
+    if (el.closest(SOLID)) return true;
+    // Text directly inside the topmost element (inline children such as links are topmost themselves).
+    const range = document.createRange();
+    for (const node of Array.from(el.childNodes)) {
+      if (node.nodeType !== Node.TEXT_NODE || !node.textContent?.trim()) continue;
+      range.selectNodeContents(node);
+      for (const r of Array.from(range.getClientRects())) {
+        if (x >= r.left - pad && x <= r.right + pad && y >= r.top - pad && y <= r.bottom + pad) return true;
+      }
+    }
+    return false;
+  }
+  return false;
+}
+
 export function AskWidget() {
   const pathname = usePathname();
   const quiet = isQuietRoute(pathname ?? '');
@@ -64,6 +91,8 @@ export function AskWidget() {
   const [celebrate, setCelebrate] = useState(false);
   const [trouble, setTrouble] = useState(false);
   const [asleep, setAsleep] = useState(false);
+  // Slid into the right gutter while the launcher would sit on text, links, images or controls.
+  const [tucked, setTucked] = useState(false);
   const flash = (set: (v: boolean) => void, ms: number) => {
     set(true);
     setTimeout(() => set(false), ms);
@@ -251,6 +280,80 @@ export function AskWidget() {
     };
   }, [open, available, quiet]);
 
+  // Collision pass (every page): sample the launcher's resting footprint, including the head above the
+  // pill. When it would cover content, slide it into the right gutter so only a sliver shows. It tucks
+  // at once, but returns only after the area has been clear for a moment (no flicker while scrolling);
+  // hover, keyboard focus and opening the panel always bring it back.
+  useEffect(() => {
+    if (open) {
+      setTucked(false);
+      return;
+    }
+    let frame = 0;
+    let clearSince = 0;
+    let lastScroll = 0;
+    let settle: ReturnType<typeof setTimeout> | undefined;
+    const check = () => {
+      frame = 0;
+      const btn = launcherRef.current;
+      if (!btn) return;
+      // Resting position: offsetWidth/offsetHeight ignore the tuck transform.
+      // clientWidth/clientHeight exclude a classic scrollbar (Firefox and others on Windows), which is
+      // what the fixed right/bottom offsets are measured from; innerWidth would shift the samples.
+      const vw = document.documentElement.clientWidth;
+      const vh = document.documentElement.clientHeight;
+      const right = window.innerWidth >= 768 ? 24 : 16;
+      const w = btn.offsetWidth;
+      const h = btn.offsetHeight + 28;
+      const x0 = vw - right - w;
+      const y1 = vh - 16;
+      const y0 = y1 - h;
+      const previous = btn.style.pointerEvents;
+      btn.style.pointerEvents = 'none';
+      let hit = false;
+      // Rows every ~10px, so a single line of small mono text cannot slip between two samples.
+      for (const fx of [0.06, 0.3, 0.55, 0.8, 0.96]) {
+        for (const fy of [0.03, 0.17, 0.31, 0.45, 0.59, 0.73, 0.87, 0.98]) {
+          if (contentAt(x0 + w * fx, y0 + h * fy)) {
+            hit = true;
+            break;
+          }
+        }
+        if (hit) break;
+      }
+      btn.style.pointerEvents = previous;
+      if (hit) {
+        clearSince = 0;
+        setTucked(true);
+      } else {
+        // Only come back once scrolling has settled, so it never pops out mid-scroll.
+        const now = performance.now();
+        clearSince ||= now;
+        if (now - clearSince >= 220 && now - lastScroll >= 260) setTucked(false);
+        else {
+          clearTimeout(settle);
+          settle = setTimeout(schedule, 240);
+        }
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
+    const onScroll = () => {
+      lastScroll = performance.now();
+      schedule();
+    };
+    schedule();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      clearTimeout(settle);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [pathname, open]);
+
   const offline = available === false;
   const last = messages[messages.length - 1];
   const streaming = pending && last?.role === 'assistant' && last.content.length > 0;
@@ -272,7 +375,7 @@ export function AskWidget() {
   const showSuggestions = !messages.some((m) => m.role === 'user');
 
   return (
-    <div data-print-hide data-surface="dark" className="!bg-transparent">
+    <div data-print-hide data-ask-widget data-surface="dark" className="!bg-transparent">
       {/* Speech bubble nudge */}
       {teaser && !open && (
         <div
@@ -314,8 +417,12 @@ export function AskWidget() {
         aria-label="Ask about me"
         className={cn(
           // Collapsed by default (R03: must not cover hero content); the label slides out on hover/focus or while open.
-          'group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center rounded-full border border-line bg-carbon py-1.5 pr-3 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform hover:-translate-y-0.5 md:right-6',
+          'group fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-4 z-[60] flex items-center rounded-full border border-line bg-carbon py-1.5 pr-3 text-warm shadow-[0_8px_30px_rgb(0_0_0/0.35)] transition-transform hover:-translate-y-0.5 motion-reduce:transition-none md:right-6',
+          // Leaves quickly when it would cover content, returns gently.
+          tucked && !hover ? 'duration-150' : 'duration-300',
           'pl-[3.75rem]',
+          // Tucked: only a sliver stays in the page gutter (10px on phones, 14px from tablet up).
+          tucked && !hover && 'translate-x-[calc(100%+6px)] md:translate-x-[calc(100%+10px)]',
           open && 'hidden', // the panel header has its own Close; one control, one Mini Razeen
         )}
       >

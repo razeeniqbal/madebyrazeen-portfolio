@@ -50,7 +50,7 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
                 aria-pressed={active}
                 onClick={() => setArea(f.value)}
                 className={cn(
-                  'label flex items-center gap-2 border-b-2 pb-1.5 transition-colors',
+                  'hit label flex items-center gap-2 border-b-2 pb-1.5 transition-colors',
                   active ? 'border-lime text-ink' : 'border-transparent text-muted hover:text-ink',
                 )}
               >
@@ -116,7 +116,7 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
       </ol>
 
       {initial && !filtered && results.length > initial && (
-        <button type="button" onClick={() => setExpanded((v) => !v)} className="label mt-6 border-b border-current pb-1" aria-expanded={expanded}>
+        <button type="button" onClick={() => setExpanded((v) => !v)} className="hit label mt-6 border-b border-current pb-1" aria-expanded={expanded}>
           {expanded ? 'Show fewer' : `Show all ${results.length}`}
         </button>
       )}

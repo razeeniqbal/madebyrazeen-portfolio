@@ -79,7 +79,7 @@ export default function JournalPage() {
             <ArrowLink href="/projects">What I build</ArrowLink>
             <ArrowLink href="/trainer">What I share</ArrowLink>
             {/* A feed file, not a page: a plain link so the router does not try to render it. */}
-            <a href="/journal/rss.xml" className="label inline-flex items-center gap-3 border-b border-current pb-1 hover:text-signal">
+            <a href="/journal/rss.xml" className="hit label inline-flex items-center gap-3 border-b border-current pb-1 hover:text-signal">
               RSS feed <span aria-hidden="true">↗</span>
             </a>
           </div>

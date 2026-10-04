@@ -115,7 +115,7 @@ export function FeaturedWork({ work, number }: { work: SelectedWork; number: str
         </div>
         <WorkFacts work={work} />
         {work.projectSlug && (
-          <Link href={`/projects/${work.projectSlug}`} className="label inline-block border-b border-current pb-1 hover:text-signal">
+          <Link href={`/projects/${work.projectSlug}`} className="hit label inline-block border-b border-current pb-1 hover:text-signal">
             {work.name} case study <span aria-hidden="true">→</span>
           </Link>
         )}

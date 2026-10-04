@@ -127,13 +127,6 @@ export function getProjectsByTier(...tiers: ProjectTier[]): Project[] {
   return getProjects().filter((p) => tiers.includes(p.tier));
 }
 
-/** Home "Selected work": highlighted projects that can be shown as working; under-construction builds stay on /projects. */
-export function getHomeProjects(count = 3): Project[] {
-  return getProjectsByTier('flagship', 'featured')
-    .filter((p) => p.status !== 'under-construction')
-    .slice(0, count);
-}
-
 /** Projects of one kind (e.g. the primary builds: VSB, FORMA, Sepang Vision Lab, BALANG), in presentation order. */
 export const getProjectsByKind = (...kinds: ProjectKind[]): Project[] => getProjects().filter((p) => kinds.includes(p.kind));
 

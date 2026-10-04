@@ -84,3 +84,11 @@ export function engagementWhen(e: TrainerEngagement): string | undefined {
 }
 
 export const getFeaturedTrainerEngagements = (): TrainerEngagement[] => getTrainerEngagements().filter((e) => e.featured);
+
+/** How a session is shaped: Understand → Demonstrate → Practise → Apply (used on /trainer and Home). */
+export const trainerApproach = [
+  { step: 'Understand', detail: 'What it is, and why it exists.' },
+  { step: 'Demonstrate', detail: 'How it works, shown on something real.' },
+  { step: 'Practise', detail: 'People work through it themselves.' },
+  { step: 'Apply', detail: 'Connect it to a real use case.' },
+];

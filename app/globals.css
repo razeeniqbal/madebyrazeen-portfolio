@@ -180,6 +180,16 @@
     overflow-wrap: anywhere;
   }
 
+  /* Larger tap area without changing the look: an invisible box 4px above and below the element. */
+  .hit {
+    position: relative;
+  }
+  .hit::after {
+    content: '';
+    position: absolute;
+    inset: -4px 0;
+  }
+
   /* Justified long-form copy (tablet and up). Phones stay left-aligned to avoid wide word gaps. */
   @media (min-width: 768px) {
     .justify-copy,

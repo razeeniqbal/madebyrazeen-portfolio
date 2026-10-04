@@ -4,21 +4,16 @@ import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { CompactEngagement, FeaturedEngagement } from '@/components/v2/trainer/EngagementEntry';
-import { getTrainerEngagements } from '@/content/trainer';
+import { getTrainerEngagements, trainerApproach } from '@/content/trainer';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/trainer' },
-  title: { absolute: 'Training & Speaking | Razeen Iqbal' },
+  title: 'Training & Speaking',
   description:
     'Training and speaking by Razeen Iqbal across Data, Cloud and AI, including technical knowledge sharing, student sessions and structured professional training.',
 };
 
-const approach = [
-  { step: 'Understand', detail: 'What it is, and why it exists.' },
-  { step: 'Demonstrate', detail: 'How it works, shown on something real.' },
-  { step: 'Practise', detail: 'People work through it themselves.' },
-  { step: 'Apply', detail: 'Connect it to a real use case.' },
-];
+const approach = trainerApproach;
 
 // Trainer: learning becomes more useful when it can be explained and shared. Records come from
 // content/data/trainer.json and keep their order; their mode sets their weight (structured training
