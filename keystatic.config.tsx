@@ -26,9 +26,7 @@ const paragraphList = (label: string) =>
 const NODE_TYPES = ['SOURCE', 'PROCESS', 'DATABASE', 'API', 'MODEL', 'AGENT', 'USER', 'OUTPUT', 'MONITOR'].map((v) => ({ label: v, value: v }));
 
 // Content blocks shared by case studies and notes (mirrors content/case-studies/types.ts).
-const contentBlocks = (label: string) =>
-  fields.blocks(
-    {
+const sharedBlocks = {
       gallery: {
         label: 'Product evidence (screenshots)',
         schema: fields.object({
@@ -112,6 +110,47 @@ const contentBlocks = (label: string) =>
         label: 'Image',
         schema: fields.object({ image: imageSelect('Image'), caption: fields.text({ label: 'Caption' }) }),
       },
+};
+
+const contentBlocks = (label: string) => fields.blocks(sharedBlocks, { label });
+
+// Journal articles add reading blocks on top of the shared ones. Text in paragraphs and list items
+// supports [links](url), `code`, **bold** and *italics*.
+const articleBlocks = (label: string) =>
+  fields.blocks(
+    {
+      ...sharedBlocks,
+      heading: {
+        label: 'Heading',
+        schema: fields.object({
+          level: fields.select({
+            label: 'Level',
+            options: [
+              { label: 'Section (H2)', value: '2' },
+              { label: 'Subsection (H3)', value: '3' },
+            ],
+            defaultValue: '2',
+          }),
+          text: fields.text({ label: 'Text' }),
+        }),
+      },
+      bullets: {
+        label: 'Bulleted / numbered list',
+        schema: fields.object({ numbered: fields.checkbox({ label: 'Numbered' }), items: textList('Items', 'Item') }),
+      },
+      quote: {
+        label: 'Quote',
+        schema: fields.object({ text: fields.text({ label: 'Quote', multiline: true }), cite: fields.text({ label: 'Source (optional)' }) }),
+      },
+      code: {
+        label: 'Code',
+        schema: fields.object({
+          language: fields.text({ label: 'Language (e.g. python, sql, ts)' }),
+          code: fields.text({ label: 'Code', multiline: true }),
+          caption: fields.text({ label: 'Caption (optional)' }),
+        }),
+      },
+      divider: { label: 'Divider', schema: fields.empty() },
     },
     { label },
   );
@@ -673,12 +712,15 @@ export default config({
       format: json,
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
-        number: fields.text({ label: 'Number (e.g. 004)' }),
-        summary: fields.text({ label: 'Summary', multiline: true }),
-        topic: fields.select({
-          label: 'Topic',
-          options: ['Data Engineering', 'AI', 'Product', 'Architecture', 'Running', 'Retrospective'].map((v) => ({ label: v, value: v })),
-          defaultValue: 'Data Engineering',
+        summary: fields.text({ label: 'Description (the deck under the title; also the meta description)', multiline: true }),
+        category: fields.select({
+          label: 'Category',
+          options: [
+            { label: 'Building', value: 'building' },
+            { label: 'Learning', value: 'learning' },
+            { label: 'Notes', value: 'notes' },
+          ],
+          defaultValue: 'notes',
         }),
         status: fields.select({
           label: 'Status (only Published is ever public)',
@@ -689,20 +731,17 @@ export default config({
           ],
           defaultValue: 'draft',
         }),
-        category: fields.select({
-          label: 'Category',
-          options: [
-            { label: 'Building', value: 'building' },
-            { label: 'Learning', value: 'learning' },
-            { label: 'Notes', value: 'notes' },
-          ],
-          defaultValue: 'notes',
-        }),
+        featured: fields.checkbox({ label: 'Featured on the Journal page' }),
         date: fields.date({ label: 'Published date (the real one; never filled automatically)' }),
-        readingMinutes: fields.integer({ label: 'Reading minutes' }),
-        photo: imageSelect('Photo (list thumbnail + top of the entry)'),
-        photoCaption: fields.text({ label: 'Photo caption' }),
-        body: contentBlocks('Body'),
+        updated: fields.date({ label: 'Updated date (only for a meaningful revision)' }),
+        relatedProject: fields.text({ label: 'Related project slug (e.g. forma; leave empty for none)' }),
+        tags: textList('Tags (keep to a few)', 'Tag'),
+        photo: imageSelect('Hero image (optional; real images only)'),
+        photoAlt: fields.text({ label: 'Hero image alt text (required when there is an image)' }),
+        photoCaption: fields.text({ label: 'Hero image caption' }),
+        seoTitle: fields.text({ label: 'SEO title (optional)' }),
+        seoDescription: fields.text({ label: 'SEO description (optional)', multiline: true }),
+        body: articleBlocks('Body'),
       },
     }),
   },

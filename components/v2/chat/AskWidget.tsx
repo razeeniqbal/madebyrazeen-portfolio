@@ -16,7 +16,7 @@ const STORE_KEY = 'ask-razeen:v1';
  * Content-first pages: project case studies (screenshots are evidence) and the content-heavy Trainer,
  * Credentials, Life and Running pages. There the trigger stays compact until the visitor opens it.
  */
-const isQuietRoute = (path: string) => /^\/projects\/[^/]+/.test(path) || /^\/(trainer|credentials|life|running)(\/|$)/.test(path);
+const isQuietRoute = (path: string) => /^\/projects\/[^/]+/.test(path) || /^\/(trainer|credentials|life|running|journal)(\/|$)/.test(path);
 const SLEEP_AFTER_MS = 60_000;
 
 /** Turns relative site links (/projects/…) and URLs in plain-text answers into links. Old paths still redirect. */

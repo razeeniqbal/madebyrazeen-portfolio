@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { getProjects } from '@/content/projects';
-import { getPublishedNotes } from '@/content/notes';
+import { getPublishedJournalEntries } from '@/content/notes';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ['', '/about', '/experience', '/trainer', '/projects', '/journal', '/life', '/credentials', '/running', '/resume', '/contact'];
@@ -13,6 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: p.tier === 'flagship' || p.tier === 'featured' ? 0.8 : 0.5,
     })),
     // Published entries only: drafts and archived entries have no page.
-    ...getPublishedNotes().map((n) => ({ url: `${SITE_URL}/journal/${n.slug}`, lastModified: n.date, priority: 0.6 })),
+    ...getPublishedJournalEntries().map((n) => ({ url: `${SITE_URL}/journal/${n.slug}`, lastModified: n.updated ?? n.date, priority: 0.6 })),
   ];
 }

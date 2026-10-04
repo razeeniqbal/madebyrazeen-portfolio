@@ -7,6 +7,7 @@ import { ProjectContext } from '@/components/v2/work/ProjectContext';
 import { CaseStudyBlock } from './CaseStudyBlocks';
 import { sectionTitles, type CaseStudy, type SectionId } from '@/content/case-studies';
 import type { Project } from '@/content/projects';
+import { getEntriesForProject } from '@/content/notes';
 
 // Thinking/writing sections are light; systems/building sections are dark (PRD §8).
 const defaultSurface: Record<SectionId, 'dark' | 'light'> = {
@@ -118,6 +119,23 @@ export function CaseStudyView({ project, study, next }: CaseStudyViewProps) {
           </Section>
         );
       })}
+
+      {/* A journal entry about this project, when one is published: a small editorial cross-link, not a section. */}
+      {getEntriesForProject(project.slug).map((entry) => (
+        <Section key={entry.slug} surface="light" className="!py-10 border-t border-line">
+          <div className="page-grid">
+            <div className="col-span-full flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 lg:col-span-8 lg:col-start-5">
+              <div>
+                <TechnicalLabel as="p">Read the journal</TechnicalLabel>
+                <Link href={`/journal/${entry.slug}`} className="mt-2 block text-xl font-semibold hover:underline">
+                  {entry.title}
+                </Link>
+              </div>
+              <ArrowLink href={`/journal/${entry.slug}`}>Read the entry</ArrowLink>
+            </div>
+          </div>
+        </Section>
+      ))}
 
       {study.disclaimer && (
         <Section surface="light" className="!py-8 border-t border-line">

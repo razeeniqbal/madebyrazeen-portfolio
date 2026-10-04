@@ -1,67 +1,90 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Section } from '@/components/v2/system/Section';
 import { PageHeader } from '@/components/v2/system/PageHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
+import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
-import { NoteList } from '@/components/v2/notes/NoteList';
-import { getPublishedJournalEntries, journalCategories } from '@/content/notes';
+import { EntryMeta } from '@/components/v2/journal/EntryMeta';
+import { JournalIndex } from '@/components/v2/journal/JournalIndex';
+import { getFeaturedEntry, getPublishedJournalEntries, journalCategories, toSummary } from '@/content/notes';
 
 export const metadata: Metadata = {
-  alternates: { canonical: '/journal' },
+  alternates: { canonical: '/journal', types: { 'application/rss+xml': '/journal/rss.xml' } },
   title: 'Journal',
-  description: 'Notes from what Razeen Iqbal is building and learning: ideas that need more room than a project card.',
+  description:
+    'Razeen Iqbal’s journal: why something was built, the questions behind an experiment, what changed and what is still open.',
 };
 
-// The journal is visually quieter than project pages: one light surface, reading first (PRD §30).
-// Only published entries appear. Entries are grouped by category (Building, Learning, Notes); a category
-// appears only when it has a published entry, and the category index only when there is more than one.
+// The thinking layer between the finished pages. Built for scarcity: one featured entry, then the
+// full index with a category filter. Nothing is invented to fill space; empty categories say so.
 export default function JournalPage() {
-  const entries = getPublishedJournalEntries();
-  const groups = journalCategories
-    .map((c) => ({ ...c, entries: entries.filter((e) => e.category === c.value) }))
-    .filter((g) => g.entries.length > 0);
+  const entries = getPublishedJournalEntries().map(toSummary);
+  const featured = getFeaturedEntry();
+  const lead = featured ? toSummary(featured) : undefined;
 
   return (
-    <Section surface="light" className="!pt-16">
-      <PageHeader
-        href="/journal"
-        title={['Notes from what', 'I am building', 'and learning.']}
-        lede={['A place for ideas that need more room than a project card.']}
-        aside={
-          <div className="hidden justify-end lg:flex">
-            <MiniRazeen pose="learning" height={151} />
-          </div>
-        }
-      />
-      <div className="page-grid mt-12">
-        <div className="col-span-full lg:col-span-8">
-          {groups.length === 0 ? (
-            <p className="border-t border-line pt-6 text-lead">Nothing is published yet.</p>
-          ) : (
-            <>
-              {groups.length > 1 && (
-                <nav aria-label="Categories" className="mb-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-4">
-                  {groups.map((g) => (
-                    <a key={g.value} href={`#${g.value}`} className="label border-b border-current pb-1">
-                      {g.label} · {g.entries.length}
-                    </a>
-                  ))}
-                </nav>
-              )}
-              <div className="space-y-14">
-                {groups.map((g) => (
-                  <section key={g.value} id={g.value} aria-labelledby={`${g.value}-title`} className="scroll-mt-20">
-                    <TechnicalLabel as="h2" marker="//" className="mb-4">
-                      <span id={`${g.value}-title`}>{g.label}</span>
-                    </TechnicalLabel>
-                    <NoteList notes={g.entries} />
-                  </section>
-                ))}
+    <>
+      <Section surface="light" className="!pt-16">
+        <PageHeader
+          href="/journal"
+          title={['Notes from', 'building and', 'learning.']}
+          lede={[
+            'Why something was built, the question behind an experiment, what changed along the way and what is still open. The finished work lives in Projects. This is the thinking around it.',
+          ]}
+          aside={
+            <div className="hidden justify-end lg:flex">
+              <MiniRazeen pose="learning" height={151} />
+            </div>
+          }
+        />
+
+        {lead ? (
+          <div id="featured" className="page-grid mt-20 scroll-mt-20 gap-y-8">
+            <TechnicalLabel as="h2" marker="01 /" className="col-span-full">
+              {featured?.featured ? 'Featured' : 'Latest'}
+            </TechnicalLabel>
+            <article className="col-span-full border-t border-ink pt-8 lg:col-span-10">
+              <EntryMeta entry={lead} />
+              <h3 className="mt-5 text-display-md">
+                <Link href={`/journal/${lead.slug}`} className="hover:underline">
+                  {lead.title}
+                </Link>
+              </h3>
+              <p className="mt-5 max-w-[44rem] text-lead text-muted">{lead.description}</p>
+              <div className="mt-8 flex flex-wrap items-center gap-x-10 gap-y-4">
+                <ArrowLink href={`/journal/${lead.slug}`}>
+                  Read the entry
+                </ArrowLink>
+                {lead.project && <TechnicalLabel>Related build · {lead.project}</TechnicalLabel>}
               </div>
-            </>
-          )}
+            </article>
+          </div>
+        ) : null}
+      </Section>
+
+      <Section surface="light" id="index" className="!pt-0 scroll-mt-16">
+        <div className="page-grid gap-y-8">
+          <TechnicalLabel as="h2" marker={lead ? '02 /' : '01 /'} className="col-span-full">
+            Index
+          </TechnicalLabel>
+          <div className="col-span-full lg:col-span-10">
+            {entries.length > 0 ? (
+              <JournalIndex entries={entries} categories={journalCategories} />
+            ) : (
+              <p className="border-t border-line pt-6 text-muted">Nothing is published yet.</p>
+            )}
+          </div>
+          <div className="col-span-full mt-8 flex flex-wrap gap-x-10 gap-y-4 lg:col-span-10">
+            <ArrowLink href="/projects">What I build</ArrowLink>
+            <ArrowLink href="/trainer">What I share</ArrowLink>
+            {/* A feed file, not a page: a plain link so the router does not try to render it. */}
+            <a href="/journal/rss.xml" className="label inline-flex items-center gap-3 border-b border-current pb-1 hover:text-signal">
+              RSS feed <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+    </>
   );
 }
