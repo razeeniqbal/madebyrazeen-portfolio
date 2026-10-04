@@ -179,7 +179,7 @@ export function buildKnowledge(): string {
   const byIssuer = new Map<string, string[]>();
   achievements.forEach((a) => byIssuer.set(a.organization, [...(byIssuer.get(a.organization) ?? []), `${a.title} (${credentialTypeLabel[a.type].toLowerCase()}${a.issuedDate ? `, ${a.issuedDate}` : ''})`]));
   out.push(
-    `## Certifications & courses (${achievements.length})\n${[...byIssuer.entries()].map(([org, list]) => `- ${org}: ${list.join('; ')}`).join('\n')}`,
+    `## Credentials (${achievements.length}: certifications, accreditations, skill badges, courses, programmes and registrations; each line names its type)\n${[...byIssuer.entries()].map(([org, list]) => `- ${org}: ${list.join('; ')}`).join('\n')}`,
   );
 
   return out.join('\n\n');

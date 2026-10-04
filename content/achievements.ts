@@ -28,7 +28,12 @@ export interface Achievement {
   title: string;
   organization: string;
   type: CredentialType;
+  /** Exam / credential code when it is not part of the title (PCEP-30-02). */
+  code?: string;
   issuedDate: string;
+  /** Exact ISO dates, when supplied; the display uses the month form. */
+  issuedOn?: string;
+  expiresOn?: string;
   /** "July 2027"; empty when the credential does not expire or the date is unknown. */
   expiresDate?: string;
   description: string;
@@ -42,6 +47,9 @@ export interface Achievement {
   evidenceUrl?: string;
   credentialId?: string;
   certificationNumber?: string;
+  /** personal = a working personal verification page; broken = data kept, link needs updating. */
+  verification: 'personal' | 'none' | 'broken';
+  provenance: string[];
   /** Provenance of the record (audit trail). */
   source?: string;
   /** Shown in the Home hero strip and first on the Resume. */
@@ -66,6 +74,11 @@ export const achievements: Achievement[] = data.items.map((a) => ({
   category: a.category as Achievement['category'],
   area: a.area as CredentialArea,
   type: (a.type || 'certification') as CredentialType,
+  code: a.code || undefined,
+  issuedOn: a.issuedOn || undefined,
+  expiresOn: a.expiresOn || undefined,
+  verification: (a.verification || 'none') as Achievement['verification'],
+  provenance: a.provenance ?? [],
   expiresDate: a.expiresDate || undefined,
   credentialUrl: a.credentialUrl || undefined,
   issuerUrl: a.issuerUrl || undefined,

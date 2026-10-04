@@ -647,8 +647,11 @@ export default config({
               ],
               defaultValue: 'certification',
             }),
+            code: fields.text({ label: 'Exam / credential code (e.g. PCEP-30-02), when it is not in the title' }),
             issuedDate: fields.text({ label: 'Issued (e.g. April 2025)' }),
+            issuedOn: fields.text({ label: 'Issued on, exact (YYYY-MM-DD), when known' }),
             expiresDate: fields.text({ label: 'Expires (e.g. July 2027; empty if none or unknown)' }),
+            expiresOn: fields.text({ label: 'Expires on, exact (YYYY-MM-DD), when known' }),
             description: fields.text({ label: 'Description', multiline: true }),
             category: fields.select({
               label: 'Category',
@@ -672,6 +675,25 @@ export default config({
             evidenceUrl: fields.text({ label: 'Evidence URL (other supporting evidence)' }),
             credentialId: fields.text({ label: 'Credential ID' }),
             certificationNumber: fields.text({ label: 'Certification number' }),
+            verification: fields.select({
+              label: 'Public verification',
+              options: [
+                { label: 'Personal verification link works', value: 'personal' },
+                { label: 'None', value: 'none' },
+                { label: 'Broken (needs an updated link)', value: 'broken' },
+              ],
+              defaultValue: 'none',
+            }),
+            provenance: fields.multiselect({
+              label: 'Provenance',
+              options: [
+                { label: 'User supplied', value: 'user-supplied' },
+                { label: 'Personal verification page', value: 'personal-verify' },
+                { label: 'Issuer source', value: 'issuer-source' },
+                { label: 'Badge evidence', value: 'badge-evidence' },
+              ],
+              defaultValue: ['user-supplied'],
+            }),
             featured: fields.checkbox({ label: 'Featured (Home hero + Resume, pick 3–4)', defaultValue: false }),
             selected: fields.checkbox({ label: 'Selected (the small narrative set on /credentials and About)', defaultValue: false }),
             source: fields.text({ label: 'Source (where this record comes from)', multiline: true }),

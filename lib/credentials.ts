@@ -7,7 +7,7 @@ import type { Achievement } from '@/content/achievements';
 export const credentialYear = (a: Achievement) => a.issuedDate.match(/\d{4}/)?.[0];
 
 /** Exam code such as "AI-102" when the title carries one. */
-export const credentialCode = (a: Achievement) => a.title.match(/\(([A-Z]{2,3}-\d{3})\)/)?.[1];
+export const credentialCode = (a: Achievement) => a.code || a.title.match(/\(([A-Z]{2,3}-\d{3})\)/)?.[1];
 
 /** Title without vendor prefix or exam code, for compact lists. */
 export const credentialShortTitle = (a: Achievement) =>
@@ -19,7 +19,8 @@ const GENERIC_URLS = new Set([
   'https://www.pythoninstitute.org/',
   'https://www.cloudskillsboost.google/',
 ]);
-export const credentialVerifyUrl = (a: Achievement) => (a.credentialUrl && !GENERIC_URLS.has(a.credentialUrl) ? a.credentialUrl : undefined);
+export const credentialVerifyUrl = (a: Achievement) =>
+  a.credentialUrl && a.verification !== 'broken' && !GENERIC_URLS.has(a.credentialUrl) ? a.credentialUrl : undefined;
 
 const issuerMark: Record<string, string> = {
   Microsoft: 'MS',
