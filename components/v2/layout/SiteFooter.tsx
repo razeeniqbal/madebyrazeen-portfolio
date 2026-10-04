@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { Wordmark } from '@/components/v2/identity/Wordmark';
-import { Trajectory } from '@/components/v2/system/Trajectory';
 import { primaryNav, utilityNav } from '@/lib/site';
-import { profile, contact } from '@/content/profile';
+import { contact } from '@/content/profile';
 
 // Verified channels only (the same ones the Contact page lists).
 const elsewhere = [
@@ -58,8 +57,8 @@ export function SiteFooter() {
           ))}
         </ul>
 
-        <div className="col-span-full flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
-          <Trajectory steps={profile.loops.journey} />
+        {/* No framework here: the site already states its philosophy where it belongs (About, Trainer). */}
+        <div className="col-span-full border-t border-line pt-6">
           <p className="label text-muted">© {new Date().getFullYear()} Razeen Iqbal · Made by Razeen</p>
         </div>
       </div>

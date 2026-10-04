@@ -60,8 +60,8 @@ export function Hero() {
           </ArrowLink>
         </div>
 
-        {/* Portrait + credentials. lg offset = label + one headline line, so it starts level with THEN I BUILD. */}
-        <div className="col-span-full md:col-span-3 md:col-start-6 md:row-span-2 md:row-start-1 lg:col-span-5 lg:col-start-8 lg:mt-[calc(2.5rem+min(5.76vw,6.525rem))]">
+        {/* Portrait + credentials. Top-aligned with the left column (the name label). */}
+        <div className="col-span-full md:col-span-3 md:col-start-6 md:row-span-2 md:row-start-1 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:self-start">
           <PhotoFrame
             image={assets.identity.hero}
             sizes="(min-width: 1024px) 38vw, (min-width: 768px) 40vw, 100vw"
