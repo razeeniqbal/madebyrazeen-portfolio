@@ -1,15 +1,22 @@
 import { Hero } from '@/components/v2/home/Hero';
-import { SelectedWork } from '@/components/v2/home/SelectedWork';
+import { Currently } from '@/components/v2/home/Currently';
+import { SelectedBuilds } from '@/components/v2/home/SelectedBuilds';
+import { PathTeaser, ContactBlock } from '@/components/v2/home/AboutContact';
+import { FeaturedWork } from '@/components/v2/home/FeaturedWork';
+import { SharingTeaser } from '@/components/v2/home/SharingTeaser';
 import { JournalTeaser } from '@/components/v2/home/JournalTeaser';
-import { RunningTeaser } from '@/components/v2/home/RunningTeaser';
-import { AboutTeaser, ContactBlock } from '@/components/v2/home/AboutContact';
+import { LifeTeaser } from '@/components/v2/home/LifeTeaser';
 import { JsonLd } from '@/components/v2/seo/JsonLd';
 import { SITE_URL } from '@/lib/site';
 import { contact, education, profile } from '@/content/profile';
 import { getCurrentRole } from '@/content/experience';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { alternates: { canonical: '/' } };
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+  description:
+    'Razeen Iqbal, Data Engineer and AI Solutions Engineer. Civil engineering, then data, then AI: the products he builds, his professional data and AI work, training, writing and life away from the screen.',
+};
 
 const person = {
   '@context': 'https://schema.org',
@@ -23,18 +30,23 @@ const person = {
   knowsAbout: ['Data engineering', 'Artificial intelligence', 'Machine learning', 'Product engineering'],
 };
 
-// Home is a trailer, not the database (refinement spec §11): six moments, depth lives on the destination pages.
-// Rhythm: dark · light · dark · light · dark · light, then the dark footer.
+// Home is the trailer, not the database: who Razeen is, what he is doing now, what he builds, how he got
+// here, how he applies it at work, how he shares it, how he thinks, and life away from the screen.
+// Rhythm: dark hero + currently · light builds · dark path + featured work · light sharing + journal ·
+// dark life · light contact, then the dark footer.
 export default function HomePage() {
   return (
     <>
       <JsonLd data={person} />
       <Hero />
-      <SelectedWork />
-      <AboutTeaser />
+      <Currently />
+      <SelectedBuilds />
+      <PathTeaser />
+      <FeaturedWork />
+      <SharingTeaser />
       <JournalTeaser />
-      <RunningTeaser />
-      <ContactBlock index="05" surface="light" title={['Have something', 'worth building?']} />
+      <LifeTeaser />
+      <ContactBlock index="07" surface="light" title={['Have something', 'worth building?']} />
     </>
   );
 }

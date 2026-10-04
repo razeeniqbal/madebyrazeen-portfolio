@@ -243,10 +243,20 @@ export default config({
       path: 'content/data/home',
       format: json,
       schema: {
-        aboutTeaser: fields.object(
-          { title: textList('Title lines', 'Line'), body: fields.text({ label: 'Body', multiline: true }) },
-          { label: '10 · About teaser' },
+        hero: fields.object({ arc: textList('Career arc (small line under the hero copy)', 'Step') }, { label: 'Hero' }),
+        builds: fields.object(
+          { title: textList('Title lines', 'Line'), projects: textList('Projects, in order (project slugs)', 'Slug') },
+          { label: '01 · Selected builds' },
         ),
+        path: fields.object(
+          { title: textList('Title lines', 'Line'), body: fields.text({ label: 'Body', multiline: true }) },
+          { label: '02 · Path' },
+        ),
+        featuredWork: fields.object(
+          { project: fields.text({ label: 'Project slug' }), title: textList('Title lines', 'Line'), body: paragraphList('Body') },
+          { label: '03 · Featured work' },
+        ),
+        journal: fields.object({ title: textList('Title lines', 'Line') }, { label: '05 · Journal' }),
       },
     }),
 
