@@ -24,3 +24,21 @@ export function formatJournalDate(iso: string) {
   const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'][m - 1];
   return `${d} ${month} ${y}`;
 }
+
+/**
+ * Editorial figures drawn in code (real text, no image weight), registered by key so an entry can
+ * pick one in the admin. A cover explains the article's system at the top; a figure explains one
+ * idea inline. `motif` is the same sequence in words, reused on the social card; `mark` is the stage
+ * drawn in Signal Lime on the cover, marked the same way on the card.
+ */
+export const journalCovers = {
+  career: { label: 'Structure to AI system', motif: ['Structure', 'Measurements', 'Data', 'Code', 'Pipeline', 'AI system'], mark: 5 },
+  quality: { label: 'Check, find, assist, review', motif: ['Check', 'Find', 'Assist', 'Review'], mark: 2 },
+} as const;
+export type JournalCover = keyof typeof journalCovers;
+
+export const journalFigures = {
+  'career-path': 'The path was not a jump',
+  'quality-boundary': 'Where the AI sits',
+} as const;
+export type JournalFigure = keyof typeof journalFigures;

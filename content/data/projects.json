@@ -80,7 +80,7 @@
         "TypeScript",
         "Supabase",
         "n8n",
-        "Ollama Cloud"
+        "Ollama"
       ],
       "tags": [
         "Data Quality",

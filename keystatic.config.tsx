@@ -7,6 +7,7 @@
  */
 import { config, collection, singleton, fields } from '@keystatic/core';
 import { assets, type ImageAsset } from '@/lib/assets';
+import { journalCovers, journalFigures } from '@/lib/journal';
 
 // ── Shared options ──────────────────────────────────────────────────────────
 const assetOptions = [
@@ -151,6 +152,17 @@ const articleBlocks = (label: string) =>
         }),
       },
       divider: { label: 'Divider', schema: fields.empty() },
+      figure: {
+        label: 'Editorial figure (diagram drawn in code)',
+        schema: fields.object({
+          figure: fields.select({
+            label: 'Figure',
+            options: Object.entries(journalFigures).map(([value, label]) => ({ label, value })),
+            defaultValue: 'career-path',
+          }),
+          caption: fields.text({ label: 'Caption (the point of the figure, in words)', multiline: true }),
+        }),
+      },
     },
     { label },
   );
@@ -789,6 +801,15 @@ export default config({
         photo: imageSelect('Hero image (optional; real images only)'),
         photoAlt: fields.text({ label: 'Hero image alt text (required when there is an image)' }),
         photoCaption: fields.text({ label: 'Hero image caption' }),
+        cover: fields.select({
+          label: 'Editorial cover (drawn in code; shown when there is no hero image)',
+          options: [{ label: 'None', value: '' }, ...Object.entries(journalCovers).map(([value, c]) => ({ label: c.label, value }))],
+          defaultValue: '',
+        }),
+        related: fields.array(fields.object({ label: fields.text({ label: 'Label' }), href: fields.text({ label: 'Link (e.g. /experience)' }) }), {
+          label: 'Related (hand-picked links at the end of the entry)',
+          itemLabel: (p) => p.fields.label.value || 'Link',
+        }),
         seoTitle: fields.text({ label: 'SEO title (optional)' }),
         seoDescription: fields.text({ label: 'SEO description (optional)', multiline: true }),
         body: articleBlocks('Body'),

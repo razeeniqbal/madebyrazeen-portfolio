@@ -1,5 +1,6 @@
 import { renderOg, ogSize, ogContentType } from '@/lib/og/template';
 import { categoryLabel, formatJournalDate, getNote, getPublishedJournalEntries } from '@/content/notes';
+import { journalCovers } from '@/lib/journal';
 
 export const size = ogSize;
 export const contentType = ogContentType;
@@ -19,5 +20,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     subtitle: n?.description,
     meta: n?.date ? `${formatJournalDate(n.date)} · ${n.readingMinutes} min read` : undefined,
     surface: 'light',
+    // The article's own cover sequence, so each card is distinct but the Journal reads as one publication.
+    motif: n?.cover ? journalCovers[n.cover].motif : undefined,
+    motifMark: n?.cover ? journalCovers[n.cover].mark : undefined,
   });
 }
