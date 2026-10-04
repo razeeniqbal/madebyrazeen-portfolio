@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
-import { credentialAreas, issuedTime, type Achievement, type CredentialArea } from '@/content/achievements';
+import { credentialAreas, credentialTypeLabel, issuedTime, type Achievement, type CredentialArea } from '@/content/achievements';
 import { cn } from '@/lib/utils';
 import { credentialMark, credentialVerifyUrl } from '@/lib/credentials';
 
@@ -96,11 +96,13 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
                 <span className="block font-semibold leading-snug [overflow-wrap:anywhere]">{a.title}</span>
                 <span className="mt-0.5 block text-sm text-muted md:hidden">
                   {a.organization} · {a.issuedDate || 'Undated'}
+                  {a.type !== 'certification' && <> · {credentialTypeLabel[a.type]}</>}
                 </span>
               </span>
               <span className="hidden text-sm text-muted md:block">
                 {a.organization}
-                {a.category === 'course' && <span className="label ml-2">· Course</span>}
+                {/* The type, when it is not a certification, so a course never reads as one. */}
+                {a.type !== 'certification' && <span className="label ml-2">· {credentialTypeLabel[a.type]}</span>}
               </span>
               <span className="label hidden text-muted md:block">{a.issuedDate || 'Undated'}</span>
               <span className="label text-right">

@@ -26,6 +26,7 @@ const issuerMark: Record<string, string> = {
   'Google Cloud': 'GC',
   Anthropic: 'AN',
   IBM: 'IBM',
+  'IBM SkillsBuild': 'IBM',
   'Python Institute': 'PI',
   Confluent: 'CF',
   Databricks: 'DB',
