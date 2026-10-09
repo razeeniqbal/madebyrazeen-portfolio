@@ -1200,19 +1200,20 @@
       "category": "certification",
       "area": "ai",
       "image": "/achievements/microsoft-certified-associate.png",
-      "credentialUrl": "",
+      "credentialUrl": "https://learn.microsoft.com/en-us/users/razeenroslanaemenersol-6680/credentials/certification/azure-ai-engineer?tab=credentials-tab",
       "issuerUrl": "",
       "evidenceUrl": "",
       "credentialId": "FA9DCEAE8BAFE125",
       "certificationNumber": "02BCD5-0G846C",
-      "verification": "broken",
+      "verification": "personal",
       "provenance": [
-        "user-supplied"
+        "user-supplied",
+        "personal-verify"
       ],
       "featured": true,
       "selected": true,
-      "source": "Resume supplied by Razeen in chat (26 Sep 2026), Certifications section; Supplied directly by Razeen (credential correction brief, 4 Oct 2026): earned 19 Jun 2026, expires 20 Jun 2027, ID and certification number",
-      "notes": "Microsoft Learn returns \"credential unavailable\" for this credential ID (checked 4 Oct 2026). Data kept as supplied; no Verify until a working personal link is supplied."
+      "source": "Resume supplied by Razeen in chat (26 Sep 2026), Certifications section; Supplied directly by Razeen (credential correction brief, 4 Oct 2026): earned 19 Jun 2026, expires 20 Jun 2027, ID and certification number; Microsoft Learn credential page on the AEM Enersol profile, link supplied by Razeen (9 Oct 2026)",
+      "notes": "The earlier credential ID link returned \"credential unavailable\" (4 Oct 2026); replaced by the working profile link Razeen supplied on 9 Oct 2026. Dates, ID and number kept as supplied; not re-checked against the page from this environment."
     },
     {
       "id": "44",
