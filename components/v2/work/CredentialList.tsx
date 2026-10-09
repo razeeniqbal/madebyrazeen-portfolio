@@ -80,7 +80,7 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
         {shown.map((a) => {
           const verify = credentialVerifyUrl(a);
           return (
-            <li
+            <li data-reveal
               key={a.id}
               className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-x-4 gap-y-1 border-t border-line py-3.5 md:grid-cols-[2.5rem_1fr_13rem_7rem_4.5rem]"
             >

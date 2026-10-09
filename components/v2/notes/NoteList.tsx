@@ -16,7 +16,7 @@ export function NoteList({ notes }: { notes: Note[] }) {
           </div>
         );
         return (
-          <li key={n.slug} className="border-t border-line">
+          <li key={n.slug} data-reveal className="border-t border-line">
             <Link href={`/journal/${n.slug}`} className="group block py-5">
               {n.photo ? (
                 <div className="grid grid-cols-[1fr_5.5rem] items-start gap-5 md:grid-cols-[1fr_8rem]">

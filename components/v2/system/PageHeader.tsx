@@ -1,5 +1,6 @@
 import { TechnicalLabel } from './TechnicalLabel';
 import { sectionFor } from '@/lib/site';
+import { CountUp } from './CountUp';
 import { cn } from '@/lib/utils';
 
 interface PageHeaderProps {
@@ -52,7 +53,7 @@ export function PageHeader({ href, label, title, lede, meta, aside, before, clas
             {meta.map((m) => (
               <div key={m.label}>
                 <dt className="label text-muted">{m.label}</dt>
-                <dd className="mt-1">{m.value}</dd>
+                <dd className="mt-1">{typeof m.value === 'number' && m.value < 1000 ? <CountUp value={m.value} /> : m.value}</dd>
               </div>
             ))}
           </dl>

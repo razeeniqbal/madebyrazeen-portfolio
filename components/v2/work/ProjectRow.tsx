@@ -17,7 +17,7 @@ interface ProjectRowProps {
 export function ProjectRow({ project, note, showSummary, quiet }: ProjectRowProps) {
   const detail = note ?? categoryLabel(project.category);
   return (
-    <li className="border-t border-line">
+    <li data-reveal className="border-t border-line">
       <Link
         href={`/projects/${project.slug}`}
         className={cn(

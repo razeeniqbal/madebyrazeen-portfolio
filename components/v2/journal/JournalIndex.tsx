@@ -52,7 +52,7 @@ export function JournalIndex({ entries, categories }: { entries: EntrySummary[];
       ) : (
         <ol>
           {shown.map((e) => (
-            <li key={e.slug} className="border-b border-line">
+            <li key={e.slug} data-reveal className="border-b border-line">
               <Link href={`/journal/${e.slug}`} className="group grid gap-x-8 gap-y-2 py-7 md:grid-cols-[1fr_14rem]">
                 <div className="min-w-0">
                   <h3 className="text-xl font-semibold leading-snug group-hover:underline md:text-2xl">{e.title}</h3>

@@ -360,7 +360,7 @@ const figureBody: Record<JournalFigure, () => ReactNode> = {
 export function JournalFigureBlock({ figure, caption, index }: { figure: JournalFigure; caption: string; index: number }) {
   const Body = figureBody[figure];
   return (
-    <figure className="journal-wide journal-figure border-y border-ink py-5">
+    <figure data-reveal className="journal-wide journal-figure border-y border-ink py-5">
       <p className="label mb-4 text-muted">
         Fig. {index} / {journalFigures[figure]}
       </p>
