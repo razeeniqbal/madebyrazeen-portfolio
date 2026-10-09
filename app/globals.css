@@ -258,6 +258,24 @@
       animation-timeline: view();
       animation-range: entry 0% entry 45%;
     }
+    /* Career timeline: bars grow from their start date, dots and year bars follow in date order. */
+    .tl-grow {
+      transform-origin: left;
+      animation: tl-grow linear both;
+      animation-timeline: view();
+      animation-range: entry calc(5% + var(--i) * 2%) entry calc(40% + var(--i) * 2%);
+    }
+    .tl-fade {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry calc(10% + var(--i) * 1%) entry calc(40% + var(--i) * 1%);
+    }
+    .tl-rise {
+      transform-origin: bottom;
+      animation: tl-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 60%;
+    }
     /* Diagram construction: nodes light up left → right as the diagram enters. */
     [data-reveal] .flow-node {
       animation: node-in linear both;
@@ -401,7 +419,7 @@
     background: #fff !important;
     color: #090909 !important;
   }
-  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  [data-reveal], .tl-grow, .tl-fade, .tl-rise { opacity: 1 !important; transform: none !important; animation: none !important; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   a { text-decoration: none; }
   /* Resume: Tailwind sizes are rem-based, so scale the root. Two columns on every printed page:
@@ -417,3 +435,6 @@
   .resume-print [data-keep] { break-inside: avoid; }
   .resume-print h2 { break-after: avoid; }
 }
+
+@keyframes tl-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes tl-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }

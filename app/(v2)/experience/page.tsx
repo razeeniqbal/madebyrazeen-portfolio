@@ -5,7 +5,8 @@ import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { Trajectory } from '@/components/v2/system/Trajectory';
-import { CareerMap } from '@/components/v2/experience/CareerMap';
+import { CareerTimeline } from '@/components/v2/career/CareerTimeline';
+import { getCareerTimeline } from '@/content/career-timeline';
 import { FeaturedWork, Narrative, ProgressionLadder, RoleFacts, SmallBuild, SupportingWork } from '@/components/v2/experience/RoleParts';
 import { Capabilities } from '@/components/v2/work/Capabilities';
 import { CredentialList } from '@/components/v2/work/CredentialList';
@@ -68,9 +69,9 @@ export default function ExperiencePage() {
         <div className="page-grid mt-20">
           <div className="col-span-full">
             <TechnicalLabel as="h2" marker="//" className="mb-6">
-              Career map
+              Career timeline
             </TechnicalLabel>
-            <CareerMap />
+            <CareerTimeline data={getCareerTimeline()} />
           </div>
         </div>
       </Section>
@@ -281,9 +282,6 @@ export default function ExperiencePage() {
       {/* Closing */}
       <Section surface="dark" grid className="border-t border-line">
         <div className="page-grid gap-y-12">
-          <div className="col-span-full">
-            <CareerMap variant="compact" />
-          </div>
           <p className="col-span-full max-w-[24ch] text-display-md">
             Different disciplines. <span className="text-muted">The same habit of understanding how things work.</span>
           </p>

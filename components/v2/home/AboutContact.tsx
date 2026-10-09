@@ -5,12 +5,13 @@ import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { assets } from '@/lib/assets';
 import { contact } from '@/content/profile';
-import { aboutStages } from '@/content/story';
+import { CareerTimeline } from '@/components/v2/career/CareerTimeline';
+import { getCareerTimeline } from '@/content/career-timeline';
 import { home } from '@/content/home';
 
 /**
- * Home 02. The path: Engineering → Data → AI → Build (the About stages), the real workshop photo and
- * one link. The detailed, dated career map lives on /experience.
+ * Home 02. The path: the real workshop photo, one paragraph and one link, then the dated career
+ * timeline (work and study). The full timeline, with credentials, lives on /experience.
  */
 export function PathTeaser() {
   return (
@@ -24,26 +25,13 @@ export function PathTeaser() {
         />
         <div className="col-span-full lg:col-span-4 lg:col-start-9 lg:self-end">
           <SectionHeader index="02" eyebrow="Path" title={home.path.title} size="md" />
-          <ol className="mt-8" aria-label="Career path">
-            {aboutStages.map((step, i) => (
-              <li key={step.label} className="grid grid-cols-[2rem_1fr_auto] items-baseline gap-x-3 border-t border-line py-2.5">
-                <span className="label text-muted">{String(i + 1).padStart(2, '0')}</span>
-                <span>
-                  <span className="font-semibold">{step.label}</span>
-                  <span className="ml-2 text-sm text-muted">{step.detail}</span>
-                </span>
-                {i < aboutStages.length - 1 ? (
-                  <span aria-hidden="true" className="text-muted">↓</span>
-                ) : (
-                  <span aria-hidden="true" className="h-2 w-2 self-center rounded-full bg-lime" />
-                )}
-              </li>
-            ))}
-          </ol>
-          <p className="justify-copy mt-6 text-muted">{home.path.body}</p>
+          <p className="justify-copy mt-8 text-muted">{home.path.body}</p>
           <div className="mt-8">
             <ArrowLink href="/about">More about me</ArrowLink>
           </div>
+        </div>
+        <div data-reveal className="col-span-full border-t border-line pt-8">
+          <CareerTimeline data={getCareerTimeline()} variant="compact" />
         </div>
       </div>
     </Section>

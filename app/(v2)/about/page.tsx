@@ -18,7 +18,6 @@ import { credentialShortTitle } from '@/lib/credentials';
 import {
   aboutClosing,
   aboutHero,
-  aboutStages,
   beyond,
   currently,
   howIWork,
@@ -28,7 +27,6 @@ import {
   whyBuild,
   type Moment,
 } from '@/content/story';
-import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/about' },
@@ -118,7 +116,7 @@ export default function AboutPage() {
 
   return (
     <>
-      {/* 01 Hero + 02 The path */}
+      {/* 01 Hero */}
       <Section surface="dark" className="!pt-16">
         <PageHeader
           href="/about"
@@ -134,44 +132,19 @@ export default function AboutPage() {
             />
           }
         />
-        <div id="path" className="page-grid mt-20 scroll-mt-20">
-          <TechnicalLabel as="h2" marker={`${pad(2)} /`} className="col-span-full mb-6">
-            The path
-          </TechnicalLabel>
-          <ol aria-label="The path, in order" className="col-span-full grid grid-cols-2 border-t border-line md:grid-cols-4">
-            {aboutStages.map((s, i) => {
-              const last = i === aboutStages.length - 1;
-              return (
-                <li key={s.label} className={cn('border-b border-line py-6 pr-4 md:border-b-0', i > 0 && 'md:border-l md:pl-6')}>
-                  <p className="flex items-center gap-3">
-                    <span aria-hidden="true" className={cn('h-2.5 w-2.5 rounded-full', last ? 'bg-lime' : 'border border-muted')} />
-                    <span className="label text-muted">{pad(i + 1)}</span>
-                    {!last && (
-                      <span aria-hidden="true" className="label ml-auto hidden text-muted md:inline">
-                        →
-                      </span>
-                    )}
-                  </p>
-                  <p className="mt-3 text-display-sm uppercase">{s.label}</p>
-                  <p className="mt-1 text-sm text-muted">{s.detail}</p>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
       </Section>
 
-      {origin && <MomentSection moment={origin} index={3} surface="light" />}
-      {turning && <MomentSection moment={turning} index={4} surface="dark" grid />}
-      {intoData && <MomentSection moment={intoData} index={5} surface="light" />}
+      {origin && <MomentSection moment={origin} index={2} surface="light" />}
+      {turning && <MomentSection moment={turning} index={3} surface="dark" grid />}
+      {intoData && <MomentSection moment={intoData} index={4} surface="light" />}
       {toAi && (
-        <MomentSection moment={toAi} index={6} surface="dark" photo={{ image: assets.identity.graduation, caption: 'Master of Science, Artificial Intelligence' }} />
+        <MomentSection moment={toAi} index={5} surface="dark" photo={{ image: assets.identity.graduation, caption: 'Master of Science, Artificial Intelligence' }} />
       )}
 
       {/* 07 Why I build: the origin of each primary build, linked to its canonical project */}
       <Section surface="light" id="why-i-build" className="scroll-mt-16 bg-raised">
         <div className="page-grid gap-y-12">
-          <SectionHeader index={pad(7)} eyebrow={whyBuild.eyebrow} title={whyBuild.title} size="md" className="lg:col-span-9" />
+          <SectionHeader index={pad(6)} eyebrow={whyBuild.eyebrow} title={whyBuild.title} size="md" className="lg:col-span-9" />
           <ol className="col-span-full">
             {whyBuild.origins.map((o) => (
               <li key={o.project.slug} className="grid grid-cols-1 gap-x-6 gap-y-5 border-t border-line py-8 lg:grid-cols-12">
@@ -206,7 +179,7 @@ export default function AboutPage() {
       {/* 08 How I work */}
       <Section surface="dark" grid id="how-i-work" className="scroll-mt-16">
         <div className="page-grid gap-y-12">
-          <SectionHeader index={pad(8)} eyebrow={howIWork.eyebrow} title={howIWork.title} size="md" className="lg:col-span-6" />
+          <SectionHeader index={pad(7)} eyebrow={howIWork.eyebrow} title={howIWork.title} size="md" className="lg:col-span-6" />
           <div className="col-span-full max-w-prose space-y-4 self-end lg:col-span-5 lg:col-start-8">
             {howIWork.body.map((p, i) => (
               <p key={p} className={i === 0 ? 'text-lead' : 'text-muted'}>
@@ -240,7 +213,7 @@ export default function AboutPage() {
       {/* 09 Learning and sharing */}
       <Section surface="light" id="learning" className="scroll-mt-16">
         <div className="page-grid gap-y-10">
-          <SectionHeader index={pad(9)} eyebrow={learning.eyebrow} title={learning.title} size="md" className="lg:col-span-9" />
+          <SectionHeader index={pad(8)} eyebrow={learning.eyebrow} title={learning.title} size="md" className="lg:col-span-9" />
           <PhotoFrame
             image={assets.career.briefing2}
             sizes="(min-width: 1024px) 34vw, 100vw"
@@ -268,7 +241,7 @@ export default function AboutPage() {
       {/* 10 Currently + 11 Selected credentials */}
       <Section surface="dark" id="currently" className="scroll-mt-16">
         <div className="page-grid gap-y-10">
-          <SectionHeader index={pad(10)} eyebrow="Currently" title={['Where I am', 'right now.']} size="md" />
+          <SectionHeader index={pad(9)} eyebrow="Currently" title={['Where I am', 'right now.']} size="md" />
           <dl className="col-span-full grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { k: 'Working on', v: currently.working.map((w) => <p key={w}>{w}</p>) },
@@ -294,7 +267,7 @@ export default function AboutPage() {
           </dl>
 
           <div className="col-span-full mt-10 border-t border-line pt-10">
-            <TechnicalLabel as="h2" marker={`${pad(11)} /`}>
+            <TechnicalLabel as="h2" marker={`${pad(10)} /`}>
               Selected credentials
             </TechnicalLabel>
             <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -319,7 +292,7 @@ export default function AboutPage() {
       <Section surface="light" id="away" className="scroll-mt-16">
         <div className="page-grid gap-y-10">
           <div className="col-span-full lg:col-span-6 lg:self-center">
-            <SectionHeader index={pad(12)} eyebrow={beyond.eyebrow} title={beyond.title} size="md" />
+            <SectionHeader index={pad(11)} eyebrow={beyond.eyebrow} title={beyond.title} size="md" />
             <div className="mt-8 max-w-prose space-y-4">
               {beyond.body.map((p, i) => (
                 <p key={p} className={i === 0 ? 'text-lead' : 'text-muted'}>
