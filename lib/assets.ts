@@ -62,7 +62,7 @@ const shot = (src: AssetPath, width: number, height: number, alt: string, eviden
 const LIVE = 'vsb.madebyrazeen.com';
 const VSB_PREVIEW = 'Development preview with sample data';
 const FORMA_EXAMPLE = 'Built-in example project and sample data';
-const SVL_SESSION = '2017 Malaysian GP timing, reconstructed movement';
+const SVL_SESSION = '2026 Sepang race replay, recorded OpenF1 data';
 
 export const assets = {
   identity: {
@@ -117,11 +117,13 @@ export const assets = {
     reviewQueue: shot('/assets/v2/projects/forma/product/forma-review-queue.webp', 2400, 1500, 'FORMA review queue: sixteen rows held back with their issue, and a panel to correct the value, keep the original, exclude the row or ignore the warning', 'real-product', FORMA_EXAMPLE),
     export: shot('/assets/v2/projects/forma/product/forma-export.webp', 2400, 1500, 'FORMA export: options for a Python script, a Python project, Airflow or Prefect, beside the generated pandas code', 'real-product', FORMA_EXAMPLE),
   },
-  /** Sepang Vision Lab: captures of the current local build. */
+  /** Sepang Vision Lab: captures of the live build (sepangvisionlab.madebyrazeen.com) replaying the 2026 Sepang race. */
   sepang: {
-    circuitReplay: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-circuit-replay.webp', 2400, 1396, 'Sepang Vision Lab historical workspace: driver list, the 3D Sepang circuit with car markers at lap 35, the selected driver inspector and the replay controls', 'current-build', SVL_SESSION),
-    stintAnalysis: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-stint-analysis.webp', 2400, 1058, 'Sepang Vision Lab tyre and stint analysis: lap times for one stint with a fitted pace trend and the limits of what can be inferred', 'current-build', SVL_SESSION),
-    lapTimeMl: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-lap-time-ml.webp', 2400, 1142, 'Sepang Vision Lab lap-time ML panel: a model comparison table where the previous-lap baseline has the lowest test error, with a note that the selected model did not beat it', 'current-build', SVL_SESSION),
+    tvCamera: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-tv-camera.webp', 2400, 1500, 'Sepang Vision Lab race replay on the TV camera: the timing tower for all 22 cars, a safety car message, the track map and weather, Charles Leclerc on track with his speed, gear, throttle, g-meter and lap times, and the replay bar', 'real-product', SVL_SESSION),
+    chaseCorner: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-chase-corner.webp', 2400, 1500, 'Sepang Vision Lab chase camera behind Lando Norris through a corner on lap 9, with the rev arc, gear, g-meter and a stewards message about a Turn 9 incident', 'real-product', SVL_SESSION),
+    inspect: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-inspect.webp', 2400, 1500, 'Sepang Vision Lab inspect camera orbiting Lewis Hamilton\'s car in a red and white team-style livery at 226 km/h under the safety car', 'real-product', SVL_SESSION),
+    pitLane: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-pit-lane.webp', 2400, 1500, 'Sepang Vision Lab chase camera following Max Verstappen down the pit lane at 29 km/h past the garages on lap 34', 'real-product', SVL_SESSION),
+    phone: shot('/assets/v2/projects/sepang-vision-lab/product/sepang-phone.webp', 1170, 2532, 'Sepang Vision Lab on a phone: session tabs, the 3D chase view, the replay bar and the followed driver\'s live telemetry card', 'real-product', SVL_SESSION),
   },
   /** BALANG captures from a real local game against the built-in computer players. */
   balangPlay: {

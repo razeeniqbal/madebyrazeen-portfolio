@@ -1,34 +1,38 @@
 {
   "project": "Sepang Vision Lab",
   "review": "approved",
-  "lede": "A motorsport digital twin and race-strategy research platform built around Sepang International Circuit. You do not drive the car. You act as the race engineer.",
+  "lede": "A 3D, broadcast-style replay of the 2026 Sepang weekend. Every practice session, qualifying and the race, rebuilt from public OpenF1 data: real names, positions, telemetry, tyres, race control and weather, with the cars driving an aligned 3D model of the circuit.",
   "facts": [
     {
       "label": "Status",
-      "value": "Under construction"
+      "value": "Live"
     },
     {
       "label": "Role",
-      "value": "Solo: product, engineering, data, ML"
+      "value": "Solo: product, data pipeline, 3D, engineering"
     },
     {
       "label": "Timeline",
-      "value": "2026 · 17 milestones"
+      "value": "2026 · 29 milestones"
     },
     {
       "label": "Data",
-      "value": "2017 Malaysian GP · 1,024 lap times"
+      "value": "OpenF1 · 2026 Sepang weekend (2 to 4 October) · 5 sessions, 22 cars"
     },
     {
       "label": "Stack",
-      "value": "React Three Fiber · FastAPI · scikit-learn · MediaPipe"
+      "value": "React 19 · TypeScript · Three.js (React Three Fiber) · Vite · Python · Claude API"
+    },
+    {
+      "label": "Live",
+      "value": "sepangvisionlab.madebyrazeen.com"
     }
   ],
-  "disclaimer": "Independent motorsport technology and research project. Motorsport names and trademarks belong to their respective owners. No official affiliation or endorsement is implied.",
+  "disclaimer": "Independent motorsport technology and research project. Motorsport names and trademarks belong to their respective owners. No official affiliation or endorsement is implied. Data via OpenF1 (unofficial). Driver and team names are shown for identification only, and no team, series or sponsor logos are used.",
   "sections": [
     {
       "id": "overview",
-      "headline": "A strategy workstation, not a racing game.",
+      "headline": "Watch the race again, from any seat.",
       "surface": "default",
       "blocks": [
         {
@@ -36,7 +40,7 @@
           "value": {
             "lead": true,
             "body": [
-              "Sepang Vision Lab puts an interactive digital twin of Sepang next to the tools a strategist would want: historical replay, telemetry, lap-time models, pit-strategy and Monte Carlo simulation, weather scenarios, webcam hand tracking and an AI race engineer."
+              "Sepang Vision Lab replays the 2026 Sepang weekend in 3D, in the browser. Pick a session, follow any of the 22 cars and switch between five cameras while a timing tower, track map, weather and race-control messages run alongside, the way a television broadcast would show them."
             ]
           }
         },
@@ -45,7 +49,7 @@
           "value": {
             "lead": false,
             "body": [
-              "It is deliberately not a driving game, a fantasy manager or a chatbot with racing trivia. The question it explores is how far honest, public race data can go before you have to start guessing, and how to show clearly where that line is."
+              "Everything on screen comes from recorded data. Where the data cannot say something, such as track width, brake temperature or the scenery around the circuit, the app either leaves it out or labels it as illustrative."
             ]
           }
         }
@@ -53,7 +57,7 @@
     },
     {
       "id": "problem",
-      "headline": "Strategy is decided under uncertainty.",
+      "headline": "Public data is sparse and noisy.",
       "surface": "default",
       "blocks": [
         {
@@ -61,89 +65,50 @@
           "value": {
             "lead": false,
             "body": [
-              "Race strategy is made from partial information: lap times, gaps, pit windows, weather that might arrive. Public data covers only a slice of it. There is timing, but no pedal telemetry, no tyre compounds and no car positions between timing lines.",
-              "Most visualisations fill those gaps quietly with plausible-looking numbers. I wanted a system that used what the data actually supports, modelled what it could, and labelled everything else as an assumption."
+              "OpenF1 publishes car positions at about four samples a second, with jittery timestamps, in a coordinate system that matches no map. Tyre stints sometimes contradict the pit stops. Sessions have gaps.",
+              "Played back as they arrive, the cars stutter, cut corners, overlap and float above the track. The work was turning that into motion that looks physical without inventing anything the data does not contain."
             ]
           }
         }
       ]
     },
     {
-      "id": "idea",
-      "headline": "Build in layers.",
+      "id": "gameplay",
+      "headline": "What it looks like.",
       "surface": "default",
       "blocks": [
         {
-          "discriminant": "steps",
+          "discriminant": "gallery",
           "value": {
-            "label": "Concept loop",
-            "steps": [
-              "Observe",
-              "Predict",
-              "Simulate"
-            ]
-          }
-        },
-        {
-          "discriminant": "text",
-          "value": {
-            "lead": false,
-            "body": [
-              "Each capability depends on the one before it, so the project was built strictly in that order. No layer started until the one beneath it worked and was tested."
-            ]
-          }
-        },
-        {
-          "discriminant": "steps",
-          "value": {
-            "label": "Build order",
-            "steps": [
-              "Circuit",
-              "Car movement",
-              "Race state",
-              "Replay",
-              "Telemetry",
-              "ML",
-              "Strategy",
-              "Monte Carlo",
-              "Weather",
-              "Computer vision",
-              "AI race engineer"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "evidence",
-      "headline": "What runs today.",
-      "surface": "default",
-      "blocks": [
-        {
-          "discriminant": "text",
-          "value": {
-            "lead": true,
-            "body": [
-              "Sepang Vision Lab is under construction. These are captures of the current local build on the 2017 Malaysian Grand Prix timing archive. Movement is interpolated between timing lines, not GPS, and the screens say so."
+            "layout": "pair",
+            "items": [
+              {
+                "image": "sepang.tvCamera",
+                "caption": "Race, lap 11, under the safety car: the TV camera on Charles Leclerc, the 22-car timing tower, the driver card with live speed, gear, throttle and g-force, and the replay bar with incident markers."
+              },
+              {
+                "image": "sepang.phone",
+                "caption": "On a phone: one scrolling column with the 3D view, replay controls and the followed driver's telemetry."
+              }
             ]
           }
         },
         {
           "discriminant": "gallery",
           "value": {
-            "layout": "sequence",
+            "layout": "grid",
             "items": [
               {
-                "image": "sepang.circuitReplay",
-                "caption": "Historical workspace at lap 35: the 3D circuit, every car with timing coverage, the selected driver and the replay controls."
+                "image": "sepang.chaseCorner",
+                "caption": "Chase camera with the driving HUD: rev arc, gear and g-meter, all from recorded channels."
               },
               {
-                "image": "sepang.stintAnalysis",
-                "caption": "Tyre and stint analysis: an observed pace trend with its limits stated beside it."
+                "image": "sepang.inspect",
+                "caption": "Inspect camera around a team-style livery. Colours only, no logos."
               },
               {
-                "image": "sepang.lapTimeMl",
-                "caption": "Lap-time ML: the previous-lap baseline beats every trained model on test error, and the panel says so."
+                "image": "sepang.pitLane",
+                "caption": "The pit lane, derived from where cars actually drove during the race's 73 pit stops."
               }
             ]
           }
@@ -152,66 +117,50 @@
     },
     {
       "id": "architecture",
-      "headline": "Ingest once. Replay offline.",
+      "headline": "Fetch once, replay in the browser.",
       "surface": "default",
       "blocks": [
         {
           "discriminant": "flow",
           "value": {
-            "label": "Sepang Vision Lab architecture",
-            "caption": "No external calls happen during replay. The frontend never reads the raw API JSON directly.",
+            "label": "Sepang Vision Lab data flow",
+            "caption": "No backend at runtime. The site is static; the replay files are committed and served from Vercel.",
             "nodes": [
               {
                 "type": "SOURCE",
-                "title": "Jolpica F1 API",
-                "detail": "Ergast-compatible results, laps and pit stops.",
+                "title": "OpenF1 API",
+                "detail": "Meeting 1308: laps, positions, telemetry, stints, pits, race control, weather.",
                 "active": false
               },
               {
                 "type": "PROCESS",
-                "title": "Ingest",
-                "detail": "Paginated, paced, cached. Validates lap sequences and the winner’s total time.",
+                "title": "Fetch and build",
+                "detail": "Python, standard library only. Cached, resumable and throttled, then compacted into replay files.",
+                "active": false
+              },
+              {
+                "type": "PROCESS",
+                "title": "Derive",
+                "detail": "Track alignment, pit lane and elevation, each produced by a script and labelled DERIVED.",
                 "active": false
               },
               {
                 "type": "DATABASE",
-                "title": "Parquet cache",
-                "detail": "Raw-response hashes and retrieval time kept as provenance.",
-                "active": false
-              },
-              {
-                "type": "API",
-                "title": "FastAPI",
-                "detail": "Pydantic-validated replay, models and strategy endpoints.",
+                "title": "Replay files",
+                "detail": "One file per session and driver, committed to the repo.",
                 "active": false
               },
               {
                 "type": "OUTPUT",
-                "title": "Digital twin",
-                "detail": "React Three Fiber scene; readouts refresh at 10 Hz.",
+                "title": "3D replay",
+                "detail": "React Three Fiber scene reading the replay clock every frame.",
                 "active": true
               },
               {
                 "type": "USER",
-                "title": "Race engineer",
-                "detail": "Selects drivers, seeks the race, branches strategies.",
+                "title": "Viewer",
+                "detail": "Picks a session, a driver and a camera, scrubs, compares and shares a moment.",
                 "active": false
-              }
-            ]
-          }
-        },
-        {
-          "discriminant": "list",
-          "value": {
-            "numbered": false,
-            "items": [
-              {
-                "title": "Circuit geometry",
-                "detail": "Community GeoJSON, cross-checked against the operator’s circuit map. The projected path is ~5,549 m against a published 5.543 km (0.11% over). Smoothed with a centripetal Catmull–Rom spline."
-              },
-              {
-                "title": "Historical replay",
-                "detail": "Cars move by linear reconstruction between recorded lap crossings. It is not GPS, and it is labelled that way. A retired car is never extrapolated around the track."
               }
             ]
           }
@@ -220,46 +169,37 @@
     },
     {
       "id": "data",
-      "headline": "The baseline won.",
+      "headline": "Making noisy data move like a car.",
       "surface": "default",
       "blocks": [
-        {
-          "discriminant": "text",
-          "value": {
-            "lead": false,
-            "body": [
-              "The lap-time experiment predicts lap N from the three previous laps, the lap number and the last recorded position. Splits are chronological across the whole field (train by 45 min, validate to 65 min, test after), so no model ever sees the future.",
-              "Random Forest won on validation MAE and was selected. On the test window it did not beat the naive previous-lap baseline, and the app says so prominently instead of hiding it."
-            ]
-          }
-        },
-        {
-          "discriminant": "table",
-          "value": {
-            "caption": "Lap-time models · 2017 Malaysian GP · chronological split (448 / 207 / 275 examples)",
-            "columns": "Model | Validation MAE (s) | Test MAE (s) | Test RMSE (s) | Test R²",
-            "rows": [
-              "Previous-lap baseline | 1.584 | 0.795 | 2.162 | −0.368",
-              "Linear Regression | 1.634 | 1.098 | 1.709 | 0.145",
-              "Random Forest (selected) | 1.505 | 1.160 | 1.731 | 0.123",
-              "XGBoost | 1.843 | 1.566 | 1.934 | −0.095"
-            ],
-            "note": "Single race only; not validated on unseen races.",
-            "highlightRow": 2
-          }
-        },
         {
           "discriminant": "list",
           "value": {
             "numbered": false,
             "items": [
               {
-                "title": "Stint pace",
-                "detail": "Median-of-pairwise-slopes regression per stint. Pit laps and the following lap are excluded but stay visible. Tyre-only degradation is reported as not identifiable from this data."
+                "title": "Alignment",
+                "detail": "OpenF1 positions are fitted to the circuit model with a derived similarity transform: 3.09 m RMS and 5.69 m at the 95th percentile from the centre line, a residual that includes the real racing line."
               },
               {
-                "title": "Monte Carlo",
-                "detail": "1,000–10,000 seeded scenarios per comparison. Every strategy shares the same random draws (common random numbers), so the differences come from the strategy, not the noise."
+                "title": "Smooth motion",
+                "detail": "Each car's distance along the track and its offset across it are refitted with a Gaussian-weighted local fit against time, so cars follow their real line and steer from its curvature."
+              },
+              {
+                "title": "Physics check",
+                "detail": "Sampling every car at 50 Hz across the race, 99% of frames stay within 3.7 g braking or acceleration and 5.9 g cornering, the range of a real car."
+              },
+              {
+                "title": "Elevation",
+                "detail": "About 22 m of climbs and drops, derived from OpenF1 heights. Cars, cameras, scenery and terrain all follow it."
+              },
+              {
+                "title": "Cars keep their space",
+                "detail": "Aligned positions carry a few metres of error, so overlapping cars are eased apart sideways. Overlapping frames in the race fell from 3,955 to 211, and only pairs that race control reports as colliding may touch."
+              },
+              {
+                "title": "Honest gaps",
+                "detail": "When OpenF1's tyre labels disagree, the tower shows ? instead of a guess. A data gap holds the last sample and marks the car stale after two seconds."
               }
             ]
           }
@@ -268,7 +208,7 @@
     },
     {
       "id": "build",
-      "headline": "Constrain what can be trusted.",
+      "headline": "Broadcast features on top.",
       "surface": "default",
       "blocks": [
         {
@@ -277,20 +217,28 @@
             "numbered": true,
             "items": [
               {
-                "title": "Strategy Lab",
-                "detail": "Freezes a hypothetical branch from a driver’s last completed lap and compares stay out, pit now and a delayed stop. All defaults are editable and labelled illustrative."
+                "title": "Five cameras",
+                "detail": "TV, Chase, Onboard, Heli and Inspect, with a speed-sensitive lens and a driving HUD in Chase and Onboard."
               },
               {
-                "title": "Weather Lab",
-                "detail": "Dry → light rain → wet → drying, with five deterministic tyre plans (slicks, early or delayed inters, early or delayed wets) and editable per-lap penalties."
+                "title": "Compare and share",
+                "detail": "Compare two drivers on the same lap with an optional ghost car, and copy a link that reopens the exact session, moment, driver and camera."
               },
               {
-                "title": "Hand tracking",
-                "detail": "MediaPipe HandLandmarker runs locally in a web worker, capped at 15 fps. No camera request is made until the user explicitly enables it."
+                "title": "Weather",
+                "detail": "Rain falls while OpenF1 reports rain, then the track dries over about 90 minutes, a drying time fitted to the race's intermediate stint."
               },
               {
-                "title": "AI race engineer",
-                "detail": "The model may call exactly one tool, which re-runs the captured comparison. It cannot change inputs, and only simulator-derived numbers are shown. The no-AI path is labelled no-AI."
+                "title": "Race engineer",
+                "detail": "Ask about gaps, tyres, pace or flags and hear the answer as a radio call. Presets are answered from the data with no key. With the viewer's own Anthropic API key, Claude answers anything from the same data brief and is told to use only its numbers."
+              },
+              {
+                "title": "Hand gestures",
+                "detail": "Optional webcam control through MediaPipe, running locally: swipe to skip, pinch to follow the next driver. No frames leave the browser."
+              },
+              {
+                "title": "Fast first load",
+                "detail": "three.js and MediaPipe are kept out of the first download, which fell from 988 KB to under 300 KB."
               }
             ]
           }
@@ -298,22 +246,8 @@
       ]
     },
     {
-      "id": "interface",
-      "headline": "From racing curiosity to data experiment.",
-      "surface": "default",
-      "blocks": [
-        {
-          "discriminant": "image",
-          "value": {
-            "image": "projects.sepang",
-            "caption": "Project cover. Concept artwork, not an interface capture."
-          }
-        }
-      ]
-    },
-    {
       "id": "outcome",
-      "headline": "Seventeen milestones in.",
+      "headline": "Live, and checked against the source.",
       "surface": "default",
       "blocks": [
         {
@@ -321,27 +255,27 @@
           "value": {
             "items": [
               {
-                "label": "Milestones",
-                "value": "17",
-                "note": "",
+                "label": "Sessions",
+                "value": "5",
+                "note": "FP1, FP2, FP3, Qualifying, Race",
                 "illustrative": false
               },
               {
-                "label": "Recorded laps",
-                "value": "1,024",
-                "note": "20 drivers · 20 pit records",
+                "label": "Cars",
+                "value": "22",
+                "note": "every car in every session",
                 "illustrative": false
               },
               {
-                "label": "Scenarios / run",
-                "value": "10,000",
-                "note": "Monte Carlo, seeded",
+                "label": "Alignment",
+                "value": "3.09 m",
+                "note": "RMS to the centre line",
                 "illustrative": false
               },
               {
-                "label": "Geometry error",
-                "value": "0.11%",
-                "note": "vs published length",
+                "label": "Tests",
+                "value": "125",
+                "note": "all passing",
                 "illustrative": false
               }
             ]
@@ -352,7 +286,8 @@
           "value": {
             "lead": false,
             "body": [
-              "Still open: the gesture model is waiting on real labelled recordings, and the live AI race-engineer path still needs end-to-end verification. Both are marked as open in the project rather than shown as finished."
+              "All five sessions were compared with the live OpenF1 API for laps, stints, pits, race control and classification, and the position and telemetry streams have no gap over 60 seconds.",
+              "Earlier versions replayed the 2017 Malaysian Grand Prix from timing data, with lap-time models and Monte Carlo strategy tools. Those were removed so the project could focus on doing one recorded weekend well."
             ]
           }
         }
@@ -360,7 +295,7 @@
     },
     {
       "id": "learned",
-      "headline": "A baseline is a result.",
+      "headline": "Data first, then the polish.",
       "surface": "default",
       "blocks": [
         {
@@ -369,20 +304,20 @@
             "numbered": true,
             "items": [
               {
-                "title": "Beat the naive model first",
-                "detail": "A previous-lap guess outperformed every trained model on test. Showing that is more useful than a flattering chart."
+                "title": "Fix the data before the visuals",
+                "detail": "Most of what looked like rendering bugs, such as stutter, cars overlapping or floating, came from the data. Fixing it at the source fixed every view at once."
               },
               {
-                "title": "Label the unknown",
-                "detail": "Saying “tyre degradation is not identifiable here” is a finding, not a gap."
+                "title": "Label every number",
+                "detail": "DERIVED, SOURCED, OFFICIAL or illustrative: saying where each value comes from is what lets a replay be trusted."
               },
               {
-                "title": "Layers keep you honest",
-                "detail": "Building strictly bottom-up meant every new feature stood on something already tested."
+                "title": "Cut to focus",
+                "detail": "Removing the strategy and ML tools made the product clearer, not smaller."
               },
               {
                 "title": "Give AI a narrow job",
-                "detail": "Letting the model explain the simulator, but never invent numbers, made the AI feature trustworthy."
+                "detail": "The race engineer only answers from a brief of recorded data, so it explains the race without inventing it."
               }
             ]
           }

@@ -6,36 +6,38 @@
       "title": "Sepang Vision Lab",
       "year": 2026,
       "category": "product",
-      "status": "under-construction",
+      "status": "active",
       "tier": "featured",
       "resume": true,
       "order": 3,
-      "summary": "Race-intelligence lab for Sepang International Circuit: circuit geometry, simulated telemetry, replay, weather scenarios and Monte Carlo strategy.",
+      "summary": "A 3D, broadcast-style replay of the 2026 Sepang weekend: all five sessions rebuilt from public OpenF1 data, with 22 cars driving an aligned 3D model of the circuit.",
       "stack": [
         "React",
         "TypeScript",
+        "Three.js",
         "React Three Fiber",
         "Vite",
-        "Python"
+        "Python",
+        "Claude API"
       ],
       "tags": [
         "Telemetry",
-        "Simulation",
-        "Digital Twin",
-        "Visualisation"
+        "3D",
+        "Data Visualisation",
+        "Motorsport"
       ],
       "links": {
-        "live": "",
+        "live": "https://sepangvisionlab.madebyrazeen.com",
         "source": "https://github.com/razeeniqbal/sepangvisionlab"
       },
       "cover": "projects.sepang",
-      "productImage": "sepang.circuitReplay",
-      "productImageMobile": "none",
+      "productImage": "sepang.tvCamera",
+      "productImageMobile": "sepang.phone",
       "metrics": [
         {
-          "label": "Lap",
-          "value": "1:30.432",
-          "illustrative": true
+          "label": "Sessions",
+          "value": "5 (FP1 to Race)",
+          "illustrative": false
         },
         {
           "label": "Circuit",
@@ -57,9 +59,9 @@
       "fullName": "",
       "origin": "Curiosity → Experiment",
       "loop": [
-        "Observe",
-        "Predict",
-        "Simulate"
+        "Fetch",
+        "Align",
+        "Replay"
       ],
       "visibility": "public"
     },
