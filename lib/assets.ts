@@ -82,7 +82,7 @@ export const assets = {
   },
   /** Project cover art. Numbers painted into these boards are illustrative. */
   projects: {
-    sepang: { ...img('/assets/v2/projects/sepang-vision-lab/cover.webp', 1672, 941, 'Sepang Vision Lab cover: a race car on track beside the Sepang circuit map and telemetry charts', 'illustrative'), evidence: 'concept' },
+    sepang: shot('/assets/v2/projects/sepang-vision-lab/hero.webp', 2400, 1350, 'Sepang Vision Lab race replay: three cars in team-style liveries nose to tail through a kerbed corner on the opening lap, seen from a trackside TV camera', 'real-product', SVL_SESSION),
     qualityplus: { ...img('/assets/v2/projects/qualityplus/cover.webp', 1672, 941, 'QualityPlus cover: raw data flowing through completeness, uniqueness, validity, consistency and AI rule-check stages into clean data', 'illustrative'), evidence: 'concept' },
     nlp: { ...img('/assets/v2/projects/nlp-research/cover.webp', 1672, 941, 'AI / NLP research cover: two questions tokenised, embedded and compared in a semantic space', 'illustrative'), evidence: 'concept' },
     balang: {

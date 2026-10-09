@@ -1,4 +1,4 @@
-import { renderOg, ogSize, ogContentType } from '@/lib/og/template';
+import { renderOg, ogBackground, ogSize, ogContentType } from '@/lib/og/template';
 import { getProject, getProjects } from '@/content/projects';
 
 export const size = ogSize;
@@ -18,5 +18,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     title: p?.title ?? 'Projects',
     subtitle: p?.summary,
     meta: p ? `${p.year} · ${p.stack.slice(0, 3).join(' · ')}` : undefined,
+    photo: p ? ogBackground(p.slug) : undefined,
   });
 }
