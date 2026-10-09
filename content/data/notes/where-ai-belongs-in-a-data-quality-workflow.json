@@ -5,7 +5,7 @@
   "status": "published",
   "featured": false,
   "date": "2026-10-05",
-  "updated": null,
+  "updated": "2026-10-10",
   "relatedProject": "qualityplus",
   "tags": [],
   "photo": "none",
@@ -41,9 +41,8 @@
       "value": {
         "lead": false,
         "body": [
-          "QualityPlus started from a familiar problem. Operational datasets arrive incomplete, duplicated or inconsistent, and the fixes tend to happen by hand in a copy of a spreadsheet, with no record of what changed, who agreed to it or which rules were applied.",
-          "One obvious approach would have been to hand the whole problem to a model: upload a dataset, ask an agent whether the data is good, and let it fix what it finds. It would make a convincing demo.",
-          "The trouble appears as soon as you think about the second run. Would the same dataset get the same score tomorrow? Could anyone explain why a particular row failed? If a value changed, who changed it, the model or a person? For a quality check, those questions are the whole point. A score that cannot answer them is an opinion."
+          "QualityPlus started from a familiar problem. Operational datasets arrive incomplete, duplicated or inconsistent, and the fixes tend to happen by hand in a copy of a spreadsheet, with no record of what changed or who agreed to it.",
+          "One obvious approach would have been to hand the whole problem to a model. The trouble appears as soon as you think about the second run. Would the same dataset get the same score tomorrow? Could anyone explain why a row failed? If a value changed, who changed it, the model or a person? For a quality check, those questions are the whole point."
         ]
       }
     },
@@ -59,30 +58,8 @@
       "value": {
         "lead": false,
         "body": [
-          "So QualityPlus is built around a boundary. Anything that produces the score stays deterministic: written as explicit rules, run the same way every time, and explainable row by row.",
-          "QualityPlus scores a dataset across four dimensions, and each one answers a different question."
-        ]
-      }
-    },
-    {
-      "discriminant": "bullets",
-      "value": {
-        "numbered": false,
-        "items": [
-          "**Completeness.** Is the value there at all? Selected columns must be present and non-empty.",
-          "**Uniqueness.** Is this record the only one of its kind, by a single column or a composite key?",
-          "**Validity.** Is the value possible? Ranges, thresholds, allowed values, patterns and data types.",
-          "**Consistency.** Does the value agree with something already trusted, such as a reference list, an uploaded file or another dataset in the platform?"
-        ]
-      }
-    },
-    {
-      "discriminant": "text",
-      "value": {
-        "lead": false,
-        "body": [
-          "The quality engine is plain TypeScript and runs in the browser, so scoring does not depend on a model at all. None of these checks needs one. A missing value, a duplicate key or a value outside a defined range can be evaluated directly against explicit rules, and a rule does that more cheaply, more quickly and more predictably than a model would.",
-          "The second part of the design is keeping the failures. A percentage on its own throws away the most useful thing a check finds, which is the exact rows and cells that failed. In QualityPlus those cells become the work, and the score becomes the start of a workflow instead of the end of a report."
+          "So QualityPlus is built around a boundary. Anything that produces the score stays deterministic: explicit rules, run the same way every time, explainable row by row. It scores four dimensions: completeness, uniqueness, validity, and consistency with something already trusted.",
+          "A missing value, a duplicate key or a value outside a defined range can be evaluated directly against explicit rules, and a rule does that more cheaply, more quickly and more predictably than a model would. The failures are kept too. The failed cells become the work, and the score becomes the start of a workflow instead of the end of a report."
         ]
       }
     },
@@ -105,30 +82,16 @@
       "value": {
         "lead": false,
         "body": [
-          "With scoring kept away from the model, the question changed. Where could a model save someone time without being trusted with the result?",
-          "There are three places in QualityPlus, each a separate n8n workflow that calls a model through Ollama."
+          "There are three places, each a separate n8n workflow that calls a model through Ollama. One suggests validity rules from column names and an oil and gas domain knowledge base. One summarises a saved score. One proposes fixes for failed cells, each with a reason and a confidence, and leaves out cells it cannot fix with confidence. Every output is a suggestion a person can accept, change or ignore.",
+          "All three are optional. If a workflow is not configured, its feature is hidden and the quality workflow still runs end to end. If switching the AI off would break the quality check, the AI has ended up somewhere it should not be."
         ]
       }
     },
     {
-      "discriminant": "bullets",
+      "discriminant": "figure",
       "value": {
-        "numbered": false,
-        "items": [
-          "**Rule suggestions.** The model reads column names against an oil and gas domain knowledge base, suggests validity rules, and flags columns that look like they need a consistency check instead.",
-          "**Summaries.** It writes a plain-language summary of a saved score, with the key issues, links to the failing rows and recommendations.",
-          "**Fix suggestions.** It proposes replacements for failed cells, each with a reason and a confidence, using passing values from the same column as examples. Cells it cannot fix with confidence are left out rather than guessed."
-        ]
-      }
-    },
-    {
-      "discriminant": "text",
-      "value": {
-        "lead": false,
-        "body": [
-          "In all three cases the output is a suggestion that a person can read, accept, change or ignore. Writing rules is slow when a dataset has dozens of columns, summarising a long list of failures is tedious, and proposing a fix for a malformed value is something a model is reasonably good at. None of those tasks decides whether the data is good.",
-          "All three are also optional. If a workflow is not configured, its feature is hidden and the quality workflow still runs end to end. I found that a useful test of the boundary. If switching the AI off would break the quality check, the AI has ended up somewhere it should not be."
-        ]
+        "figure": "quality-demo",
+        "caption": "Step through the workflow, then switch the AI off and run it again. The score, the findings and the review still work; only the suggestions disappear."
       }
     },
     {
@@ -143,9 +106,8 @@
       "value": {
         "lead": false,
         "body": [
-          "Every correction records how it was made: entered manually, accepted from an AI suggestion, or accepted and then modified. Both the AI’s value and the final value are kept.",
-          "Roles make the decision explicit. Owners, co-owners and editors can submit corrections. Only owners and co-owners approve or reject them, and a rejection needs a reason. The same idea applies to the rules themselves. A check configuration can become a template, and a template is reviewed and approved before other projects can reuse it.",
-          "Keeping the AI’s answer beside the human’s made the system auditable. It also makes the AI measurable. Each accepted, modified or replaced suggestion is a small piece of evidence about whether the model is actually helping, which is a better test than how convincing its suggestions sound."
+          "Every correction records how it was made: entered manually, accepted from an AI suggestion, or accepted and then modified. Both the AI’s value and the final value are kept. Owners, co-owners and editors can submit corrections. Only owners and co-owners approve or reject them, and a rejection needs a reason. Rule templates are reviewed and approved before other projects reuse them.",
+          "Keeping the AI’s answer beside the human’s made the system auditable. It also makes the AI measurable, which is a better test than how convincing its suggestions sound."
         ]
       }
     },
@@ -161,9 +123,8 @@
       "value": {
         "lead": false,
         "body": [
-          "Most of the design effort went into the workflow around the AI rather than the AI itself: assess, remediate, approve and publish a version people can trust.",
-          "A few decisions did most of the work. The workflow phase is computed from the counts of failed, addressed and pending cells instead of being stored, so it cannot drift away from the data. Each AI touchpoint is a separate webhook, so one can be changed or switched off without touching the scoring or the other two. And an early Python backend on Render was replaced by talking to Supabase directly, which was simpler to run and left less to break.",
-          "The model is the part people ask about. The parts that made QualityPlus usable were the rules, the record of every decision and the approval step. The same principle sits in [FORMA](/journal/why-i-am-building-forma): AI can assist, but it should never be the hidden execution engine."
+          "The workflow phase is computed from the counts of failed, addressed and pending cells, so it cannot drift away from the data. Each AI touchpoint is a separate webhook, so one can change without touching the scoring. An early Python backend on Render was replaced by talking to Supabase directly, which left less to break.",
+          "The parts that made QualityPlus usable were the rules, the record of every decision and the approval step. The same principle sits in [FORMA](/journal/why-i-am-building-forma): AI can assist, but it should never be the hidden execution engine."
         ]
       }
     },
@@ -179,8 +140,7 @@
       "value": {
         "lead": false,
         "body": [
-          "QualityPlus is a proof of concept. I demonstrated it at the SPE AI Summit, but what I know about it comes from building and demonstrating it, not from long-term use, so I am careful not to claim more than that.",
-          "There are a few things I would work on next."
+          "QualityPlus is a proof of concept. I demonstrated it at the SPE AI Summit, but what I know about it comes from building and demonstrating it, not from long-term use."
         ]
       }
     },
@@ -189,23 +149,9 @@
       "value": {
         "numbered": false,
         "items": [
-          "Use the record of accepted, modified and manual corrections to evaluate the fix suggestions properly, column type by column type, instead of judging them by impression.",
-          "Make consistency checks understand relationships between datasets better, beyond matching values against a single reference.",
-          "Keep developing remediation, which is the most active part of the product. Dataset refresh, visual marking of corrected cells and PDF export were the latest additions.",
-          "Test the boundary with more people. Whether reviewers read the AI’s reasoning or only its suggested value is something I can only learn by watching them use it."
-        ]
-      }
-    },
-    {
-      "discriminant": "divider",
-      "value": null
-    },
-    {
-      "discriminant": "text",
-      "value": {
-        "lead": false,
-        "body": [
-          "The design question I started with was where to put the AI. Looking back, the more useful question was where to keep it out. In QualityPlus the AI helps most in the space between a finding and a decision, and the closer it gets to the score itself, the less I want it there."
+          "Use the record of corrections to evaluate the fix suggestions properly, column type by column type.",
+          "Make consistency checks understand relationships between datasets, beyond matching values against a single reference.",
+          "Test the boundary with more reviewers, to see whether they read the AI’s reasoning or only its suggested value."
         ]
       }
     }

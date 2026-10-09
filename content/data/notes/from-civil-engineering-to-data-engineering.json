@@ -5,7 +5,7 @@
   "status": "published",
   "featured": false,
   "date": "2026-10-05",
-  "updated": null,
+  "updated": "2026-10-10",
   "relatedProject": "",
   "tags": [],
   "photo": "none",
@@ -45,10 +45,8 @@
       "value": {
         "lead": false,
         "body": [
-          "I studied Civil Engineering at Universiti Putra Malaysia from 2017 to 2021. At the time it made sense. Mathematics had always been one of my stronger subjects, and engineering connected with the direction my family knew.",
-          "My first roles were on construction sites. I coordinated workers, reviewed drawings, planned site activities, checked measurements and monitored work against the design. Site work has a particular kind of constraint. Once something is built, a mistake is expensive to undo. Checking carries on throughout a project, but the checks made before the work carry a lot of weight.",
-          "After that I worked as a BIM engineer, turning 2D construction drawings into coordinated 3D models and looking for clashes between building elements before they reached site. It was my first experience of representing a physical system digitally before it existed. In 2022 I moved into geotechnical engineering at G&P Geotechnic, working on calculations, technical reports and field activities.",
-          "I liked the work. Calculations had to be right, reports had to stand up to review, and engineering judgement mattered whenever the numbers alone did not settle a question. Nothing about those years felt like a detour, and I still think of myself as an engineer."
+          "I studied Civil Engineering at Universiti Putra Malaysia from 2017 to 2021. Mathematics had always been one of my stronger subjects, and engineering connected with the direction my family knew.",
+          "I started on construction sites, coordinating workers, reviewing drawings and checking measurements against the design. Once something is built, a mistake is expensive to undo. Checking carries on throughout a project, but the checks made before the work carry a lot of weight. Then came BIM, turning 2D drawings into coordinated 3D models, and in 2022 geotechnical engineering at G&P Geotechnic. I liked the work, and I still think of myself as an engineer."
         ]
       }
     },
@@ -64,9 +62,8 @@
       "value": {
         "lead": false,
         "body": [
-          "Geotechnical work produces a lot of measurement. Part of my work at G&P involved time-series readings from engineering equipment, and some of those datasets contained millions of readings.",
-          "The engineering question was usually simple to state: is this behaving the way it should? Answering it meant getting through the data first. I plotted readings to see their shape, looked for abnormal values, compared them with the history and sometimes looked at how they might develop over time.",
-          "I cannot show any of that here. The data belongs to the projects it came from. What I can describe is where the time went. Much of the effort sat between the raw readings and the point where the engineering question could be asked at all, and that was the part of the job I found myself thinking about after the task was done."
+          "Part of my work at G&P involved time-series readings from engineering equipment, and some of those datasets contained millions of readings. The engineering question was simple to state: is this behaving the way it should? Answering it meant getting through the data first, plotting readings, finding abnormal values and comparing them with the history.",
+          "I cannot show any of that here. The data belongs to the projects it came from. What I can describe is where the time went, and that it was the part of the job I kept thinking about after the task was done."
         ]
       }
     },
@@ -82,13 +79,17 @@
       "value": {
         "lead": false,
         "body": [
-          "The repetitive parts came first. The same calculation set up again for new inputs. The same charts rebuilt for a new batch of readings. The same steps repeated each time a report came round.",
-          "The questions I started asking were small ones. Could I automate this calculation? Could I process this with Python? Could I make this Excel workflow easier with VBA?",
-          "VBA came first, because Excel was where the work already lived. I used it to simplify calculations that were otherwise set up by hand. Python came in where a spreadsheet stopped being comfortable, for processing larger sets of readings and automating parts of the engineering and data workflows.",
-          "None of it was planned as a skill path. Each tool arrived the same way: a specific annoyance, a small experiment to see whether it could be done differently, and something I could reuse next time. The tools changed. That way of learning stayed.",
-          "In 2023, still working as a geotechnical engineer, I took four data credentials: Microsoft’s Azure Data Fundamentals, the Certified Data Analyst Associate at APU, the PCEP Python certification and Microsoft’s Power BI Data Analyst certification. I did not take them as an exit plan. The data side of the work had become the part I most wanted to do properly.",
-          "I also practised in public, on datasets that were safe to share, such as [cleaning the London bike-sharing data in Python](https://github.com/razeeniqbal/python-london-bike) and [cleaning a raw bike sales dataset in Excel](https://github.com/razeeniqbal/excel-bike-sales). They are small projects. Looking back, both are about the same thing: what has to happen to data before anyone can trust a chart made from it."
+          "The questions were small ones. Could I automate this calculation? Could I process this with Python? Could I make this Excel workflow easier with VBA?",
+          "VBA came first, because Excel was where the work already lived. Python came in where a spreadsheet stopped being comfortable. Each tool arrived the same way: a specific annoyance, a small experiment, and something I could reuse next time. The tools changed. That way of learning stayed.",
+          "In 2023, still working as a geotechnical engineer, I took four data credentials: Azure Data Fundamentals, the Certified Data Analyst Associate at APU, PCEP and Power BI Data Analyst. I did not take them as an exit plan. The data side of the work had become the part I most wanted to do properly. I also practised in public, [cleaning the London bike-sharing data in Python](https://github.com/razeeniqbal/python-london-bike) and [a raw bike sales dataset in Excel](https://github.com/razeeniqbal/excel-bike-sales)."
         ]
+      }
+    },
+    {
+      "discriminant": "figure",
+      "value": {
+        "figure": "career-timeline",
+        "caption": "Roles, study and credentials on one axis, from the records on this site. Most stages overlap the one before. Point at or tap any bar or dot to read it."
       }
     },
     {
@@ -103,9 +104,7 @@
       "value": {
         "lead": false,
         "body": [
-          "In May 2024 I joined EISmartwork as a Data Analyst. Data stopped being the part of the job I did on the way to an engineering answer and became the job itself.",
-          "Most of the work was Power BI with MSSQL underneath: developing and maintaining dashboards, and preparing and transforming the data they depended on, on reporting datasets with millions of records. Dashboards have their own discipline. You decide what to show and at what level of detail, so that the person reading it can act on it.",
-          "The longer I worked on them, the more of my attention went below the visual layer. A dashboard is only as reliable as the model under it, and the model is only as reliable as whatever prepared the data. One question kept coming back."
+          "In May 2024 I joined EISmartwork as a Data Analyst: Power BI dashboards with MSSQL underneath, on reporting datasets with millions of records. The longer I worked on dashboards, the more of my attention went below them. A dashboard is only as reliable as the model under it, and the model is only as reliable as whatever prepared the data."
         ]
       }
     },
@@ -114,16 +113,6 @@
       "value": {
         "text": "What happens before the dashboard?",
         "cite": ""
-      }
-    },
-    {
-      "discriminant": "text",
-      "value": {
-        "lead": false,
-        "body": [
-          "Under it sat more specific ones. Where did the data come from? How should it be transformed? How do we move it reliably? What happens when the volume grows? What should happen when something fails?",
-          "Part of that role also took me closer to the system side of an existing environment: command-line work, virtual machines and networks, and supporting updates without disrupting a system that was already running. It was a useful reminder of how much sits underneath the data before anyone sees a chart."
-        ]
       }
     },
     {
@@ -138,11 +127,8 @@
       "value": {
         "lead": false,
         "body": [
-          "Since June 2025 I have worked as an AI Data Engineer at AEM Energy Solutions. Most of the work sits further upstream than dashboards: data migration, automation, data quality and the pipelines between systems.",
-          "One example is a Python migration of around 700,000 records from an MSSQL source into a NoSQL target through an existing API. Moving the records was the simple part. Most of the effort went into understanding how the API behaved, reading its responses carefully and handling the cases that could fail partway through.",
-          "That kind of problem felt familiar in a way I did not expect. In engineering, the conditions on the ground are not always as clean as the drawings suggest. Data migrations have their own version of that problem: sooner or later the source contains cases the specification did not describe, and the pipeline needs to know what to do when it meets them.",
-          "Data quality became part of the work too, along with structured Excel templates and VBA for recurring data preparation. The tools from the engineering years did not go away. They found a new place.",
-          "This is where data engineering stopped feeling like a career choice and started feeling like the natural place for the way I already worked: check the inputs, design for failure, and make sure the next step can rely on the last one."
+          "Since June 2025 I have worked as an AI Data Engineer at AEM Energy Solutions, on data migration, automation, data quality and the pipelines between systems. One example is a Python migration of around 700,000 records from an MSSQL source into a NoSQL target through an existing API. Moving the records was the simple part. Most of the effort went into understanding how the API behaved and handling the cases that could fail partway through.",
+          "In engineering, the conditions on the ground are not always as clean as the drawings suggest. Data migrations have their own version of that problem: sooner or later the source contains cases the specification did not describe. This is where data engineering stopped feeling like a career choice and started feeling like the natural place for the way I already worked."
         ]
       }
     },
@@ -158,11 +144,8 @@
       "value": {
         "lead": false,
         "body": [
-          "AI did not arrive as a separate move. It grew out of the data work.",
-          "Machine learning was the first part of it, another way to look for patterns in data. That was close to what I had already been doing with equipment readings, including looking at how readings might develop over time. In September 2024 I started a Master of Science in Artificial Intelligence at UMPSA while working, and finished in 2025. My [research project](/projects/nlp-semantic-similarity) asked whether duplicate questions could be detected accurately without the heaviest models, which is as much a question about cost and constraint as about accuracy.",
-          "Generative AI opened different ways for people to interact with information, through retrieval-augmented generation and assistants that answer from a specific body of data. Agentic workflows raised another question: how AI could reason over data, recommend an action and work alongside systems that already exist.",
-          "Some of my work now uses agentic workflows, such as a proof of concept that recommends equipment based on available data and explains its reasoning, and QualityPlus, which combines data-quality checks with AI assistance. Much of my work does not use AI at all. A migration needs careful Python and error handling, and a model would only add uncertainty to it.",
-          "The question I find most useful is narrower than whether AI can do something. It is closer to which parts of a system should stay deterministic, and where a suggestion would actually help a person."
+          "AI grew out of the data work. Machine learning was close to what I had already done with equipment readings. In September 2024 I started a Master of Science in Artificial Intelligence at UMPSA while working, and finished in 2025. My [research project](/projects/nlp-semantic-similarity) asked whether duplicate questions could be detected accurately without the heaviest models.",
+          "Some of my work now uses agentic workflows, such as QualityPlus, which I wrote about in [Where AI Belongs in a Data Quality Workflow](/journal/where-ai-belongs-in-a-data-quality-workflow). Much of it does not use AI at all. The question I find most useful is which parts of a system should stay deterministic, and where a suggestion would actually help a person."
         ]
       }
     },
@@ -174,32 +157,14 @@
       }
     },
     {
-      "discriminant": "text",
-      "value": {
-        "lead": false,
-        "body": [
-          "Somewhere along the way, building things became my main way of learning. Outside work, the projects start with whatever is bothering me or holding my attention."
-        ]
-      }
-    },
-    {
       "discriminant": "bullets",
       "value": {
         "numbered": false,
         "items": [
-          "[FORMA](/projects/forma) came from writing similar ETL logic again and again, and wondering whether working with messy data could be more direct. I wrote about that in [Why I am building FORMA](/journal/why-i-am-building-forma).",
+          "[FORMA](/projects/forma) came from writing similar ETL logic again and again. I wrote about that in [Why I am building FORMA](/journal/why-i-am-building-forma).",
           "[VSB](/projects/vsb) came from organising volleyball sessions through messages and individual coordination.",
           "[Sepang Vision Lab](/projects/sepang-vision-lab) came from following Formula 1 and wanting to see what a 3D view built around real timing data could show.",
-          "[BALANG](/projects/balang) is a party game about probability and kuih that runs in the browser, with rooms that need no server."
-        ]
-      }
-    },
-    {
-      "discriminant": "text",
-      "value": {
-        "lead": false,
-        "body": [
-          "They look unrelated. Underneath, they follow the same loop that started with VBA at G&P: a problem, a small experiment, and something tangible at the end that shows whether the idea holds."
+          "[BALANG](/projects/balang) is a party game about probability and kuih, with rooms that need no server."
         ]
       }
     },
@@ -211,20 +176,12 @@
       }
     },
     {
-      "discriminant": "figure",
-      "value": {
-        "figure": "career-path",
-        "caption": "Each stage grew out of the one before, and most overlap. Dates come from my roles, study and credentials. The conceptual stages in between have no start date, because there was no single day they began."
-      }
-    },
-    {
       "discriminant": "text",
       "value": {
         "lead": false,
         "body": [
-          "Looking at the whole path, the medium changed more than the method. Structures became data, data became pipelines, and pipelines became systems that sometimes include AI.",
-          "Engineering taught me to be careful with inputs, because they do not tell you everything on their own. It taught me to respect constraints that are real, to think about the whole system rather than one part of it, to ask how something fails before asking how well it performs, and to treat the first design as something to test and revise.",
-          "That is still how I approach a pipeline, an agentic workflow or a side project. Understand what exists, make something tangible, test what works, and keep moving. On this site I call it input, process, iterate, progress. I was working that way long before I wrote it down."
+          "The medium changed more than the method. Engineering taught me to be careful with inputs, because they do not tell you everything on their own. It taught me to respect constraints that are real, to think about the whole system rather than one part of it, to ask how something fails before asking how well it performs, and to treat the first design as something to test and revise.",
+          "On this site I call it input, process, iterate, progress. I was working that way long before I wrote it down."
         ]
       }
     }

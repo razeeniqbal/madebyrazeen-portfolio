@@ -40,5 +40,8 @@ export type JournalCover = keyof typeof journalCovers;
 export const journalFigures = {
   'career-path': 'The path was not a jump',
   'quality-boundary': 'Where the AI sits',
+  'career-timeline': 'The path, dated',
+  'quality-demo': 'Try it: switch the AI off',
+  'forma-loop': 'The core loop',
 } as const;
 export type JournalFigure = keyof typeof journalFigures;

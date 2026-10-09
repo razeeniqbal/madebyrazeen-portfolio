@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react';
 import { journalFigures, type JournalCover, type JournalFigure } from '@/lib/journal';
 import { cn } from '@/lib/utils';
+import { CareerTimeline } from '@/components/v2/career/CareerTimeline';
+import { getCareerTimeline } from '@/content/career-timeline';
+import { QualityWorkflowDemo } from '@/components/v2/work/QualityWorkflowDemo';
+import { FormaLoop } from './FormaLoop';
 
 /**
  * Journal editorial figures, drawn in code: real text, no image weight, and the same technical
@@ -354,6 +358,9 @@ function QualityBoundary() {
 const figureBody: Record<JournalFigure, () => ReactNode> = {
   'career-path': CareerPath,
   'quality-boundary': QualityBoundary,
+  'career-timeline': () => <CareerTimeline data={getCareerTimeline()} />,
+  'quality-demo': () => <QualityWorkflowDemo />,
+  'forma-loop': FormaLoop,
 };
 
 /** An inline figure: label, the drawing (real text, so it reads without the caption), and the caption. */
