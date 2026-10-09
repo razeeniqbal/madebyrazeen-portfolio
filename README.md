@@ -3,7 +3,7 @@
 Personal site of Razeen Iqbal: projects and case studies, experience and training work, a journal, and a running log.
 Live at **[portfolio.madebyrazeen.com](https://portfolio.madebyrazeen.com)**.
 
-The repository keeps the name `portfolio-v1.0` for history, but the code is V2. V1 has been retired and its old URLs redirect to their V2 pages (`next.config.js`).
+The code is V2. V1 has been retired and its old URLs redirect to their V2 pages (`next.config.js`). The repository was called `portfolio-v1.0` until October 2026; GitHub redirects the old URL.
 
 ## Stack
 
@@ -11,7 +11,7 @@ The repository keeps the name `portfolio-v1.0` for history, but the code is V2. 
 - **Tailwind CSS 3** for styling
 - **Keystatic** admin panel over JSON content in `content/data/`
 - **Claude** (`@anthropic-ai/sdk`) for the "Ask about me" assistant
-- `next/og` for share images · deployed on **Vercel**
+- `next/og` for share images · fonts self-hosted with `next/font/local` · deployed on **Vercel**
 
 ## Getting started
 
@@ -121,4 +121,4 @@ Run the dev server and open `http://localhost:3000/keystatic`. Saving writes str
 
 ## Licence
 
-The code is MIT licensed (`package.json`). Fonts in `lib/og/fonts` (Inter, JetBrains Mono) are under the SIL Open Font License; see the licence files alongside them.
+The code is MIT licensed (`package.json`). The self-hosted fonts in `app/fonts` and `lib/og/fonts` (Inter, JetBrains Mono) are under the SIL Open Font License; see the licence files alongside them.

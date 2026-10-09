@@ -33,7 +33,7 @@ Production edits go through GitHub: you sign in with GitHub, and each save becom
 1. Locally, create `.env.local` with `NEXT_PUBLIC_KEYSTATIC_STORAGE=github`, start the dev server, and open `/keystatic`.
 2. Follow Keystatic's prompt to **create a GitHub App**. It writes `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` into `.env.local`.
 3. In the GitHub App settings, add the production callback URL: `https://portfolio.madebyrazeen.com/api/keystatic/github/oauth/callback`.
-4. Copy those four variables into Vercel → Project → Settings → Environment Variables. If the repo isn't `portfolio-v1.0`, also set `NEXT_PUBLIC_KEYSTATIC_REPO`.
+4. Copy those four variables into Vercel → Project → Settings → Environment Variables. If the repo isn't `madebyrazeen-portfolio`, also set `NEXT_PUBLIC_KEYSTATIC_REPO`.
 5. Remove `NEXT_PUBLIC_KEYSTATIC_STORAGE` from `.env.local` to go back to local editing.
 
 ## "Ask about me" assistant

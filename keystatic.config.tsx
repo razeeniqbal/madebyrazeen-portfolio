@@ -174,7 +174,7 @@ export default config({
   // NEXT_PUBLIC_KEYSTATIC_STORAGE=github to run the one-time GitHub App setup.
   storage:
     process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_KEYSTATIC_STORAGE === 'github'
-      ? { kind: 'github', repo: { owner: 'razeeniqbal', name: process.env.NEXT_PUBLIC_KEYSTATIC_REPO || 'portfolio-v1.0' } }
+      ? { kind: 'github', repo: { owner: 'razeeniqbal', name: process.env.NEXT_PUBLIC_KEYSTATIC_REPO || 'madebyrazeen-portfolio' } }
       : { kind: 'local' },
   ui: {
     brand: { name: 'razeeniqbal. admin' },
