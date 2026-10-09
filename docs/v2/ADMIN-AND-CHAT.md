@@ -13,9 +13,8 @@ All site content lives in `content/data/` as JSON and is edited through Keystati
 | Chat assistant | Greeting, suggested questions, offline message |
 | Projects | Every project. **Tier** controls where it appears; **Draft** hides it; **Placeholder** shows "details coming" |
 | Case studies | One entry per project (file name = project slug), built from content blocks |
-| Experience, Capabilities, Credentials | As named |
-| Field notes | Notes with status Published / Draft / In writing |
-| Lab | Experiments and "currently exploring" |
+| Experience, Trainer, Life, Capabilities, Credentials | As named |
+| Journal | Entries with status Published / Draft / Archived |
 
 Photos are picked from the image library in `lib/assets.ts`. To add a new photo: put the file in `public/assets/v2/…`, add it to `lib/assets.ts`, and it appears in every image picker.
 

@@ -1,11 +1,11 @@
 {
-  "name": "retro-portfolio",
-  "version": "0.1.0",
+  "name": "razeen-portfolio",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "set NODE_OPTIONS=--max-old-space-size=4096 && next dev --webpack",
+    "dev": "node --max-old-space-size=4096 node_modules/next/dist/bin/next dev --webpack",
     "dev:turbo": "next dev --turbopack",
-    "dev:light": "set NODE_OPTIONS=--max-old-space-size=2048 && next dev --webpack",
+    "dev:light": "node --max-old-space-size=2048 node_modules/next/dist/bin/next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -14,7 +14,7 @@
     "check:writing": "node scripts/check-writing.mjs",
     "check:links": "node scripts/check-links.mjs",
     "resume:pdf": "node scripts/build-resume-pdf.mjs",
-    "clean": "powershell -Command \"Remove-Item -Path .next -Recurse -Force -ErrorAction SilentlyContinue\""
+    "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\""
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
@@ -38,7 +38,7 @@
     "tsx": "^4.23.15",
     "typescript": "^5.9.3"
   },
-  "description": "Retro indie/90s portfolio built with Next.js",
+  "description": "Personal site of Razeen Iqbal: projects, experience, journal and running log. Next.js 16 + Keystatic.",
   "author": "Razeen Iqbal",
   "license": "MIT"
 }

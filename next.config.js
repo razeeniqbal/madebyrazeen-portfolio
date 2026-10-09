@@ -2,10 +2,6 @@
 const nextConfig = {
   // Optional: build into another folder (e.g. when OneDrive or a dev server locks .next). Default .next.
   ...(process.env.NEXT_DIST_DIR && { distDir: process.env.NEXT_DIST_DIR }),
-  // Optimize for lower memory usage
-  experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-  },
   turbopack: {},
 
   // Suppress hydration warnings from browser extensions
@@ -67,12 +63,6 @@ const nextConfig = {
               name: 'commons',
               chunks: 'all',
               minChunks: 2,
-            },
-            framerMotion: {
-              name: 'framer-motion',
-              test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
-              priority: 10,
-              reuseExistingChunk: true,
             },
           },
         },
