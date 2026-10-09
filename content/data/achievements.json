@@ -1208,12 +1208,13 @@
       "verification": "personal",
       "provenance": [
         "user-supplied",
-        "personal-verify"
+        "personal-verify",
+        "issuer-source"
       ],
       "featured": true,
       "selected": true,
-      "source": "Resume supplied by Razeen in chat (26 Sep 2026), Certifications section; Supplied directly by Razeen (credential correction brief, 4 Oct 2026): earned 19 Jun 2026, expires 20 Jun 2027, ID and certification number; Microsoft Learn credential page on the AEM Enersol profile, link supplied by Razeen (9 Oct 2026)",
-      "notes": "The earlier credential ID link returned \"credential unavailable\" (4 Oct 2026); replaced by the working profile link Razeen supplied on 9 Oct 2026. Dates, ID and number kept as supplied; not re-checked against the page from this environment."
+      "source": "Resume supplied by Razeen in chat (26 Sep 2026), Certifications section; Supplied directly by Razeen (credential correction brief, 4 Oct 2026): earned 19 Jun 2026, expires 20 Jun 2027, ID and certification number; Microsoft Learn credential page on the AEM Enersol profile, link and page screenshot supplied by Razeen (9 Oct 2026): Active, earned 19 Jun 2026, expires 20 Jun 2027, same ID and certification number",
+      "notes": "The earlier credential-ID link returned \"credential unavailable\" (4 Oct 2026). The AEM Enersol profile page shows the same credential as Active and Online Verifiable (screenshot, 9 Oct 2026)."
     },
     {
       "id": "44",
