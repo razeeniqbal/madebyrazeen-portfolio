@@ -92,7 +92,7 @@ export function BuildShowcase({ builds }: { builds: ShowcaseBuild[] }) {
                     sizes="(min-width: 1024px) 56vw, 1px"
                     className={cn(
                       'absolute inset-0 h-full w-full object-cover object-top transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none',
-                      i === active ? 'scale-100 opacity-100' : 'scale-[1.03] opacity-0',
+                      i === active ? 'opacity-100' : 'opacity-0',
                     )}
                   />
                 ) : null,
