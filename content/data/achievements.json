@@ -37,26 +37,28 @@
       "type": "certification",
       "code": "",
       "issuedDate": "December 2024",
-      "issuedOn": "",
+      "issuedOn": "2024-12-19",
       "expiresDate": "",
       "expiresOn": "",
       "description": "Foundational knowledge in ML, AI concepts, and Azure AI services.",
       "category": "certification",
       "area": "ai",
       "image": "/achievements/microsoft-azure-ai-fundamentals.webp",
-      "credentialUrl": "",
+      "credentialUrl": "https://www.credly.com/badges/a79662e5-3993-4b9b-baaf-cee4fe6d63b1",
       "issuerUrl": "https://learn.microsoft.com/en-us/certifications/",
       "evidenceUrl": "",
-      "credentialId": "",
+      "credentialId": "a79662e5-3993-4b9b-baaf-cee4fe6d63b1",
       "certificationNumber": "",
-      "verification": "none",
+      "verification": "personal",
       "provenance": [
         "user-supplied",
-        "badge-evidence"
+        "badge-evidence",
+        "personal-verify",
+        "issuer-source"
       ],
       "featured": false,
       "selected": false,
-      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026)",
+      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026); Credly Badge Details screenshot and link supplied by Razeen (9 Oct 2026): Microsoft Certified: Azure AI Fundamentals, issued 19 Dec 2024, does not expire",
       "notes": ""
     },
     {
@@ -66,25 +68,27 @@
       "type": "certification",
       "code": "",
       "issuedDate": "October 2024",
-      "issuedOn": "",
+      "issuedOn": "2024-10-30",
       "expiresDate": "",
       "expiresOn": "",
       "description": "Cloud fundamentals including Azure services, security, compliance, and pricing.",
       "category": "certification",
       "area": "cloud",
       "image": "/achievements/microsoft-fundamentals.webp",
-      "credentialUrl": "",
+      "credentialUrl": "https://www.credly.com/badges/f27899ed-2e21-4140-a2c6-63149c17f26a",
       "issuerUrl": "https://learn.microsoft.com/en-us/certifications/",
       "evidenceUrl": "",
-      "credentialId": "",
+      "credentialId": "f27899ed-2e21-4140-a2c6-63149c17f26a",
       "certificationNumber": "",
-      "verification": "none",
+      "verification": "personal",
       "provenance": [
-        "user-supplied"
+        "user-supplied",
+        "personal-verify",
+        "issuer-source"
       ],
       "featured": false,
       "selected": false,
-      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026)",
+      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026); Credly Badge Details screenshot and link supplied by Razeen (9 Oct 2026): Microsoft Certified: Azure Fundamentals, issued 30 Oct 2024, does not expire",
       "notes": ""
     },
     {
@@ -131,19 +135,21 @@
       "category": "certification",
       "area": "development",
       "image": "/achievements/python-institute-pcep.webp",
-      "credentialUrl": "",
+      "credentialUrl": "https://www.credly.com/badges/d89ccdc1-0330-4c2e-8c65-1611c8d904cf",
       "issuerUrl": "https://www.pythoninstitute.org/",
       "evidenceUrl": "",
-      "credentialId": "",
+      "credentialId": "d89ccdc1-0330-4c2e-8c65-1611c8d904cf",
       "certificationNumber": "",
-      "verification": "none",
+      "verification": "personal",
       "provenance": [
         "user-supplied",
-        "badge-evidence"
+        "badge-evidence",
+        "personal-verify",
+        "issuer-source"
       ],
       "featured": false,
       "selected": false,
-      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026); Supplied directly by Razeen (credential correction brief, 4 Oct 2026): exam PCEP-30-02, issued 1 Sep 2023",
+      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026); Supplied directly by Razeen (credential correction brief, 4 Oct 2026): exam PCEP-30-02, issued 1 Sep 2023; Credly Badge Details screenshot and link supplied by Razeen (9 Oct 2026): [PCEP-30-02] PCEP Certified Entry-Level Python Programmer, Python Institute, issued 1 Sep 2023, does not expire",
       "notes": ""
     },
     {
@@ -246,19 +252,21 @@
       "category": "certification",
       "area": "data",
       "image": "/achievements/apu-certified-data-analyst-associate.webp",
-      "credentialUrl": "",
+      "credentialUrl": "https://www.credly.com/badges/26c70019-8ff7-4afe-a22c-c67f953cba91",
       "issuerUrl": "",
       "evidenceUrl": "",
-      "credentialId": "",
+      "credentialId": "26c70019-8ff7-4afe-a22c-c67f953cba91",
       "certificationNumber": "",
-      "verification": "none",
+      "verification": "personal",
       "provenance": [
         "user-supplied",
-        "badge-evidence"
+        "badge-evidence",
+        "personal-verify",
+        "issuer-source"
       ],
       "featured": false,
       "selected": false,
-      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026); Supplied directly by Razeen (credential correction brief, 4 Oct 2026): issued 5 Aug 2023",
+      "source": "v1 portfolio data supplied by Razeen (lib/achievementsData.ts, Dec 2025 to Jan 2026); Supplied directly by Razeen (credential correction brief, 4 Oct 2026): issued 5 Aug 2023; Credly Badge Details screenshot and link supplied by Razeen (9 Oct 2026): Certified Data Analyst Associate, Asia Pacific University of Technology and Innovation, issued 5 Aug 2023, does not expire",
       "notes": ""
     },
     {
