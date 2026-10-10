@@ -1,4 +1,6 @@
 import { Fragment } from 'react';
+import { CaseStudyDemo } from './CaseStudyDemo';
+import { FlowExplorer } from '@/components/v2/diagram/FlowExplorer';
 import { FlowDiagram } from '@/components/v2/diagram/FlowDiagram';
 import { EvidenceGallery, EvidenceImage } from '@/components/v2/work/EvidenceImage';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
@@ -37,7 +39,12 @@ export function CaseStudyBlock({ block }: { block: Block }) {
     case 'flow':
       return (
         <figure>
-          <FlowDiagram nodes={block.nodes} label={block.label} />
+          {/* Nodes with details become a walkable flow; detail-less flows stay a static diagram. */}
+          {block.nodes.some((n) => n.detail) ? (
+            <FlowExplorer nodes={block.nodes} label={block.label} />
+          ) : (
+            <FlowDiagram nodes={block.nodes} label={block.label} />
+          )}
           {block.caption && (
             <figcaption className="mt-4">
               <TechnicalLabel>{block.caption}</TechnicalLabel>
@@ -45,6 +52,9 @@ export function CaseStudyBlock({ block }: { block: Block }) {
           )}
         </figure>
       );
+
+    case 'demo':
+      return <CaseStudyDemo demo={block.demo} caption={block.caption} />;
 
     case 'steps':
       return (

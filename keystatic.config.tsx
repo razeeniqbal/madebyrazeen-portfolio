@@ -111,6 +111,20 @@ const sharedBlocks = {
         label: 'Image',
         schema: fields.object({ image: imageSelect('Image'), caption: fields.text({ label: 'Caption' }) }),
       },
+      demo: {
+        label: 'Interactive demo (real data)',
+        schema: fields.object({
+          demo: fields.select({
+            label: 'Demo',
+            options: [
+              { label: 'Sepang: raw vs smoothed OpenF1 motion', value: 'sepang-motion' },
+              { label: 'QualityPlus: workflow with AI switch', value: 'quality-workflow' },
+            ],
+            defaultValue: 'sepang-motion',
+          }),
+          caption: fields.text({ label: 'Caption' }),
+        }),
+      },
 };
 
 const contentBlocks = (label: string) => fields.blocks(sharedBlocks, { label });

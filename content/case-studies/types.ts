@@ -68,7 +68,9 @@ export type Block =
    * numbered screens one after another; `grid` shows two per row. Every image opens at full size.
    */
   | { kind: 'gallery'; layout: 'pair' | 'sequence' | 'grid'; items: { image: ImageAsset; caption: string }[] }
-  | { kind: 'steps'; label: string; steps: string[] };
+  | { kind: 'steps'; label: string; steps: string[] }
+  /** A registered interactive demo built from real data (see components/v2/case-study/CaseStudyDemo). */
+  | { kind: 'demo'; demo: 'sepang-motion' | 'quality-workflow'; caption?: string };
 
 export interface CaseSection {
   id: SectionId;

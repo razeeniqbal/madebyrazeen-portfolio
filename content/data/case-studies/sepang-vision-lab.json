@@ -203,6 +203,13 @@
               }
             ]
           }
+        },
+        {
+          "discriminant": "demo",
+          "value": {
+            "demo": "sepang-motion",
+            "caption": "Real OpenF1 samples from the 2026 race, played as received and smoothed. Drag the slider or press Play."
+          }
         }
       ]
     },
