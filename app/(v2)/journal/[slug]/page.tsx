@@ -165,6 +165,7 @@ export default async function JournalEntryPage({ params }: Params) {
             )}
             <ArrowLink href="/journal">Back to the Journal</ArrowLink>
           </footer>
+          {note.postscript && <p className="mt-16 max-w-[40rem] font-mono text-[0.6875rem] leading-relaxed text-muted/70">{note.postscript}</p>}
         </div>
       </article>
     </Section>

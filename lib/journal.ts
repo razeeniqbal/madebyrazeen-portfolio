@@ -43,5 +43,6 @@ export const journalFigures = {
   'career-timeline': 'The path, dated',
   'quality-demo': 'Try it: switch the AI off',
   'forma-loop': 'The core loop',
+  'sepang-motion': 'Raw versus smoothed',
 } as const;
 export type JournalFigure = keyof typeof journalFigures;

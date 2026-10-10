@@ -821,6 +821,7 @@ export default config({
           options: [{ label: 'None', value: '' }, ...Object.entries(journalCovers).map(([value, c]) => ({ label: c.label, value }))],
           defaultValue: '',
         }),
+        postscript: fields.text({ label: 'Postscript (a quiet line at the very end, shown small)', multiline: true }),
         related: fields.array(fields.object({ label: fields.text({ label: 'Label' }), href: fields.text({ label: 'Link (e.g. /experience)' }) }), {
           label: 'Related (hand-picked links at the end of the entry)',
           itemLabel: (p) => p.fields.label.value || 'Link',

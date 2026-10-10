@@ -5,6 +5,8 @@ import { CareerTimeline } from '@/components/v2/career/CareerTimeline';
 import { getCareerTimeline } from '@/content/career-timeline';
 import { QualityWorkflowDemo } from '@/components/v2/work/QualityWorkflowDemo';
 import { FormaLoop } from './FormaLoop';
+import { SepangMotionDemo, type SepangMotion } from '@/components/v2/case-study/SepangMotionDemo';
+import motion from '@/content/data/sepang-motion.json';
 
 /**
  * Journal editorial figures, drawn in code: real text, no image weight, and the same technical
@@ -361,6 +363,7 @@ const figureBody: Record<JournalFigure, () => ReactNode> = {
   'career-timeline': () => <CareerTimeline data={getCareerTimeline()} />,
   'quality-demo': () => <QualityWorkflowDemo />,
   'forma-loop': FormaLoop,
+  'sepang-motion': () => <SepangMotionDemo data={motion as unknown as SepangMotion} />,
 };
 
 /** An inline figure: label, the drawing (real text, so it reads without the caption), and the caption. */

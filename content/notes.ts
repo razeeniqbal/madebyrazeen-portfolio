@@ -51,6 +51,8 @@ export interface Note {
   photo?: { image: ImageAsset; caption: string; alt: string };
   /** An editorial cover drawn in code, shown in place of a photo (see journalCovers). */
   cover?: JournalCover;
+  /** A quiet line after the entry (a dedication or a note), shown small. */
+  postscript?: string;
   /** Hand-picked links for the end of the entry ("Related"), never computed. */
   related: { label: string; href: string }[];
   seoTitle?: string;
@@ -76,6 +78,7 @@ type CmsNote = {
   photoAlt?: string;
   cover?: string;
   related?: { label: string; href: string }[];
+  postscript?: string;
   seoTitle?: string;
   seoDescription?: string;
   body?: CmsBlock[];
@@ -152,6 +155,7 @@ export const notes: Note[] = readCollection<CmsNote>('notes')
       photo: image ? { image, caption: data.photoCaption ?? '', alt: data.photoAlt || image.alt } : undefined,
       cover: data.cover && data.cover in journalCovers ? (data.cover as JournalCover) : undefined,
       related: (data.related ?? []).filter((r) => r.label && r.href),
+      postscript: data.postscript || undefined,
       seoTitle: data.seoTitle || undefined,
       seoDescription: data.seoDescription || undefined,
       body,

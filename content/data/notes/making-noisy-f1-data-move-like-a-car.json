@@ -1,0 +1,158 @@
+{
+  "title": "Making Noisy F1 Data Move Like a Car",
+  "summary": "Sepang Vision Lab replays the 2026 Sepang weekend in 3D from public OpenF1 data. Most of the work went into making sparse, jittery positions move like a real car without inventing anything.",
+  "category": "building",
+  "status": "published",
+  "featured": false,
+  "date": "2026-10-10",
+  "updated": null,
+  "relatedProject": "sepang-vision-lab",
+  "tags": [],
+  "photo": "none",
+  "photoAlt": "",
+  "photoCaption": "",
+  "cover": "",
+  "postscript": "You are the one who inspired me to do this. I hope you see Russell win, so I can see you smile.",
+  "related": [
+    {
+      "label": "Sepang Vision Lab: the case study",
+      "href": "/projects/sepang-vision-lab"
+    },
+    {
+      "label": "Life: Formula 1",
+      "href": "/life#formula-1"
+    },
+    {
+      "label": "Where AI Belongs in a Data Quality Workflow",
+      "href": "/journal/where-ai-belongs-in-a-data-quality-workflow"
+    }
+  ],
+  "seoTitle": "",
+  "seoDescription": "",
+  "body": [
+    {
+      "discriminant": "heading",
+      "value": {
+        "level": "2",
+        "text": "Why Sepang"
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "I like how Formula 1 uses data to understand performance. When OpenF1 published the 2026 Sepang weekend, I wanted to see how much of it I could rebuild from public data alone: every practice session, qualifying and the race, with all 22 cars driving an aligned 3D model of the circuit.",
+          "The 3D part turned out to be the easier half."
+        ]
+      }
+    },
+    {
+      "discriminant": "image",
+      "value": {
+        "image": "sepang.tvCamera",
+        "caption": "The race replay on the TV camera: the timing tower for all 22 cars, a safety car message, the track map and weather."
+      }
+    },
+    {
+      "discriminant": "heading",
+      "value": {
+        "level": "2",
+        "text": "The data fought back"
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "OpenF1 publishes car positions at about four samples a second, with jittery timestamps, in a coordinate system that matches no map. Played back as they arrive, the cars stutter, cut corners, overlap and float above the track."
+        ]
+      }
+    },
+    {
+      "discriminant": "figure",
+      "value": {
+        "figure": "sepang-motion",
+        "caption": "Twelve real seconds of one car through a corner. Press Play on Raw, then on Smoothed. The histogram is the gap between every sample in that half hour of the race."
+      }
+    },
+    {
+      "discriminant": "heading",
+      "value": {
+        "level": "2",
+        "text": "Fix the data before the visuals"
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Most of what looked like rendering bugs came from the data. Fixing it at the source fixed every camera at once."
+        ]
+      }
+    },
+    {
+      "discriminant": "bullets",
+      "value": {
+        "numbered": false,
+        "items": [
+          "**Alignment.** Positions are fitted to the circuit model with a derived similarity transform, 3.09 m RMS from the centre line.",
+          "**Smooth motion.** Each car’s distance along the track and offset across it are refitted against time, so cars follow their real line.",
+          "**A physics check.** Sampled at 50 Hz across the race, 99% of frames stay within the braking, acceleration and cornering range of a real car.",
+          "**Cars keep their space.** Overlapping cars are eased apart sideways. Overlapping frames in the race fell from 3,955 to 211."
+        ]
+      }
+    },
+    {
+      "discriminant": "heading",
+      "value": {
+        "level": "2",
+        "text": "Honest gaps"
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Some things the data cannot say. When OpenF1’s tyre labels disagree, the timing tower shows a question mark instead of a guess, and a data gap marks the car as stale after two seconds. Every number is labelled as derived, sourced, official or illustrative. That labelling is what lets a replay be trusted."
+        ]
+      }
+    },
+    {
+      "discriminant": "image",
+      "value": {
+        "image": "sepang.chaseCorner",
+        "caption": "The chase camera through a corner on lap 9, with the rev arc, gear, g-meter and a stewards message."
+      }
+    },
+    {
+      "discriminant": "heading",
+      "value": {
+        "level": "2",
+        "text": "Cutting what I liked"
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "Earlier versions carried lap-time models and strategy tools. I removed them so the project could do one recorded weekend well. The product became clearer, not smaller.",
+          "The one AI feature left has a narrow job. The race engineer answers questions about gaps, tyres, pace and flags only from a brief of recorded data, so it explains the race without inventing it."
+        ]
+      }
+    },
+    {
+      "discriminant": "text",
+      "value": {
+        "lead": false,
+        "body": [
+          "The [case study](/projects/sepang-vision-lab) has the architecture and every feature, and the [live replay](https://sepangvisionlab.madebyrazeen.com) is the best way to see it."
+        ]
+      }
+    }
+  ]
+}
