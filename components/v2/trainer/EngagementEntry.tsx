@@ -1,6 +1,7 @@
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { engagementWhen, modeLabel, type TrainerEngagement } from '@/content/trainer';
 import { cn } from '@/lib/utils';
+import { CurriculumExplorer } from './TrainerInteractive';
 
 interface EngagementProps {
   engagement: TrainerEngagement;
@@ -77,16 +78,10 @@ export function FeaturedEngagement({ engagement: e, number }: EngagementProps) {
       {e.topicGroups.length > 0 && (
         <div className="mt-10">
           <TechnicalLabel as="p" marker="//">
-            Curriculum · {e.topics.length} topics in {e.topicGroups.length} themes
+            Curriculum · {e.topics.length} topics in {e.topicGroups.length} themes · pick a theme
           </TechnicalLabel>
-          <dl className="mt-4 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-5">
-            {e.topicGroups.map((g) => (
-              <div key={g.label} className="border-t border-line pt-3">
-                <dt className="font-semibold">{g.label}</dt>
-                <dd className="mt-1 text-sm text-muted">{g.topics.join(', ')}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-4" />
+          <CurriculumExplorer groups={e.topicGroups} />
         </div>
       )}
     </article>

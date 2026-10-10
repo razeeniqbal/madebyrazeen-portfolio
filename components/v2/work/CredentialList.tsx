@@ -11,6 +11,16 @@ export type ListedCredential = Achievement & { badge?: string };
 
 type Filter = CredentialArea | 'all';
 
+// One treatment per area, from the palette only: AI is the signal, the rest are shades of ink.
+const areaFill: Record<CredentialArea, string> = {
+  ai: 'bg-lime',
+  data: 'bg-ink',
+  cloud: 'bg-ink/50',
+  development: 'bg-ink/25',
+  other: 'bg-transparent border border-ink/40',
+};
+const yearOf = (a: Achievement) => a.issuedDate.match(/\d{4}/)?.[0] ?? 'Undated';
+
 /**
  * The full credential archive: one row of subject filters and a search box. Newest first; undated
  * records last (they are shown as undated, never given a guessed date).
@@ -25,20 +35,68 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
   const [area, setArea] = useState<Filter>('all');
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const [year, setYear] = useState<string | null>(null);
+
+  // Credentials per year, stacked by area: the chart above the list, and a filter of its own.
+  const years = useMemo(() => {
+    const keys = [...new Set(items.map(yearOf))].sort((a, b) => (a === 'Undated' ? 1 : b === 'Undated' ? -1 : a.localeCompare(b)));
+    return keys.map((y) => {
+      const inYear = items.filter((a) => yearOf(a) === y);
+      return { year: y, total: inYear.length, byArea: credentialAreas.map((c) => ({ area: c.value, n: inYear.filter((a) => a.area === c.value).length })).filter((x) => x.n > 0) };
+    });
+  }, [items]);
+  const maxYear = Math.max(1, ...years.map((y) => y.total));
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return items
-      .filter((a) => (area === 'all' || a.area === area) && (!q || `${a.title} ${a.organization}`.toLowerCase().includes(q)))
+      .filter((a) => (area === 'all' || a.area === area) && (!year || yearOf(a) === year) && (!q || `${a.title} ${a.organization}`.toLowerCase().includes(q)))
       .sort((a, b) => (issuedTime(b.issuedDate) || -1) - (issuedTime(a.issuedDate) || -1) || a.title.localeCompare(b.title));
-  }, [items, area, query]);
+  }, [items, area, query, year]);
 
-  const filtered = area !== 'all' || Boolean(query);
+  const filtered = area !== 'all' || Boolean(query) || Boolean(year);
   const shown = initial && !expanded && !filtered ? results.slice(0, initial) : results;
   const filters: { value: Filter; label: string }[] = [{ value: 'all', label: 'All' }, ...credentialAreas.filter((c) => counts.has(c.value))];
 
   return (
     <div>
+      {/* Per-year chart: click a year to filter; the area filter dims the other areas. */}
+      <div className="mb-8">
+        <div className="flex h-40 items-end gap-2 border-b border-line sm:gap-4" role="group" aria-label="Credentials per year">
+          {years.map((y) => {
+            const on = year === y.year;
+            return (
+              <button
+                key={y.year}
+                type="button"
+                aria-pressed={on}
+                aria-label={`${y.year}: ${y.total} credential${y.total === 1 ? '' : 's'}`}
+                onClick={() => setYear(on ? null : y.year)}
+                className={cn('group flex h-full flex-1 flex-col justify-end', year && !on && 'opacity-35')}
+              >
+                <span className="label mb-1 text-center text-ink">{y.total}</span>
+                <span className="tl-rise flex flex-col-reverse gap-px" style={{ height: `${(y.total / maxYear) * 75}%` }}>
+                  {y.byArea.map((b) => (
+                    <span
+                      key={b.area}
+                      style={{ flexGrow: b.n }}
+                      className={cn('block min-h-[3px] transition-opacity', areaFill[b.area], area !== 'all' && area !== b.area && 'opacity-15', 'group-hover:brightness-110')}
+                    />
+                  ))}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="mt-2 flex gap-2 sm:gap-4">
+          {years.map((y) => (
+            <span key={y.year} className={cn('label flex-1 text-center', year === y.year ? 'text-ink' : 'text-muted')}>
+              {y.year === 'Undated' ? 'No date' : `’${y.year.slice(2)}`}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className="flex flex-col gap-5 border-b border-line pb-5 lg:flex-row lg:items-end lg:justify-between">
         <div role="group" aria-label="Filter by area" className="flex flex-wrap gap-x-6 gap-y-2">
           {filters.map((f) => {
@@ -54,6 +112,7 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
                   active ? 'border-lime text-ink' : 'border-transparent text-muted hover:text-ink',
                 )}
               >
+                {f.value !== 'all' && <span aria-hidden="true" className={cn('h-2 w-2', areaFill[f.value])} />}
                 {f.label}
                 <span className="opacity-60">{counts.get(f.value) ?? 0}</span>
               </button>
@@ -74,6 +133,15 @@ export function CredentialList({ items, initial }: { items: ListedCredential[]; 
 
       <p className="label mt-4 text-muted" role="status" aria-live="polite">
         {results.length} of {items.length}
+        {year && (
+          <>
+            {' · '}
+            {year}{' '}
+            <button type="button" onClick={() => setYear(null)} className="ml-1 border-b border-current text-ink">
+              Clear year
+            </button>
+          </>
+        )}
       </p>
 
       <ol className="mt-2">

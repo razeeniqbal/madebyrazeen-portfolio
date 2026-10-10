@@ -92,3 +92,49 @@ export const trainerApproach = [
   { step: 'Practise', detail: 'People work through it themselves.' },
   { step: 'Apply', detail: 'Connect it to a real use case.' },
 ];
+
+export type TopicArea = 'data' | 'cloud' | 'ai' | 'dev';
+export const topicAreaLabel: Record<TopicArea, string> = { data: 'Data', cloud: 'Cloud', ai: 'AI', dev: 'Dev tools' };
+
+/**
+ * Which area a taught topic belongs to, by its wording. AI is checked first so "Google Cloud AI" and
+ * "BigQuery ML" count as AI; a capstone is part of the programme, not a topic area, and is left out.
+ */
+function areaOf(topic: string): TopicArea | undefined {
+  const t = topic.toLowerCase();
+  if (/capstone/.test(t)) return undefined;
+  if (/\bai\b|vertex|ml\b|machine learning|document ai/.test(t)) return 'ai';
+  if (/git/.test(t)) return 'dev';
+  if (/power bi|power query|python|sql fundamentals|data analysis/.test(t)) return 'data';
+  return 'cloud';
+}
+
+export interface TopicMapData {
+  engagements: { slug: string; title: string; audience: string; mode: string; when?: string }[];
+  topics: { topic: string; area: TopicArea; engagements: string[] }[];
+}
+
+/** Every public topic taught, with its area and the engagements that covered it (for the topic map). */
+export function getTopicMap(): TopicMapData {
+  const list = getTrainerEngagements();
+  const byTopic = new Map<string, { area: TopicArea; engagements: string[] }>();
+  for (const e of list) {
+    for (const topic of e.topics) {
+      const area = areaOf(topic);
+      if (!area) continue;
+      const row = byTopic.get(topic) ?? { area, engagements: [] };
+      row.engagements.push(e.slug);
+      byTopic.set(topic, row);
+    }
+  }
+  return {
+    engagements: list.map((e) => ({
+      slug: e.slug,
+      title: e.title,
+      audience: e.mode === 'internal-knowledge-sharing' ? 'Colleagues' : e.mode === 'technical-sharing' ? 'Students' : 'Public sector',
+      mode: modeLabel[e.mode],
+      when: engagementWhen(e),
+    })),
+    topics: [...byTopic.entries()].map(([topic, v]) => ({ topic, ...v })),
+  };
+}
