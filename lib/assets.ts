@@ -64,6 +64,34 @@ const VSB_PREVIEW = 'Development preview with sample data';
 const FORMA_EXAMPLE = 'Built-in example project and sample data';
 const SVL_SESSION = '2026 Sepang race replay, recorded OpenF1 data';
 
+/**
+ * Organisation logos (employers, universities), supplied by Razeen. Shown small, on a white tile so
+ * they read on either surface. Matched to a company or institution name by `orgLogo`.
+ */
+export const logos = {
+  aem: img('/assets/v2/logos/aem.webp', 480, 87, 'AEM Enersol logo'),
+  eismartwork: img('/assets/v2/logos/eismartwork.webp', 480, 136, 'EISmartwork logo'),
+  gnp: img('/assets/v2/logos/gnp.webp', 287, 240, 'G&P logo'),
+  threeDtech: img('/assets/v2/logos/3dtech.webp', 265, 240, '3Dtech Solutions logo'),
+  upm: img('/assets/v2/logos/upm.webp', 480, 220, 'Universiti Putra Malaysia logo'),
+  umpsa: img('/assets/v2/logos/umpsa.webp', 325, 240, 'Universiti Malaysia Pahang Al-Sultan Abdullah logo'),
+};
+
+const logoMatchers: [RegExp, keyof typeof logos][] = [
+  [/\bAEM\b/i, 'aem'],
+  [/EISmartwork/i, 'eismartwork'],
+  [/G&P/i, 'gnp'],
+  [/3Dtech/i, 'threeDtech'],
+  [/Universiti Putra Malaysia|\bUPM\b/i, 'upm'],
+  [/Universiti Malaysia Pahang|UMPSA/i, 'umpsa'],
+];
+
+/** The logo for an organisation name, or undefined when there is none on file. */
+export const orgLogo = (name: string): ImageAsset | undefined => {
+  const hit = logoMatchers.find(([re]) => re.test(name));
+  return hit ? logos[hit[1]] : undefined;
+};
+
 export const assets = {
   identity: {
     // Source is 800×800; use at ≤800px CSS width until a higher-resolution original exists.

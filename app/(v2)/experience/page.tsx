@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { OrgLogo } from '@/components/v2/system/OrgLogo';
 import { Section } from '@/components/v2/system/Section';
 import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
@@ -81,6 +82,7 @@ export default function ExperiencePage() {
               <TechnicalLabel as="p" marker={stageLabel(stages, current)}>
                 Current chapter
               </TechnicalLabel>
+              <OrgLogo name={current.company} className="mt-6" />
               <h2 className="mt-6 text-display-lg uppercase">{current.role}</h2>
               <p className="mt-3 text-lead">{current.company}</p>
               <RoleFacts role={current} className="mt-8" />
@@ -155,6 +157,7 @@ export default function ExperiencePage() {
               <TechnicalLabel as="p" marker={stageLabel(stages, pipelines)}>
                 {pipelines.discipline}
               </TechnicalLabel>
+              <OrgLogo name={pipelines.company} className="mt-6" />
               <h2 className="mt-6 text-display-lg uppercase">{pipelines.headline ?? pipelines.role}</h2>
               <p className="mt-4 text-lead">
                 {pipelines.role}, {pipelines.company}
@@ -194,6 +197,7 @@ export default function ExperiencePage() {
               <TechnicalLabel as="p" marker={stageLabel(stages, turning)}>
                 Turning point
               </TechnicalLabel>
+              <OrgLogo name={turning.company} className="mt-6" />
               <h2 className="mt-6 max-w-[16ch] text-display-xl uppercase">{turning.headline ?? turning.role}</h2>
               <p className="mt-6 text-lead">
                 {turning.role}, {turning.company}
@@ -221,6 +225,7 @@ export default function ExperiencePage() {
                 <TechnicalLabel as="p" marker={stageLabel(stages, r)}>
                   {r.discipline}
                 </TechnicalLabel>
+                <OrgLogo name={r.company} size="sm" className="mt-4" />
                 <h3 className="mt-4 text-display-sm">{r.role}</h3>
                 <p className="mt-1 text-muted">{r.company}</p>
                 <RoleFacts role={r} className="mt-5" />
@@ -240,12 +245,15 @@ export default function ExperiencePage() {
           <SectionHeader eyebrow="Education and credentials" title={[`${achievements.length} certifications`, '& courses.']} size="md" />
           <ul className="col-span-full grid gap-x-6 gap-y-6 md:grid-cols-2">
             {education.map((e) => (
-              <li key={e.institution} className="border-t border-line pt-4">
-                <p className="label text-muted">{e.period}</p>
-                <p className="mt-1 font-semibold">
-                  {e.degree}, {e.field}
-                </p>
-                <p className="mt-1 text-sm text-muted">{e.institution}</p>
+              <li key={e.institution} className="flex items-start gap-5 border-t border-line pt-4">
+                <OrgLogo name={e.institution} className="shrink-0" />
+                <div>
+                  <p className="label text-muted">{e.period}</p>
+                  <p className="mt-1 font-semibold">
+                    {e.degree}, {e.field}
+                  </p>
+                  <p className="mt-1 text-sm text-muted">{e.institution}</p>
+                </div>
               </li>
             ))}
           </ul>

@@ -115,7 +115,7 @@ export default function LifePage() {
                 )}
               </div>
 
-              <div className={running ? 'col-span-full space-y-8 lg:col-span-6 lg:col-start-7 lg:self-end' : 'col-span-full space-y-8 lg:col-span-4 lg:col-start-9 lg:self-end'}>
+              <div className={running ? 'col-span-full space-y-8 lg:col-span-6 lg:col-start-7 lg:self-start' : 'col-span-full space-y-8 lg:col-span-4 lg:col-start-9 lg:self-start'}>
                 {running ? (
                   <>
                     <PhotoFrame

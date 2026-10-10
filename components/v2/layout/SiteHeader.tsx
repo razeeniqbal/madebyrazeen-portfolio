@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Wordmark } from '@/components/v2/identity/Wordmark';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { Avatar } from '@/components/v2/identity/Avatar';
-import { openCommandMenu } from './CommandMenu';
 import { primaryNav, utilityNav, contactHref, isActive, isSectionActive } from '@/lib/site';
 import { profile } from '@/content/profile';
 import { cn } from '@/lib/utils';
@@ -95,18 +94,6 @@ export function SiteHeader() {
         {/* Utilities: set apart on the right, smaller in weight than the sections they follow. */}
         <nav aria-label="Utilities" className="hidden justify-self-end lg:block">
           <ul className="flex items-center gap-5 xl:gap-6">
-            <li>
-              {/* Quick jump (Ctrl/⌘ K): every page, project and journal entry. */}
-              <button
-                type="button"
-                onClick={openCommandMenu}
-                aria-label="Quick jump to a page, project or article (Ctrl K)"
-                className="label flex items-center gap-2 py-2 text-muted transition-colors hover:text-ink"
-              >
-                Jump
-                <kbd className="border border-line px-1.5 py-0.5 font-mono text-[0.625rem]">Ctrl K</kbd>
-              </button>
-            </li>
             {utilityNav.map((u) => {
               const active = isActive(pathname, u.href);
               return (

@@ -62,7 +62,7 @@ export default function RunningPage() {
           <div className="col-span-full">
             <ArrowLink href="/life#running">Back to Life</ArrowLink>
           </div>
-          <div className="col-span-full md:col-span-5 lg:col-span-7 lg:self-end">
+          <div className="col-span-full md:col-span-5 lg:col-span-7 lg:self-start">
             <SectionHeader as="h1" size="xl" eyebrow="Life / Running" title={['Same steps.', 'Better insights.']} />
             <p className="mt-8 max-w-prose text-lead text-muted">
               Running is where engineering habits meet real life: show up, measure, adjust, repeat. Consistency compounds.
@@ -311,7 +311,7 @@ export default function RunningPage() {
             caption="Road race"
             className="col-span-full md:col-span-4 lg:col-span-5"
           />
-          <div className="col-span-full self-end md:col-span-4 lg:col-span-6 lg:col-start-7">
+          <div className="col-span-full self-start md:col-span-4 lg:col-span-6 lg:col-start-7">
             <SectionHeader index="07" eyebrow="From the journal" title={['Further than', 'yesterday.']} size="md" />
             <p className="mt-6 max-w-prose text-muted">Race reports and training reflections will live in the journal.</p>
             <div className="mt-6">

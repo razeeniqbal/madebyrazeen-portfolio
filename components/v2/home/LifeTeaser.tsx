@@ -33,7 +33,7 @@ export function LifeTeaser() {
           className="col-span-full md:col-span-4 lg:col-span-5"
         />
 
-        <div className="col-span-full md:col-span-4 lg:col-span-6 lg:col-start-7 lg:self-end">
+        <div className="col-span-full md:col-span-4 lg:col-span-6 lg:col-start-7 lg:self-start">
           <SectionHeader index="06" eyebrow="Life" title={beyond.title} size="md" />
 
           <div className="mt-10">
