@@ -69,7 +69,7 @@ export function CommandMenu({ items }: { items: JumpItem[] }) {
       data-surface="dark"
     >
       <div className="flex items-center gap-3 border-b border-line px-4">
-        <span aria-hidden="true" className="label text-muted">
+        <span aria-hidden="true" className="label shrink-0 whitespace-nowrap text-muted">
           Go to
         </span>
         <input
