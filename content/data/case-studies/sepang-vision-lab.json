@@ -287,7 +287,7 @@
             "lead": false,
             "body": [
               "All five sessions were compared with the live OpenF1 API for laps, stints, pits, race control and classification, and the position and telemetry streams have no gap over 60 seconds.",
-              "Earlier versions replayed the 2017 Malaysian Grand Prix from timing data, with lap-time models and Monte Carlo strategy tools. Those were removed so the project could focus on doing one recorded weekend well."
+              "Earlier versions also carried lap-time models and strategy tools. Those were removed so the project could focus on doing one recorded weekend well."
             ]
           }
         }
