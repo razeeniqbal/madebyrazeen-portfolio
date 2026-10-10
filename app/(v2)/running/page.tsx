@@ -5,7 +5,8 @@ import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { RouteMap } from '@/components/v2/running/RouteMap';
-import { MonthlyChart, WeekStrip } from '@/components/v2/running/RunCharts';
+import { WeekStrip } from '@/components/v2/running/RunCharts';
+import { MonthlyChartInteractive, PaceCalculator } from '@/components/v2/running/RunInteractive';
 import { RunLog } from '@/components/v2/running/RunLog';
 import { assets } from '@/lib/assets';
 import {
@@ -95,7 +96,7 @@ export default function RunningPage() {
           <SectionHeader index="01" eyebrow="Personal bests" title={['Fastest so far.']} size="md" className="lg:col-span-6" />
           <p className="col-span-full self-end text-muted lg:col-span-5 lg:col-start-8">
             Fastest continuous effort inside any outdoor run, measured from the GPS track the way Garmin and Strava do. Treadmill
-            runs don&apos;t count.
+            runs do not count.
           </p>
           <dl className="col-span-full grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
             {achieved.map((b) => (
@@ -113,6 +114,9 @@ export default function RunningPage() {
               </div>
             ))}
           </dl>
+          <div className="col-span-full lg:col-span-6">
+            <PaceCalculator bests={bests.map((b) => ({ key: b.key, label: b.label, km: b.km, sec: b.sec }))} />
+          </div>
           {next && (
             <p className="col-span-full flex items-center gap-3 border-t border-line pt-5">
               <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full border border-ink" />
@@ -145,7 +149,7 @@ export default function RunningPage() {
               <TechnicalLabel as="h3" className="mb-4">
                 Distance per month (km)
               </TechnicalLabel>
-              <MonthlyChart months={months} />
+              <MonthlyChartInteractive months={months} />
             </div>
             <div className="col-span-full lg:col-span-4 lg:col-start-9">
               <TechnicalLabel as="h3" className="mb-4">

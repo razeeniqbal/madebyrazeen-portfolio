@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { InterestStepper } from '@/components/v2/life/InterestStepper';
 import { Section } from '@/components/v2/system/Section';
 import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
@@ -96,24 +97,8 @@ export default function LifePage() {
               <div className={running ? 'col-span-full lg:col-span-5' : 'col-span-full lg:col-span-7'}>
                 <SectionHeader index={index} eyebrow={`Life / ${interest.name}`} title={[`${interest.name}.`]} size="lg" />
                 {interest.story.length > 0 ? (
-                  // The interest first, then the problem it surfaced, then the project: a numbered sequence, not a CTA.
-                  <ol aria-label={`${interest.name}, step by step`} className="mt-10 border-l border-line">
-                    {interest.story.map((s, n) => {
-                      const last = n === interest.story.length - 1;
-                      return (
-                        <li key={s.label} className="relative pb-7 pl-6 last:pb-0">
-                          <span
-                            aria-hidden="true"
-                            className={last ? 'absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-lime ring-1 ring-ink' : 'absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border border-muted bg-surface'}
-                          />
-                          <p className="label text-muted">
-                            {String(n + 1).padStart(2, '0')} / {s.label}
-                          </p>
-                          <p className={last ? 'mt-1.5 max-w-prose text-lead text-ink' : 'mt-1.5 max-w-prose text-lead text-muted'}>{s.text}</p>
-                        </li>
-                      );
-                    })}
-                  </ol>
+                  // The interest first, then the problem it surfaced, then the project: stepped through, one at a time.
+                  <InterestStepper name={interest.name} steps={interest.story} />
                 ) : (
                   <div className="mt-8 max-w-prose space-y-4 text-lead text-muted">
                     {interest.body.map((p) => (
