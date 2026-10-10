@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { EntryMeta } from '@/components/v2/journal/EntryMeta';
 import { toSummary, type Note } from '@/content/notes';
 
-/** Compact list of published journal entries: date · reading time · category, then title and description. */
-export function NoteList({ notes }: { notes: Note[] }) {
+/** Compact list of published journal entries: date · reading time · category, then title (and description unless compact). */
+export function NoteList({ notes, compact }: { notes: Note[]; compact?: boolean }) {
   return (
     <ol>
       {notes.map((n) => {
@@ -12,7 +12,7 @@ export function NoteList({ notes }: { notes: Note[] }) {
           <div className="min-w-0">
             <EntryMeta entry={toSummary(n)} />
             <h3 className="mt-2 text-xl font-semibold group-hover:underline">{n.title}</h3>
-            <p className="mt-1 max-w-prose text-sm text-muted">{n.description}</p>
+            {!compact && <p className="mt-1 max-w-prose text-sm text-muted">{n.description}</p>}
           </div>
         );
         return (

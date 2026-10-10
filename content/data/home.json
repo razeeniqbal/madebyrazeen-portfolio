@@ -33,7 +33,7 @@
       "into a reviewable workflow."
     ],
     "body": [
-      "Deterministic checks score a dataset for completeness, uniqueness, validity and consistency against reference data. AI works around those checks, suggesting rules, summarising findings and proposing fixes. Every correction is reviewed before the trusted version is approved and published."
+      "Rules score the data, AI suggests fixes, and a person approves every change."
     ]
   },
   "journal": {

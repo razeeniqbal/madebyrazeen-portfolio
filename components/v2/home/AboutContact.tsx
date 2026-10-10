@@ -25,7 +25,6 @@ export function PathTeaser() {
         />
         <div className="col-span-full lg:col-span-4 lg:col-start-9 lg:self-end">
           <SectionHeader index="02" eyebrow="Path" title={home.path.title} size="md" />
-          <p className="justify-copy mt-8 text-muted">{home.path.body}</p>
           <div className="mt-8">
             <ArrowLink href="/about">More about me</ArrowLink>
           </div>

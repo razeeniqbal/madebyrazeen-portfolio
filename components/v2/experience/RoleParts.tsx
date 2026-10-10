@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { FlowDiagram } from '@/components/v2/diagram/FlowDiagram';
@@ -34,14 +35,38 @@ export function RoleFacts({ role, className }: { role: Role; className?: string 
 
 /** Role narrative: the first paragraph leads, the rest follow at reading size. */
 export function Narrative({ role, className }: { role: Role; className?: string }) {
+  const [first, ...rest] = role.narrative;
   return (
     <div className={cn('max-w-prose space-y-4', className)}>
-      {role.narrative.map((p, i) => (
-        <p key={p} className={i === 0 ? 'text-lead' : 'text-muted'}>
-          {p}
-        </p>
-      ))}
+      {first && <p className="text-lead">{first}</p>}
+      <More>
+        {rest.map((p) => (
+          <p key={p} className="text-muted">
+            {p}
+          </p>
+        ))}
+      </More>
     </div>
+  );
+}
+
+/**
+ * The first paragraph stays; everything after it waits behind a quiet "More" toggle, so a role or a
+ * piece of work reads in one line and the detail is one click away. Native <details>: keyboard and
+ * screen-reader friendly, and no JavaScript.
+ */
+export function More({ children, label = 'More' }: { children: ReactNode; label?: string }) {
+  const items = Array.isArray(children) ? children.filter(Boolean) : children ? [children] : [];
+  if (items.length === 0) return null;
+  return (
+    <details className="group">
+      <summary className="label hit inline-flex cursor-pointer list-none items-center gap-2 border-b border-current pb-0.5 text-muted hover:text-ink [&::-webkit-details-marker]:hidden">
+        <span className="group-open:hidden">{label}</span>
+        <span className="hidden group-open:inline">Less</span>
+        <span aria-hidden="true" className="transition-transform group-open:rotate-45">+</span>
+      </summary>
+      <div className="mt-4 space-y-4">{children}</div>
+    </details>
   );
 }
 
@@ -107,29 +132,34 @@ export function FeaturedWork({ work, number }: { work: SelectedWork; number: str
       </header>
       <div className="col-span-4 space-y-6 md:col-span-8 lg:col-span-6 lg:col-start-7">
         <div className="max-w-prose space-y-4">
-          {paragraphs(work.description).map((p, i) => (
-            <p key={p} className={i === 0 ? 'text-lead' : 'text-muted'}>
-              {p}
-            </p>
-          ))}
+          <p className="text-lead">{paragraphs(work.description)[0]}</p>
+          <More>
+            {paragraphs(work.description)
+              .slice(1)
+              .map((p) => (
+                <p key={p} className="text-muted">
+                  {p}
+                </p>
+              ))}
+            <WorkFacts work={work} />
+            {work.flow.length > 0 && (
+              <figure>
+                <figcaption className="label mb-4 text-muted">Flow · {work.flow.length} steps</figcaption>
+                <FlowDiagram
+                  label={`${work.name}: ${work.flow.map((f) => f.label).join(', then ')}`}
+                  nodes={work.flow.map((f, i) => ({ type: f.type, title: f.label, active: i === work.flow.length - 1 }))}
+                  horizontalFrom="xl"
+                />
+              </figure>
+            )}
+          </More>
         </div>
-        <WorkFacts work={work} />
         {work.projectSlug && (
           <Link href={`/projects/${work.projectSlug}`} className="hit label inline-block border-b border-current pb-1 hover:text-signal">
             {work.name} case study <span aria-hidden="true">→</span>
           </Link>
         )}
       </div>
-      {work.flow.length > 0 && (
-        <figure className="col-span-full">
-          <figcaption className="label mb-4 text-muted">Flow · {work.flow.length} steps</figcaption>
-          <FlowDiagram
-            label={`${work.name}: ${work.flow.map((f) => f.label).join(', then ')}`}
-            nodes={work.flow.map((f, i) => ({ type: f.type, title: f.label, active: i === work.flow.length - 1 }))}
-            horizontalFrom={work.flow.length > 5 ? 'xl' : 'lg'}
-          />
-        </figure>
-      )}
     </article>
   );
 }
@@ -143,9 +173,14 @@ export function SupportingWork({ work, className }: { work: SelectedWork; classN
         <WorkLabels work={work} />
       </div>
       <div className="mt-4 max-w-prose space-y-3 text-muted">
-        {paragraphs(work.description).map((p) => (
-          <p key={p}>{p}</p>
-        ))}
+        <p>{paragraphs(work.description)[0]}</p>
+        <More>
+          {paragraphs(work.description)
+            .slice(1)
+            .map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+        </More>
       </div>
       <p className="label mt-4 text-muted">
         {[work.technologies.join(' · '), `AI · ${work.aiUsed ? 'Yes' : 'No'}`].filter(Boolean).join('   /   ')}

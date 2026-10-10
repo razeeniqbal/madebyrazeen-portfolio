@@ -287,6 +287,7 @@ export default config({
             id: fields.text({ label: 'Anchor id' }),
             eyebrow: fields.text({ label: 'Label' }),
             title: textList('Heading lines', 'Line'),
+            summary: fields.text({ label: 'One-line summary (About shows this; the full text is in the Journal)' }),
             body: paragraphList('Paragraphs before the questions'),
             questions: textList('Questions (shown with emphasis)', 'Question'),
             after: paragraphList('Paragraphs after the questions'),

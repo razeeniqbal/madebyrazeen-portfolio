@@ -9,8 +9,6 @@ import { CareerTimeline } from '@/components/v2/career/CareerTimeline';
 import { getCareerTimeline } from '@/content/career-timeline';
 import { FeaturedWork, Narrative, ProgressionLadder, RoleFacts, SmallBuild, SupportingWork } from '@/components/v2/experience/RoleParts';
 import { Capabilities } from '@/components/v2/work/Capabilities';
-import { CredentialList } from '@/components/v2/work/CredentialList';
-import { withBadges } from '@/content/credential-badges';
 import { CodingActivity } from '@/components/v2/experience/CodingActivity';
 import { achievements } from '@/content/achievements';
 import { education, recognition } from '@/content/profile';
@@ -58,7 +56,6 @@ export default function ExperiencePage() {
           title={['Built through', 'different disciplines.']}
           lede={[
             'My career started with physical systems, moved through data, and continues today with Data Engineering and AI.',
-            'Each role changed the kind of problems I work on, but the approach has remained familiar: understand the system, work through the details, and find a better way to build it.',
           ]}
           meta={[
             { label: 'Roles', value: roles.length },
@@ -253,10 +250,7 @@ export default function ExperiencePage() {
             ))}
           </ul>
           <div className="col-span-full">
-            <CredentialList items={withBadges(achievements)} initial={8} />
-            <div className="mt-8">
-              <ArrowLink href="/credentials">Learning path and selected credentials</ArrowLink>
-            </div>
+            <ArrowLink href="/credentials">All {achievements.length} credentials</ArrowLink>
           </div>
           <div className="col-span-full border-t border-line pt-10">
             <TechnicalLabel as="h3" marker="//">

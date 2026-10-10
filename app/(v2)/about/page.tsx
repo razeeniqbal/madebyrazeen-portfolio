@@ -11,7 +11,7 @@ import { Trajectory } from '@/components/v2/system/Trajectory';
 import { MiniRazeen } from '@/components/v2/identity/MiniRazeen';
 import { CredentialBadge } from '@/components/v2/credentials/CredentialBadge';
 import { statusLabel } from '@/components/v2/work/ProjectMeta';
-import { assets, type ImageAsset } from '@/lib/assets';
+import { assets } from '@/lib/assets';
 import { profile } from '@/content/profile';
 import { selectedCredentials, achievements } from '@/content/achievements';
 import { credentialShortTitle } from '@/lib/credentials';
@@ -37,72 +37,6 @@ export const metadata: Metadata = {
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-/** One narrative moment: heading on the left, the text (and any questions) on the right. */
-function MomentSection({
-  moment,
-  index,
-  surface,
-  grid,
-  photo,
-}: {
-  moment: Moment;
-  index: number;
-  surface: 'dark' | 'light';
-  grid?: boolean;
-  photo?: { image: ImageAsset; caption: string };
-}) {
-  return (
-    <Section surface={surface} grid={grid} id={moment.id} className="scroll-mt-16">
-      <div className="page-grid gap-y-10">
-        <div className="col-span-full lg:col-span-5">
-          <SectionHeader index={pad(index)} eyebrow={moment.eyebrow} title={moment.title} size="md" />
-          {photo && (
-            <PhotoFrame
-              image={photo.image}
-              sizes="(min-width: 1024px) 30vw, 100vw"
-              aspect="aspect-[4/3] lg:aspect-[4/5]"
-              caption={photo.caption}
-              className="mt-10 lg:max-w-sm"
-            />
-          )}
-        </div>
-        <div className="col-span-full max-w-prose space-y-4 lg:col-span-6 lg:col-start-7">
-          {moment.body.map((p, i) => {
-            // The sentence that leads into the questions carries the turn, so it is set in ink.
-            const bridge = moment.questions.length > 0 && i === moment.body.length - 1;
-            return (
-              <p key={p} className={i === 0 ? 'text-lead' : bridge ? 'font-semibold text-ink' : 'text-muted'}>
-                {p}
-              </p>
-            );
-          })}
-          {moment.questions.length > 0 && (
-            // The questions are the turn in the story: set large, numbered, on a rule. Not quotation cards.
-            <ol aria-label="Questions" className="!my-10 border-l-2 border-lime">
-              {moment.questions.map((q, i) => (
-                <li key={q} className="flex items-baseline gap-4 py-2 pl-5">
-                  <span className="label shrink-0 text-muted">Q{i + 1}</span>
-                  <span className="text-display-sm text-ink">{q}</span>
-                </li>
-              ))}
-            </ol>
-          )}
-          {moment.after.map((p, i) => (
-            <p key={p} className={i === moment.after.length - 1 ? 'font-semibold text-ink' : 'text-muted'}>
-              {p}
-            </p>
-          ))}
-          {moment.link && (
-            <div className="pt-4">
-              <ArrowLink href={moment.link.href}>{moment.link.label}</ArrowLink>
-            </div>
-          )}
-        </div>
-      </div>
-    </Section>
-  );
-}
-
 // About answers WHY the path happened. Experience answers WHAT happened, so this page links there for
 // dates, roles and work instead of repeating them. All copy lives in content/data/story.json; the
 // projects, credentials and growth loop come from their own canonical records.
@@ -121,7 +55,7 @@ export default function AboutPage() {
         <PageHeader
           href="/about"
           title={aboutHero.title}
-          lede={aboutHero.lede}
+          lede={aboutHero.lede.slice(0, 1)}
           aside={
             <PhotoFrame
               image={assets.identity.portraitFormal}
@@ -134,23 +68,46 @@ export default function AboutPage() {
         />
       </Section>
 
-      {origin && <MomentSection moment={origin} index={2} surface="light" />}
-      {turning && <MomentSection moment={turning} index={3} surface="dark" grid />}
-      {intoData && <MomentSection moment={intoData} index={4} surface="light" />}
-      {toAi && (
-        <MomentSection moment={toAi} index={5} surface="dark" photo={{ image: assets.identity.graduation, caption: 'Master of Science, Artificial Intelligence' }} />
-      )}
+      {/* 02 The story, short: one line per turn, the full version is the Journal article. */}
+      <Section surface="light" id="story" className="scroll-mt-16">
+        <div className="page-grid gap-y-10">
+          <div className="col-span-full lg:col-span-4">
+            <SectionHeader index={pad(2)} eyebrow="The story" title={['Four turns,', 'one path.']} size="md" />
+            <PhotoFrame
+              image={assets.identity.graduation}
+              sizes="(min-width: 1024px) 26vw, 100vw"
+              aspect="aspect-[4/3] lg:aspect-[4/5]"
+              caption="Master of Science, Artificial Intelligence"
+              className="mt-10 hidden lg:block lg:max-w-xs"
+            />
+          </div>
+          <ol className="col-span-full lg:col-span-7 lg:col-start-6">
+            {[origin, turning, intoData, toAi].filter((m): m is Moment => Boolean(m)).map((m, i) => (
+              <li key={m.id} id={m.id} data-reveal className="grid scroll-mt-20 grid-cols-[2.5rem_1fr] gap-x-4 border-t border-line py-7">
+                <span className="label pt-1.5 text-muted">{pad(i + 1)}</span>
+                <div>
+                  <p className="label text-muted">{m.eyebrow}</p>
+                  <p className="mt-2 text-display-sm">{m.title.join(' ')}</p>
+                  <p className="mt-2 max-w-prose text-muted">{m.summary}</p>
+                </div>
+              </li>
+            ))}
+            <li className="border-t border-line pt-8">
+              <ArrowLink href="/journal/from-civil-engineering-to-data-engineering">Read the full story</ArrowLink>
+            </li>
+          </ol>
+        </div>
+      </Section>
 
       {/* 07 Why I build: the origin of each primary build, linked to its canonical project */}
       <Section surface="light" id="why-i-build" className="scroll-mt-16 bg-raised">
         <div className="page-grid gap-y-12">
-          <SectionHeader index={pad(6)} eyebrow={whyBuild.eyebrow} title={whyBuild.title} size="md" className="lg:col-span-9" />
+          <SectionHeader index={pad(3)} eyebrow={whyBuild.eyebrow} title={whyBuild.title} size="md" className="lg:col-span-9" />
           <ol className="col-span-full">
             {whyBuild.origins.map((o) => (
               <li key={o.project.slug} className="grid grid-cols-1 gap-x-6 gap-y-5 border-t border-line py-8 lg:grid-cols-12">
                 <div className="lg:col-span-6">
                   <p className="text-display-sm">{o.lead}</p>
-                  <p className="mt-3 max-w-prose text-muted">{o.text}</p>
                 </div>
                 <Link
                   href={`/projects/${o.project.slug}`}
@@ -167,11 +124,7 @@ export default function AboutPage() {
             ))}
           </ol>
           <div className="col-span-full space-y-1 border-t border-ink pt-8 lg:col-span-8">
-            {whyBuild.after.map((p, i) => (
-              <p key={p} className={i === whyBuild.after.length - 1 ? 'text-display-sm' : 'text-lead text-muted'}>
-                {p}
-              </p>
-            ))}
+            <p className="text-display-sm">{whyBuild.after[whyBuild.after.length - 1]}</p>
           </div>
         </div>
       </Section>
@@ -179,14 +132,8 @@ export default function AboutPage() {
       {/* 08 How I work */}
       <Section surface="dark" grid id="how-i-work" className="scroll-mt-16">
         <div className="page-grid gap-y-12">
-          <SectionHeader index={pad(7)} eyebrow={howIWork.eyebrow} title={howIWork.title} size="md" className="lg:col-span-6" />
-          <div className="col-span-full max-w-prose space-y-4 self-end lg:col-span-5 lg:col-start-8">
-            {howIWork.body.map((p, i) => (
-              <p key={p} className={i === 0 ? 'text-lead' : 'text-muted'}>
-                {p}
-              </p>
-            ))}
-          </div>
+          <SectionHeader index={pad(4)} eyebrow={howIWork.eyebrow} title={howIWork.title} size="md" className="lg:col-span-6" />
+          <p className="col-span-full max-w-prose self-end text-lead text-muted lg:col-span-5 lg:col-start-8">{howIWork.body[0]}</p>
           <ol aria-label="How I work, in order" className="col-span-full grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {principles.map((p, i) => {
               const last = i === principles.length - 1;
@@ -213,7 +160,7 @@ export default function AboutPage() {
       {/* 09 Learning and sharing */}
       <Section surface="light" id="learning" className="scroll-mt-16">
         <div className="page-grid gap-y-10">
-          <SectionHeader index={pad(8)} eyebrow={learning.eyebrow} title={learning.title} size="md" className="lg:col-span-9" />
+          <SectionHeader index={pad(5)} eyebrow={learning.eyebrow} title={learning.title} size="md" className="lg:col-span-9" />
           <PhotoFrame
             image={assets.career.briefing2}
             sizes="(min-width: 1024px) 34vw, 100vw"
@@ -222,11 +169,7 @@ export default function AboutPage() {
             className="col-span-full lg:col-span-5"
           />
           <div className="col-span-full max-w-prose space-y-4 lg:col-span-6 lg:col-start-7">
-            {learning.body.map((p, i) => (
-              <p key={p} className={i === 0 ? 'text-lead' : i === learning.body.length - 1 ? 'font-semibold text-ink' : 'text-muted'}>
-                {p}
-              </p>
-            ))}
+            <p className="text-lead">{learning.body[0]}</p>
             <div className="!mt-10 border-t border-line pt-5">
               <p className="label mb-4 text-muted">The loop</p>
               <Trajectory steps={growth} />
@@ -241,7 +184,7 @@ export default function AboutPage() {
       {/* 10 Currently + 11 Selected credentials */}
       <Section surface="dark" id="currently" className="scroll-mt-16">
         <div className="page-grid gap-y-10">
-          <SectionHeader index={pad(9)} eyebrow="Currently" title={['Where I am', 'right now.']} size="md" />
+          <SectionHeader index={pad(6)} eyebrow="Currently" title={['Where I am', 'right now.']} size="md" />
           <dl className="col-span-full grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { k: 'Working on', v: currently.working.map((w) => <p key={w}>{w}</p>) },
@@ -267,7 +210,7 @@ export default function AboutPage() {
           </dl>
 
           <div className="col-span-full mt-10 border-t border-line pt-10">
-            <TechnicalLabel as="h2" marker={`${pad(10)} /`}>
+            <TechnicalLabel as="h2" marker={`${pad(7)} /`}>
               Selected credentials
             </TechnicalLabel>
             <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -292,13 +235,9 @@ export default function AboutPage() {
       <Section surface="light" id="away" className="scroll-mt-16">
         <div className="page-grid gap-y-10">
           <div className="col-span-full lg:col-span-6 lg:self-center">
-            <SectionHeader index={pad(11)} eyebrow={beyond.eyebrow} title={beyond.title} size="md" />
+            <SectionHeader index={pad(8)} eyebrow={beyond.eyebrow} title={beyond.title} size="md" />
             <div className="mt-8 max-w-prose space-y-4">
-              {beyond.body.map((p, i) => (
-                <p key={p} className={i === 0 ? 'text-lead' : 'text-muted'}>
-                  {p}
-                </p>
-              ))}
+              <p className="text-lead">{beyond.body[0]}</p>
             </div>
             <div className="mt-8">
               <ArrowLink href="/life">A little more about Life</ArrowLink>
