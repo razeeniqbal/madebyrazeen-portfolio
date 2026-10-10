@@ -7,14 +7,14 @@ export function OrgLogo({ name, size = 'md', className }: { name: string; size?:
   const logo = orgLogo(name);
   if (!logo) return null;
   return (
-    <span className={cn('inline-flex items-center justify-center rounded-sm bg-white', size === 'sm' ? 'h-9 px-2' : 'h-12 px-3', className)}>
+    <span className={cn('inline-flex items-center justify-center rounded-sm bg-white', size === 'sm' ? 'h-12 px-2.5' : 'h-16 px-3', className)}>
       <Image
         src={logo.src}
         width={logo.width}
         height={logo.height}
         alt={logo.alt}
         sizes="120px"
-        className={cn('h-auto w-auto object-contain', size === 'sm' ? 'max-h-6 max-w-[5.5rem]' : 'max-h-8 max-w-[7.5rem]')}
+        className={cn('h-auto w-auto object-contain', size === 'sm' ? 'max-h-9 max-w-[8rem]' : 'max-h-12 max-w-[11rem]')}
       />
     </span>
   );
