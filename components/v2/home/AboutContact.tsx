@@ -2,6 +2,7 @@ import { Section } from '@/components/v2/system/Section';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
+import { CopyButton } from '@/components/v2/system/CopyButton';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { assets } from '@/lib/assets';
 import { contact } from '@/content/profile';
@@ -59,11 +60,14 @@ export function ContactBlock({ index = '11', surface = 'dark', title = ['Have so
           <ArrowLink href={contact.github}>GitHub</ArrowLink>
         </div>
         {/* Email addresses stay lowercase: the label style uppercases everything else. */}
-        <TechnicalLabel as="p" className="col-span-full normal-case tracking-[0.04em]">
-          <a href={`mailto:${contact.email}`} className="underline-offset-4 hover:underline">
-            {contact.email}
-          </a>
-        </TechnicalLabel>
+        <div className="col-span-full flex flex-wrap items-center gap-4">
+          <TechnicalLabel as="p" className="normal-case tracking-[0.04em]">
+            <a href={`mailto:${contact.email}`} className="underline-offset-4 hover:underline">
+              {contact.email}
+            </a>
+          </TechnicalLabel>
+          <CopyButton value={contact.email} label="Copy email" />
+        </div>
       </div>
     </Section>
   );
