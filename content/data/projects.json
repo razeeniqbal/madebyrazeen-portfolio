@@ -40,6 +40,11 @@
           "illustrative": false
         },
         {
+          "label": "Cars",
+          "value": "22",
+          "illustrative": false
+        },
+        {
           "label": "Circuit",
           "value": "5.543 km / 15 turns",
           "illustrative": false
@@ -101,7 +106,18 @@
       "role": "Designer and developer",
       "outcome": "Proof of concept demonstrated at SPE AI Summit.",
       "learning": "",
-      "metrics": [],
+      "metrics": [
+        {
+          "label": "Quality dimensions",
+          "value": "4",
+          "illustrative": false
+        },
+        {
+          "label": "AI workflows",
+          "value": "3, all optional",
+          "illustrative": false
+        }
+      ],
       "draft": false,
       "placeholder": false,
       "highlights": [],
@@ -930,7 +946,23 @@
       "cover": "none",
       "productImage": "forma.analystWorkbench",
       "productImageMobile": "none",
-      "metrics": [],
+      "metrics": [
+        {
+          "label": "Rows in (example run)",
+          "value": "1,001",
+          "illustrative": false
+        },
+        {
+          "label": "Ready",
+          "value": "985",
+          "illustrative": false
+        },
+        {
+          "label": "Held for review",
+          "value": "16",
+          "illustrative": false
+        }
+      ],
       "caseStudy": true,
       "role": "Designer and developer",
       "problem": "Data engineering repeatedly requires inspecting, selecting, cleaning, transforming, validating, running and reviewing data through workflows that are often fragmented across code and tools.",

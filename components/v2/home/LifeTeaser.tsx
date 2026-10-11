@@ -33,9 +33,8 @@ export function LifeTeaser() {
           className="col-span-full md:col-span-4 lg:col-span-5"
         />
 
-        <div className="col-span-full md:col-span-4 lg:col-span-6 lg:col-start-7 lg:self-end">
+        <div className="col-span-full md:col-span-4 lg:col-span-6 lg:col-start-7 lg:self-start">
           <SectionHeader index="06" eyebrow="Life" title={beyond.title} size="md" />
-          <p className="mt-6 max-w-prose text-muted">{beyond.body[0]}</p>
 
           <div className="mt-10">
             <div className="flex flex-wrap items-baseline justify-between gap-2 border-t border-line pt-4">

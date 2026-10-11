@@ -1,3 +1,5 @@
+import { ScrambleRotator } from './ScrambleRotator';
+import { Availability } from '@/components/v2/system/Availability';
 import { Section } from '@/components/v2/system/Section';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
@@ -9,14 +11,13 @@ import { credentialCode, credentialShortTitle, credentialYear, credentialVerifyU
 import { assets } from '@/lib/assets';
 import { resumeHref } from '@/lib/site';
 import { profile } from '@/content/profile';
-import { home } from '@/content/home';
 
 /**
- * Home 00. The portfolio narrative in one statement, the career arc as a quiet line, two actions and
+ * Home 00. The portfolio narrative in one statement (the career arc is in the supporting line), two actions and
  * the real portrait, with a small selected-credentials strip under it as supporting evidence (the full
  * history lives on /credentials).
  * Desktop: the portrait starts level with the second headline line (editorial asymmetry, not centred).
- * Mobile order follows the DOM: label → headline → copy → arc → actions → portrait.
+ * Mobile order follows the DOM: label → headline → copy → actions → portrait.
  */
 export function Hero() {
   const { statement } = profile;
@@ -40,15 +41,10 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-8 max-w-[36rem] text-lead text-muted">{profile.supporting}</p>
-          <ol aria-label="Career path" className="label mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
-            {home.hero.arc.map((step, i) => (
-              <li key={step} className="flex items-center gap-3">
-                <span className={i === home.hero.arc.length - 1 ? 'text-ink' : undefined}>{step}</span>
-                {i < home.hero.arc.length - 1 && <span aria-hidden="true">→</span>}
-              </li>
-            ))}
-          </ol>
+          <div className="mt-6">
+            <ScrambleRotator phrases={['data pipelines', 'AI systems', 'products', 'experiments']} />
+          </div>
+          <p className="mt-6 max-w-[36rem] text-lead text-muted">{profile.supporting}</p>
         </div>
 
         <div className="col-span-full flex flex-wrap items-center gap-x-8 gap-y-5 md:col-span-5 lg:col-span-7 lg:row-start-2 lg:mt-10 lg:self-start">
@@ -58,6 +54,7 @@ export function Hero() {
           <ArrowLink href={resumeHref} arrow="↗">
             Resume
           </ArrowLink>
+          <Availability className="basis-full" />
         </div>
 
         {/* Portrait + credentials. Top-aligned with the left column (the name label). */}
@@ -85,7 +82,9 @@ export function Hero() {
                   const url = credentialVerifyUrl(c);
                   const year = credentialYear(c);
                   const meta = `${c.organization}${year ? ` · ${year}` : ''}`;
-                  const label = `${credentialShortTitle(c)}, ${meta}${url ? ' (verify)' : ''}`;
+                  // The accessible name starts with the visible text (code, then issuer), then the full title.
+                  const code = credentialCode(c) ?? credentialShortTitle(c);
+                  const label = `${code} ${c.organization}: ${credentialShortTitle(c)}${year ? `, ${year}` : ''}${url ? ' (verify)' : ''}`;
                   return (
                     <li key={c.id} className="group relative">
                       <a

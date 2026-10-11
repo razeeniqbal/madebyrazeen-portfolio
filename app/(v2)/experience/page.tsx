@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
+import { OrgLogo } from '@/components/v2/system/OrgLogo';
 import { Section } from '@/components/v2/system/Section';
 import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { Trajectory } from '@/components/v2/system/Trajectory';
-import { CareerMap } from '@/components/v2/experience/CareerMap';
+import { CareerTimeline } from '@/components/v2/career/CareerTimeline';
+import { getCareerTimeline } from '@/content/career-timeline';
 import { FeaturedWork, Narrative, ProgressionLadder, RoleFacts, SmallBuild, SupportingWork } from '@/components/v2/experience/RoleParts';
 import { Capabilities } from '@/components/v2/work/Capabilities';
-import { CredentialList } from '@/components/v2/work/CredentialList';
-import { withBadges } from '@/content/credential-badges';
 import { CodingActivity } from '@/components/v2/experience/CodingActivity';
 import { achievements } from '@/content/achievements';
 import { education, recognition } from '@/content/profile';
@@ -57,7 +57,6 @@ export default function ExperiencePage() {
           title={['Built through', 'different disciplines.']}
           lede={[
             'My career started with physical systems, moved through data, and continues today with Data Engineering and AI.',
-            'Each role changed the kind of problems I work on, but the approach has remained familiar: understand the system, work through the details, and find a better way to build it.',
           ]}
           meta={[
             { label: 'Roles', value: roles.length },
@@ -68,9 +67,9 @@ export default function ExperiencePage() {
         <div className="page-grid mt-20">
           <div className="col-span-full">
             <TechnicalLabel as="h2" marker="//" className="mb-6">
-              Career map
+              Career timeline
             </TechnicalLabel>
-            <CareerMap />
+            <CareerTimeline data={getCareerTimeline()} />
           </div>
         </div>
       </Section>
@@ -84,7 +83,10 @@ export default function ExperiencePage() {
                 Current chapter
               </TechnicalLabel>
               <h2 className="mt-6 text-display-lg uppercase">{current.role}</h2>
-              <p className="mt-3 text-lead">{current.company}</p>
+              <p className="mt-3 flex items-center gap-3 text-lead">
+                <OrgLogo name={current.company} />
+                {current.company}
+              </p>
               <RoleFacts role={current} className="mt-8" />
             </header>
             <Narrative role={current} className="col-span-full lg:col-span-6 lg:col-start-7 lg:self-end" />
@@ -158,7 +160,8 @@ export default function ExperiencePage() {
                 {pipelines.discipline}
               </TechnicalLabel>
               <h2 className="mt-6 text-display-lg uppercase">{pipelines.headline ?? pipelines.role}</h2>
-              <p className="mt-4 text-lead">
+              <p className="mt-4 flex flex-wrap items-center gap-3 text-lead">
+                <OrgLogo name={pipelines.company} />
                 {pipelines.role}, {pipelines.company}
               </p>
               <RoleFacts role={pipelines} className="mt-6" />
@@ -197,7 +200,8 @@ export default function ExperiencePage() {
                 Turning point
               </TechnicalLabel>
               <h2 className="mt-6 max-w-[16ch] text-display-xl uppercase">{turning.headline ?? turning.role}</h2>
-              <p className="mt-6 text-lead">
+              <p className="mt-6 flex flex-wrap items-center gap-3 text-lead">
+                <OrgLogo name={turning.company} />
                 {turning.role}, {turning.company}
               </p>
               <RoleFacts role={turning} className="mt-6" />
@@ -224,7 +228,10 @@ export default function ExperiencePage() {
                   {r.discipline}
                 </TechnicalLabel>
                 <h3 className="mt-4 text-display-sm">{r.role}</h3>
-                <p className="mt-1 text-muted">{r.company}</p>
+                <p className="mt-1 flex items-center gap-2.5 text-muted">
+                  <OrgLogo name={r.company} size="sm" />
+                  {r.company}
+                </p>
                 <RoleFacts role={r} className="mt-5" />
                 <Narrative role={r} className="mt-6 [&>p:first-child]:text-base [&>p:first-child]:text-ink" />
                 {r.progression.length > 0 && <Trajectory steps={r.progression} className="mt-6" />}
@@ -242,20 +249,20 @@ export default function ExperiencePage() {
           <SectionHeader eyebrow="Education and credentials" title={[`${achievements.length} certifications`, '& courses.']} size="md" />
           <ul className="col-span-full grid gap-x-6 gap-y-6 md:grid-cols-2">
             {education.map((e) => (
-              <li key={e.institution} className="border-t border-line pt-4">
-                <p className="label text-muted">{e.period}</p>
-                <p className="mt-1 font-semibold">
-                  {e.degree}, {e.field}
-                </p>
-                <p className="mt-1 text-sm text-muted">{e.institution}</p>
+              <li key={e.institution} className="flex items-start gap-5 border-t border-line pt-4">
+                <OrgLogo name={e.institution} className="shrink-0" />
+                <div>
+                  <p className="label text-muted">{e.period}</p>
+                  <p className="mt-1 font-semibold">
+                    {e.degree}, {e.field}
+                  </p>
+                  <p className="mt-1 text-sm text-muted">{e.institution}</p>
+                </div>
               </li>
             ))}
           </ul>
           <div className="col-span-full">
-            <CredentialList items={withBadges(achievements)} initial={8} />
-            <div className="mt-8">
-              <ArrowLink href="/credentials">Learning path and selected credentials</ArrowLink>
-            </div>
+            <ArrowLink href="/credentials">All {achievements.length} credentials</ArrowLink>
           </div>
           <div className="col-span-full border-t border-line pt-10">
             <TechnicalLabel as="h3" marker="//">
@@ -281,9 +288,6 @@ export default function ExperiencePage() {
       {/* Closing */}
       <Section surface="dark" grid className="border-t border-line">
         <div className="page-grid gap-y-12">
-          <div className="col-span-full">
-            <CareerMap variant="compact" />
-          </div>
           <p className="col-span-full max-w-[24ch] text-display-md">
             Different disciplines. <span className="text-muted">The same habit of understanding how things work.</span>
           </p>

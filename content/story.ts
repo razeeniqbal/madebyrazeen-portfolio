@@ -12,6 +12,8 @@ export interface Moment {
   id: string;
   eyebrow: string;
   title: string[];
+  /** The one line About shows for this moment. */
+  summary: string;
   /** Paragraphs before the questions. */
   body: string[];
   /** Short questions given visual emphasis. */

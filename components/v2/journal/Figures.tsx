@@ -1,6 +1,12 @@
 import type { ReactNode } from 'react';
 import { journalFigures, type JournalCover, type JournalFigure } from '@/lib/journal';
 import { cn } from '@/lib/utils';
+import { CareerTimeline } from '@/components/v2/career/CareerTimeline';
+import { getCareerTimeline } from '@/content/career-timeline';
+import { QualityWorkflowDemo } from '@/components/v2/work/QualityWorkflowDemo';
+import { FormaLoop } from './FormaLoop';
+import { SepangMotionDemo, type SepangMotion } from '@/components/v2/case-study/SepangMotionDemo';
+import motion from '@/content/data/sepang-motion.json';
 
 /**
  * Journal editorial figures, drawn in code: real text, no image weight, and the same technical
@@ -354,13 +360,17 @@ function QualityBoundary() {
 const figureBody: Record<JournalFigure, () => ReactNode> = {
   'career-path': CareerPath,
   'quality-boundary': QualityBoundary,
+  'career-timeline': () => <CareerTimeline data={getCareerTimeline()} />,
+  'quality-demo': () => <QualityWorkflowDemo />,
+  'forma-loop': FormaLoop,
+  'sepang-motion': () => <SepangMotionDemo data={motion as unknown as SepangMotion} />,
 };
 
 /** An inline figure: label, the drawing (real text, so it reads without the caption), and the caption. */
 export function JournalFigureBlock({ figure, caption, index }: { figure: JournalFigure; caption: string; index: number }) {
   const Body = figureBody[figure];
   return (
-    <figure className="journal-wide journal-figure border-y border-ink py-5">
+    <figure data-reveal className="journal-wide journal-figure border-y border-ink py-5">
       <p className="label mb-4 text-muted">
         Fig. {index} / {journalFigures[figure]}
       </p>

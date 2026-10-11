@@ -4,7 +4,8 @@ import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
-import { PrimaryBuild } from '@/components/v2/work/PrimaryBuild';
+import { PrimaryBuild, PrimaryBuildEvidence, PrimaryBuildStory } from '@/components/v2/work/PrimaryBuild';
+import { StickyShowcase } from '@/components/v2/work/StickyShowcase';
 import { ProjectRow } from '@/components/v2/work/ProjectRow';
 import { getPrimaryBuilds, getProjects, getSecondaryProjectGroups } from '@/content/projects';
 import { getRoleForProject, shortCompany } from '@/content/experience';
@@ -43,10 +44,22 @@ export default function ProjectsPage() {
         {/* 01 Primary builds: same surface as the heading, so the hierarchy reads as one block. */}
         <div id="primary" className="page-grid mt-24 scroll-mt-20 gap-y-12">
           <SectionHeader index="01" eyebrow={`Primary builds · ${primary.length}`} title={['Four builds,', 'four origins.']} size="md" />
-          <div className="col-span-full space-y-20">
+          {/* Phones and tablets: each build stacked. Desktop: a scroll story with the product pinned. */}
+          <div className="col-span-full space-y-20 lg:hidden">
             {primary.map((p, i) => (
-              <PrimaryBuild key={p.slug} project={p} index={String(i + 1).padStart(2, '0')} side={i % 2 === 0 ? 'left' : 'right'} />
+              <PrimaryBuild key={p.slug} project={p} index={String(i + 1).padStart(2, '0')} side="left" />
             ))}
+          </div>
+          <div className="col-span-full hidden lg:block">
+            <StickyShowcase
+              names={primary.map((p) => p.title)}
+              visuals={primary.map((p, i) => (
+                <PrimaryBuildEvidence key={p.slug} project={p} priority={i === 0} />
+              ))}
+              stories={primary.map((p, i) => (
+                <PrimaryBuildStory key={p.slug} project={p} index={String(i + 1).padStart(2, '0')} titleId={`${p.slug}-title-lg`} />
+              ))}
+            />
           </div>
         </div>
       </Section>

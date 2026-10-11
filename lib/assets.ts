@@ -64,6 +64,34 @@ const VSB_PREVIEW = 'Development preview with sample data';
 const FORMA_EXAMPLE = 'Built-in example project and sample data';
 const SVL_SESSION = '2026 Sepang race replay, recorded OpenF1 data';
 
+/**
+ * Organisation logos (employers, universities), supplied by Razeen and reduced to single-colour marks
+ * (white removed, taglines and lockup text cropped), so they take the surrounding text colour.
+ * Matched to a company or institution name by `orgLogo`. 3Dtech's rendered 3D logo cannot be reduced
+ * to a clean mark, so it has none.
+ */
+export const logos = {
+  aem: img('/assets/v2/logos/aem-mark.png', 360, 158, 'AEM Enersol'),
+  eismartwork: img('/assets/v2/logos/eismartwork-mark.png', 360, 102, 'EISmartwork'),
+  gnp: img('/assets/v2/logos/gnp-mark.png', 191, 160, 'G&P'),
+  upm: img('/assets/v2/logos/upm-mark.png', 144, 160, 'Universiti Putra Malaysia'),
+  umpsa: img('/assets/v2/logos/umpsa-mark.png', 109, 160, 'Universiti Malaysia Pahang Al-Sultan Abdullah'),
+};
+
+const logoMatchers: [RegExp, keyof typeof logos][] = [
+  [/\bAEM\b/i, 'aem'],
+  [/EISmartwork/i, 'eismartwork'],
+  [/G&P/i, 'gnp'],
+  [/Universiti Putra Malaysia|\bUPM\b/i, 'upm'],
+  [/Universiti Malaysia Pahang|UMPSA/i, 'umpsa'],
+];
+
+/** The logo for an organisation name, or undefined when there is none on file. */
+export const orgLogo = (name: string): ImageAsset | undefined => {
+  const hit = logoMatchers.find(([re]) => re.test(name));
+  return hit ? logos[hit[1]] : undefined;
+};
+
 export const assets = {
   identity: {
     // Source is 800×800; use at ≤800px CSS width until a higher-resolution original exists.

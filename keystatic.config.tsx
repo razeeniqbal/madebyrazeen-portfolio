@@ -111,6 +111,20 @@ const sharedBlocks = {
         label: 'Image',
         schema: fields.object({ image: imageSelect('Image'), caption: fields.text({ label: 'Caption' }) }),
       },
+      demo: {
+        label: 'Interactive demo (real data)',
+        schema: fields.object({
+          demo: fields.select({
+            label: 'Demo',
+            options: [
+              { label: 'Sepang: raw vs smoothed OpenF1 motion', value: 'sepang-motion' },
+              { label: 'QualityPlus: workflow with AI switch', value: 'quality-workflow' },
+            ],
+            defaultValue: 'sepang-motion',
+          }),
+          caption: fields.text({ label: 'Caption' }),
+        }),
+      },
 };
 
 const contentBlocks = (label: string) => fields.blocks(sharedBlocks, { label });
@@ -287,6 +301,7 @@ export default config({
             id: fields.text({ label: 'Anchor id' }),
             eyebrow: fields.text({ label: 'Label' }),
             title: textList('Heading lines', 'Line'),
+            summary: fields.text({ label: 'One-line summary (About shows this; the full text is in the Journal)' }),
             body: paragraphList('Paragraphs before the questions'),
             questions: textList('Questions (shown with emphasis)', 'Question'),
             after: paragraphList('Paragraphs after the questions'),
@@ -806,6 +821,7 @@ export default config({
           options: [{ label: 'None', value: '' }, ...Object.entries(journalCovers).map(([value, c]) => ({ label: c.label, value }))],
           defaultValue: '',
         }),
+        postscript: fields.text({ label: 'Postscript (a quiet line at the very end, shown small)', multiline: true }),
         related: fields.array(fields.object({ label: fields.text({ label: 'Label' }), href: fields.text({ label: 'Link (e.g. /experience)' }) }), {
           label: 'Related (hand-picked links at the end of the entry)',
           itemLabel: (p) => p.fields.label.value || 'Link',

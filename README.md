@@ -89,7 +89,7 @@ scripts/
   garmin/            Garmin Connect to runs.json exporter (see its README)
   strava/            one-off import of the Strava export
   check-*            content, writing and link checks used by CI
-docs/v2/             PRD, milestone reports, admin and assistant guide
+docs/v2/             admin and assistant setup guide
 ```
 
 ## Editing content

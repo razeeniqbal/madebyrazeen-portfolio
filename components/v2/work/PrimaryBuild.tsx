@@ -21,20 +21,30 @@ interface PrimaryBuildProps {
  * has a phone layout), so a product with a phone view shows both and one without shows a single wide screen.
  */
 export function PrimaryBuild({ project: p, index, side }: PrimaryBuildProps) {
-  const main = p.productImage ?? p.cover;
-  const phone = p.productImageMobile;
-  const building = p.status === 'under-construction';
-  const href = `/projects/${p.slug}`;
-  const kind = main ? evidenceCaption(main) : undefined;
-
   return (
     <article
       id={p.slug}
       aria-labelledby={`${p.slug}-title`}
       className="grid scroll-mt-20 grid-cols-1 items-center gap-x-10 gap-y-8 border-t border-line pt-10 lg:grid-cols-12"
     >
-      {/* Evidence */}
       <div className={cn('lg:col-span-7', side === 'right' && 'lg:order-2 lg:col-start-6')}>
+        <PrimaryBuildEvidence project={p} />
+      </div>
+      <div className={cn('lg:col-span-5', side === 'right' && 'lg:order-1')}>
+        <PrimaryBuildStory project={p} index={index} />
+      </div>
+    </article>
+  );
+}
+
+/** The real product capture (and phone capture when the product has one), linked to the case study. */
+export function PrimaryBuildEvidence({ project: p, priority }: { project: Project; priority?: boolean }) {
+  const main = p.productImage ?? p.cover;
+  const phone = p.productImageMobile;
+  const href = `/projects/${p.slug}`;
+  const kind = main ? evidenceCaption(main) : undefined;
+  return (
+    <>
         {main && (
           <figure>
             <Link href={href} className="group relative block" aria-label={`${p.title} case study`}>
@@ -45,6 +55,7 @@ export function PrimaryBuild({ project: p, index, side }: PrimaryBuildProps) {
                   height={main.height}
                   alt={main.alt}
                   sizes="(min-width: 1024px) 56vw, 100vw"
+                  priority={priority}
                   className="w-full transition-transform duration-700 ease-out group-hover:scale-[1.015] motion-reduce:transition-none"
                 />
               </div>
@@ -62,21 +73,42 @@ export function PrimaryBuild({ project: p, index, side }: PrimaryBuildProps) {
             )}
           </figure>
         )}
-      </div>
+    </>
+  );
+}
 
-      {/* Story */}
-      <div className={cn('lg:col-span-5', side === 'right' && 'lg:order-1')}>
+/** Origin, name, summary, status and role, with the case study and live links. */
+export function PrimaryBuildStory({ project: p, index, titleId = `${p.slug}-title` }: { project: Project; index: string; titleId?: string }) {
+  const building = p.status === 'under-construction';
+  const href = `/projects/${p.slug}`;
+  return (
+    <div>
         <p className="label flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
           <span className="text-ink">{index}</span>
           {p.origin && <span className="text-ink">{p.origin}</span>}
         </p>
-        <h3 id={`${p.slug}-title`} className="mt-4 text-display-lg">
+        <h3 id={titleId} className="mt-4 text-display-lg">
           <Link href={href} className="transition-colors hover:text-signal">
             {p.title}
           </Link>
         </h3>
         {(p.fullName || p.tagline) && <p className="mt-2 text-lead text-muted">{p.fullName ?? p.tagline}</p>}
         <p className="mt-5 max-w-prose">{p.summary}</p>
+        {/* Real figures from the project record, as proof; illustrative ones are never shown here. */}
+        {p.metrics && p.metrics.some((m) => !m.illustrative) && (
+          <dl className="mt-6 grid grid-cols-3 gap-4">
+            {p.metrics
+              .filter((m) => !m.illustrative)
+              .slice(0, 3)
+              .map((m) => (
+                // Label first in the markup (valid dt/dd order), value shown on top.
+                <div key={m.label} className="flex flex-col-reverse">
+                  <dt className="label mt-1 text-muted">{m.label}</dt>
+                  <dd className="text-2xl font-extrabold tabular-nums leading-tight">{m.value}</dd>
+                </div>
+              ))}
+          </dl>
+        )}
 
         <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-line pt-4 text-sm">
           <div>
@@ -107,7 +139,6 @@ export function PrimaryBuild({ project: p, index, side }: PrimaryBuildProps) {
             </ArrowLink>
           )}
         </div>
-      </div>
-    </article>
+    </div>
   );
 }

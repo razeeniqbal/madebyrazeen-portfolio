@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Section } from '@/components/v2/system/Section';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
+import { CopyButton } from '@/components/v2/system/CopyButton';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
@@ -102,8 +103,9 @@ export default function ContactPage() {
             ))}
             <li className="flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-line pt-8">
               <ArrowLink href={`mailto:${contact.email}`} variant="primary">
-                Let&apos;s talk
+                Get in touch
               </ArrowLink>
+              <CopyButton value={contact.email} label="Copy email" />
               <ArrowLink href="/resume">View resume</ArrowLink>
             </li>
           </ul>

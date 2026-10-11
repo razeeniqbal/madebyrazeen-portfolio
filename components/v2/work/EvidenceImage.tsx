@@ -23,7 +23,7 @@ export function EvidenceImage({ image, caption, index, sizes, priority, classNam
   const portrait = image.height > image.width;
   const kind = evidenceCaption(image);
   return (
-    <figure className={cn(portrait && 'mx-auto w-full max-w-[20rem]', className)}>
+    <figure data-reveal className={cn(portrait && 'mx-auto w-full max-w-[20rem]', className)}>
       <a
         href={image.src}
         target="_blank"

@@ -36,6 +36,8 @@ function blockText(b: Block): string {
       return '';
     case 'gallery':
       return `Screens: ${b.items.map((i) => i.caption).filter(Boolean).join('; ')}`;
+    case 'demo':
+      return b.caption ? `Interactive demo: ${b.caption}` : '';
   }
 }
 

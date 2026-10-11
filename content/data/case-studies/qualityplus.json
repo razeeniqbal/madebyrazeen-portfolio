@@ -84,6 +84,13 @@
               "A score on its own is not enough; people need a way to act on it. So the score becomes the start of a workflow. AI can suggest at each step, but a person always decides."
             ]
           }
+        },
+        {
+          "discriminant": "demo",
+          "value": {
+            "demo": "quality-workflow",
+            "caption": "Step through the workflow, then switch the AI off. Illustrative sample data."
+          }
         }
       ]
     },

@@ -4,7 +4,8 @@ import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { CompactEngagement, FeaturedEngagement } from '@/components/v2/trainer/EngagementEntry';
-import { getTrainerEngagements, trainerApproach } from '@/content/trainer';
+import { getTopicMap, getTrainerEngagements, trainerApproach } from '@/content/trainer';
+import { TopicMap } from '@/components/v2/trainer/TrainerInteractive';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/trainer' },
@@ -59,10 +60,20 @@ export default function TrainerPage() {
         </div>
       </Section>
 
-      {/* 03 Approach */}
-      <Section surface="light" id="approach">
+      {/* 03 What I teach: every topic, by area and by session */}
+      <Section surface="light" id="topics">
         <div className="page-grid gap-y-10">
-          <SectionHeader index="03" eyebrow="Approach" title={['How I approach', 'technical sharing.']} size="md" className="lg:col-span-6" />
+          <SectionHeader index="03" eyebrow="What I teach" title={['Every topic,', 'one map.']} size="md" className="lg:col-span-8" />
+          <div className="col-span-full">
+            <TopicMap data={getTopicMap()} />
+          </div>
+        </div>
+      </Section>
+
+      {/* 04 Approach */}
+      <Section surface="dark" grid id="approach">
+        <div className="page-grid gap-y-10">
+          <SectionHeader index="04" eyebrow="Approach" title={['How I approach', 'technical sharing.']} size="md" className="lg:col-span-6" />
           <p className="col-span-full max-w-prose self-end text-lead lg:col-span-5 lg:col-start-8">
             I learn best when I can connect a concept to something tangible. I try to teach the same way: explain what something is, show how it works, let people work through it, then connect it to a real use case.
           </p>
@@ -85,10 +96,10 @@ export default function TrainerPage() {
         </div>
       </Section>
 
-      {/* 04 Contact path */}
-      <Section surface="dark">
+      {/* 05 Contact path */}
+      <Section surface="light">
         <div className="page-grid items-end gap-y-8">
-          <SectionHeader index="04" eyebrow="Contact" title={['Training or', 'technical sharing?']} size="md" className="lg:col-span-7" />
+          <SectionHeader index="05" eyebrow="Contact" title={['Training or', 'technical sharing?']} size="md" className="lg:col-span-7" />
           <div className="col-span-full space-y-6 lg:col-span-5">
             <p className="max-w-prose text-muted">
               For training or technical sharing related to Data, Cloud, or AI, you can reach me through the contact page.
