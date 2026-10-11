@@ -219,6 +219,30 @@ export type AvatarVariant = keyof typeof avatarIcons;
 export const avatarFor = (px: number): AvatarVariant =>
   px >= 96 ? 'detailed' : px >= 48 ? 'standard' : px >= 32 ? 'simplified' : px >= 24 ? 'micro' : 'minimal';
 
+/**
+ * Race-day photos, with the day each was taken (from the photo's own date). The Running page matches the
+ * date to a race in the Strava record for its name; photos without a date or a matching race are grouped
+ * as "More race days".
+ */
+export const racePhotos: { date: string | null; image: ImageAsset }[] = [
+  { date: '2026-05-17', image: img('/assets/v2/running/races/perkeso-1.webp', 1067, 1600, 'Razeen running in a teal race shirt and cap, arms out, past trees and a green slope') },
+  { date: '2026-05-17', image: img('/assets/v2/running/races/perkeso-2.webp', 1600, 1067, 'Razeen running toward the camera with both arms raised, in a teal race shirt') },
+  { date: '2026-05-17', image: img('/assets/v2/running/races/perkeso-3.webp', 1067, 1600, 'Razeen mid-stride in a teal race shirt on an empty road in front of a large building') },
+  { date: '2026-06-05', image: img('/assets/v2/running/races/night-run.webp', 1067, 1600, 'Razeen running on a track at night under floodlights, giving a peace sign') },
+  { date: '2026-07-05', image: img('/assets/v2/running/races/kuantan-1.webp', 899, 1600, 'Razeen running along a street of old shophouses, arms raised, with a race bib') },
+  { date: '2026-07-05', image: img('/assets/v2/running/races/kuantan-2.webp', 1600, 1201, 'Razeen running on a wide road, seen from above, giving two peace signs') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-1.webp', 1600, 1200, 'Razeen in a yellow race shirt in front of a Kuala Lumpur race backdrop') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-2.webp', 1067, 1600, 'Razeen in a yellow race shirt pointing at the camera in early morning light') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-3.webp', 1600, 1067, 'Razeen running in a yellow race shirt with a crowd of runners behind') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-4.webp', 1070, 1600, 'Razeen running in a yellow race shirt among a large field of runners') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-5.webp', 1067, 1600, 'Runners in yellow race shirts on a city road, Razeen among them') },
+  { date: '2026-09-13', image: img('/assets/v2/running/races/boom-1.webp', 1067, 1600, 'Razeen running in a green camouflage race shirt, arms out, city towers behind') },
+  { date: '2026-09-13', image: img('/assets/v2/running/races/boom-2.webp', 1067, 1600, 'Razeen running in a green camouflage race shirt and cap, smiling') },
+  { date: '2026-09-13', image: img('/assets/v2/running/races/boom-3.webp', 1600, 1066, 'A group of runners on a tree-lined road, Razeen in a green camouflage race shirt') },
+  { date: null, image: img('/assets/v2/running/races/more-1.webp', 853, 1280, 'Razeen running in a white race shirt and pink cap, giving peace signs') },
+  { date: null, image: img('/assets/v2/running/races/more-2.webp', 1280, 718, 'Razeen running in a white race shirt among a group of runners on a city road') },
+];
+
 /** Resolves a CMS image key like "career.aws" to its asset; "none" or unknown → undefined. */
 export function resolveAsset(key: string | null | undefined): ImageAsset | undefined {
   if (!key || key === 'none') return undefined;
