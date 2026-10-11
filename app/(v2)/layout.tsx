@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/v2/layout/SiteHeader';
 import { SiteFooter } from '@/components/v2/layout/SiteFooter';
-import { AskWidget } from '@/components/v2/chat/AskWidget';
-import { CommandMenu, type JumpItem } from '@/components/v2/layout/CommandMenu';
+import { DeferredWidgets } from '@/components/v2/layout/DeferredWidgets';
+import type { JumpItem } from '@/components/v2/layout/CommandMenu';
 import { getProjects } from '@/content/projects';
 import { getPublishedJournalEntries } from '@/content/notes';
 import { primaryNav } from '@/lib/site';
@@ -43,8 +43,7 @@ export default function V2Layout({ children }: Readonly<{ children: React.ReactN
         {children}
       </main>
       <SiteFooter />
-      <AskWidget />
-      <CommandMenu items={jumpItems()} />
+      <DeferredWidgets items={jumpItems()} />
     </div>
   );
 }
