@@ -97,6 +97,8 @@ export const orgLogo = (name: string): ImageAsset | undefined => {
 export const assets = {
   identity: {
     // Source is 800×800; use at ≤800px CSS width until a higher-resolution original exists.
+    // Home hero: an editorial poster (its own typography is part of the image, so it is never cropped).
+    poster: img('/assets/v2/identity/razeen-poster.webp', 1024, 1536, 'Editorial poster: Razeen Iqbal Roslan running toward the camera on a track, smiling and giving peace signs, under his name in large letters, with the words engineer, builder, sports addict, curious human'),
     hero: img('/assets/v2/identity/razeen-hero.webp', 800, 800, 'Razeen Iqbal smiling with arms crossed on a glass walkway'),
     portraitFormal: img('/assets/v2/identity/razeen-portrait-formal.webp', 1096, 1375, 'Formal portrait of Razeen Iqbal in a suit and tie'),
     graduation: img('/assets/v2/identity/razeen-graduation.webp', 1600, 2400, 'Razeen Iqbal in graduation robes holding a scroll'),
