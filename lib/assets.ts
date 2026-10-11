@@ -245,6 +245,17 @@ export const racePhotos: { date: string | null; image: ImageAsset }[] = [
   { date: null, image: img('/assets/v2/running/races/more-2.webp', 1280, 718, 'Razeen running in a white race shirt among a group of runners on a city road') },
 ];
 
+/** Product videos: muted, looping previews (see components/v2/system/LoopVideo). */
+export const videos = {
+  vsbPreview: {
+    src: '/assets/v2/projects/vsb/video/vsb-preview.mp4',
+    poster: '/assets/v2/projects/vsb/video/vsb-preview-poster.webp',
+    width: 1280,
+    height: 720,
+    label: 'VSB preview video: find a game, see who is playing, bring a friend and pay by QR, and the VSB player card',
+  },
+};
+
 /** Resolves a CMS image key like "career.aws" to its asset; "none" or unknown → undefined. */
 export function resolveAsset(key: string | null | undefined): ImageAsset | undefined {
   if (!key || key === 'none') return undefined;

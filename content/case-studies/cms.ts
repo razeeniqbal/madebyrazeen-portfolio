@@ -24,7 +24,7 @@ export function fromCmsBlock(b: CmsBlock): Block | null {
     case 'steps':
       return { kind: 'steps', label: v.label ?? '', steps: v.steps ?? [] };
     case 'demo':
-      return v.demo === 'sepang-motion' || v.demo === 'quality-workflow' ? { kind: 'demo', demo: v.demo, caption: v.caption || undefined } : null;
+      return v.demo === 'sepang-motion' || v.demo === 'quality-workflow' || v.demo === 'vsb-preview' ? { kind: 'demo', demo: v.demo, caption: v.caption || undefined } : null;
     case 'flow':
       return {
         kind: 'flow',
