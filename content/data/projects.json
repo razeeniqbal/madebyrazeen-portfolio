@@ -894,7 +894,23 @@
       "cover": "none",
       "productImage": "vsb.landingDesktop",
       "productImageMobile": "vsb.landingMobile",
-      "metrics": [],
+      "metrics": [
+        {
+          "label": "Strings, English and Malay",
+          "value": "789 each",
+          "illustrative": false
+        },
+        {
+          "label": "Tables with row-level security",
+          "value": "15 of 15",
+          "illustrative": false
+        },
+        {
+          "label": "Unpaid place held",
+          "value": "12 h",
+          "illustrative": false
+        }
+      ],
       "caseStudy": true,
       "role": "Designer and developer",
       "problem": "Coordinating social volleyball sessions through WhatsApp and individual messages is unnecessarily difficult.",
