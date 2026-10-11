@@ -18,7 +18,7 @@ const approach = trainerApproach;
 
 // Trainer: learning becomes more useful when it can be explained and shared. Records come from
 // content/data/trainer.json and keep their order; their mode sets their weight (structured training
-// leads, technical sharing and internal sharing follow). No photographs until real event images exist.
+// leads, technical sharing and internal sharing follow). Photos appear only where an engagement lists real ones.
 export default function TrainerPage() {
   const engagements = getTrainerEngagements();
   const organizations = [...new Set(engagements.map((e) => e.organization))];

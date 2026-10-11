@@ -1,6 +1,8 @@
 import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { engagementWhen, modeLabel, type TrainerEngagement } from '@/content/trainer';
 import { cn } from '@/lib/utils';
+import { assets } from '@/lib/assets';
+import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
 import { CurriculumExplorer } from './TrainerInteractive';
 
 interface EngagementProps {
@@ -31,6 +33,44 @@ function Facts({ e, wide }: { e: TrainerEngagement; wide?: boolean }) {
         </div>
       ))}
     </dl>
+  );
+}
+
+// Captions for the photos an engagement lists as evidence (asset keys in assets.trainer).
+const photoCaption: Record<string, string> = {
+  'suk-perak-session': 'In session',
+  'suk-perak-google-wall': 'Google Malaysia’s office',
+  'suk-perak-guest-pass': 'Guest pass',
+};
+
+/** Real photos from the engagement, when it lists any: one row, every photo the same height on desktop. */
+function Photos({ e }: { e: TrainerEngagement }) {
+  const photos = e.evidence.map((k) => ({ k, a: assets.trainer[k] })).filter((p) => p.a);
+  if (photos.length === 0) return null;
+  return (
+    <div className="mt-10">
+      <TechnicalLabel as="p" marker="//">
+        In the room
+      </TechnicalLabel>
+      <div
+        className="mt-4 grid grid-cols-2 gap-3 lg:gap-4 lg:[grid-template-columns:var(--cols)]"
+        style={{ ['--cols' as string]: photos.map((p) => `${(p.a.width / p.a.height).toFixed(3)}fr`).join(' ') }}
+      >
+        {photos.map((p, i) => {
+          const portrait = p.a.height > p.a.width;
+          return (
+            <PhotoFrame
+              key={p.k}
+              image={p.a}
+              sizes="(min-width: 1024px) 30vw, 50vw"
+              aspect={cn(i === 0 ? 'aspect-[4/3]' : 'aspect-[4/5]', portrait ? 'lg:aspect-[3/4]' : 'lg:aspect-[4/3]')}
+              caption={photoCaption[p.k]}
+              className={cn(i === 0 && 'col-span-2 lg:col-span-1')}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -74,6 +114,8 @@ export function FeaturedEngagement({ engagement: e, number }: EngagementProps) {
           ))}
         </ol>
       )}
+
+      <Photos e={e} />
 
       {e.topicGroups.length > 0 && (
         <div className="mt-10">

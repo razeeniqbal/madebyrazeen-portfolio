@@ -150,7 +150,11 @@
           "detail": "A capstone and a consultation session."
         }
       ],
-      "evidence": [],
+      "evidence": [
+        "suk-perak-session",
+        "suk-perak-google-wall",
+        "suk-perak-guest-pass"
+      ],
       "featured": true,
       "visibility": "public"
     }

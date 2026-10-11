@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { OrgLogo } from '@/components/v2/system/OrgLogo';
+import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
+import { assets } from '@/lib/assets';
 import { Section } from '@/components/v2/system/Section';
 import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
@@ -142,7 +144,10 @@ export default function ExperiencePage() {
                   <h3 id={`${p.id}-title`} className="mt-4 text-display-sm">
                     {p.role}
                   </h3>
-                  <p className="mt-1 text-muted">{p.company}</p>
+                  <p className="mt-1 flex items-center gap-2.5 text-muted">
+                    <OrgLogo name={p.company} size="sm" />
+                    {p.company}
+                  </p>
                 </div>
                 <Narrative role={p} className="lg:col-span-6 lg:col-start-7 [&>p:first-child]:text-base [&>p:first-child]:text-ink" />
               </aside>
@@ -235,6 +240,15 @@ export default function ExperiencePage() {
                 <RoleFacts role={r} className="mt-5" />
                 <Narrative role={r} className="mt-6 [&>p:first-child]:text-base [&>p:first-child]:text-ink" />
                 {r.progression.length > 0 && <Trajectory steps={r.progression} className="mt-6" />}
+                {r.stage === 'Site' && (
+                  <PhotoFrame
+                    image={assets.career.site}
+                    sizes="(min-width: 1024px) 24vw, (min-width: 768px) 30vw, 100vw"
+                    aspect="aspect-[4/5]"
+                    caption="On site with an auto level"
+                    className="mt-8 max-w-xs"
+                  />
+                )}
               </article>
             ))}
           </div>

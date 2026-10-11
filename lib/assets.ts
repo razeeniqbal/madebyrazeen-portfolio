@@ -68,7 +68,7 @@ const SVL_SESSION = '2026 Sepang race replay, recorded OpenF1 data';
  * Organisation logos (employers, universities), supplied by Razeen and reduced to single-colour marks
  * (white removed, taglines and lockup text cropped), so they take the surrounding text colour.
  * Matched to a company or institution name by `orgLogo`. 3Dtech's rendered 3D logo cannot be reduced
- * to a clean mark, so it has none.
+ * to a clean mark, so it has none; IntelliLabs uses its wordmark only (the gradient icon does not reduce).
  */
 export const logos = {
   aem: img('/assets/v2/logos/aem-mark.png', 360, 158, 'AEM Enersol'),
@@ -76,6 +76,7 @@ export const logos = {
   gnp: img('/assets/v2/logos/gnp-mark.png', 191, 160, 'G&P'),
   upm: img('/assets/v2/logos/upm-mark.png', 144, 160, 'Universiti Putra Malaysia'),
   umpsa: img('/assets/v2/logos/umpsa-mark.png', 109, 160, 'Universiti Malaysia Pahang Al-Sultan Abdullah'),
+  intellilabs: img('/assets/v2/logos/intellilabs-mark.png', 237, 48, 'IntelliLabs'),
 };
 
 const logoMatchers: [RegExp, keyof typeof logos][] = [
@@ -84,6 +85,7 @@ const logoMatchers: [RegExp, keyof typeof logos][] = [
   [/G&P/i, 'gnp'],
   [/Universiti Putra Malaysia|\bUPM\b/i, 'upm'],
   [/Universiti Malaysia Pahang|UMPSA/i, 'umpsa'],
+  [/IntelliLabs/i, 'intellilabs'],
 ];
 
 /** The logo for an organisation name, or undefined when there is none on file. */
@@ -107,7 +109,14 @@ export const assets = {
     cursorAnthropic: img('/assets/v2/career/event-cursor-anthropic.webp', 1350, 2400, 'Razeen with teammates at the Cursor × Anthropic hackathon'),
     aws: img('/assets/v2/career/event-aws.webp', 1350, 2400, 'Razeen standing beside the AWS logo wall'),
     networking: img('/assets/v2/career/event-networking.webp', 1350, 2400, 'Razeen with a colleague at a conference hall'),
+    site: img('/assets/v2/career/site-levelling.webp', 1500, 2000, 'Razeen on a construction site in a hard hat and safety vest, carrying an auto level on its tripod, a dump truck on the gravel road behind'),
   },
+  /** Trainer photos, keyed by the names used in an engagement's `evidence` list (content/data/trainer.json). */
+  trainer: {
+    'suk-perak-session': img('/assets/v2/trainer/suk-perak-session.webp', 2000, 1500, 'Participants around a boardroom table during a session, two screens showing a slide on managed AI functions for semantic reasoning on unstructured data'),
+    'suk-perak-google-wall': img('/assets/v2/trainer/suk-perak-google-wall.webp', 2000, 1500, 'Participants with backpacks gathered in front of a carved Google logo wall, some taking photos'),
+    'suk-perak-guest-pass': img('/assets/v2/trainer/suk-perak-guest-pass.webp', 1500, 2000, 'A Google guest pass with the name Razeen Iqbal Roslan, held up in a car park'),
+  } as Record<string, ImageAsset>,
   /** Project cover art. Numbers painted into these boards are illustrative. */
   projects: {
     sepang: shot('/assets/v2/projects/sepang-vision-lab/hero.webp', 2400, 1350, 'Sepang Vision Lab race replay: three cars in team-style liveries nose to tail through a kerbed corner on the opening lap, seen from a trackside TV camera', 'real-product', SVL_SESSION),
