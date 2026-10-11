@@ -70,7 +70,7 @@ export type Block =
   | { kind: 'gallery'; layout: 'pair' | 'sequence' | 'grid'; items: { image: ImageAsset; caption: string }[] }
   | { kind: 'steps'; label: string; steps: string[] }
   /** A registered interactive demo built from real data (see components/v2/case-study/CaseStudyDemo). */
-  | { kind: 'demo'; demo: 'sepang-motion' | 'quality-workflow'; caption?: string };
+  | { kind: 'demo'; demo: 'sepang-motion' | 'quality-workflow' | 'vsb-preview'; caption?: string };
 
 export interface CaseSection {
   id: SectionId;

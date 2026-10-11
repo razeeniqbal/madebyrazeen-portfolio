@@ -86,6 +86,13 @@
       "surface": "default",
       "blocks": [
         {
+          "discriminant": "demo",
+          "value": {
+            "demo": "vsb-preview",
+            "caption": "The VSB preview: sessions, who is playing, booking with a friend, paying by QR and the player card."
+          }
+        },
+        {
           "discriminant": "gallery",
           "value": {
             "layout": "pair",
