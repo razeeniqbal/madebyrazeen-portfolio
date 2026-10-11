@@ -60,11 +60,11 @@ export function Hero() {
         {/* Portrait + credentials. Top-aligned with the left column (the name label). */}
         <div className="col-span-full md:col-span-3 md:col-start-6 md:row-span-2 md:row-start-1 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:self-start">
           <PhotoFrame
-            image={assets.identity.hero}
-            sizes="(min-width: 1024px) 38vw, (min-width: 768px) 40vw, 100vw"
-            mono
+            image={assets.identity.poster}
+            sizes="(min-width: 1024px) 38vw, (min-width: 768px) 36vw, 100vw"
             priority
-            aspect="aspect-[5/4] md:aspect-[4/5] lg:aspect-[5/4]"
+            uncapped
+            aspect="aspect-square"
             caption="Real Razeen"
           />
 
@@ -104,7 +104,7 @@ export function Hero() {
                       </a>
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 hidden w-max max-w-[14rem] group-[:last-child]:left-auto group-[:last-child]:right-0 border border-line bg-carbon px-2.5 py-1.5 text-xs leading-snug text-warm opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 lg:block"
+                        className="pointer-events-none absolute bottom-full left-0 z-10 mb-2 hidden w-max max-w-[14rem] group-[:nth-child(n+3)]:left-auto group-[:nth-child(n+3)]:right-0 border border-line bg-carbon px-2.5 py-1.5 text-xs leading-snug text-warm opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 lg:block"
                       >
                         <span className="block font-medium">{credentialShortTitle(c)}</span>
                         <span className="block text-muted">{meta}</span>

@@ -12,15 +12,17 @@ interface PhotoFrameProps {
   priority?: boolean;
   /** Crop to a fixed ratio, e.g. "aspect-[4/5]". */
   aspect?: string;
+  /** Keep the whole image even when tall (no desktop height cap), for artwork that must not be cropped. */
+  uncapped?: boolean;
   className?: string;
 }
 
 /** Real photography with the annotation language: corner registration marks + mono caption. */
-export function PhotoFrame({ image, sizes, caption, meta, mono, priority, aspect, className }: PhotoFrameProps) {
+export function PhotoFrame({ image, sizes, caption, meta, mono, priority, aspect, uncapped, className }: PhotoFrameProps) {
   return (
     <figure data-reveal={priority ? undefined : ''} className={cn('relative', className)}>
       {/* Capped at ~3/4 of the viewport on desktop so a tall photo never hides the rest of the page; object-cover crops. */}
-      <div className={cn('relative overflow-hidden', aspect, 'lg:max-h-[75vh]')}>
+      <div className={cn('relative overflow-hidden', aspect, !uncapped && 'lg:max-h-[75vh]')}>
         <Image
           src={image.src}
           width={image.width}

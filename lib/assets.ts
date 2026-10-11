@@ -68,7 +68,7 @@ const SVL_SESSION = '2026 Sepang race replay, recorded OpenF1 data';
  * Organisation logos (employers, universities), supplied by Razeen and reduced to single-colour marks
  * (white removed, taglines and lockup text cropped), so they take the surrounding text colour.
  * Matched to a company or institution name by `orgLogo`. 3Dtech's rendered 3D logo cannot be reduced
- * to a clean mark, so it has none.
+ * to a clean mark, so it has none; IntelliLabs uses its wordmark only (the gradient icon does not reduce).
  */
 export const logos = {
   aem: img('/assets/v2/logos/aem-mark.png', 360, 158, 'AEM Enersol'),
@@ -76,6 +76,7 @@ export const logos = {
   gnp: img('/assets/v2/logos/gnp-mark.png', 191, 160, 'G&P'),
   upm: img('/assets/v2/logos/upm-mark.png', 144, 160, 'Universiti Putra Malaysia'),
   umpsa: img('/assets/v2/logos/umpsa-mark.png', 109, 160, 'Universiti Malaysia Pahang Al-Sultan Abdullah'),
+  intellilabs: img('/assets/v2/logos/intellilabs-mark.png', 237, 48, 'IntelliLabs'),
 };
 
 const logoMatchers: [RegExp, keyof typeof logos][] = [
@@ -84,6 +85,7 @@ const logoMatchers: [RegExp, keyof typeof logos][] = [
   [/G&P/i, 'gnp'],
   [/Universiti Putra Malaysia|\bUPM\b/i, 'upm'],
   [/Universiti Malaysia Pahang|UMPSA/i, 'umpsa'],
+  [/IntelliLabs/i, 'intellilabs'],
 ];
 
 /** The logo for an organisation name, or undefined when there is none on file. */
@@ -95,6 +97,8 @@ export const orgLogo = (name: string): ImageAsset | undefined => {
 export const assets = {
   identity: {
     // Source is 800×800; use at ≤800px CSS width until a higher-resolution original exists.
+    // Home hero: an editorial poster (its own typography is part of the image, so it is never cropped).
+    poster: img('/assets/v2/identity/razeen-poster-square.webp', 1254, 1254, 'Editorial poster: Razeen Iqbal Roslan running toward the camera on a track, smiling and giving peace signs, in front of his name in large letters and a close-up of his face, with the words engineer, builder, sports addict, curious human'),
     hero: img('/assets/v2/identity/razeen-hero.webp', 800, 800, 'Razeen Iqbal smiling with arms crossed on a glass walkway'),
     portraitFormal: img('/assets/v2/identity/razeen-portrait-formal.webp', 1096, 1375, 'Formal portrait of Razeen Iqbal in a suit and tie'),
     graduation: img('/assets/v2/identity/razeen-graduation.webp', 1600, 2400, 'Razeen Iqbal in graduation robes holding a scroll'),
@@ -107,7 +111,14 @@ export const assets = {
     cursorAnthropic: img('/assets/v2/career/event-cursor-anthropic.webp', 1350, 2400, 'Razeen with teammates at the Cursor × Anthropic hackathon'),
     aws: img('/assets/v2/career/event-aws.webp', 1350, 2400, 'Razeen standing beside the AWS logo wall'),
     networking: img('/assets/v2/career/event-networking.webp', 1350, 2400, 'Razeen with a colleague at a conference hall'),
+    site: img('/assets/v2/career/site-levelling.webp', 1500, 2000, 'Razeen on a construction site in a hard hat and safety vest, carrying an auto level on its tripod, a dump truck on the gravel road behind'),
   },
+  /** Trainer photos, keyed by the names used in an engagement's `evidence` list (content/data/trainer.json). */
+  trainer: {
+    'suk-perak-session': img('/assets/v2/trainer/suk-perak-session.webp', 2000, 1500, 'Participants around a boardroom table during a session, two screens showing a slide on managed AI functions for semantic reasoning on unstructured data'),
+    'suk-perak-google-wall': img('/assets/v2/trainer/suk-perak-google-wall.webp', 2000, 1500, 'Participants with backpacks gathered in front of a carved Google logo wall, some taking photos'),
+    'suk-perak-guest-pass': img('/assets/v2/trainer/suk-perak-guest-pass.webp', 1500, 2000, 'A Google guest pass with the name Razeen Iqbal Roslan, held up in a car park'),
+  } as Record<string, ImageAsset>,
   /** Project cover art. Numbers painted into these boards are illustrative. */
   projects: {
     sepang: shot('/assets/v2/projects/sepang-vision-lab/hero.webp', 2400, 1350, 'Sepang Vision Lab race replay: three cars in team-style liveries nose to tail through a kerbed corner on the opening lap, seen from a trackside TV camera', 'real-product', SVL_SESSION),
@@ -209,6 +220,30 @@ export type AvatarVariant = keyof typeof avatarIcons;
 /** The icon-system variant drawn for a given display size. */
 export const avatarFor = (px: number): AvatarVariant =>
   px >= 96 ? 'detailed' : px >= 48 ? 'standard' : px >= 32 ? 'simplified' : px >= 24 ? 'micro' : 'minimal';
+
+/**
+ * Race-day photos, with the day each was taken (from the photo's own date). The Running page matches the
+ * date to a race in the Strava record for its name; photos without a date or a matching race are grouped
+ * as "More race days".
+ */
+export const racePhotos: { date: string | null; image: ImageAsset }[] = [
+  { date: '2026-05-17', image: img('/assets/v2/running/races/perkeso-1.webp', 1067, 1600, 'Razeen running in a teal race shirt and cap, arms out, past trees and a green slope') },
+  { date: '2026-05-17', image: img('/assets/v2/running/races/perkeso-2.webp', 1600, 1067, 'Razeen running toward the camera with both arms raised, in a teal race shirt') },
+  { date: '2026-05-17', image: img('/assets/v2/running/races/perkeso-3.webp', 1067, 1600, 'Razeen mid-stride in a teal race shirt on an empty road in front of a large building') },
+  { date: '2026-06-05', image: img('/assets/v2/running/races/night-run.webp', 1067, 1600, 'Razeen running on a track at night under floodlights, giving a peace sign') },
+  { date: '2026-07-05', image: img('/assets/v2/running/races/kuantan-1.webp', 899, 1600, 'Razeen running along a street of old shophouses, arms raised, with a race bib') },
+  { date: '2026-07-05', image: img('/assets/v2/running/races/kuantan-2.webp', 1600, 1201, 'Razeen running on a wide road, seen from above, giving two peace signs') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-1.webp', 1600, 1200, 'Razeen in a yellow race shirt in front of a Kuala Lumpur race backdrop') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-2.webp', 1067, 1600, 'Razeen in a yellow race shirt pointing at the camera in early morning light') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-3.webp', 1600, 1067, 'Razeen running in a yellow race shirt with a crowd of runners behind') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-4.webp', 1070, 1600, 'Razeen running in a yellow race shirt among a large field of runners') },
+  { date: '2026-07-18', image: img('/assets/v2/running/races/score-5.webp', 1067, 1600, 'Runners in yellow race shirts on a city road, Razeen among them') },
+  { date: '2026-09-13', image: img('/assets/v2/running/races/boom-1.webp', 1067, 1600, 'Razeen running in a green camouflage race shirt, arms out, city towers behind') },
+  { date: '2026-09-13', image: img('/assets/v2/running/races/boom-2.webp', 1067, 1600, 'Razeen running in a green camouflage race shirt and cap, smiling') },
+  { date: '2026-09-13', image: img('/assets/v2/running/races/boom-3.webp', 1600, 1066, 'A group of runners on a tree-lined road, Razeen in a green camouflage race shirt') },
+  { date: null, image: img('/assets/v2/running/races/more-1.webp', 853, 1280, 'Razeen running in a white race shirt and pink cap, giving peace signs') },
+  { date: null, image: img('/assets/v2/running/races/more-2.webp', 1280, 718, 'Razeen running in a white race shirt among a group of runners on a city road') },
+];
 
 /** Resolves a CMS image key like "career.aws" to its asset; "none" or unknown → undefined. */
 export function resolveAsset(key: string | null | undefined): ImageAsset | undefined {

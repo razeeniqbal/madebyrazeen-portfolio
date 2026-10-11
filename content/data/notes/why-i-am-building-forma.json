@@ -3,7 +3,7 @@
   "summary": "Writing and debugging the same kind of ETL logic again and again left me with a question about messy data. FORMA is where I am testing it.",
   "category": "building",
   "status": "published",
-  "featured": true,
+  "featured": false,
   "date": "2026-10-04",
   "updated": "2026-10-10",
   "relatedProject": "forma",

@@ -120,9 +120,7 @@
     font-size: 1.0625rem;
     line-height: 1.75;
   }
-  /* Prose keeps the reading measure; figures may run wider, up to the article column. */
-  .journal-prose > * { max-width: 40rem; }
-  .journal-prose > .journal-wide { max-width: 56rem; }
+  /* Text and figures share one width: the article column (about 48rem on desktop), so their edges line up. */
   @media (min-width: 768px) {
     .journal-prose { font-size: 1.125rem; }
   }

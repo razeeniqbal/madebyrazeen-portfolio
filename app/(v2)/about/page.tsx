@@ -58,10 +58,11 @@ export default function AboutPage() {
           lede={aboutHero.lede.slice(0, 1)}
           aside={
             <PhotoFrame
-              image={assets.identity.portraitFormal}
+              image={assets.identity.hero}
               sizes="(min-width: 1024px) 30vw, (min-width: 768px) 38vw, 100vw"
               aspect="aspect-[4/3] md:aspect-[4/5]"
               priority
+              mono
               caption="Razeen"
             />
           }

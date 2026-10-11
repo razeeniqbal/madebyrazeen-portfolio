@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { OrgLogo } from '@/components/v2/system/OrgLogo';
+import { PhotoFrame } from '@/components/v2/system/PhotoFrame';
+import { assets } from '@/lib/assets';
 import { Section } from '@/components/v2/system/Section';
 import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
@@ -142,7 +144,10 @@ export default function ExperiencePage() {
                   <h3 id={`${p.id}-title`} className="mt-4 text-display-sm">
                     {p.role}
                   </h3>
-                  <p className="mt-1 text-muted">{p.company}</p>
+                  <p className="mt-1 flex items-center gap-2.5 text-muted">
+                    <OrgLogo name={p.company} size="sm" />
+                    {p.company}
+                  </p>
                 </div>
                 <Narrative role={p} className="lg:col-span-6 lg:col-start-7 [&>p:first-child]:text-base [&>p:first-child]:text-ink" />
               </aside>
@@ -221,9 +226,10 @@ export default function ExperiencePage() {
       {foundations.length > 0 && (
         <Section surface="light" id="foundations" className="scroll-mt-16">
           <div className="page-grid gap-y-12">
-            <SectionHeader eyebrow="Foundations" title={['Where it started.']} size="md" />
+            <SectionHeader eyebrow="Foundations" title={['Where it started.']} size="md" className="lg:col-span-8" />
+            {/* Desktop: the two roles side by side under the heading, the site photo in its own column beside them. */}
             {foundations.map((r) => (
-              <article key={r.id} id={r.id} className="col-span-full scroll-mt-20 border-t border-line pt-6 md:col-span-4 lg:col-span-6">
+              <article key={r.id} id={r.id} className="col-span-full scroll-mt-20 border-t border-line pt-6 md:col-span-4 lg:row-start-2">
                 <TechnicalLabel as="p" marker={stageLabel(stages, r)}>
                   {r.discipline}
                 </TechnicalLabel>
@@ -237,6 +243,13 @@ export default function ExperiencePage() {
                 {r.progression.length > 0 && <Trajectory steps={r.progression} className="mt-6" />}
               </article>
             ))}
+            <PhotoFrame
+              image={assets.career.site}
+              sizes="(min-width: 1024px) 28vw, (min-width: 768px) 45vw, 100vw"
+              aspect="aspect-[4/5]"
+              caption="On site as a project engineer"
+              className="col-span-full md:col-span-4 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1"
+            />
           </div>
         </Section>
       )}

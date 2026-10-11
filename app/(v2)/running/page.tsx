@@ -8,7 +8,8 @@ import { RouteMap } from '@/components/v2/running/RouteMap';
 import { WeekStrip } from '@/components/v2/running/RunCharts';
 import { MonthlyChartInteractive, PaceCalculator } from '@/components/v2/running/RunInteractive';
 import { RunLog } from '@/components/v2/running/RunLog';
-import { assets } from '@/lib/assets';
+import { RaceGallery, type RaceGroup } from '@/components/v2/running/RaceGallery';
+import { assets, racePhotos } from '@/lib/assets';
 import {
   getRuns,
   getLatestRun,
@@ -47,6 +48,16 @@ export default function RunningPage() {
   const achieved = bests.filter((b) => b.sec);
   const next = bests.find((b) => !b.sec);
   const races = getRaces();
+  // Race-day photos grouped by race: a photo's date is matched to a race in the Strava record.
+  const raceGroups: RaceGroup[] = [];
+  for (const p of racePhotos) {
+    const race = p.date ? races.find((r) => r.date === p.date) : undefined;
+    const name = race?.race?.name ?? 'More race days';
+    let g = raceGroups.find((x) => x.name === name);
+    if (!g) raceGroups.push((g = { name, when: race ? formatDate(race.date) : undefined, photos: [] }));
+    g.photos.push(p.image);
+  }
+  raceGroups.sort((a, b) => Number(a.name === 'More race days') - Number(b.name === 'More race days'));
   const totals = getTotals();
   const months = getMonthly();
   const weeks = getWeekly();
@@ -179,6 +190,16 @@ export default function RunningPage() {
                 );
               })}
             </ol>
+            {raceGroups.length > 0 && (
+              <div className="col-span-full mt-10">
+                <TechnicalLabel as="p" marker="//">
+                  Race-day photos
+                </TechnicalLabel>
+                <div className="mt-4">
+                  <RaceGallery groups={raceGroups} />
+                </div>
+              </div>
+            )}
           </div>
         </Section>
       )}
