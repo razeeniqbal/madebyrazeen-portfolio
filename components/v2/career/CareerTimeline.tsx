@@ -4,6 +4,7 @@ import { useMemo, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import type { CareerTimelineData, TimelineCredential, TimelineSpan } from '@/content/career-timeline';
 import { cn } from '@/lib/utils';
+import { useMediaQuery } from '@/lib/use-media-query';
 
 interface CareerTimelineProps {
   data: CareerTimelineData;
@@ -13,11 +14,23 @@ interface CareerTimelineProps {
 }
 
 // Gantt layout: a fixed label column, then one track per row on a shared year grid.
-function Row({ label, children, tall }: { label: string; children: ReactNode; tall?: boolean }) {
+// onPick (phones): a tap on the track reports where along it, as a fraction, so the nearest item is read.
+function Row({ label, children, tall, onPick }: { label: string; children: ReactNode; tall?: boolean; onPick?: (fraction: number) => void }) {
   return (
     <div className="flex items-stretch border-b border-line">
       <span className="label flex w-16 shrink-0 items-center text-muted sm:w-24">{label}</span>
-      <div className={cn('relative flex-1', tall ? 'h-16' : 'h-11')}>{children}</div>
+      <div
+        className={cn('relative flex-1', tall ? 'h-16' : 'h-11', onPick && 'cursor-pointer')}
+        onClick={
+          onPick &&
+          ((e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            onPick((e.clientX - r.left) / r.width);
+          })
+        }
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -42,6 +55,9 @@ export function CareerTimeline({ data, variant = 'full', className }: CareerTime
   const [active, setActive] = useState(currentIndex);
   const [year, setYear] = useState<number | null>(null);
   const selected = items[active];
+  // Phones: the marks are too close together to be separate tap targets, so they are drawn, not buttons.
+  // A tap on a track reads the nearest item there; the arrows below step through everything.
+  const wide = useMediaQuery('(min-width: 768px)', true);
 
   const range = data.to - data.from;
   const x = (t: number) => `${((t - data.from) / range) * 100}%`;
@@ -61,6 +77,29 @@ export function CareerTimeline({ data, variant = 'full', className }: CareerTime
     return rows;
   }, [data.credentials]);
   const indexOf = (match: (i: Item) => boolean) => items.findIndex(match);
+  const pickSpan = (lane: TimelineSpan['lane']) => (f: number) => {
+    const t = data.from + f * range;
+    const gap = (s: TimelineSpan) => (t < s.start ? s.start - t : t > s.end ? t - s.end : 0);
+    const near = data.spans.filter((s) => s.lane === lane).reduce((a, b) => (gap(b) < gap(a) ? b : a));
+    setActive(indexOf((it) => it.kind === 'span' && it.span.id === near.id));
+  };
+  const pickCredential = (f: number) => {
+    const t = data.from + f * range;
+    const near = data.credentials.reduce((a, b) => (Math.abs(b.at - t) < Math.abs(a.at - t) ? b : a));
+    setActive(indexOf((it) => it.kind === 'credential' && it.credential.id === near.id));
+  };
+  // The props that make a mark a button, on wider screens only.
+  const markProps = (i: number, label: string) =>
+    wide
+      ? {
+          type: 'button' as const,
+          onMouseEnter: () => setActive(i),
+          onFocus: () => setActive(i),
+          onClick: () => setActive(i),
+          'aria-pressed': i === active,
+          'aria-label': label,
+        }
+      : { 'aria-hidden': true };
 
   const bars = (name: TimelineSpan['lane']) =>
     data.spans
@@ -68,15 +107,11 @@ export function CareerTimeline({ data, variant = 'full', className }: CareerTime
       .map((s) => {
         const i = indexOf((it) => it.kind === 'span' && it.span.id === s.id);
         const on = i === active;
+        const Mark = wide ? 'button' : 'span';
         return (
-          <button
+          <Mark
             key={s.id}
-            type="button"
-            onMouseEnter={() => setActive(i)}
-            onFocus={() => setActive(i)}
-            onClick={() => setActive(i)}
-            aria-pressed={on}
-            aria-label={`${s.title}, ${s.org}, ${s.period}`}
+            {...markProps(i, `${s.title}, ${s.org}, ${s.period}`)}
             style={{ left: x(s.start), width: w(s.start, s.end), ['--i' as string]: i }}
             className={cn(
               'tl-grow absolute top-1/2 h-6 min-w-[1.5rem] -translate-y-1/2 overflow-hidden border px-2 text-left text-xs font-semibold leading-[1.375rem] transition-colors',
@@ -84,7 +119,7 @@ export function CareerTimeline({ data, variant = 'full', className }: CareerTime
             )}
           >
             <span className="block truncate max-md:sr-only">{s.short}</span>
-          </button>
+          </Mark>
         );
       });
 
@@ -115,29 +150,29 @@ export function CareerTimeline({ data, variant = 'full', className }: CareerTime
           </div>
         </div>
 
-        <Row label="Work">{bars('work')}</Row>
-        <Row label="Study">{bars('study')}</Row>
+        <Row label="Work" onPick={wide ? undefined : pickSpan('work')}>
+          {bars('work')}
+        </Row>
+        <Row label="Study" onPick={wide ? undefined : pickSpan('study')}>
+          {bars('study')}
+        </Row>
 
         {full && (
-          <Row label="Credentials">
+          <Row label="Credentials" onPick={wide ? undefined : pickCredential}>
             {data.credentials.map((c) => {
               const i = indexOf((it) => it.kind === 'credential' && it.credential.id === c.id);
               const on = i === active;
               const dim = year !== null && Math.floor(c.at) !== year;
+              const Mark = wide ? 'button' : 'span';
               return (
-                <button
+                <Mark
                   key={c.id}
-                  type="button"
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  aria-pressed={on}
-                  aria-label={`${c.title}, ${c.org}, ${c.when}`}
+                  {...markProps(i, `${c.title}, ${c.org}, ${c.when}`)}
                   style={{ left: x(c.at), top: dotRow.get(c.id) ? '50%' : '8%', ['--i' as string]: i }}
                   className={cn('tl-fade group absolute flex h-6 w-6 -translate-x-1/2 items-center justify-center transition-opacity', dim && 'opacity-25')}
                 >
                   <span className={cn('h-2 w-2 rounded-full border border-ink transition-transform group-hover:scale-125', on ? 'scale-150 bg-lime' : 'bg-surface')} />
-                </button>
+                </Mark>
               );
             })}
           </Row>
