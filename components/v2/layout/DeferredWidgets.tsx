@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import type { JumpItem } from './CommandMenu';
 
 // The chat widget and the quick-jump menu are on every page but never part of the first paint, so their
-// code loads once the page is idle (or on the first key press), not with the page itself.
+// code loads on the visitor's first interaction (scroll, touch, pointer, key), or after a few seconds,
+// not with the page itself, so it never competes with the first paint.
 const loadAsk = () => import('@/components/v2/chat/AskWidget');
 const loadMenu = () => import('./CommandMenu');
 const AskWidget = dynamic(() => loadAsk().then((m) => m.AskWidget), { ssr: false });
@@ -15,7 +16,7 @@ export function DeferredWidgets({ items }: { items: JumpItem[] }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const hasIdle = 'requestIdleCallback' in window;
+    const firstTouch = ['pointerdown', 'pointermove', 'scroll', 'touchstart', 'wheel'] as const;
     // Ctrl/⌘ K before the menu has loaded: load it, then open it. Once loaded, the menu handles the keys.
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -24,24 +25,37 @@ export function DeferredWidgets({ items }: { items: JumpItem[] }) {
         loadMenu().then(() => window.setTimeout(() => window.dispatchEvent(new Event('open-command-menu')), 100));
       }
     };
-    // An "Ask" button pressed before the chat has loaded: load it, then pass the question on.
+    // An "Ask" button pressed before the chat is mounted (the press itself is often the first interaction):
+    // load it, then pass the question on. Listens until the chat has had time to mount.
+    const replayed = new WeakSet<Event>();
     const onAsk = (e: Event) => {
+      if (replayed.has(e)) return;
       go();
-      const detail = (e as CustomEvent).detail;
-      loadAsk().then(() => window.setTimeout(() => window.dispatchEvent(new CustomEvent('ask-razeen:open', { detail })), 100));
+      const again = new CustomEvent('ask-razeen:open', { detail: (e as CustomEvent).detail });
+      replayed.add(again);
+      loadAsk().then(() => window.setTimeout(() => window.dispatchEvent(again), 150));
+    };
+    let askTimer = 0;
+    const onFirst = () => go();
+    const detach = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('keydown', onFirst);
+      firstTouch.forEach((t) => window.removeEventListener(t, onFirst));
     };
     const go = () => {
-      window.removeEventListener('keydown', onKey);
-      window.removeEventListener('ask-razeen:open', onAsk);
+      detach();
       setReady(true);
+      if (!askTimer) loadAsk().then(() => (askTimer = window.setTimeout(() => window.removeEventListener('ask-razeen:open', onAsk), 1000)));
     };
-    const idle = hasIdle ? window.requestIdleCallback(go, { timeout: 3000 }) : window.setTimeout(go, 1500);
+    const timer = window.setTimeout(go, 10_000);
     window.addEventListener('keydown', onKey);
+    window.addEventListener('keydown', onFirst);
     window.addEventListener('ask-razeen:open', onAsk);
+    firstTouch.forEach((t) => window.addEventListener(t, onFirst, { passive: true }));
     return () => {
-      if (hasIdle) window.cancelIdleCallback(idle);
-      else window.clearTimeout(idle);
-      window.removeEventListener('keydown', onKey);
+      detach();
+      window.clearTimeout(askTimer);
       window.removeEventListener('ask-razeen:open', onAsk);
     };
   }, []);
