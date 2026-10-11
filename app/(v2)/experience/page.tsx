@@ -226,9 +226,10 @@ export default function ExperiencePage() {
       {foundations.length > 0 && (
         <Section surface="light" id="foundations" className="scroll-mt-16">
           <div className="page-grid gap-y-12">
-            <SectionHeader eyebrow="Foundations" title={['Where it started.']} size="md" />
+            <SectionHeader eyebrow="Foundations" title={['Where it started.']} size="md" className="lg:col-span-8" />
+            {/* Desktop: the two roles side by side under the heading, the site photo in its own column beside them. */}
             {foundations.map((r) => (
-              <article key={r.id} id={r.id} className="col-span-full scroll-mt-20 border-t border-line pt-6 md:col-span-4 lg:col-span-6">
+              <article key={r.id} id={r.id} className="col-span-full scroll-mt-20 border-t border-line pt-6 md:col-span-4 lg:row-start-2">
                 <TechnicalLabel as="p" marker={stageLabel(stages, r)}>
                   {r.discipline}
                 </TechnicalLabel>
@@ -240,17 +241,15 @@ export default function ExperiencePage() {
                 <RoleFacts role={r} className="mt-5" />
                 <Narrative role={r} className="mt-6 [&>p:first-child]:text-base [&>p:first-child]:text-ink" />
                 {r.progression.length > 0 && <Trajectory steps={r.progression} className="mt-6" />}
-                {r.stage === 'Site' && (
-                  <PhotoFrame
-                    image={assets.career.site}
-                    sizes="(min-width: 1024px) 24vw, (min-width: 768px) 30vw, 100vw"
-                    aspect="aspect-[4/5]"
-                    caption="On site with an auto level"
-                    className="mt-8 max-w-xs"
-                  />
-                )}
               </article>
             ))}
+            <PhotoFrame
+              image={assets.career.site}
+              sizes="(min-width: 1024px) 28vw, (min-width: 768px) 45vw, 100vw"
+              aspect="aspect-[4/5]"
+              caption="On site as a project engineer"
+              className="col-span-full md:col-span-4 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:row-start-1"
+            />
           </div>
         </Section>
       )}

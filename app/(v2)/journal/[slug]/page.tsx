@@ -78,14 +78,14 @@ export default async function JournalEntryPage({ params }: Params) {
         }}
       />
       <article className="page-grid gap-y-10">
-        <header className="col-span-full lg:col-span-9 lg:col-start-4">
+        <header className="col-span-full lg:col-span-7 lg:col-start-4">
           <ArrowLink href="/journal">Journal</ArrowLink>
           <EntryMeta entry={entry} className="mt-10" />
-          <h1 className="mt-5 max-w-[48rem] text-display-md">{note.title}</h1>
-          <p className="mt-6 max-w-[40rem] text-lead text-muted">{note.description}</p>
+          <h1 className="mt-5 text-display-md">{note.title}</h1>
+          <p className="mt-6 text-lead text-muted">{note.description}</p>
 
           {project && (
-            <aside aria-label="Related build" className="mt-10 max-w-[40rem] border-y border-line py-5">
+            <aside aria-label="Related build" className="mt-10 border-y border-line py-5">
               <TechnicalLabel as="p">Related build</TechnicalLabel>
               <div className="mt-3 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
                 <div>
@@ -112,14 +112,15 @@ export default async function JournalEntryPage({ params }: Params) {
           </nav>
         )}
 
-        <div className="col-span-full min-w-0 lg:col-span-9 lg:col-start-4">
-          {note.cover && !note.photo && <JournalCoverFigure cover={note.cover} className="mb-12 max-w-[56rem]" />}
+        {/* One column for everything: text, figures and the cover share the same width. */}
+        <div className="col-span-full min-w-0 lg:col-span-7 lg:col-start-4">
+          {note.cover && !note.photo && <JournalCoverFigure cover={note.cover} className="mb-12" />}
           {note.photo && (
-            <EvidenceImage image={{ ...note.photo.image, alt: note.photo.alt }} caption={note.photo.caption} sizes="(min-width: 1024px) 56rem, 100vw" priority className="mb-12 max-w-[56rem]" />
+            <EvidenceImage image={{ ...note.photo.image, alt: note.photo.alt }} caption={note.photo.caption} sizes="(min-width: 1024px) 50rem, 100vw" priority className="mb-12" />
           )}
           <ArticleBody blocks={note.body} />
 
-          <footer className="mt-20 max-w-[40rem] space-y-10 border-t border-line pt-8">
+          <footer className="mt-20 space-y-10 border-t border-line pt-8">
             {note.related.length > 0 ? (
               <div>
                 <TechnicalLabel as="h2">Related</TechnicalLabel>
@@ -165,7 +166,7 @@ export default async function JournalEntryPage({ params }: Params) {
             )}
             <ArrowLink href="/journal">Back to the Journal</ArrowLink>
           </footer>
-          {note.postscript && <p className="mt-16 max-w-[40rem] font-mono text-[0.6875rem] leading-relaxed text-muted">{note.postscript}</p>}
+          {note.postscript && <p className="mt-16 font-mono text-[0.6875rem] leading-relaxed text-muted">{note.postscript}</p>}
         </div>
       </article>
     </Section>

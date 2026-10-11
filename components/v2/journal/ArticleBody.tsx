@@ -75,7 +75,7 @@ function Block({ block, figureIndex }: { block: ArticleBlock; figureIndex: numbe
         <EvidenceImage
           image={block.image}
           caption={block.caption}
-          sizes="(min-width: 1024px) 56rem, 100vw"
+          sizes="(min-width: 1024px) 50rem, 100vw"
           className="journal-wide"
         />
       );

@@ -3,7 +3,7 @@
   "summary": "Sepang Vision Lab replays the 2026 Sepang weekend in 3D from public OpenF1 data. Most of the work went into making sparse, jittery positions move like a real car without inventing anything.",
   "category": "building",
   "status": "published",
-  "featured": false,
+  "featured": true,
   "date": "2026-10-10",
   "updated": null,
   "relatedProject": "sepang-vision-lab",
