@@ -58,13 +58,13 @@ export function Hero() {
         </div>
 
         {/* Portrait + credentials. Top-aligned with the left column (the name label). */}
-        <div className="col-span-full md:col-span-3 md:col-start-6 md:row-span-2 md:row-start-1 lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:self-start">
+        <div className="col-span-full md:col-span-3 md:col-start-6 md:row-span-2 md:row-start-1 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:self-start">
           <PhotoFrame
             image={assets.identity.poster}
-            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 36vw, 100vw"
+            sizes="(min-width: 1024px) 38vw, (min-width: 768px) 36vw, 100vw"
             priority
             uncapped
-            aspect="aspect-[2/3]"
+            aspect="aspect-square"
             caption="Real Razeen"
           />
 
