@@ -98,7 +98,7 @@ export const assets = {
   identity: {
     // Source is 800×800; use at ≤800px CSS width until a higher-resolution original exists.
     // Home hero: an editorial poster (its own typography is part of the image, so it is never cropped).
-    poster: img('/assets/v2/identity/razeen-poster-square.webp', 1254, 1254, 'Editorial poster: Razeen Iqbal Roslan running toward the camera on a track, smiling and giving peace signs, in front of his name in large letters and a close-up of his face, with the words engineer, builder, sports addict, curious human'),
+    poster: img('/assets/v2/identity/razeen-poster-runner.webp', 1254, 1254, 'Cinematic poster: Razeen Iqbal written in script above ROSLAN in tall letters filled with a racetrack scene, Razeen running toward the camera on a track in a PETRONAS team shirt, smiling and pointing back with both hands, and a back view in a PETRONAS cap and shirt behind'),
     hero: img('/assets/v2/identity/razeen-hero.webp', 800, 800, 'Razeen Iqbal smiling with arms crossed on a glass walkway'),
     portraitFormal: img('/assets/v2/identity/razeen-portrait-formal.webp', 1096, 1375, 'Formal portrait of Razeen Iqbal in a suit and tie'),
     graduation: img('/assets/v2/identity/razeen-graduation.webp', 1600, 2400, 'Razeen Iqbal in graduation robes holding a scroll'),
@@ -253,6 +253,20 @@ export const videos = {
     width: 1280,
     height: 720,
     label: 'VSB preview video: find a game, see who is playing, bring a friend and pay by QR, and the VSB player card',
+  },
+  balangWalkthrough: {
+    src: '/assets/v2/projects/balang/video/balang-walkthrough.mp4',
+    poster: '/assets/v2/projects/balang/video/balang-walkthrough-poster.webp',
+    width: 1280,
+    height: 720,
+    label: 'BALANG walkthrough video: open a room, see what is in the jar, shake and draw, discard the long shots, dare to double with KAW-KAW, and the round result',
+  },
+  sepangPreview: {
+    src: '/assets/v2/projects/sepang-vision-lab/video/sepang-vision-lab-preview.mp4',
+    poster: '/assets/v2/projects/sepang-vision-lab/video/sepang-vision-lab-preview-poster.webp',
+    width: 1280,
+    height: 720,
+    label: 'Sepang Vision Lab preview video: the 3D race replay, the onboard camera, sector times, the race engineer, five cameras and the Sepang circuit',
   },
 };
 

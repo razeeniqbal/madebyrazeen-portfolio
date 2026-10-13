@@ -123,6 +123,13 @@
       "surface": "default",
       "blocks": [
         {
+          "discriminant": "demo",
+          "value": {
+            "demo": "balang-walkthrough",
+            "caption": "The BALANG walkthrough: open a room, read the jar, shake and draw, let go of the long shots, dare to double and see every card resolve."
+          }
+        },
+        {
           "discriminant": "text",
           "value": {
             "lead": false,
