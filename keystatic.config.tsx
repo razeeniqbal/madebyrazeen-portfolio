@@ -120,6 +120,8 @@ const sharedBlocks = {
               { label: 'Sepang: raw vs smoothed OpenF1 motion', value: 'sepang-motion' },
               { label: 'QualityPlus: workflow with AI switch', value: 'quality-workflow' },
               { label: 'VSB: product preview video (autoplays muted)', value: 'vsb-preview' },
+              { label: 'BALANG: walkthrough video (autoplays muted)', value: 'balang-walkthrough' },
+              { label: 'Sepang Vision Lab: preview video (autoplays muted)', value: 'sepang-preview' },
             ],
             defaultValue: 'sepang-motion',
           }),

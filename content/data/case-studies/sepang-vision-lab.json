@@ -78,6 +78,13 @@
       "surface": "default",
       "blocks": [
         {
+          "discriminant": "demo",
+          "value": {
+            "demo": "sepang-preview",
+            "caption": "The Sepang Vision Lab preview: the 3D replay, the onboard camera, sector times, the race engineer and the five cameras, all from recorded OpenF1 data."
+          }
+        },
+        {
           "discriminant": "gallery",
           "value": {
             "layout": "pair",
