@@ -46,6 +46,7 @@ All are optional for local work. See `.env.example`.
 | `CHAT_MODEL` | Overrides the assistant model (default `claude-haiku-4-5`) |
 | `GITHUB_TOKEN` | The coding-activity calendar on `/experience` |
 | `KEYSTATIC_*`, `NEXT_PUBLIC_KEYSTATIC_*` | Production admin through GitHub. See [`docs/v2/ADMIN-AND-CHAT.md`](docs/v2/ADMIN-AND-CHAT.md) |
+| `MBR_SSO_*`, `ADMIN_GITHUB_*` | `/admin` sign-in shared with Langkah and the course tracker. See [`docs/v2/ADMIN-SSO.md`](docs/v2/ADMIN-SSO.md) |
 
 ## Site map
 

@@ -58,8 +58,12 @@ export function SiteFooter() {
         </ul>
 
         {/* No framework here: the site already states its philosophy where it belongs (About, Trainer). */}
-        <div className="col-span-full border-t border-line pt-6">
+        <div className="col-span-full flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-6">
           <p className="label text-muted">© {new Date().getFullYear()} Razeen Iqbal · Made by Razeen</p>
+          {/* Sign-in for the portfolio, Langkah and the course tracker. Quiet on purpose; /admin checks the session. */}
+          <Link href="/admin" prefetch={false} className="label text-muted/60 hover:text-lime">
+            Admin
+          </Link>
         </div>
       </div>
     </footer>
