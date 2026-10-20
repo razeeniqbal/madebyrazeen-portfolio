@@ -38,6 +38,11 @@ export function issueToken(sub: string, now = Math.floor(Date.now() / 1000)): st
 
 /** The GitHub login the token belongs to, or null when it is missing, forged or expired. */
 export function verifyToken(token: string | undefined): string | null {
+  return readSession(token)?.login ?? null;
+}
+
+/** The signed-in admin and when the session ends, or null when the token is missing, forged or expired. */
+export function readSession(token: string | undefined): { login: string; expires: Date } | null {
   if (!secret() || !token) return null;
   const [version, payload, sig, ...rest] = token.split('.');
   if (version !== 'v1' || !payload || !sig || rest.length) return null;
@@ -46,7 +51,9 @@ export function verifyToken(token: string | undefined): string | null {
   if (want.length !== got.length || !timingSafeEqual(want, got)) return null;
   try {
     const { sub, exp } = JSON.parse(Buffer.from(payload, 'base64url').toString());
-    return typeof sub === 'string' && typeof exp === 'number' && exp > Date.now() / 1000 ? sub : null;
+    return typeof sub === 'string' && typeof exp === 'number' && exp > Date.now() / 1000
+      ? { login: sub, expires: new Date(exp * 1000) }
+      : null;
   } catch {
     return null;
   }
