@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { Section } from '@/components/v2/system/Section';
 import { PageHeader } from '@/components/v2/system/PageHeader';
+import { LangkahPanel, PortfolioPanel, TrackerPanel } from '@/components/v2/admin/Dashboard';
+import { langkahDigest, portfolioDigest, trackerDigest } from '@/lib/admin/digest';
 import { SSO_COOKIE, readSession, ssoConfig } from '@/lib/admin/sso';
 import { cn } from '@/lib/utils';
 
@@ -58,7 +60,12 @@ const sessionEnds = (d: Date) =>
 
 export default async function AdminPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;
-  const session = readSession((await cookies()).get(SSO_COOKIE)?.value);
+  const token = (await cookies()).get(SSO_COOKIE)?.value;
+  const session = readSession(token);
+  // Signed in: ask each app for its digest in parallel (each gives up after 4 s).
+  const [langkah, tracker] = session && token
+    ? await Promise.all([langkahDigest(langkahUrl, token), trackerDigest(trackerUrl, token)])
+    : [null, null];
   const ready = ssoConfig().ready;
 
   // Signed out, the sign-in button leads; signed in, sign-out follows the apps.
@@ -103,7 +110,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
         title={session ? ['Your', 'apps.'] : ['Admin.']}
         lede={[
           session
-            ? 'One session for the portfolio, Langkah and the course tracker. Open any of them without signing in again.'
+            ? 'Where things stand across the portfolio, Langkah and the course tracker. Open any of them without signing in again.'
             : 'One sign-in for the portfolio, Langkah and the course tracker.',
         ]}
         meta={
@@ -126,6 +133,15 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
         {!session && actions}
 
+        {session && (
+          <div className="col-span-full grid gap-px border border-line bg-line xl:grid-cols-3">
+            <PortfolioPanel data={portfolioDigest()} />
+            <LangkahPanel data={langkah} href={langkahUrl} />
+            <TrackerPanel data={tracker} href={trackerUrl} />
+          </div>
+        )}
+
+        {!session && (
         <ul className="col-span-full border-b border-line" aria-label="Apps">
           {apps.map((app) => {
             const row = (
@@ -173,6 +189,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
             );
           })}
         </ul>
+        )}
 
         {session && actions}
       </div>
