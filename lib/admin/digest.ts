@@ -40,7 +40,34 @@ export interface PortfolioDigest {
 /** Today in Malaysia, so "late" and "due this week" match what Langkah shows on the board. */
 export const todayMYT = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kuala_Lumpur' }).format(new Date());
 
-async function getJson<T>(url: string, token: string): Promise<T | null> {
+const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+const isArr = (v: unknown, each: (x: Record<string, unknown>) => boolean) =>
+  Array.isArray(v) && v.every((x) => typeof x === 'object' && x !== null && each(x as Record<string, unknown>));
+const isStr = (v: unknown): v is string => typeof v === 'string';
+
+/** Only the shapes the panels read; anything else counts as "did not answer" rather than breaking /admin. */
+const isLangkah = (d: Record<string, unknown>): boolean => {
+  const cards = d.cards as Record<string, unknown> | null;
+  return (
+    isNum(d.overall) && isNum(d.lateCount) && isNum(d.dueThisWeek) &&
+    typeof cards === 'object' && cards !== null && ['backlog', 'todo', 'doing', 'review', 'done'].every((k) => isNum(cards[k])) &&
+    isArr(d.projects, (p) => isStr(p.code) && isStr(p.name) && isNum(p.progress) && isNum(p.open) && isNum(p.late)) &&
+    isArr(d.attention, (c) => isStr(c.title) && isStr(c.project) && isStr(c.due) && isStr(c.status))
+  );
+};
+
+const isTracker = (d: Record<string, unknown>): boolean => {
+  const pace = d.pace as Record<string, unknown> | null;
+  return (
+    isNum(d.total) && isNum(d.published) && isNum(d.studyMinutesWeek) && isNum(d.streak) &&
+    typeof pace === 'object' && pace !== null && isNum(pace.thisWeek) && isNum(pace.target) && isNum(pace.perWeek) &&
+    (pace.finishAtPace === null || isStr(pace.finishAtPace)) &&
+    isArr(d.rings, (r) => isStr(r.key) && isStr(r.label) && isNum(r.percent)) &&
+    isArr(d.upNext, (e) => isStr(e.key) && isStr(e.code) && isStr(e.title) && isStr(e.statusLabel))
+  );
+};
+
+async function getJson<T>(url: string, token: string, valid: (d: Record<string, unknown>) => boolean): Promise<T | null> {
   try {
     const res = await fetch(url, {
       headers: { Cookie: `${SSO_COOKIE}=${token}`, Accept: 'application/json' },
@@ -48,16 +75,19 @@ async function getJson<T>(url: string, token: string): Promise<T | null> {
       cache: 'no-store',
       signal: AbortSignal.timeout(4000),
     });
-    return res.ok ? ((await res.json()) as T) : null;
+    if (!res.ok) return null;
+    const body: unknown = await res.json();
+    return typeof body === 'object' && body !== null && valid(body as Record<string, unknown>) ? (body as T) : null;
   } catch {
     return null;
   }
 }
 
 export const langkahDigest = (base: string, token: string) =>
-  getJson<LangkahDigest>(`${base}/api/digest?today=${todayMYT()}`, token);
+  getJson<LangkahDigest>(`${base}/api/digest?today=${todayMYT()}`, token, isLangkah);
 
-export const trackerDigest = (base: string, token: string) => getJson<TrackerDigest>(`${base}/api/digest`, token);
+export const trackerDigest = (base: string, token: string) =>
+  getJson<TrackerDigest>(`${base}/api/digest`, token, isTracker);
 
 export function portfolioDigest(): PortfolioDigest {
   const published = getPublishedJournalEntries();
