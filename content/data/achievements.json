@@ -740,6 +740,34 @@
       "selected": false,
       "source": "Supplied directly by Razeen (credential correction brief, 4 Oct 2026): DP-900, May 2023 (not in the v1 data or the resume)",
       "notes": "Restored in the correction pass. No personal verification link supplied."
+    },
+    {
+      "id": "56",
+      "title": "Professional Technologist (Ts.)",
+      "organization": "Malaysia Board of Technologists (MBOT)",
+      "type": "professional-registration",
+      "code": "",
+      "issuedDate": "October 2026",
+      "issuedOn": "2026-10-01",
+      "expiresDate": "September 2027",
+      "expiresOn": "2027-09-30",
+      "description": "Registered Professional Technologist in Information & Communication Technology, under the Technologists and Technicians Act 2015.",
+      "category": "certification",
+      "area": "other",
+      "image": "",
+      "credentialUrl": "",
+      "issuerUrl": "https://www.mbot.org.my",
+      "evidenceUrl": "",
+      "credentialId": "PT26100020",
+      "certificationNumber": "",
+      "verification": "none",
+      "provenance": [
+        "user-supplied"
+      ],
+      "featured": true,
+      "selected": true,
+      "source": "MBOT registration approval slip supplied by Razeen (3 Nov 2026): Professional Technologist, Information & Communication Technology (IT), approved 1 Oct 2026, valid to 30 Sep 2027, registration PT26100020; original certificate awaiting issuance",
+      "notes": "Original certificate not yet issued by MBOT; the approval slip is the proof of active registration until then."
     }
   ]
 }

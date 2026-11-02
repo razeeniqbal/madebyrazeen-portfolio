@@ -29,6 +29,7 @@ export function Hero() {
       <div className="page-grid gap-y-10 lg:grid-rows-[auto_1fr] lg:gap-y-0">
         <div className="col-span-full md:col-span-5 lg:col-span-7">
           <TechnicalLabel as="p">
+            {profile.title && `${profile.title} `}
             {profile.name} <span className="text-muted">/ {profile.role}</span>
           </TechnicalLabel>
           <h1 className="mt-6 text-[clamp(2.75rem,6.4vw,7.25rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.045em]">

@@ -209,6 +209,7 @@ export default config({
       format: json,
       schema: {
         name: fields.text({ label: 'Name' }),
+        title: fields.text({ label: 'Title before the name (Ts. for Professional Technologist; empty for none)' }),
         legalName: fields.text({ label: 'Full legal name (resume header)' }),
         wordmark: fields.text({ label: 'Wordmark' }),
         umbrella: fields.text({ label: 'Umbrella brand' }),

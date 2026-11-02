@@ -24,6 +24,7 @@ const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: profile.name,
+  ...(profile.title && { honorificPrefix: profile.title }),
   url: SITE_URL,
   jobTitle: profile.role,
   worksFor: { '@type': 'Organization', name: getCurrentRole()?.company },
