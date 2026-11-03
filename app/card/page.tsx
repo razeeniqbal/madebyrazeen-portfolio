@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import QRCode from 'qrcode';
 import { CARD_PATH, CARD_PHOTO, CARD_URL, getCard } from '@/lib/card';
 import { ShareCard } from '@/components/v2/card/ShareCard';
+import { ShowQr } from '@/components/v2/card/ShowQr';
 import { CredentialBadge } from '@/components/v2/credentials/CredentialBadge';
 
 const card = getCard();
@@ -40,7 +42,15 @@ export default async function CardPage() {
 
   return (
     <main data-surface="dark" className="min-h-dvh bg-surface text-ink">
-      <div className="mx-auto flex max-w-md flex-col px-5 pb-12 pt-10">
+      <div className="mx-auto flex max-w-md flex-col px-5 pb-12 pt-6">
+        {/* Top bar: the owner's shortcut to a scannable QR (also /card?qr from the home screen) */}
+        <div className="mb-3 flex items-center justify-between">
+          <span className="label text-muted">Digital card</span>
+          <Suspense fallback={<span className="h-9" />}>
+            <ShowQr svg={qr} name={card.shortName} url={CARD_URL} />
+          </Suspense>
+        </div>
+
         {/* Card face */}
         <section aria-label="Card" className="border border-line bg-raised/40 p-6">
           <div className="flex items-center gap-4">
