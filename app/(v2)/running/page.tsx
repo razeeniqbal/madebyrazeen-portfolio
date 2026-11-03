@@ -10,6 +10,7 @@ import { MonthlyChartInteractive, PaceCalculator } from '@/components/v2/running
 import { RunLog } from '@/components/v2/running/RunLog';
 import { RaceGallery, type RaceGroup } from '@/components/v2/running/RaceGallery';
 import { assets, racePhotos } from '@/lib/assets';
+import { titledName } from '@/content/profile';
 import {
   getRuns,
   getLatestRun,
@@ -95,7 +96,7 @@ export default function RunningPage() {
             aspect="aspect-[4/5]"
             priority
             caption="Race day"
-            meta="Real Razeen"
+            meta={titledName}
             className="col-span-full md:col-span-3 lg:col-span-5"
           />
         </div>

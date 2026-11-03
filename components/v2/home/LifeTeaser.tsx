@@ -7,6 +7,7 @@ import { TechnicalLabel } from '@/components/v2/system/TechnicalLabel';
 import { assets } from '@/lib/assets';
 import { beyond } from '@/content/story';
 import { getLifeInterests } from '@/content/life';
+import { titledName } from '@/content/profile';
 import { getProject } from '@/content/projects';
 import { getPersonalBests, getTotals, isSampleData, formatDuration, formatPaceSec } from '@/content/running';
 
@@ -29,7 +30,7 @@ export function LifeTeaser() {
           sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 100vw"
           aspect="aspect-[4/3] md:aspect-[4/5]"
           caption="Race day"
-          meta="Real Razeen"
+          meta={titledName}
           className="col-span-full md:col-span-4 lg:col-span-5"
         />
 
