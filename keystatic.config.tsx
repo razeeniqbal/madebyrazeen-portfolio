@@ -210,6 +210,7 @@ export default config({
       schema: {
         name: fields.text({ label: 'Name' }),
         title: fields.text({ label: 'Title before the name (Ts. for Professional Technologist; empty for none)' }),
+        cardRole: fields.text({ label: 'Role on the digital card (experience ID, e.g. intellilabs-ai; empty = current main role)' }),
         legalName: fields.text({ label: 'Full legal name (resume header)' }),
         wordmark: fields.text({ label: 'Wordmark' }),
         umbrella: fields.text({ label: 'Umbrella brand' }),

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import QRCode from 'qrcode';
 import { CARD_PATH, CARD_PHOTO, CARD_URL, getCard } from '@/lib/card';
 import { ShareCard } from '@/components/v2/card/ShareCard';
+import { CredentialBadge } from '@/components/v2/credentials/CredentialBadge';
 
 const card = getCard();
 
@@ -49,16 +50,56 @@ export default async function CardPage() {
               <p className="mt-1 text-sm text-muted">{card.legalName}</p>
             </div>
           </div>
-          <p className="mt-6 text-lg font-semibold">{card.role}</p>
-          {card.company && <p className="text-muted">{card.company}</p>}
-          <p className="label mt-1 text-muted">{card.location}</p>
-          <ul aria-label="Credentials" className="mt-5 flex flex-wrap gap-2">
-            {card.credentials.map((c) => (
-              <li key={c} className="label border border-line px-2 py-1">
-                {c}
-              </li>
-            ))}
-          </ul>
+          {/* Role: title, company, place */}
+          <div className="mt-6 border-t border-line pt-5">
+            <p className="text-xl font-semibold leading-snug">{card.role}</p>
+            {card.company && (
+              <p className="mt-1 flex items-center gap-2">
+                <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime" />
+                {card.company}
+              </p>
+            )}
+            {card.location && (
+              <p className="mt-1.5 flex items-center gap-2 text-sm text-muted">
+                <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M8 14.5s4.5-4.2 4.5-8a4.5 4.5 0 0 0-9 0c0 3.8 4.5 8 4.5 8Z" />
+                  <circle cx="8" cy="6.5" r="1.6" />
+                </svg>
+                {card.location}
+              </p>
+            )}
+          </div>
+
+          {/* Credentials as badges: official artwork where it exists, a typographic tile otherwise */}
+          {card.badges.length > 0 && (
+            <div className="mt-5 border-t border-line pt-5">
+              <p className="label text-muted">Credentials</p>
+              <ul aria-label="Credentials" className="mt-3 grid grid-cols-5 gap-2">
+                {card.badges.map((b) => {
+                  const body = (
+                    <>
+                      <CredentialBadge credential={b.credential} size={44} />
+                      <span className="mt-2 text-[10px] font-semibold uppercase leading-tight tracking-wide">{b.label}</span>
+                    </>
+                  );
+                  const cls = 'flex flex-col items-center text-center';
+                  return (
+                    <li key={b.title} title={`${b.title} · ${b.issuer}`}>
+                      {b.verifyUrl ? (
+                        <a href={b.verifyUrl} target="_blank" rel="noopener noreferrer" aria-label={`${b.title}, ${b.issuer}: verify`} className={`${cls} transition-opacity hover:opacity-80`}>
+                          {body}
+                        </a>
+                      ) : (
+                        <span aria-label={`${b.title}, ${b.issuer}`} className={cls}>
+                          {body}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </section>
 
         {/* The two things people came for */}
