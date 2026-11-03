@@ -117,6 +117,9 @@ export const assets = {
   trainer: {
     'suk-perak-session': img('/assets/v2/trainer/suk-perak-session.webp', 2000, 1500, 'Participants around a boardroom table during a session, two screens showing a slide on managed AI functions for semantic reasoning on unstructured data'),
     'suk-perak-google-wall': img('/assets/v2/trainer/suk-perak-google-wall.webp', 2000, 1500, 'Participants with backpacks gathered in front of a carved Google logo wall, some taking photos'),
+    'marii-dep-room': img('/assets/v2/trainer/marii-dep-room.webp', 2000, 1325, 'Razeen presenting with a microphone to a full training room at MARii, laptops on the tables and a banner reading From AI Awareness to Agentic Action'),
+    'marii-dep-presenting': img('/assets/v2/trainer/marii-dep-presenting.webp', 1325, 2000, 'Razeen speaking in front of two screens showing the Where this session fits slide of the Gemini Enterprise for Automotive deck'),
+    'marii-dep-group-work': img('/assets/v2/trainer/marii-dep-group-work.webp', 2000, 1325, 'Razeen pointing to notes while three participants at a table work through an activity on their laptops'),
     'suk-perak-guest-pass': img('/assets/v2/trainer/suk-perak-guest-pass.webp', 1500, 2000, 'A Google guest pass with the name Razeen Iqbal Roslan, held up in a car park'),
   } as Record<string, ImageAsset>,
   /** Project cover art. Numbers painted into these boards are illustrative. */
