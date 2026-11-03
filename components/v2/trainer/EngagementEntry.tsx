@@ -38,6 +38,9 @@ function Facts({ e, wide }: { e: TrainerEngagement; wide?: boolean }) {
 
 // Captions for the photos an engagement lists as evidence (asset keys in assets.trainer).
 const photoCaption: Record<string, string> = {
+  'marii-dep-room': 'Day 1 · In session',
+  'marii-dep-presenting': 'Where the session fits',
+  'marii-dep-group-work': 'Day 2 · At the tables',
   'suk-perak-session': 'In session',
   'suk-perak-google-wall': 'Google Malaysia’s office',
   'suk-perak-guest-pass': 'Guest pass',

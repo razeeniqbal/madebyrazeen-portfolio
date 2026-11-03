@@ -1,6 +1,93 @@
 {
   "engagements": [
     {
+      "slug": "marii-dep-gemini-enterprise",
+      "title": "Gemini Enterprise for Automotive",
+      "mode": "structured-training",
+      "role": "Trainer",
+      "organization": "MARii",
+      "partners": [
+        "Google Cloud",
+        "Awantec"
+      ],
+      "dateStart": "2026-10-17",
+      "dateEnd": "2026-10-18",
+      "year": 2026,
+      "format": "Face-to-face, 2 days, in the MARii Digital Engineering and Prototyping (DEP) Generative AI Programme 2026. 20% concept, 30% guided demonstration, 50% hands-on.",
+      "audience": "Participants from the Malaysian automotive industry in the MARii DEP Generative AI Programme 2026.",
+      "audienceShort": "Automotive industry",
+      "summary": "Building grounded AI agents with enterprise data: a Gemini Enterprise session where automotive teams answered an EV adoption question with evidence they could trace and check.",
+      "topics": [
+        "Grounded AI",
+        "Gemini Enterprise",
+        "Prompt engineering (R-C-T-E-O)",
+        "Multi-agent architecture",
+        "Context engineering",
+        "Agent harness and guardrails",
+        "BigQuery",
+        "Knowledge base retrieval (RAG)",
+        "Evidence validation (S-I-M)",
+        "Human validation"
+      ],
+      "topicGroups": [
+        {
+          "label": "Grounded AI",
+          "topics": [
+            "Grounded AI",
+            "Gemini Enterprise",
+            "Prompt engineering (R-C-T-E-O)"
+          ]
+        },
+        {
+          "label": "Agent design",
+          "topics": [
+            "Multi-agent architecture",
+            "Context engineering",
+            "Agent harness and guardrails"
+          ]
+        },
+        {
+          "label": "Evidence",
+          "topics": [
+            "BigQuery",
+            "Knowledge base retrieval (RAG)"
+          ]
+        },
+        {
+          "label": "Validation",
+          "topics": [
+            "Evidence validation (S-I-M)",
+            "Human validation"
+          ]
+        }
+      ],
+      "journey": [
+        {
+          "label": "Audience",
+          "detail": "Automotive industry participants in MARii's DEP Generative AI Programme, after a morning of data analytics."
+        },
+        {
+          "label": "Concept",
+          "detail": "From predictive models to grounded AI agents, and how a coordinator, a data agent and a knowledge agent divide the work."
+        },
+        {
+          "label": "Hands-on",
+          "detail": "Half the session in Gemini Enterprise: prepared agents answering an EV adoption question from BigQuery data and four knowledge documents."
+        },
+        {
+          "label": "Application",
+          "detail": "Classifying every claim as Supported, Inferred or Missing, with a harness checklist to carry into the AI ideation and MVP stages."
+        }
+      ],
+      "evidence": [
+        "marii-dep-room",
+        "marii-dep-presenting",
+        "marii-dep-group-work"
+      ],
+      "featured": true,
+      "visibility": "public"
+    },
+    {
       "slug": "aem-internal-training",
       "title": "AEM Internal Technical Training",
       "mode": "internal-knowledge-sharing",
@@ -12,6 +99,7 @@
       "year": null,
       "format": "Internal technical training / knowledge sharing",
       "audience": "Internal",
+      "audienceShort": "",
       "summary": "Recurring internal sessions for colleagues, from Power BI and SQL to Python, Git and Google Cloud AI.",
       "topics": [
         "Power BI Fundamentals & Dashboard Development",
@@ -39,6 +127,7 @@
       "year": 2025,
       "format": "Online",
       "audience": "UPM students",
+      "audienceShort": "",
       "summary": "Gave students exposure to Google's Data and AI technologies and showed what they can explore and build.",
       "topics": [
         "BigQuery ML",
@@ -66,6 +155,7 @@
       "year": 2026,
       "format": "Face-to-face, 2 days: theory, hands-on and capstone / consultation",
       "audience": "Technical and management participants from relevant SUK Perak digital and related units.",
+      "audienceShort": "Public sector",
       "summary": "Two days of Google Cloud training for SUK Perak, from cloud foundations to AI services.",
       "topics": [
         "Google Cloud ecosystem",

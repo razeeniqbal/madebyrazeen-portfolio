@@ -600,6 +600,7 @@ export default config({
             year: fields.integer({ label: 'Year (only when no exact date is known)' }),
             format: fields.text({ label: 'Format' }),
             audience: fields.text({ label: 'Audience', multiline: true }),
+            audienceShort: fields.text({ label: 'Audience in a few words (topic map; e.g. Automotive industry)' }),
             summary: fields.text({ label: 'Summary', multiline: true }),
             topics: textList('Topics', 'Topic'),
             topicGroups: fields.array(fields.object({ label: fields.text({ label: 'Theme' }), topics: textList('Topics (from the list above)', 'Topic') }), {

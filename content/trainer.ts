@@ -31,6 +31,8 @@ export interface TrainerEngagement {
   year?: number;
   format?: string;
   audience?: string;
+  /** Two or three words for the topic map ("Automotive industry"); falls back to one derived from the mode. */
+  audienceShort?: string;
   summary: string;
   topics: string[];
   evidence: string[];
@@ -56,6 +58,7 @@ const engagements: TrainerEngagement[] = (data.engagements as Raw[]).map((e) => 
   year: e.year ?? (e.dateStart ? Number(e.dateStart.slice(0, 4)) : undefined),
   format: e.format || undefined,
   audience: e.audience || undefined,
+  audienceShort: e.audienceShort || undefined,
   visibility: e.visibility as TrainerEngagement['visibility'],
 }));
 
@@ -103,7 +106,7 @@ export const topicAreaLabel: Record<TopicArea, string> = { data: 'Data', cloud: 
 function areaOf(topic: string): TopicArea | undefined {
   const t = topic.toLowerCase();
   if (/capstone/.test(t)) return undefined;
-  if (/\bai\b|vertex|ml\b|machine learning|document ai/.test(t)) return 'ai';
+  if (/\bai\b|vertex|ml\b|machine learning|document ai|gemini|agent|prompt|context engineering|\brag\b/.test(t)) return 'ai';
   if (/git/.test(t)) return 'dev';
   if (/power bi|power query|python|sql fundamentals|data analysis/.test(t)) return 'data';
   return 'cloud';
@@ -131,7 +134,9 @@ export function getTopicMap(): TopicMapData {
     engagements: list.map((e) => ({
       slug: e.slug,
       title: e.title,
-      audience: e.mode === 'internal-knowledge-sharing' ? 'Colleagues' : e.mode === 'technical-sharing' ? 'Students' : 'Public sector',
+      audience:
+        e.audienceShort ??
+        (e.mode === 'internal-knowledge-sharing' ? 'Colleagues' : e.mode === 'technical-sharing' ? 'Students' : 'Public sector'),
       mode: modeLabel[e.mode],
       when: engagementWhen(e),
     })),
