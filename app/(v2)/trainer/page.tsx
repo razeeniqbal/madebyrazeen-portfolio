@@ -4,7 +4,8 @@ import { PageHeader } from '@/components/v2/system/PageHeader';
 import { SectionHeader } from '@/components/v2/system/SectionHeader';
 import { ArrowLink } from '@/components/v2/system/ArrowLink';
 import { CompactEngagement, FeaturedEngagement } from '@/components/v2/trainer/EngagementEntry';
-import { getTopicMap, getTrainerEngagements, trainerApproach } from '@/content/trainer';
+import { getTopicMap, getTrainerEngagements, trainerApproach, trainerProfile } from '@/content/trainer';
+import { TrainerProfileCard } from '@/components/v2/trainer/TrainerProfileCard';
 import { TopicMap } from '@/components/v2/trainer/TrainerInteractive';
 
 export const metadata: Metadata = {
@@ -37,6 +38,14 @@ export default function TrainerPage() {
           meta={[
             { label: 'Engagements', value: engagements.length },
             { label: 'Organizations', value: organizations.join(' · ') },
+            {
+              label: 'Trainer profile',
+              value: (
+                <a href={trainerProfile.href} target="_blank" rel="noopener" className="border-b border-current hover:text-lime">
+                  PDF <span aria-hidden="true">↗</span>
+                </a>
+              ),
+            },
           ]}
         />
 
@@ -103,8 +112,12 @@ export default function TrainerPage() {
           <div className="col-span-full space-y-6 lg:col-span-5">
             <p className="max-w-prose text-muted">
               For training or technical sharing related to Data, Cloud, or AI, you can reach me through the contact page.
+              The trainer profile has everything an organiser usually asks for.
             </p>
             <ArrowLink href="/contact">Get in touch</ArrowLink>
+          </div>
+          <div className="col-span-full mt-4 lg:col-span-7 lg:col-start-6">
+            <TrainerProfileCard />
           </div>
         </div>
       </Section>
