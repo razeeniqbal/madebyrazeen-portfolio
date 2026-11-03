@@ -35,6 +35,7 @@ const issuerMark: Record<string, string> = {
   'DeepLearning.AI': 'DL',
   'The Institution of Engineers Malaysia': 'IEM',
   'Board of Engineers Malaysia': 'BEM',
+  'Malaysia Board of Technologists (MBOT)': 'MBOT',
 };
 
 /** The typographic stand-in when no official badge ships: exam code, else a short issuer mark. */

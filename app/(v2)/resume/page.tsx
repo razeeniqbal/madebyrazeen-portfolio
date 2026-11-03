@@ -115,7 +115,10 @@ export default function ResumePage() {
               <p className="label text-muted" data-print-hide>
                 Resume / {year}
               </p>
-              <h1 className="mt-3 text-display-md uppercase print:mt-0 print:text-[21pt]">{profile.legalName}</h1>
+              <h1 className="mt-3 text-display-md uppercase print:mt-0 print:text-[21pt]">
+                {profile.title && `${profile.title} `}
+                {profile.legalName}
+              </h1>
               <p className="mt-2 text-lg font-semibold">
                 {current?.role}
                 {current?.location && <span className="font-normal text-muted"> · {current.location}</span>}
