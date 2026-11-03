@@ -14,9 +14,13 @@ export function ShareCard({ url, title, className }: { url: string; title: strin
         if ((e as Error).name === 'AbortError') return; // dismissed the share sheet
       }
     }
-    await navigator.clipboard?.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.prompt('Copy this link', url); // no share sheet and no clipboard: show the link to copy by hand
+    }
   };
   return (
     <button type="button" onClick={share} className={className} aria-live="polite">
