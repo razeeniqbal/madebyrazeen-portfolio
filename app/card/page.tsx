@@ -52,16 +52,15 @@ export default async function CardPage() {
         </div>
 
         {/* Card face */}
-        <section aria-label="Card" className="border border-line bg-raised/40 p-6">
-          <div className="flex items-center gap-4">
-            <Image src={CARD_PHOTO} width={480} height={480} alt={`Portrait of ${card.legalName}`} priority className="h-20 w-20 shrink-0 rounded-full object-cover" />
-            <div className="min-w-0">
-              <h1 className="text-2xl font-extrabold leading-tight tracking-tight">{card.shortName}</h1>
-              <p className="mt-1 text-sm text-muted">{card.legalName}</p>
-            </div>
+        {/* Centred, as a printed business card reads: photo, name, role, credentials */}
+        <section aria-label="Card" className="border border-line bg-raised/40 p-6 text-center">
+          <div className="flex flex-col items-center">
+            <Image src={CARD_PHOTO} width={480} height={480} alt={`Portrait of ${card.legalName}`} priority className="h-24 w-24 shrink-0 rounded-full object-cover" />
+            <h1 className="mt-4 text-2xl font-extrabold leading-tight tracking-tight">{card.shortName}</h1>
+            <p className="mt-1 text-sm text-muted">{card.legalName}</p>
           </div>
           {/* Role: title, company, place */}
-          <div className="mt-6 border-t border-line pt-5">
+          <div className="mt-6 flex flex-col items-center border-t border-line pt-5">
             <p className="text-xl font-semibold leading-snug">{card.role}</p>
             {card.company && (
               <p className="mt-1 flex items-center gap-2">
@@ -84,7 +83,7 @@ export default async function CardPage() {
           {card.badges.length > 0 && (
             <div className="mt-5 border-t border-line pt-5">
               <p className="label text-muted">Credentials</p>
-              <ul aria-label="Credentials" className="mt-3 grid grid-cols-5 gap-2">
+              <ul aria-label="Credentials" className="mx-auto mt-3 grid max-w-xs grid-cols-5 gap-2">
                 {card.badges.map((b) => {
                   const body = (
                     <>
