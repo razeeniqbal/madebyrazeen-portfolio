@@ -10,7 +10,7 @@ import { featuredCredentials } from '@/content/achievements';
 import { credentialCode, credentialShortTitle, credentialYear, credentialVerifyUrl } from '@/lib/credentials';
 import { assets } from '@/lib/assets';
 import { resumeHref } from '@/lib/site';
-import { profile } from '@/content/profile';
+import { profile, titledName } from '@/content/profile';
 
 /**
  * Home 00. The portfolio narrative in one statement (the career arc is in the supporting line), two actions and
@@ -66,7 +66,7 @@ export function Hero() {
             priority
             uncapped
             aspect="aspect-square"
-            caption="Real Razeen"
+            caption={titledName}
           />
 
           {creds.length > 0 && (

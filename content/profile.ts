@@ -8,6 +8,9 @@ const { contact: contactData, education: educationData, recognition: recognition
 
 export const profile = profileData;
 
+/** Full name with the professional title: "Ts. Mohamad Razeen Iqbal Roslan". Photo captions use it. */
+export const titledName = [profile.title, profile.legalName].filter(Boolean).join(' ');
+
 export const contact = contactData;
 
 export const education = educationData;
