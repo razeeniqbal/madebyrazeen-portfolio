@@ -86,6 +86,18 @@ export function engagementWhen(e: TrainerEngagement): string | undefined {
   return e.year ? String(e.year) : undefined;
 }
 
+/**
+ * The downloadable trainer profile (a PDF made from the Word original in OneDrive, Resume and
+ * Certifications). Replace public/Razeen_Iqbal_Trainer_Profile.pdf and its page-1 preview, then update `updated`.
+ */
+export const trainerProfile = {
+  href: '/Razeen_Iqbal_Trainer_Profile.pdf',
+  fileName: 'Razeen_Iqbal_Trainer_Profile.pdf',
+  preview: { src: '/assets/v2/trainer/trainer-profile-preview.webp', width: 900, height: 1273 },
+  pages: 4,
+  updated: 'November 2026',
+};
+
 export const getFeaturedTrainerEngagements = (): TrainerEngagement[] => getTrainerEngagements().filter((e) => e.featured);
 
 /** How a session is shaped: Understand → Demonstrate → Practise → Apply (used on /trainer and Home). */
