@@ -6,12 +6,14 @@
  *   1. content/running/runs.json: daily Garmin sync (scripts/garmin/export_runs.py)
  *   2. content/running/strava.json: full history from a Strava export (scripts/strava/import_export.py),
  *      which adds best efforts, race names and the treadmill flag
+ *   + content/running/races.json names races the Strava export does not flag yet (Garmin-only runs).
  *   3. SAMPLE_RUNS below: only while both are empty, labelled "Sample data" everywhere (PRD §58).
  * Treadmill / indoor runs are dropped: no route, and their pace is not comparable.
  */
 import exported from './running/runs.json';
 import stravaExport from './running/strava.json';
 import meta from './running/meta.json';
+import manualRaces from './running/races.json';
 
 export interface Split {
   km: number; // split distance in km (last split may be partial)
@@ -103,7 +105,25 @@ function merged(): Run[] {
   return out;
 }
 
-const REAL: Run[] = merged()
+/** Mark races listed by hand: the run on that date (nearest distance when one is given, else the longest). */
+function withManualRaces(runs: Run[]): Run[] {
+  const out = [...runs];
+  for (const m of manualRaces.races as { date: string; name: string; distanceKm?: number }[]) {
+    const candidates = out
+      .map((r, i) => ({ r, i }))
+      .filter(({ r }) => r.date.slice(0, 10) === m.date && !r.indoor)
+      .sort((a, b) =>
+        m.distanceKm !== undefined
+          ? Math.abs(a.r.distanceKm - m.distanceKm) - Math.abs(b.r.distanceKm - m.distanceKm)
+          : b.r.distanceKm - a.r.distanceKm,
+      );
+    const hit = candidates[0];
+    if (hit && !hit.r.race) out[hit.i] = { ...hit.r, race: { name: m.name } };
+  }
+  return out;
+}
+
+const REAL: Run[] = withManualRaces(merged())
   .filter((r) => !r.indoor)
   .sort((a, b) => b.date.localeCompare(a.date));
 

@@ -1,0 +1,6 @@
+{
+  "about": "Races the Strava export does not flag yet (the daily Garmin sync carries no race names). Each entry marks the outdoor run on that date as a race; add distanceKm to pick one when a day has more than one run.",
+  "races": [
+    { "date": "2026-11-01", "name": "Garmin Run Mas 2026" }
+  ]
+}
