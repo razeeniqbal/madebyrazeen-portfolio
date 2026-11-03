@@ -1,7 +1,7 @@
 import { contact, profile, titledName } from '@/content/profile';
-import { getCurrentRole } from '@/content/experience';
-import { achievements, featuredCredentials } from '@/content/achievements';
-import { credentialCode } from '@/lib/credentials';
+import { getCurrentRole, getExperience } from '@/content/experience';
+import { achievements, featuredCredentials, type Achievement } from '@/content/achievements';
+import { credentialCode, credentialVerifyUrl } from '@/lib/credentials';
 import { trainerProfile } from '@/content/trainer';
 import { SITE_URL } from '@/lib/site';
 
@@ -33,9 +33,21 @@ const registration = () => {
   );
 };
 
+/** Short badge caption: "Ts." for the registration, the exam code, else a compact title. */
+const badgeLabel = (a: Achievement) =>
+  a.type === 'professional-registration' ? 'Ts.' : credentialCode(a) ?? a.title.replace(/^Generative AI Leader$/, 'Gen AI Leader');
+const issuerLabel = (a: Achievement) => (/\bMBOT\b/.test(a.organization) ? 'MBOT' : a.organization);
+
+/**
+ * The role on the card: the experience entry named in the profile's `cardRole` (set in Keystatic),
+ * else the current main role.
+ */
+const cardRole = () => (profile.cardRole && getExperience().find((r) => r.id === profile.cardRole)) || getCurrentRole();
+
 export function getCard() {
-  const role = getCurrentRole();
+  const role = cardRole();
   const phone = contact.phone ? e164(contact.phone) : undefined;
+  const reg = registration();
   return {
     shortName: [profile.title, profile.name].filter(Boolean).join(' '),
     fullName: titledName,
@@ -44,7 +56,7 @@ export function getCard() {
     role: role?.role ?? profile.role,
     company: role?.company,
     headline: profile.role,
-    location: profile.location,
+    location: role?.location || profile.location,
     email: contact.email,
     phone,
     phoneDisplay: contact.phone,
@@ -54,12 +66,15 @@ export function getCard() {
     portfolio: SITE_URL,
     resume: profile.resume,
     trainerProfile: trainerProfile.href,
-    registration: registration() ? 'Professional Technologist (Ts.), MBOT' : undefined,
-    // Professional registration first (only while it is on record), then the featured certifications by code.
-    credentials: [
-      ...(registration() ? ['Ts. · MBOT'] : []),
-      ...featuredCredentials.filter((a) => a.type !== 'professional-registration').map((a) => credentialCode(a) ?? a.title),
-    ],
+    registration: reg ? 'Professional Technologist (Ts.), MBOT' : undefined,
+    // Professional registration first (only while it is on record), then the featured certifications.
+    badges: [...(reg ? [reg] : []), ...featuredCredentials.filter((a) => a.type !== 'professional-registration')].map((a) => ({
+      credential: a,
+      label: badgeLabel(a),
+      issuer: issuerLabel(a),
+      title: a.title,
+      verifyUrl: credentialVerifyUrl(a),
+    })),
   };
 }
 
