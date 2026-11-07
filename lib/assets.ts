@@ -244,6 +244,10 @@ export const racePhotos: { date: string | null; image: ImageAsset }[] = [
   { date: '2026-09-13', image: img('/assets/v2/running/races/boom-1.webp', 1067, 1600, 'Razeen running in a green camouflage race shirt, arms out, city towers behind') },
   { date: '2026-09-13', image: img('/assets/v2/running/races/boom-2.webp', 1067, 1600, 'Razeen running in a green camouflage race shirt and cap, smiling') },
   { date: '2026-09-13', image: img('/assets/v2/running/races/boom-3.webp', 1600, 1066, 'A group of runners on a tree-lined road, Razeen in a green camouflage race shirt') },
+  { date: '2026-11-01', image: img('/assets/v2/running/races/garmin-run-mas-1.webp', 1600, 1066, 'Razeen running with both arms spread wide in a blue Garmin race shirt and red cap, two runners behind him on a sunny tree-lined road') },
+  { date: '2026-11-01', image: img('/assets/v2/running/races/garmin-run-mas-2.webp', 1066, 1600, 'Razeen pointing at the camera with both hands, bib B 23996 on a blue Garmin race shirt') },
+  { date: '2026-11-01', image: img('/assets/v2/running/races/garmin-run-mas-3.webp', 1066, 1600, 'Razeen running at dawn holding a banana, other runners blurred behind him') },
+  { date: '2026-11-01', image: img('/assets/v2/running/races/garmin-run-mas-4.webp', 1066, 1600, 'Razeen flexing and pointing at himself, banana in hand, on a road lined with tall trees') },
   { date: null, image: img('/assets/v2/running/races/more-1.webp', 853, 1280, 'Razeen running in a white race shirt and pink cap, giving peace signs') },
   { date: null, image: img('/assets/v2/running/races/more-2.webp', 1280, 718, 'Razeen running in a white race shirt among a group of runners on a city road') },
 ];
